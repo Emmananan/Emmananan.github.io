@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年3月11日</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* 头部样式 - 居左 */
+        .header {
+            text-align: left;
+            padding: 40px 0 20px 0;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .header-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .header .subtitle {
+            font-size: 1.1em;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .header .subtitle .divider {
+            color: #cbd5e1;
+            margin: 0 8px;
+        }
+
+        .header .subtitle .time {
+            color: #94a3b8;
+        }
+
+        /* 今日亮点区域 */
+        .highlight-section {
+            margin-bottom: 50px;
+        }
+
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .highlight-desc {
+            color: #475569;
+            font-size: 1em;
+            line-height: 1.8;
+        }
+
+        /* 统计指标卡片 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
+        }
+
+        .stat-card-label {
+            color: #64748b;
+            font-size: 0.9em;
+            margin-bottom: 12px;
+        }
+
+        .stat-card-value {
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+
+        .stat-card-value.blue {
+            color: #3b82f6;
+        }
+
+        .stat-card-value.pink {
+            color: #ec4899;
+        }
+
+        .stat-card-value.orange {
+            color: #f97316;
+        }
+
+        .stat-card-value.green {
+            color: #10b981;
+        }
+
+        /* 板块样式 */
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .section-subtitle {
+            font-size: 0.85em;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        /* 新闻列表 */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .news-title {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #1e293b;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+
+        .news-source {
+            color: #6366f1;
+            font-weight: 500;
+        }
+
+        .news-time {
+            color: #94a3b8;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            font-weight: 500;
+            background: #f1f5f9;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+        }
+
+        .section-global .tag { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
+        .section-ai .tag { background: #f5f3ff; color: #7c3aed; border-color: #ddd6fe; }
+        .section-tech .tag { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
+        .section-stock .tag { background: #ecfdf5; color: #059669; border-color: #a7f3d0; }
+
+        .news-summary {
+            color: #475569;
+            font-size: 0.95em;
+            line-height: 1.75;
+            margin-bottom: 16px;
+        }
+
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+
+        .section-global .news-highlight { background: #fef2f2; border-color: #ef4444; }
+        .section-ai .news-highlight { background: #f5f3ff; border-color: #8b5cf6; }
+        .section-tech .news-highlight { background: #eff6ff; border-color: #3b82f6; }
+        .section-stock .news-highlight { background: #ecfdf5; border-color: #10b981; }
+
+        .news-highlight-label {
+            font-size: 0.75em;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .news-highlight-text {
+            color: #334155;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .news-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #6366f1;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .news-link:hover {
+            color: #4f46e5;
+            gap: 10px;
+        }
+
+        .news-link::after {
+            content: '→';
+        }
+
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            color: #64748b;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .footer .disclaimer {
+            color: #94a3b8;
+            font-size: 0.85em;
+        }
+
+        /* 突发新闻条 - 已移除，保留样式备用 */
+        .breaking-bar {
+            background: linear-gradient(90deg, #dc2626, #ea580c);
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            color: #fff;
+        }
+
+        .breaking-bar span {
+            margin-right: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .stats {
+                gap: 25px;
+            }
+
+            .news-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hot-tag {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- 头部 - 居左 -->
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年3月11日 星期三 09:30</span></p>
+        </div>
+
+        <!-- 今日亮点区域 -->
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">
+                    🔥 今日亮点
+                </div>
+                <h2 class="highlight-title">油价"过山车"：一条乌龙消息引发史诗级暴跌</h2>
+                <p class="highlight-desc">美国能源部长赖特误发"海军护航油轮通过霍尔木兹海峡"消息，WTI原油盘中暴跌18.84%，创2022年以来最大日跌幅。白宫随后澄清消息不实，油价迅速反弹至86美元/桶，全球能源市场经历惊心动魄的一天。</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-label">WTI原油日内波动</div>
+                    <div class="stat-card-value blue">-18.84%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">A股创业板涨幅</div>
+                    <div class="stat-card-value pink">+3%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">比特币最高触及</div>
+                    <div class="stat-card-value orange">$70,000</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">现货黄金</div>
+                    <div class="stat-card-value green">$5,196</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美以伊冲突持续，以色列外长称不寻求"无休止战争"</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">企鹅号 / 新浪财经</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">中东局势</span>
+                        <span class="tag">以色列</span>
+                        <span class="tag">伊朗</span>
+                        <span class="tag">地缘政治</span>
+                    </div>
+                    <p class="news-summary">以色列外长萨尔表示将在适当时机与美国协调结束军事行动。伊朗革命卫队实施"真实承诺4"第37轮军事行动，打击伊拉克美军基地及以色列目标。冲突已致超1300名伊朗平民死亡。</p>
+                    <div class="news-highlight">
+                        <div class="news-highlight-label">核心影响</div>
+                        <p class="news-highlight-text">霍尔木兹海峡局势持续紧张，油价剧烈震荡，全球能源市场高度不确定。</p>
+                    </div>
+                    <a href="https://finance.sina.com.cn" class="news-link" target="_blank">阅读原文</a>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">特朗普释放停战信号，但美防长态度矛盾</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">新浪财经</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">美国</span>
+                        <span class="tag">特朗普</span>
+                        <span class="tag">伊朗对话</span>
+                    </div>
+                    <p class="news-summary">特朗普称对伊战事"很快"会结束，愿与伊朗有条件对话。但美国防长赫格塞思拒绝判断战事状态，称"无权断言现在是开始、进行还是结束"。</p>
+                    <a href="https://finance.sina.com.cn" class="news-link" target="_blank">阅读原文</a>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美政府首次约束以色列军事行动</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">今日头条</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">美以关系</span>
+                        <span class="tag">能源设施</span>
+                        <span class="tag">军事约束</span>
+                    </div>
+                    <p class="news-summary">美国要求以色列停止对伊朗能源设施的进一步空袭，这是自2月28日美以对伊展开袭击以来首次明确约束以色列军事行动。</p>
+                    <a href="https://www.toutiao.com" class="news-link" target="_blank">阅读原文</a>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">油价"过山车"：乌龙消息引发WTI暴跌18.84%</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">华尔街见闻</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">油价</span>
+                        <span class="tag">能源市场</span>
+                        <span class="tag">霍尔木兹海峡</span>
+                    </div>
+                    <p class="news-summary">美国能源部长赖特误发"海军护航油轮"消息后删除，油价盘中暴跌至77美元/桶，随后白宫澄清消息不实，油价迅速反弹至86美元/桶，创2022年以来最大单日波动。</p>
+                    <a href="https://wallstreetcn.com" class="news-link" target="_blank">阅读原文</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">"龙虾"安全风险引发多部门紧急提示</h3>
+                        <span class="hot-tag">🔥 爆款</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">国家互联网应急中心 / 工信部</span>
+                        <span class="news-time">• 3月10日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">OpenClaw</span>
+                        <span class="tag">AI安全</span>
+                        <span class="tag">智能体风险</span>
+                        <span class="tag">监管提示</span>
+                    </div>
+                    <p class="news-summary">国家互联网应急中心、工信部联合发布OpenClaw安全风险提示。已发现四大风险：提示词注入、误操作删除重要数据、恶意插件投毒、高危漏洞。多家券商已禁止员工在公司设备安装使用。</p>
+                    <div class="news-highlight">
+                        <div class="news-highlight-label">核心亮点</div>
+                        <p class="news-highlight-text">标志着执行型AI智能体在普及初期面临严峻信任危机，安全合规成为行业发展关键。</p>
+                    </div>
+                    <a href="https://www.sohu.com" class="news-link" target="_blank">阅读原文</a>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">OpenAI GPT-5.4：首款原生电脑操控能力的通用大模型</h3>
+                        <span class="hot-tag">🔥 爆款</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">VentureBeat / 新浪科技</span>
+                        <span class="news-time">• 3月6日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">OpenAI</span>
+                        <span class="tag">GPT-5.4</span>
+                        <span class="tag">智能体</span>
+                        <span class="tag">突破性进展</span>
+                    </div>
+                    <p class="news-summary">GPT-5.4在OSWorld桌面操控测试中达到75%任务成功率，首次超越人类平均水平(72.4%)。原生支持100万token上下文，可自主执行键盘、鼠标指令，实现从被动响应到主动执行的突破。</p>
+                    <a href="https://venturebeat.com" class="news-link" target="_blank">阅读原文</a>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">英伟达与ABB联手研发AI工业机器人</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">界面新闻</span>
+                        <span class="news-time">• 3月10日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">英伟达</span>
+                        <span class="tag">ABB</span>
+                        <span class="tag">工业机器人</span>
+                    </div>
+                    <p class="news-summary">双方整合ABB机器人训练软件与英伟达Omniverse仿真平台，开发可在虚拟环境训练的新型机器人。鸿海正在测试，预计今年下半年商业化。</p>
+                    <a href="https://www.jiemian.com" class="news-link" target="_blank">阅读原文</a>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">腾讯秘密布局微信AI智能体</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">财经快讯</span>
+                        <span class="news-time">• 近期</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">腾讯</span>
+                        <span class="tag">微信</span>
+                        <span class="tag">AI智能体</span>
+                    </div>
+                    <p class="news-summary">据悉腾讯正加速推进微信AI智能体开发，年内或向全用户开放，直接对标阿里、字节跳动的AI产品布局。</p>
+                    <a href="https://www.tencent.com" class="news-link" target="_blank">阅读原文</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">工业富联2025年业绩创史上最强</h3>
+                        <span class="hot-tag">🔥 爆款</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">陆家嘴财经早餐</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">工业富联</span>
+                        <span class="tag">AI服务器</span>
+                        <span class="tag">业绩暴增</span>
+                        <span class="tag">分红</span>
+                    </div>
+                    <p class="news-summary">AI服务器营收增长超3倍，净利润增长51.99%，拟分红129亿元。订单已排至9月，工业母机概念爆发。</p>
+                    <div class="news-highlight">
+                        <div class="news-highlight-label">核心突破</div>
+                        <p class="news-highlight-text">英特尔CEO称内存价格暴涨状况可能持续到2028年，存储芯片概念股集体大涨。</p>
+                    </div>
+                    <a href="https://finance.sina.com.cn" class="news-link" target="_blank">阅读原文</a>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">英伟达投资北美光通信公司40亿美元</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">新浪财经</span>
+                        <span class="news-time">• 3月2日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">英伟达</span>
+                        <span class="tag">Lumentum</span>
+                        <span class="tag">Coherent</span>
+                        <span class="tag">光通信</span>
+                    </div>
+                    <p class="news-summary">英伟达分别投资Lumentum和Coherent各20亿美金，支持下一代AI基础设施研发、生产和运营，同时获得先进激光元件的未来产能采购权。</p>
+                    <a href="https://finance.sina.com.cn" class="news-link" target="_blank">阅读原文</a>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">深圳举办"AI+制造论坛"，探讨智能转型</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">企鹅号</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">深圳</span>
+                        <span class="tag">AI+制造</span>
+                        <span class="tag">智能转型</span>
+                    </div>
+                    <p class="news-summary">探讨制造业智能转型新路径，具身智能机器人产业持续升温，2026年被视为人形机器人出货量高速增长元年。</p>
+                    <a href="https://www.qq.com" class="news-link" target="_blank">阅读原文</a>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">甲骨文财报超预期，盘后涨10%</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">21经济网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">甲骨文</span>
+                        <span class="tag">财报</span>
+                        <span class="tag">云业务</span>
+                    </div>
+                    <p class="news-summary">第三财季调整后营收超预期，云业务持续强劲，带动盘后股价大涨10%。</p>
+                    <a href="https://www.21jingji.com" class="news-link" target="_blank">阅读原文</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">A股创业板大涨3%，算力硬件集体爆发</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">华尔街见闻</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">A股</span>
+                        <span class="tag">创业板</span>
+                        <span class="tag">算力硬件</span>
+                        <span class="tag">腾讯</span>
+                    </div>
+                    <p class="news-summary">半导体与算力硬件板块领涨，腾讯拉升7%。纳斯达克中国金龙指数收涨1.94%，蔚来涨15.08%、世纪互联涨14.76%。</p>
+                    <div class="news-highlight">
+                        <div class="news-highlight-label">意义</div>
+                        <p class="news-highlight-text">中概股在油价回落后迎来强势反弹，市场情绪明显改善。</p>
+                    </div>
+                    <a href="https://wallstreetcn.com" class="news-link" target="_blank">阅读原文</a>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美股涨跌不一，能源股承压</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">21经济网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">美股</span>
+                        <span class="tag">标普500</span>
+                        <span class="tag">能源股</span>
+                    </div>
+                    <p class="news-summary">标普500跌0.21%，纳指微涨0.01%，道指微跌0.07%。大型科技股涨多跌少，英伟达、脸书涨超1%。能源股多数下跌，埃克森美孚跌超1%。</p>
+                    <a href="https://www.21jingji.com" class="news-link" target="_blank">阅读原文</a>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">比特币冲高回落，一度站上7万美元</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">财富号东方财富网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">比特币</span>
+                        <span class="tag">加密货币</span>
+                        <span class="tag">避险资产</span>
+                    </div>
+                    <p class="news-summary">中东战争紧张局势下，投资者将比特币视为避险资产。分析师提醒，当前上涨为熊市中的"缓解性反弹"，4小时级别在71777美元高点形成长上影线的射击之星。</p>
+                    <a href="https://caifuhao.eastmoney.com" class="news-link" target="_blank">阅读原文</a>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">现货黄金涨至5196美元/盎司</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">华尔街见闻</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">黄金</span>
+                        <span class="tag">白银</span>
+                        <span class="tag">贵金属</span>
+                    </div>
+                    <p class="news-summary">黄金白银开盘小幅上涨，现货黄金涨0.1%至5196美元/盎司，现货白银涨0.6%至88美元/盎司，避险情绪支撑贵金属走强。</p>
+                    <a href="https://wallstreetcn.com" class="news-link" target="_blank">阅读原文</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
