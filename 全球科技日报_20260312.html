@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年3月12日</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: left;
+            padding: 40px 0 20px 0;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .header .subtitle {
+            font-size: 1.1em;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .header .subtitle .divider {
+            color: #cbd5e1;
+            margin: 0 8px;
+        }
+
+        .header .subtitle .time {
+            color: #94a3b8;
+        }
+
+        .highlight-section {
+            margin-bottom: 50px;
+        }
+
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .highlight-desc {
+            color: #475569;
+            font-size: 1em;
+            line-height: 1.8;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e1;
+        }
+
+        .stat-card-label {
+            color: #64748b;
+            font-size: 0.9em;
+            margin-bottom: 12px;
+        }
+
+        .stat-card-value {
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .stat-card-value.blue { color: #3b82f6; }
+        .stat-card-value.pink { color: #ec4899; }
+        .stat-card-value.orange { color: #f97316; }
+        .stat-card-value.green { color: #10b981; }
+        .stat-card-value.red { color: #ef4444; }
+        .stat-card-value.purple { color: #8b5cf6; }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .section-subtitle {
+            font-size: 0.85em;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .news-title {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #1e293b;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+
+        .news-source {
+            color: #6366f1;
+            font-weight: 500;
+        }
+
+        .news-time {
+            color: #94a3b8;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            font-weight: 500;
+            background: #f1f5f9;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+        }
+
+        .section-global .tag { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
+        .section-ai .tag { background: #f5f3ff; color: #7c3aed; border-color: #ddd6fe; }
+        .section-tech .tag { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
+        .section-stock .tag { background: #ecfdf5; color: #059669; border-color: #a7f3d0; }
+
+        .news-summary {
+            color: #475569;
+            font-size: 0.95em;
+            line-height: 1.75;
+            margin-bottom: 16px;
+        }
+
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+
+        .section-global .news-highlight { background: #fef2f2; border-color: #ef4444; }
+        .section-ai .news-highlight { background: #f5f3ff; border-color: #8b5cf6; }
+        .section-tech .news-highlight { background: #eff6ff; border-color: #3b82f6; }
+        .section-stock .news-highlight { background: #ecfdf5; border-color: #10b981; }
+
+        .news-highlight-label {
+            font-size: 0.75em;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .news-highlight-text {
+            color: #334155;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            color: #64748b;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .footer .disclaimer {
+            color: #94a3b8;
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .news-header { flex-direction: column; gap: 10px; }
+            .hot-tag { align-self: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年3月12日 星期四 09:30</span></p>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">🔥 今日亮点</div>
+                <h2 class="highlight-title">国际能源署史上最大规模释放4亿桶战略石油储备</h2>
+                <p class="highlight-desc">为应对中东战事导致的油价飙升，国际能源署成员国一致同意释放4亿桶紧急石油储备，规模史无前例。德国释放近2000万桶，英国1350万桶，韩国2246万桶。美国授权从战略储备释放1.72亿桶，下周开始执行，交付周期约120天。</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-label">WTI原油</div>
+                    <div class="stat-card-value red">$93 (+8%)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">上证指数</div>
+                    <div class="stat-card-value green">4133 (+0.25%)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">创业板指</div>
+                    <div class="stat-card-value pink">3349 (+1.31%)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">比特币</div>
+                    <div class="stat-card-value orange">$70,763</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">现货黄金</div>
+                    <div class="stat-card-value blue">$5,167</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">人民币汇率</div>
+                    <div class="stat-card-value purple">三年新高</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美以伊战事进入第13天，伊朗总统提停战三大条件</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">参考消息 / 央视新闻</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">中东局势</span>
+                        <span class="tag">伊朗</span>
+                        <span class="tag">停战条件</span>
+                        <span class="tag">战争赔偿</span>
+                    </div>
+                    <p class="news-summary">伊朗总统佩泽希齐扬提出结束战争三大必要条件：承认伊朗合法权利、支付战争赔偿、国际社会提供防止未来侵略的保障。美情报显示伊朗领导层基本完整，短期内不会崩溃。</p>
+                    <div class="news-highlight">
+                        <div class="news-highlight-label">核心影响</div>
+                        <p class="news-highlight-text">霍尔木兹海峡局势持续紧张，伊朗威胁"不允许一升石油通过"，全球能源市场剧烈波动。</p>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">特朗普称对伊军事行动"即将结束"，被以色列官员打脸</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">新浪国际</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">特朗普</span>
+                        <span class="tag">以色列</span>
+                        <span class="tag">军事行动</span>
+                    </div>
+                    <p class="news-summary">特朗普称伊朗境内"几乎已无可打击目标"，战争将"很快"结束。但以色列国防部长称对伊战争没有时间限制，"有必要打多久就打多久"。</p>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">联合国安理会要求伊朗停止袭击海湾国家</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">新华社</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">联合国</span>
+                        <span class="tag">安理会</span>
+                        <span class="tag">海湾国家</span>
+                    </div>
+                    <p class="news-summary">安理会通过决议要求伊朗立即停止对海湾国家的攻击。伊朗伊斯兰革命卫队宣布实施"真实承诺4"第40轮军事行动，与黎巴嫩真主党联合打击以色列超50个目标。</p>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">2026年全国两会胜利闭幕，"十五五"开局</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">人民网 / 新华社</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">两会</span>
+                        <span class="tag">十五五</span>
+                        <span class="tag">碳纤维</span>
+                    </div>
+                    <p class="news-summary">十四届全国人大四次会议今日闭幕，表决通过"十五五"规划纲要、生态环境法典、国家发展规划法等重要文件。T1200级超高强度碳纤维全球首发，标志中国新材料领域从"跟跑"向"领跑"跨越。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">马斯克宣布特斯拉与xAI联合打造"数字擎天柱"</h3>
+                        <span class="hot-tag">🔥 爆款</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">东方财富网 / 新浪科技</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">特斯拉</span>
+                        <span class="tag">xAI</span>
+                        <span class="tag">Digital Optimus</span>
+                        <span class="tag">AI智能体</span>
+                    </div>
+                    <p class="news-summary">特斯拉与xAI将联合开发"Digital Optimus"AI智能体系统，旨在打造能够自动执行软件任务的AI系统。马斯克称该系统理论上能"模拟一家完整的软件公司"。</p>
+                    <div class="news-highlight">
+                        <div class="news-highlight-label">核心亮点</div>
+                        <p class="news-highlight-text">马斯克此前的"巨硬"(Macrohard)项目已停滞，转向与特斯拉整合的新路线。</p>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">英伟达推出开源模型Nemotron 3 Super</h3>
+                        <span class="hot-tag">🔥 爆款</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">新浪财经</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">英伟达</span>
+                        <span class="tag">Nemotron</span>
+                        <span class="tag">开源模型</span>
+                        <span class="tag">Blackwell</span>
+                    </div>
+                    <p class="news-summary">拥有1200亿参数的开源模型，针对Blackwell架构深度优化，处理智能体AI系统的吞吐量最高可达前代5倍，准确率提升2倍，旨在解决"长思考"导致的成本问题。</p>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">多地政府下场"养龙虾"，支持AI一人公司创业</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">新浪科技</span>
+                        <span class="news-time">• 近期</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">OpenClaw</span>
+                        <span class="tag">龙虾</span>
+                        <span class="tag">一人公司</span>
+                        <span class="tag">政策扶持</span>
+                    </div>
+                    <p class="news-summary">合肥、深圳龙岗、无锡、常熟等地密集出台政策，支持以OpenClaw为核心的"一人公司"创业模式，提供免费算力、办公补贴、高额资金扶持等。</p>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">华为何刚宣布鸿蒙终端突破4700万台</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">新浪科技</span>
+                        <span class="news-time">• 近期</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">华为</span>
+                        <span class="tag">鸿蒙</span>
+                        <span class="tag">生态</span>
+                    </div>
+                    <p class="news-summary">鸿蒙应用市场可获取的应用及元服务数量已超35万个，展现强大的生态发展势头。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">英伟达投资Nebius 20亿美元，共建AI超大规模云</h3>
+                        <span class="hot-tag">🔥 爆款</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">东方财富网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">英伟达</span>
+                        <span class="tag">Nebius</span>
+                        <span class="tag">云计算</span>
+                        <span class="tag">战略投资</span>
+                    </div>
+                    <p class="news-summary">英伟达宣布与Nebius建立战略合作，投资20亿美元共同开发面向AI市场的下一代超大规模云服务。Nebius股价收涨超16%。</p>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">Meta计划2027年前推四代自研AI芯片</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">新浪科技</span>
+                        <span class="news-time">• 近期</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Meta</span>
+                        <span class="tag">MTIA</span>
+                        <span class="tag">自研芯片</span>
+                    </div>
+                    <p class="news-summary">Meta将在2027年底前推出四代自研AI芯片(MTIA 300至500)，降低对英伟达依赖。MTIA 300已投入量产，用于推荐模型训练。</p>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美光将与应用材料合作开发下一代芯片</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">新浪财经</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">美光</span>
+                        <span class="tag">存储芯片</span>
+                        <span class="tag">合作研发</span>
+                    </div>
+                    <p class="news-summary">存储概念股持续上涨，美光科技涨近4%，闪迪涨近6%。英特尔CEO此前称内存价格暴涨或持续到2028年。</p>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">我国T1200级超高强度碳纤维全球首发</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">企鹅号</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">碳纤维</span>
+                        <span class="tag">新材料</span>
+                        <span class="tag">航空航天</span>
+                    </div>
+                    <p class="news-summary">强度是钢材10倍，是航空航天、高端制造的关键材料，标志着中国在新材料领域的重大突破。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">A股创业板涨1.31%，上证站上4133点</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">腾讯财经</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">A股</span>
+                        <span class="tag">创业板</span>
+                        <span class="tag">人民币</span>
+                    </div>
+                    <p class="news-summary">半导体与算力硬件板块持续活跃，人民币汇率走强，对美元中间价续创近三年新高。</p>
+                    <div class="news-highlight">
+                        <div class="news-highlight-label">意义</div>
+                        <p class="news-highlight-text">"十五五"开局之年，市场信心稳定，经济建设类提案占比42%传递积极信号。</p>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美股涨跌不一，甲骨文涨超9%</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">21经济网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">美股</span>
+                        <span class="tag">甲骨文</span>
+                        <span class="tag">特斯拉</span>
+                    </div>
+                    <p class="news-summary">道指跌0.61%，纳指涨0.08%。甲骨文因业绩超预期大涨9.18%，特斯拉涨2.15%，英伟达涨0.66%。</p>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">原油价格飙涨，WTI突破93美元</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">今日头条</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">原油</span>
+                        <span class="tag">WTI</span>
+                        <span class="tag">能源</span>
+                    </div>
+                    <p class="news-summary">尽管国际能源署释放4亿桶储备，仍未能阻止油价上涨。WTI日内涨幅最高达8.05%，布伦特原油涨4.76%。</p>
+                </div>
+
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">比特币重返7万美元，黄金小幅回落</h3>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">东方财富网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">比特币</span>
+                        <span class="tag">黄金</span>
+                        <span class="tag">避险</span>
+                    </div>
+                    <p class="news-summary">比特币涨1.5%报$70,763，以太坊涨2.1%。现货黄金跌0.17%报$5,167/盎司，现货白银跌0.83%报$85/盎司。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
