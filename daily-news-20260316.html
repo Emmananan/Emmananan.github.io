@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年03月16日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: left; padding: 40px 0 20px 0; margin-bottom: 20px; }
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .header .subtitle { font-size: 1.1em; color: #64748b; margin-bottom: 12px; }
+        .header .subtitle .divider { color: #cbd5e1; margin: 0 8px; }
+        .header .subtitle .time { color: #94a3b8; }
+        .highlight-section { margin-bottom: 50px; }
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .highlight-desc { color: #475569; font-size: 1em; line-height: 1.8; }
+        .section { margin-bottom: 50px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+        .section-title { font-size: 1.4em; font-weight: 600; color: #1e293b; }
+        .section-subtitle { font-size: 0.85em; color: #94a3b8; margin-top: 2px; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .news-title { font-size: 1.15em; font-weight: 600; color: #1e293b; line-height: 1.5; flex: 1; }
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+        .news-source { color: #6366f1; font-weight: 500; }
+        .news-time { color: #94a3b8; }
+        .news-summary { color: #475569; font-size: 0.95em; line-height: 1.75; margin-bottom: 16px; }
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+        .news-highlight-label { font-size: 0.75em; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .news-highlight-text { color: #334155; font-size: 0.9em; line-height: 1.6; }
+        .footer { text-align: center; padding: 30px 20px; margin-top: 40px; }
+        .footer p { color: #64748b; font-size: 0.9em; margin-bottom: 8px; }
+        .footer .disclaimer { color: #94a3b8; font-size: 0.85em; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .news-header { flex-direction: column; gap: 10px; }
+            .hot-tag { align-self: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年03月16日 星期一 10:24</span></p>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">🔥 今日亮点</div>
+                <h2 class="highlight-title">科技CEO用ChatGPT+基因数据定制癌症疫苗！肿瘤缩小50%</h2>
+                <p class="highlight-desc">科技CEO用ChatGPT+基因数据定制癌症疫苗！肿瘤缩小50%
+       
+             闻乐
+                          2026-03-15
+             14:06:09
+          
+          来源：量子位            
+                          
+            AI救了我...</p>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">特朗普高调喊话各国护航，盟友反应冷淡</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 柳白】霍尔木兹海峡紧张局势持续升级，而挑起战争的美国总统特朗普却坐不住了，幻想振臂一呼，把英国、法国、日本、韩国等盟友拉入其主导的护航计划，结果碰了一鼻子灰。
+
+
+据英国《卫报》3月15日报道，面对特朗普的呼吁，英国表示正与盟友磋商方案，考虑派遣无人艇扫雷；日本高官虽不排除派遣军舰，但坦承实际部署“门槛极高”，等同委婉拒绝；韩国表态将密切沟通、审慎评估；法国则明确拒绝派舰，仅计划在...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">给AI“洗脑”，AI“投毒”已成产业链</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">按照业内人士爆料，记者在多个网络平台查询搜索到了一项名为GEO的业务，这些从事该项业务的服务商号称，用户只需支付相应的费用，它就能在各大主流AI大模型里，让客户的产品榜上有名；让客户的商品广告，成为AI模型给出的“标准答案”。
+
+
+ 
+
+
+通过GEO技术，真的能给AI“投毒”、真的能“驯服”并操控AI吗？
+
+
+ 
+
+
+按照网络上的信息，记者联系上一家业内知名的GEO服务商。负责人王总接待了记者，他...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">夜闯海峡“像进入敌人浴缸”，暴利下他们铤而走险</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 齐倩】
+
+
+美国总统特朗普的护航承诺始终没有兑现，却敦促油轮“拿出点胆量”通过霍尔木兹海峡。
+
+
+路透社3月13日援引数据称，少数希腊船东冒着被地雷、导弹和无人机摧毁的风险，派遣油轮在夜间、关闭定位的情况下硬闯霍尔木兹海峡。显然，他们此举并非因为勇气，而是源于暴利。
+
+
+报道称，这场战争实际上已将全球五分之一的石油和液化天然气供应与国际市场隔绝。随着原油价格飙升以及油轮运价激增，不...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“更少成本，更多效果，伊朗的反击让美国意外”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 王恺雯】美国和以色列悍然对伊朗动武，让战火再次笼罩中东。
+
+
+本以为可以速战速决的美国显然低估了伊朗抵抗的决心。半个月以来，伊朗的反击重创美军在中东的军事基地，还扼住了全球能源的咽喉要道。
+
+
+“伊朗的反击是如何让美国感到意外的？”英国《金融时报》3月13日以此为题报道称，德黑兰以“更少的资源”打击了海湾地区的主要目标，美国军方可能预见了风险的升级，但政治层面对伊朗报复规模和冲突升...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">特朗普打脸，泽连斯基如意算盘落空</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 柳白】
+
+
+这些日子，乌克兰总统泽连斯基颇为高调，屡次宣称美国等国有意寻求乌克兰协助防御无人机威胁。
+
+
+只不过美国总统特朗普，不太给面子。
+
+
+在3月14日接受美国全国广播公司（NBC）电话采访时称，特朗普毫不留情打脸泽连斯基，不仅称他比俄罗斯总统普京更难打交道，还拒绝了其提出帮助美国防御伊朗无人机的提议——“我们最不需要的就是泽连斯基的帮助”。
+
+
+为应对全球油价高涨，美国财政...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">特朗普呼吁各国派军舰，伊朗嘲讽：引火烧身</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 王恺雯】中东战火持续，作为全球能源要道的霍尔木兹海峡正处于事实性封锁状态，只有零星船只通过。
+
+
+面对这一由自己挑起的混乱局面，美国总统特朗普竟理直气壮喊话其他国家帮忙，呼吁其“派遣舰船”护航霍尔木兹海峡。此举很快引来伊朗的嘲讽。
+
+
+据彭博社报道，3月14日晚间，特朗普在其自创社交媒体平台“Truth Social”（真实社交）发文称，已经摧毁了伊朗“100%的军事能力”，但伊朗...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">科技CEO用ChatGPT+基因数据定制癌症疫苗！肿瘤缩小50%</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">科技CEO用ChatGPT+基因数据定制癌症疫苗！肿瘤缩小50%
+       
+             闻乐
+                          2026-03-15
+             14:06:09
+          
+          来源：量子位            
+                          
+            AI救了我...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">360发布安全龙虾系列产品：以模治模构建智能体安全体系</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">360发布安全龙虾系列产品：以模治模构建智能体安全体系
+       
+             量子位的朋友们
+                          2026-03-14
+             21:32:22
+          
+          来源：量子位            
+                          
+                 ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">AI 数学推理新纪元：SAIR Foundation 正式启动“数学蒸馏挑战赛”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">AI 数学推理新纪元：SAIR Foundation 正式启动“数学蒸馏挑战赛”
+       
+             量子位的朋友们
+                          2026-03-14
+             20:45:52
+          
+          来源：量子位            
+                          
+    ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">Gemini重塑谷歌地图！一句话搞定出行攻略，网友：垂直应用全完蛋</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">Gemini重塑谷歌地图！一句话搞定出行攻略，网友：垂直应用全完蛋
+       
+             听雨
+                          2026-03-14
+             18:48:10
+          
+          来源：量子位            
+                          
+            以后出门...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">不仿真不VLA不遥操：它石智航重磅发布“能干活的通用具身大模型 ”AWE3.0</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">不仿真不VLA不遥操：它石智航重磅发布“能干活的通用具身大模型 ”AWE3.0 
+       
+             林樾
+                          2026-03-14
+             18:32:09
+          
+          来源：量子位            
+                          
+         ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">AI能代替人干活吗？B站联合6位UP主用OpenClaw直播做了次社会实验</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">AI能代替人干活吗？B站联合6位UP主用OpenClaw直播做了次社会实验
+       
+             允中
+                          2026-03-14
+             16:56:16
+          
+          来源：量子位            
+                          
+            ...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国家统计局：1—2月份主要经济指标明显回升，开局良好</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">今天（3月16日）上午10时，国新办举行新闻发布会，介绍2026年1—2月份国民经济运行情况。今年1—2月份，我国主要经济指标明显回升，开局良好。国家统计局新闻发言人表示，今年1—2月份，我国实施更加积极有为的宏观政策，加大逆周期和跨周期调节，持续扩大内需、优化供给，做优增量、盘活存量，生产供给增长加快，市场需求稳中有升，就业物价总体稳定，新质生产力成长壮大，经济运行起步有力，实现良好开局。（央视...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪深两市成交额突破1万亿元</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，沪深两市成交额突破1万亿元，较上一日此时放量超300亿元。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国家统计局：1—2月份全国房地产开发投资9612亿元，同比下降11.1%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，据国家统计局，1—2月份，全国房地产开发投资9612亿元，同比下降11.1%（按可比口径计算），降幅比上年全年收窄6.1个百分点；其中住宅投资7282亿元，下降10.7%，降幅收窄5.6个百分点。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国家统计局：1—2月份规上工业发电量15718亿千瓦时，同比增长4.1%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，据国家统计局，规上工业电力生产增速加快。1—2月份，规上工业发电量15718亿千瓦时，同比增长4.1%，增速比2025年12月份加快4.0个百分点；日均发电266.4亿千瓦时。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国家统计局：1—2月份规上工业天然气产量446亿立方米，同比增长2.9%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，据国家统计局，1—2月份，规上工业天然气产量446亿立方米，同比增长2.9%；日均产量7.6亿立方米。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国家统计局：1—2月份规上工业原油产量3573万吨，同比增长1.9%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，据国家统计局，1—2月份，规上工业原油产量3573万吨，同比增长1.9%，2025年12月份为下降0.6%；日均产量60.6万吨。1—2月份，规上工业原油加工量12263万吨，同比增长2.9%；日均加工207.9万吨。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">A股创新药板块震荡走高，新诺威、益诺思双双涨超6%，广生堂、海思科、阳光诺和、信立泰、悦康药业等个股跟涨。</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">A股创新药板块震荡走高，新诺威、益诺思双双涨超6%，广生堂、海思科、阳光诺和、信立泰、悦康药业等个股跟涨。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">金十图示：2026年03月16日（周一）上海金早盘价为1117元/克，较国际金价（1112.58元/克），高4.42元/...</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十图示：2026年03月16日（周一）上海金早盘价为1117元/克，较国际金价（1112.58元/克），高4.42元/克</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">战争推高美元需求，美债收益率攀升，导致黄金暂时失宠。美国“滞胀”迹象愈加明显，美联储的困境会导致金价承压多久？</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">战争推高美元需求，美债收益率攀升，导致黄金暂时失宠。美国“滞胀”迹象愈加明显，美联储的困境会导致金价承压多久？</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">日本30年期国债收益率上涨3.5个基点，至3.540%。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">日本30年期国债收益率上涨3.5个基点，至3.540%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">恒生科技指数盘中涨超1%，恒生指数现涨0.54%，锂电池、OpenClaw、新消费、内房等板块涨幅居前。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">恒生科技指数盘中涨超1%，恒生指数现涨0.54%，锂电池、OpenClaw、新消费、内房等板块涨幅居前。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">迪拜媒体办公室称，迪拜机场附近发生的事件仍在控制之中，火势未蔓延，无人员受伤。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">迪拜媒体办公室称，迪拜机场附近发生的事件仍在控制之中，火势未蔓延，无人员受伤。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
