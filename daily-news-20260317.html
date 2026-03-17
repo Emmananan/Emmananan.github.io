@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年03月17日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: left; padding: 40px 0 20px 0; margin-bottom: 20px; }
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .header .subtitle { font-size: 1.1em; color: #64748b; margin-bottom: 12px; }
+        .header .subtitle .divider { color: #cbd5e1; margin: 0 8px; }
+        .header .subtitle .time { color: #94a3b8; }
+        .highlight-section { margin-bottom: 50px; }
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .highlight-desc { color: #475569; font-size: 1em; line-height: 1.8; }
+        .section { margin-bottom: 50px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+        .section-title { font-size: 1.4em; font-weight: 600; color: #1e293b; }
+        .section-subtitle { font-size: 0.85em; color: #94a3b8; margin-top: 2px; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .news-title { font-size: 1.15em; font-weight: 600; color: #1e293b; line-height: 1.5; flex: 1; }
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+        .news-source { color: #6366f1; font-weight: 500; }
+        .news-time { color: #94a3b8; }
+        .news-summary { color: #475569; font-size: 0.95em; line-height: 1.75; margin-bottom: 16px; }
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+        .news-highlight-label { font-size: 0.75em; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .news-highlight-text { color: #334155; font-size: 0.9em; line-height: 1.6; }
+        .footer { text-align: center; padding: 30px 20px; margin-top: 40px; }
+        .footer p { color: #64748b; font-size: 0.9em; margin-bottom: 8px; }
+        .footer .disclaimer { color: #94a3b8; font-size: 0.85em; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .news-header { flex-direction: column; gap: 10px; }
+            .hot-tag { align-self: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年03月17日 星期二 10:27</span></p>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">🔥 今日亮点</div>
+                <h2 class="highlight-title">315曝光的“AI投毒”原理：GEO这样操控大模型推荐</h2>
+                <p class="highlight-desc">315曝光的“AI投毒”原理：GEO这样操控大模型推荐
+       
+             听雨
+                          2026-03-16
+             19:48:07
+          
+          来源：量子位            
+                          
+            一个虚构的产品，竟然...</p>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">特朗普破防：这么点忙，都不帮？</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 柳白】
+
+
+“我们可保护了你们40年，结果你们连这点小忙也不帮？”
+
+
+当地时间3月16日，美国总统特朗普在白宫椭圆形办公室发表讲话，对盟友拒绝参与护航怨气满满。
+
+
+据《纽约时报》报道，谈及那些拒绝或冷淡回应其护航呼吁的国家，特朗普表示，自己一直觉得“如果我们哪天需要帮助，他们不会站在我们这边”，而这些国家正在印证他的观点。
+
+
+失望之余，他又强装淡定。
+
+
+“我们不需要任何人，...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">穆杰塔巴身处莫斯科？俄方回应</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 齐倩】
+
+
+自被宣布为伊朗新任最高领袖以来，57岁的穆杰塔巴·哈梅内伊始终未曾公开露面。
+
+
+在外界对穆杰塔巴健康状况众说纷纭之际，3月15日，科威特媒体《报纸报》（Al-Jarida）报道称，一名消息人士透露，穆杰塔巴因健康和安全状况，已被俄罗斯军用飞机转移至莫斯科。据称，穆杰塔巴一抵达即接受了“成功”的外科手术，目前正在莫斯科总统府邸内的一座私人医院接受治疗。
+
+
+当地时间16...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">这个小岛为何重要？让特朗普不惜考虑派地面部队</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 陈思佳】上周，美国总统特朗普宣布，美国对伊朗哈尔克岛发动空袭，“摧毁”岛上的军事目标。由于该岛是伊朗至关重要的石油出口枢纽，分析人士普遍认为，特朗普想以打击伊朗的能源收入为要挟，迫使伊朗政府退让并恢复霍尔木兹海峡的航运。
+
+
+美国官员透露，特朗普甚至有“铤而走险”的打算，图谋对该岛采取更进一步的军事行动。据美国Axios新闻网3月15日报道，特朗普正在考虑一项“高风险、高回报”的计...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“就连日本都婉拒”，高市能躲过一劫吗？</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 王一】面对美国总统特朗普派军舰赴霍尔木兹护航的要求，一向与美国保持步调一致的日本，也释放出委婉拒绝的信号。
+
+
+随着中东冲突持续升级，特朗普3月14日点名日本、韩国、法国、英国等国家，要求他们向霍尔木兹海峡派遣军舰，以确保石油运输安全。
+
+
+据日本共同社报道，日本首相高市早苗16日在国会发言时对此进行了回应，说正考虑“在法律允许范围内”可以采取哪些措施，来确保与日本相关的船只及其船...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“更可靠”，民调：美四大盟友转向中国</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 王一】英美联合进行的一项最新民调显示，在加拿大、德国、法国和英国这四个美国传统盟友国家中，相当一部分民众对美国产生了反感。他们认为中国比美国更可靠，21世纪更可能属于中国而不是美国。而这种观感变化，很大程度上源于美国总统特朗普的外交政策。
+
+
+据美国“政客新闻网”3月15日报道，其与英国民调机构Public First合作，在2月6日至2月9日期间对来自美国、加拿大、英国、法国和德...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">特朗普高调喊话各国护航，盟友反应冷淡</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 柳白】霍尔木兹海峡紧张局势持续升级，而挑起战争的美国总统特朗普却坐不住了，幻想振臂一呼，把英国、法国、日本、韩国等盟友拉入其主导的护航计划，结果碰了一鼻子灰。
+
+
+据英国《卫报》3月15日报道，面对特朗普的呼吁，英国表示正与盟友磋商方案，考虑派遣无人艇扫雷；日本高官虽不排除派遣军舰，但坦承实际部署“门槛极高”，等同委婉拒绝；韩国表态将密切沟通、审慎评估；法国则明确拒绝派舰，仅计划在...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">315曝光的“AI投毒”原理：GEO这样操控大模型推荐</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">315曝光的“AI投毒”原理：GEO这样操控大模型推荐
+       
+             听雨
+                          2026-03-16
+             19:48:07
+          
+          来源：量子位            
+                          
+            一个虚构的产品，竟然...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">机器人爆款收割机狂揽1.2亿美金</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">机器人爆款收割机狂揽1.2亿美金
+       
+             十三
+                          2026-03-16
+             19:22:49
+          
+          来源：量子位            
+                          
+            加速打造具身智能原生技术底座
+      ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">一手实测首个龙虾模型：长路径任务不失误，一人包揽全栈开发</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">一手实测首个龙虾模型：长路径任务不失误，一人包揽全栈开发
+       
+             克雷西
+                          2026-03-16
+             15:39:40
+          
+          来源：量子位            
+                          
+            还有龙虾专属套餐...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">养虾时代终结？免部署、7×24小时在线、自进化的“赛博骡子”来了！</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">养虾时代终结？免部署、7×24小时在线、自进化的“赛博骡子”来了！
+       
+             梦瑶
+                          2026-03-16
+             15:13:07
+          
+          来源：量子位            
+                          
+            养虾真不...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">天下苦「调参」久矣！MIT师生推出全新RandOpt算法</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">天下苦「调参」久矣！MIT师生推出全新RandOpt算法
+       
+             一水
+                          2026-03-16
+             15:12:20
+          
+          来源：量子位            
+                          
+            预训练模型周围早就...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">不卷速度卷验证，陈天桥MiroMind精准预测15天后黄金价格</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">不卷速度卷验证，陈天桥MiroMind精准预测15天后黄金价格
+       
+             鹭羽
+                          2026-03-16
+             14:50:10
+          
+          来源：量子位            
+                          
+            慢交互超车G...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪深两市成交额突破1万亿</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，沪深两市成交额突破1万亿。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">迪士尼公布迪士尼娱乐新领导架构</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">当地时间3月16日，华特迪士尼公司公布了迪士尼娱乐的新领导架构，该架构将媒体、电影和电视业务与游戏及数字娱乐部门进行整合。其中，Joe Earley和Adam Smith将共同担任迪士尼娱乐直接面向消费者业务（Direct to Consumer）的总裁；Debra OConnell将出任迪士尼娱乐电视公司董事长。此外，迪士尼游戏与数字娱乐执行副总裁Sean Shoptaw及其团队也将加入迪士尼娱...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美国证实特斯拉与LG新能源达成价值43亿美元的电池工厂交易</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">美国内政部表示， 特斯拉公司 和 LG新能源公司正通过一项供应协议扩大合作，将在密歇根州兰辛市建造一座价值43亿美元的磷酸铁锂电池制造厂，预计2027年开始生产。（新浪财经）</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">机构：预计2026年全球微短剧收入将达140亿美元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，市场调研机构Omdia数据显示，2025年全球微短剧收入达到110亿美元，并预计到2026年底将增长至140亿美元。其中，中国以外市场贡献30亿美元，美国目前已成为最大的国际市场。 预计到2026年，美国将占中国以外微短剧收入的50%，达到15亿美元，凸显出该内容形式的快速全球扩张。 Omdia对移动端使用数据的分析显示，美国用户在移动应用上观看微短剧的每日时长，已超过在手机上观看Ne...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">恒生科技指数涨超2%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，恒生科技指数涨超2%，零跑汽车涨超5%，理想汽车、美团涨近4%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪深两市成交额突破5000亿元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，沪深两市成交额突破5000亿元。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">金十图示：2026年03月17日（周二）亚太市场股市指数（盘初）</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十图示：2026年03月17日（周二）亚太市场股市指数（盘初）</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">黄仁勋宣告“推理时代”已至，英伟达推出性能提升350倍的新芯片。这家芯片巨头剑指万亿美元销售额，誓将AI从“训练”带入“...</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">黄仁勋宣告“推理时代”已至，英伟达推出性能提升350倍的新芯片。这家芯片巨头剑指万亿美元销售额，誓将AI从“训练”带入“推理”新纪元。点击查看...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">安全消息人士表示，火箭弹袭击巴格达机场附近的美国外交设施，警报声四起。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">安全消息人士表示，火箭弹袭击巴格达机场附近的美国外交设施，警报声四起。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">期货热点追踪</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">几内亚"限产令"突至！全球最大铝土矿生产国要限制供应？中东地缘扰动、成本端集体抬升多重催化下，氧化铝期货大幅上涨！</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">日本首相高市早苗：日本外相与伊朗保持密切联系。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">日本首相高市早苗：日本外相与伊朗保持密切联系。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">小鹏汽车：3月19日起开启不同车型第二代VLA推送</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月17日讯，3月16日，小鹏汽车举行“Ask Me Anything”直播，小鹏汽车董事长、CEO何小鹏明确列出了不同车型的第二代VLA推送时间表：3月19日开启逐步推送，预计先推送P7 Ultra，再推送G7和X9 Ultra，P7、G7、X9的用户将在本月内陆续收到4月将陆续开启推送2026款小鹏P7+ Ultra｜Ultra SE（纯电+超级增程）、2026款小鹏G9 Ultra｜...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
