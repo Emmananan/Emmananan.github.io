@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年03月18日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: left; padding: 40px 0 20px 0; margin-bottom: 20px; }
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .header .subtitle { font-size: 1.1em; color: #64748b; margin-bottom: 12px; }
+        .header .subtitle .divider { color: #cbd5e1; margin: 0 8px; }
+        .header .subtitle .time { color: #94a3b8; }
+        .highlight-section { margin-bottom: 50px; }
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .highlight-desc { color: #475569; font-size: 1em; line-height: 1.8; }
+        .section { margin-bottom: 50px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+        .section-title { font-size: 1.4em; font-weight: 600; color: #1e293b; }
+        .section-subtitle { font-size: 0.85em; color: #94a3b8; margin-top: 2px; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .news-title { font-size: 1.15em; font-weight: 600; color: #1e293b; line-height: 1.5; flex: 1; }
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+        .news-source { color: #6366f1; font-weight: 500; }
+        .news-time { color: #94a3b8; }
+        .news-summary { color: #475569; font-size: 0.95em; line-height: 1.75; margin-bottom: 16px; }
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+        .news-highlight-label { font-size: 0.75em; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .news-highlight-text { color: #334155; font-size: 0.9em; line-height: 1.6; }
+        .footer { text-align: center; padding: 30px 20px; margin-top: 40px; }
+        .footer p { color: #64748b; font-size: 0.9em; margin-bottom: 8px; }
+        .footer .disclaimer { color: #94a3b8; font-size: 0.85em; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .news-header { flex-direction: column; gap: 10px; }
+            .hot-tag { align-self: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年03月18日 星期三 10:35</span></p>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">🔥 今日亮点</div>
+                <h2 class="highlight-title">阿里“悟空”上线！钉钉给企业送来龙虾大军</h2>
+                <p class="highlight-desc">阿里“悟空”上线！钉钉给企业送来龙虾大军
+       
+             西风
+                          2026-03-18
+             09:53:44
+          
+          来源：量子位            
+                          
+            内置“开箱即用”的行业级解决方案
+...</p>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">特朗普再发飙：北约犯下愚蠢错误，我记住了</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 熊超然】是否要蹚中东战争这“浑水”，美国的盟友们大多已经表明立场，这也让美国总统特朗普为之“大动肝火”。
+
+
+当地时间3月17日，正值爱尔兰总理米歇尔·马丁（Micheal Martin）在圣帕特里克节期间访美，特朗普在白宫椭圆形办公室会见他时表示，大多数北约盟友已告知美国，它们不愿卷入美国对伊朗发动的军事行动，这位美国总统将此举形容为“非常愚蠢的错误”（a very foolis...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“他拒绝了两个中间国的停火建议：美以必须先低头”</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 陈思佳】当地时间3月17日，路透社援引一名伊朗高级官员报道称，伊朗新任最高领袖穆杰塔巴·哈梅内伊拒绝了两个中间国提出的“缓和紧张局势或停火”建议。这名官员称，穆杰塔巴要求美国和以色列先“低头”、承认失败并支付赔偿，否则不会同意停火。
+
+
+这名匿名的伊朗高级官员透露，穆杰塔巴已主持召开就任以来的首次外交政策会议，对美国和以色列确立了“非常强硬且严肃”的报复立场。该官员没有说明穆杰塔巴...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">印度执行美国制裁扣船，伊朗来翻旧账了</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 齐倩】
+
+
+近日有消息称，伊朗开始允许部分印度船只通过霍尔木兹海峡。印度外长苏杰生证实此事。
+
+
+据路透社3月16日消息，伊朗为印度船只“开绿灯”的背后，两国间存在利益交换。
+
+
+有三名知情人士透露，伊朗已要求印度释放今年2月扣押的“与伊朗有关、受美国制裁的”三艘油轮，作为寻求确保悬挂印度国旗或驶往印度的船只安全通过霍尔木兹海峡的谈判的一部分。其中一名知情伊朗官员称，伊朗方面还寻求...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">特朗普扬言“为所欲为”，美国要对他下手？</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 王恺雯】美国与古巴展开谈判之际，美国总统特朗普再次威胁“拿下古巴”。
+
+
+据路透社报道，特朗普当地时间3月16日升级了对古巴的言论，扬言能对该国“为所欲为”。与此同时，《纽约时报》16日披露，特朗普政府正试图将古巴国家主席迪亚斯-卡内尔赶下台。
+
+
+据了解谈判情况的人士透露，美方已向古巴谈判代表释放信号：迪亚斯-卡内尔必须下台，但后续如何推进可以由古巴方面自行决定。
+
+
+知情人士说...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美方澄清：“特朗普威胁推迟访华”不实</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 柳白】
+
+
+美国总统特朗普借“霍尔木兹海峡护航一事威胁推迟访华”？此前英国《金融时报》对特朗普的采访引发关注，但相关不实消息很快引来美方澄清。
+
+
+在3月16日的外交部例行记者会上，有外媒记者就特朗普访华一事提问。外交部发言人林剑表示：“元首外交对中美关系发挥着不可替代的战略引领作用，中美双方就特朗普总统访华事保持着沟通。”
+
+
+美国财政部长贝森特16日当天接受美国消费者新闻与商业...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">特朗普破防：这么点忙，都不帮？</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 柳白】
+
+
+“我们可保护了你们40年，结果你们连这点小忙也不帮？”
+
+
+当地时间3月16日，美国总统特朗普在白宫椭圆形办公室发表讲话，对盟友拒绝参与护航怨气满满。
+
+
+据《纽约时报》报道，谈及那些拒绝或冷淡回应其护航呼吁的国家，特朗普表示，自己一直觉得“如果我们哪天需要帮助，他们不会站在我们这边”，而这些国家正在印证他的观点。
+
+
+失望之余，他又强装淡定。
+
+
+“我们不需要任何人，...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">阿里“悟空”上线！钉钉给企业送来龙虾大军</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">阿里“悟空”上线！钉钉给企业送来龙虾大军
+       
+             西风
+                          2026-03-18
+             09:53:44
+          
+          来源：量子位            
+                          
+            内置“开箱即用”的行业级解决方案
+...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">英伟达最强B200算力浪费60%！普林斯顿团队出手，利用率升至71%</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">英伟达最强B200算力浪费60%！普林斯顿团队出手，利用率升至71%
+       
+             闻乐
+                          2026-03-18
+             08:31:26
+          
+          来源：量子位            
+                          
+            老黄自...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">北京养虾er！明晚19点，为你带来9+场养虾干货Talk，来创业大街见</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">北京养虾er！明晚19点，为你带来9+场养虾干货Talk，来创业大街见
+       
+             林樾
+                          2026-03-17
+             21:56:59
+          
+          来源：量子位            
+                          
+            从用...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">黄仁勋：龙虾就是新操作系统！英伟达7种芯片拼出算力怪兽，放话2027营收万亿美元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">黄仁勋：龙虾就是新操作系统！英伟达7种芯片拼出算力怪兽，放话2027营收万亿美元
+       
+             henry
+                          2026-03-17
+             21:08:23
+          
+          来源：量子位            
+                          
+      ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">从“养虾热”到实体交互：元萝卜推动OpenClaw走向真实世界</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">从“养虾热”到实体交互：元萝卜推动OpenClaw走向真实世界
+       
+             十三
+                          2026-03-17
+             20:12:51
+          
+          来源：量子位            
+                          
+            元萝卜让“桌...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">百度龙虾全家桶火速上桌！出手就是全球最大搜索skill</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">百度龙虾全家桶火速上桌！出手就是全球最大搜索skill
+       
+             梦瑶
+                          2026-03-17
+             20:00:36
+          
+          来源：量子位            
+                          
+            百度把一整桌龙虾全家...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">西贝旗下呼和浩特市俊义企业管理公司注销</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，爱企查App显示，近日，呼和浩特市俊义企业管理有限公司登记状态由存续变更为注销。 呼和浩特市俊义企业管理有限公司成立于2021年2月，法定代表人为董俊义，注册资本500万元人民币，经营范围包括企业管理、餐饮管理、农副产品销售等。股东信息显示，该公司由内蒙古西贝餐饮集团有限公司全资持股。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“擎天租”完成天使轮系融资</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，3月18日，“擎天租”宣布完成天使轮及天使+轮两轮融资，累计融资金额达亿元级。天使轮及天使+轮融资由大洋电机、慕华科创、敏卓机电等领投，乐华娱乐、复琢投资、明嘉资本、睿资创投、天季投资、嘉兴南投、知行投资等跟投，老股东大丰实业继续超额认购。本轮资金将重点用于铺设全国标准化的履约服务网络、升级平台的资产与调度系统，并依托场景数据赋能产业链上下游。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">金蝶国际：2025年营收超70亿元，收入利润双增长</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，金蝶国际发布2025年年报。报告显示，公司实现收入利润双增长，录得总收入约70.06亿元，同比增长约12.0%；归母净利润0.93亿元，经调整后净利润约2.32亿元，均成功扭亏为盈，公司订阅服务年经常性收入（ARR）约40.9亿元，同比增长约19.2%；订阅相关合同负债约37.73亿元，同比增长约20.7%。此外，公司毛利率同比提升约2.0个百分点至67.1%，盈利效率持续优化。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">库克否认退休传闻：“无法想象没有苹果的生活”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">苹果公司CEO蒂姆·库克接受媒体采访时，正面回应了外界流传的退休猜测，他明确表示卸任说法纯属传闻。库克说：“不，我没说过那样的话，从来没有。这只是外界流传的谣言。我深爱自己的工作。28 年前我加入苹果，从那天起，我热爱在这里的每一天。我们经历过起伏，但共事的伙伴们无比优秀。他们激发了我最好的一面，我也希望能成就他们。我无法想象没有苹果的人生。”此前有媒体爆料，苹果已在为库克2026年卸任做准备，加...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪深两市成交额突破5000亿元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，沪深两市成交额突破5000亿元。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">小米向第一代 SU7 / YU7 / Ultra 首销期首任车主赠送定制冰箱贴，限量 15 万份</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">IT之家</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">感谢IT之家网友 小爰同学、蛋炒鱼 的线索投递！
+            IT之家 3 月 17 日消息，据博主 @懒酱的日记本 分享，小米向第一代 SU7 / YU7 / Ultra 首销期首任车主赠送定制冰箱贴，限量 15 万份。博主分享的截图显示，该冰箱贴采用汽车造型设计，选用卡布里蓝配色，定价 19.9 元。若车主账号下有多个绑定车辆或订单，每款车型限兑换 1 个冰箱贴，最多可领 3 个。...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">韩国特使：将从阿联酋接收1800万桶原油，将从该国接收石脑油。</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">韩国特使：将从阿联酋接收1800万桶原油，将从该国接收石脑油。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国台办：我们愿意为台湾同胞提供稳定可靠的能源资源保障</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月18日讯，3月18日，国务院台办举行例行新闻发布会。近期由于中东局势动荡，台湾岛内能源面临断油、断气危险，岛内各界高度关切能源资源储备和供应问题。这也让舆论注意到，大陆方面去年10月首度提出统一后台湾会有“七个更好”，其中包括“和平统一之后，有强大祖国做后盾，台湾能源资源保障会更好”。请问对此有何阐释？发言人陈斌华答问指出，以和平方式实现统一，对两岸同胞和全民族最有利。和平统一将给台湾...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">场内石油主题LOF走强，南方原油LOF、嘉实原油LOF双双超4%，原油LOF易方达涨超3%，石油基金LOF、石油LOF、...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">场内石油主题LOF走强，南方原油LOF、嘉实原油LOF双双超4%，原油LOF易方达涨超3%，石油基金LOF、石油LOF、华宝油气LOF等跟涨。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">各大银行/品牌金条价格排行一览</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月18日讯，截至2026年03月18日（星期三）10:31，各大银行/品牌金条价格涨少跌多，其中老凤祥、建设银行、中国银行等金条价格上涨，老凤祥涨幅最大，较昨日上涨2元/克；招商银行、民生银行、交通银行等金条价格下跌，交通银行跌幅最大，较昨日下跌4元/克。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">三星电子：预计HBM市场份额将持续增长。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">三星电子：预计HBM市场份额将持续增长。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国投白银LOF复牌跌超2%。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">国投白银LOF复牌跌超2%。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
