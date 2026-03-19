@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年03月19日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: left; padding: 40px 0 20px 0; margin-bottom: 20px; }
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .header .subtitle { font-size: 1.1em; color: #64748b; margin-bottom: 12px; }
+        .header .subtitle .divider { color: #cbd5e1; margin: 0 8px; }
+        .header .subtitle .time { color: #94a3b8; }
+        .highlight-section { margin-bottom: 50px; }
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .highlight-desc { color: #475569; font-size: 1em; line-height: 1.8; }
+        .section { margin-bottom: 50px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+        .section-title { font-size: 1.4em; font-weight: 600; color: #1e293b; }
+        .section-subtitle { font-size: 0.85em; color: #94a3b8; margin-top: 2px; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .news-title { font-size: 1.15em; font-weight: 600; color: #1e293b; line-height: 1.5; flex: 1; }
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+        .news-source { color: #6366f1; font-weight: 500; }
+        .news-time { color: #94a3b8; }
+        .news-summary { color: #475569; font-size: 0.95em; line-height: 1.75; margin-bottom: 16px; }
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+        .news-highlight-label { font-size: 0.75em; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .news-highlight-text { color: #334155; font-size: 0.9em; line-height: 1.6; }
+        .footer { text-align: center; padding: 30px 20px; margin-top: 40px; }
+        .footer p { color: #64748b; font-size: 0.9em; margin-bottom: 8px; }
+        .footer .disclaimer { color: #94a3b8; font-size: 0.85em; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .news-header { flex-direction: column; gap: 10px; }
+            .hot-tag { align-self: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年03月19日 星期四 10:36</span></p>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">🔥 今日亮点</div>
+                <h2 class="highlight-title">联想发布天禧AI Claw，可实现零门槛部署和使用</h2>
+                <p class="highlight-desc">3月19日，联想发布天禧AI Claw。据了解，天禧AI Claw可实现零门槛部署和使用，并在端云混合架构的支持下，实现7*24小时全天候跨端陪伴。此外，天禧AI Claw基于独立云主机运行并辅以数据安全。</p>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+            <div class="news-list"><div class="news-item"><p class="news-summary">暂无数据</p></div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">联想发布天禧AI Claw，可实现零门槛部署和使用</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">3月19日，联想发布天禧AI Claw。据了解，天禧AI Claw可实现零门槛部署和使用，并在端云混合架构的支持下，实现7*24小时全天候跨端陪伴。此外，天禧AI Claw基于独立云主机运行并辅以数据安全。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">智己LS8即将开启预售，并发布搭载千问大模型的AI超级智能体</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">3月18日，智己汽车发布行业首个超级智能体IM Ultra Agent，全球首搭千问大模型。该智能体行业首创“舱驾一体、全域融合”的智能架构IM Fusion Nova，打通了线控底盘、智驾AI、智舱AI三大核心系统。同步，智己汽车宣布，智己LS8将于3月26日正式开启预售。此外，智己与Momenta联合推出IM AD ZETA，搭载最新一代的Momenta强化学习大模型，性能上限比现有大模型最多...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪深两市成交额突破1万亿元</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，沪深两市成交额突破1万亿元，较上一个交易日此时放量超900亿元。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">华为常务董事汪涛： 华为政企业务首次突破1000亿元</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">3月19日，华为中国合作伙伴大会2026在深圳举行。华为常务董事汪涛在致辞中表示，2025年华为整体经营稳健，中国政企业务快速增长。2025年华为政企业务收入首次突破1000亿元，中国政企伙伴业绩也超过了800亿，华为在NA市场、商业市场和分销三类市场均实现了双位数的增长。（证券时报）</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">宁德时代、泡泡玛特等入股博裕新智新产股权投资基金</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，爱企查App显示，近日，博裕新智新产（宁波）股权投资合伙企业（有限合伙）发生工商变更，新增宁德时代新能源科技股份有限公司、深圳市腾讯产业投资基金有限公司、重庆唯品会投资有限公司、北京泡泡玛特文化创意有限公司等为合伙人，同时出资额由200万元人民币增至40.01亿元人民币。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">最高翻倍，国内航司集体上调燃油附加费</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">南航向票代发布通知，受国际燃油价格调整影响，将分批调整国际航班燃油附加费，其中中国到东南亚上调100元，中国到澳洲上调270元，中国到阿联酋上调150元，中国到美国经济舱上调250元，公务舱上调500元。此外，春秋，吉祥，东航，长龙航空也已陆续上调国际航班燃油附加费，最高上调幅度翻倍，比如春秋航空上海至吉隆坡、槟城由180元上调至360元。（第一财经）</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪指跌幅扩大至1%，沪深京三市下跌个股近4900只</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，沪指跌幅扩大至1%，深成指跌1.46%，创业板指跌0.42%，贵金属、有色、培育钻石、半导体等方向跌幅居前，沪深京三市下跌个股近4900只。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">欧盟证实美社交媒体平台X已缴纳1.2亿欧元罚款</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">当地时间18日，欧盟委员会负责数字经济事务的发言人托马斯·雷尼耶证实，美国社交媒体平台X已在截止期限前，配合缴纳了欧盟去年12月开出的1.2亿欧元罚款，并就其“蓝标认证”功能提交了整改方案。这名发言人还表示，尽管X已经缴纳相关罚款，但他们仍在就该处罚进行上诉。（央视新闻）</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">香港金管局：美国未来货币政策走向存在较大不确定性。香港货币及金融市场保持有序运作。将密切监视市场发展。</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">香港金管局：美国未来货币政策走向存在较大不确定性。香港货币及金融市场保持有序运作。将密切监视市场发展。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">港股新能源车企股震荡走高，小米集团(01810.HK)涨超5%，奇瑞汽车(09973.HK)、比亚迪股份(01211.H...</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">港股新能源车企股震荡走高，小米集团(01810.HK)涨超5%，奇瑞汽车(09973.HK)、比亚迪股份(01211.HK)、吉利汽车(00175.HK)、理想汽车(02015.HK)、赛力斯(09927.HK)等个股跟涨。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">金十期货3月19日讯，据Mysteel数据显示，今日MMLC电池级碳酸锂（早盘）价格较昨日下跌2050元/吨，中间价报1...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十期货3月19日讯，据Mysteel数据显示，今日MMLC电池级碳酸锂（早盘）价格较昨日下跌2050元/吨，中间价报152150元/吨。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美国正在中东飞速“烧钱”：为了填补过去三周的巨大武器消耗，五角大楼向白宫施压，试图索要一笔高达2000亿美元的“天价”军...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">美国正在中东飞速“烧钱”：为了填补过去三周的巨大武器消耗，五角大楼向白宫施压，试图索要一笔高达2000亿美元的“天价”军费。点击查看...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">零钱往哪放？理财收益率跟踪</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月19日讯，腾讯理财通活期+7日年化收益率最高为1.5520%，最低为0.8630%，微信零钱通7日年化收益率最高为1.1570%，最低为1.0220%，支付宝余额宝7日年化收益率最高为1.2170%，最低为1.0010%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">首都利雅得遭袭 沙特称保留采取军事回应的权利</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月19日讯，当地时间19日凌晨，沙特外交大臣费萨尔召开新闻发布会称，伊朗在海湾国家和伊斯兰国家外交官在场的情况下袭击沙特首都利雅得绝非偶然，沙特保留在必要时采取军事行动回应的权利。18日深夜至19日凌晨，沙特、阿塞拜疆、约旦、阿拉伯联合酋长国、巴林、巴基斯坦、土耳其、叙利亚、卡塔尔、科威特、黎巴嫩与埃及的外长与代表在沙特首都利雅得召开会议。沙特阿拉伯国防部18日晚发布消息说，该国首都利雅...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
