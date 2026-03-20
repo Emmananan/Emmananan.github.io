@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年03月20日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: left; padding: 40px 0 20px 0; margin-bottom: 20px; }
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .header .subtitle { font-size: 1.1em; color: #64748b; margin-bottom: 12px; }
+        .header .subtitle .divider { color: #cbd5e1; margin: 0 8px; }
+        .header .subtitle .time { color: #94a3b8; }
+        .highlight-section { margin-bottom: 50px; }
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .highlight-desc { color: #475569; font-size: 1em; line-height: 1.8; }
+        .section { margin-bottom: 50px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+        .section-title { font-size: 1.4em; font-weight: 600; color: #1e293b; }
+        .section-subtitle { font-size: 0.85em; color: #94a3b8; margin-top: 2px; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .news-title { font-size: 1.15em; font-weight: 600; color: #1e293b; line-height: 1.5; flex: 1; }
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+        .news-source { color: #6366f1; font-weight: 500; }
+        .news-time { color: #94a3b8; }
+        .news-summary { color: #475569; font-size: 0.95em; line-height: 1.75; margin-bottom: 16px; }
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+        .news-highlight-label { font-size: 0.75em; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .news-highlight-text { color: #334155; font-size: 0.9em; line-height: 1.6; }
+        .footer { text-align: center; padding: 30px 20px; margin-top: 40px; }
+        .footer p { color: #64748b; font-size: 0.9em; margin-bottom: 8px; }
+        .footer .disclaimer { color: #94a3b8; font-size: 0.85em; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .news-header { flex-direction: column; gap: 10px; }
+            .hot-tag { align-self: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年03月20日 星期五 10:23</span></p>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">🔥 今日亮点</div>
+                <h2 class="highlight-title">Meta Agent失控泄密，小扎紧急拉响顶格警报</h2>
+                <p class="highlight-desc">Meta Agent失控泄密，小扎紧急拉响顶格警报
+       
+             henry
+                          2026-03-20
+             08:52:59
+          
+          来源：量子位            
+                          
+            能让小扎栽跟头的，...</p>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“谁比日本更懂偷袭？珍珠港咋说？”高市蚌埠住了…</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 熊超然】“说到出其不意（surprise，偷袭），还有谁比日本更懂？当年（偷袭）珍珠港怎么不早告诉我？”
+
+
+这样一句话突然出现在美日两国领导人会晤过程中，美国总统特朗普敢说，日本首相高市早苗可不敢听……
+
+
+当地时间3月19日，特朗普在白宫会见来访的高市，两人又是拥抱，又是寒暄，但在媒体提问环节，当日本记者询问美国袭击伊朗前为何不提前通知欧洲和日本等盟友时，却引出了特朗普这串让现...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“鸿门宴”：她本想联美遏华，现在尴尬了</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 齐倩】
+
+
+日本首相高市早苗这操作，可真是偷鸡不成蚀把米。
+
+
+路透社3月19日报道称，当天的白宫会晤期间，美国总统特朗普可能会向日本首相高市早苗施压，要求其在对伊朗战争中提供帮助。这让高市陷入尴尬境地，因为日方正在权衡能提供多少支持。
+
+
+值得一提的是，在特朗普寻求盟友军事支持之际访美，实属高市“自投罗网”。这是一场高市谋划已久的会面。有分析指出，高市原计划在特朗普启程访华前“影...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">桑切斯“开团”后，欧盟终于决定站出来</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 齐倩】
+
+
+最初，西班牙总理桑切斯谴责美国和以色列攻击伊朗，让他一度成为欧洲的异类。
+
+
+如今，欧盟所有人都想加入。
+
+
+3月18日，美国政客新闻网欧洲版披露欧洲理事会峰会结论草案。内容显示，在当地时间19日的峰会上，欧盟将公开批评美以军事行动，呼吁“各方全面尊重国际法”。
+
+
+“欧洲终于站出来了，就像西班牙从一开始就做的那样，”当天，西班牙外交部长阿尔瓦雷斯在接受该网站采访时，欣...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">伊朗报复升级，沙特警告：信任破裂，或采取军事行动</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 阮佳琪】
+
+
+本周三（18日），以色列袭击伊朗最大气田，伊斯兰革命卫队随即发出紧急警告，将沙特阿拉伯、阿联酋和卡塔尔三国的石油设施列为“合法打击目标”，宣布在“未来数小时内”实施对等报复，敦促相关区域民众撤离。
+
+
+综合《华尔街日报》、半岛电视台等披露的最新消息，卡塔尔拉斯拉凡工业区在12小时内两次遭受导弹袭击引发火灾，损毁“严重”；阿联酋成功拦截多枚针对其能源设施的导弹，并暂停两...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">爱沙尼亚朝特朗普抛媚眼：他们不帮，我们愿意啊！</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 阮佳琪】
+
+
+波罗的海这个地方指定是有点说法：先是立陶宛嚷嚷要出兵帮美国打伊朗，现在爱沙尼亚也跟着上蹿下跳，抢着要参加其他欧洲盟友都避之不及的特朗普军舰护航计划……
+
+
+据“政客新闻网”18日报道，周二晚间接受采访时，爱沙尼亚国防部长汉诺·佩夫库尔表示，尽管美国尚未正式向塔林提出援助请求，但他已注意到美国总统特朗普呼吁北约盟友为重启霍尔木兹海峡提供支援的广泛表态。爱沙尼亚对协助美国...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美议员紧张：中国在医药领域，也上演稀土剧本</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 熊超然】当地时间3月18日，美国国会众议院“美中战略竞争特别委员会”（下称“中国委员会”）召开听证会，主题就十分耸动——“从科学实验室到家庭药箱：中国如何垄断我们的药品市场”，意图“审视”美国在供应链方面对中国制药业日益加深的依赖状况。
+
+
+香港《南华早报》3月19日报道称，来自佛罗里达州的共和党籍联邦众议员尼尔·邓恩（Neal Dunn）在听证会上无端指责，宣称中国正实施一项“蓄...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">Meta Agent失控泄密，小扎紧急拉响顶格警报</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">Meta Agent失控泄密，小扎紧急拉响顶格警报
+       
+             henry
+                          2026-03-20
+             08:52:59
+          
+          来源：量子位            
+                          
+            能让小扎栽跟头的，...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">黄仁勋：每一家工业企业都将成为机器人公司！连发物理AI全家桶</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">黄仁勋：每一家工业企业都将成为机器人公司！连发物理AI全家桶
+       
+             梦晨
+                          2026-03-20
+             08:52:21
+          
+          来源：量子位            
+                          
+            抛出了一整套物...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">太初元碁推出企业级“养虾”方案，发布太初龙虾一体机（TecoClaw）</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">太初元碁推出企业级“养虾”方案，发布太初龙虾一体机（TecoClaw）
+       
+             量子位的朋友们
+                          2026-03-19
+             20:35:39
+          
+          来源：量子位            
+                          
+         ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">阿里宣布AI战略商业目标：未来五年，云和AI商业化收入突破1000亿美元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">阿里宣布AI战略商业目标：未来五年，云和AI商业化收入突破1000亿美元
+       
+             量子位的朋友们
+                          2026-03-19
+             20:07:52
+          
+          来源：量子位            
+                          
+        ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">阿里财报电话会：平头哥GPU芯片已累计规模化交付47万片</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">阿里财报电话会：平头哥GPU芯片已累计规模化交付47万片
+       
+             量子位的朋友们
+                          2026-03-19
+             20:05:42
+          
+          来源：量子位            
+                          
+            涵盖包括...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">老黄怒怼玩家根本不懂AI！英伟达新AI功能遭全网抵制，游戏圈炸锅了</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">老黄怒怼玩家根本不懂AI！英伟达新AI功能遭全网抵制，游戏圈炸锅了
+       
+             听雨
+                          2026-03-19
+             19:35:27
+          
+          来源：量子位            
+                          
+            游戏角色...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">章源钨业上调3月下半月长单采购报价</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，章源钨业公布2026年3月下半月长单采购报价：55%黑钨精矿102.00万元/标吨，55%白钨精矿101.90万元/标吨，仲钨酸铵(国标零级)150.00万元/吨，较2026年3月上半月长单采购报价均有上调。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">源杰科技涨停</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，源杰科技涨停，现报1140元/股，成交额超36亿元，成A股市场第二高价股。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">新加坡电信：3月16日服务中断影响逾60万用户</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">新加坡电信3月19日透露，16日发生的网络中断预计影响逾60万用户，事故的主要原因是网络设施出现机械故障。3月16日至18日期间，新加坡电信连续三天在网络连接上出现问题，其中16日上午起大量用户无法接打电话、连不上网络，通讯服务在八九个小时后恢复。新加坡电信曾在2024年10月固线电话服务中断，导致部分紧急热线和公共服务电话无法接通，影响约50万用户，考虑到服务干扰的规模和影响，以及用于修复系统的...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">协鑫能科抽蓄电站项目获银团100亿元贷款</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，由协鑫能科投建的浙江建德协鑫抽水蓄能电站项目签约百亿银团，8家金融机构组成的银团将为该抽蓄项目提供为期32年、总金额达100亿元的贷款。据了解，该项目为华东装机规模最大的抽蓄电站，总投资超125亿元，主体工程已于2024年9月开工，预计在2030年前全容量投产发电。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">源杰科技股价反超寒武纪跃居A股市场第二高价股</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，源杰科技盘中涨超18%，股价反超寒武纪跃居A股市场第二高价股。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">创业板指涨超2%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，创业板指涨超2%，沪指涨0.15%，深成指涨1.13%，光伏设备、电力、贵金属、CPO等方向涨幅居前，沪深京三市上涨个股超4200只。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">工信部党组书记、部长李乐成调研信息技术创新应用和未来产业发展研究工作</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月20日讯，3月19日，工业和信息化部党组书记、部长李乐成赴国家工业信息安全发展研究中心，调研信息技术创新应用和未来产业发展研究相关工作。李乐成参观了电子一所信息技术创新应用工作成果展，听取了电子一所在推动基础软件和工业软件自主创新发展、提升软件供应链韧性和安全水平，以及人工智能技术融合应用等方面情况介绍。当前，我国信息技术产业正处于从“规模扩张”向“质量提升”转型的关键时期，新一轮科技...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">2月PPI远超预期，3月能源冲击尚未计入。美联储降息预期消退导致金价承压，国际现货黄金是要进入“至暗之夜”还是处于“破晓...</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">2月PPI远超预期，3月能源冲击尚未计入。美联储降息预期消退导致金价承压，国际现货黄金是要进入“至暗之夜”还是处于“破晓”时分？</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沙特国防部发言人：在东部地区拦截并摧毁了5架无人机。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">沙特国防部发言人：在东部地区拦截并摧毁了5架无人机。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">章源钨业上调3月下半月长单采购报价</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月20日讯，章源钨业公布2026年3月下半月长单采购报价：55%黑钨精矿102.00万元/标吨，55%白钨精矿101.90万元/标吨，仲钨酸铵(国标零级)150.00万元/吨，较2026年3月上半月长单采购报价均有上调。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">仗还没打完，内塔尼亚胡已经开始规划“战后重建”了——他的目标：让中东的石油天然气管道经过以色列，彻底绕开霍尔木兹海峡。点...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">仗还没打完，内塔尼亚胡已经开始规划“战后重建”了——他的目标：让中东的石油天然气管道经过以色列，彻底绕开霍尔木兹海峡。点击查看...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">金十图示：2026年03月20日（周五）上海金早盘价为1044.04元/克，较国际金价（1038.18元/克），高5.8...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十图示：2026年03月20日（周五）上海金早盘价为1044.04元/克，较国际金价（1038.18元/克），高5.86元/克</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
