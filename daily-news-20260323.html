@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年03月23日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: left; padding: 40px 0 20px 0; margin-bottom: 20px; }
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .header .subtitle { font-size: 1.1em; color: #64748b; margin-bottom: 12px; }
+        .header .subtitle .divider { color: #cbd5e1; margin: 0 8px; }
+        .header .subtitle .time { color: #94a3b8; }
+        .highlight-section { margin-bottom: 50px; }
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .highlight-desc { color: #475569; font-size: 1em; line-height: 1.8; }
+        .section { margin-bottom: 50px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+        .section-title { font-size: 1.4em; font-weight: 600; color: #1e293b; }
+        .section-subtitle { font-size: 0.85em; color: #94a3b8; margin-top: 2px; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .news-title { font-size: 1.15em; font-weight: 600; color: #1e293b; line-height: 1.5; flex: 1; }
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+        .news-source { color: #6366f1; font-weight: 500; }
+        .news-time { color: #94a3b8; }
+        .news-summary { color: #475569; font-size: 0.95em; line-height: 1.75; margin-bottom: 16px; }
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+        .news-highlight-label { font-size: 0.75em; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .news-highlight-text { color: #334155; font-size: 0.9em; line-height: 1.6; }
+        .footer { text-align: center; padding: 30px 20px; margin-top: 40px; }
+        .footer p { color: #64748b; font-size: 0.9em; margin-bottom: 8px; }
+        .footer .disclaimer { color: #94a3b8; font-size: 0.85em; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .news-header { flex-direction: column; gap: 10px; }
+            .hot-tag { align-self: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年03月23日 星期一 10:20</span></p>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">🔥 今日亮点</div>
+                <h2 class="highlight-title">“星灿智能”完成千万级天使轮融资</h2>
+                <p class="highlight-desc">36氪获悉，近日，深圳星灿智能宣布完成千万级天使+轮融资。本轮融资由山东亚华电子、浙江亚特电器及其他社会资本共同完成，资金将重点用于出行陪护机器人的核心技术研发、产品量产落地与核心团队扩张。云悦资本担任长期财务顾问。</p>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">战局失控，美方竟诡辩“以升级求降级”</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 柳白】美以对伊朗军事行动持续升级之际，围绕霍尔木兹海峡这一全球能源命门的博弈正急剧升温，特朗普政府在“升级与降温”之间反复摇摆。
+
+
+美国财政部长贝森特当地时间3月22日接受采访时，再度为对伊军事行动辩护，提出“有时必须通过升级来实现降级”的逻辑，同时释放可能派兵控制哈尔克岛的强硬信号，这一逻辑遭到了美国民主党议员直言驳斥：“他们好像从来没读过历史书”。
+
+
+此番表态正值特朗普政府...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“美军这么干，和自杀式袭击者有啥区别”</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 齐倩】
+
+
+美以伊军事冲突爆发后，美国非营利组织“军事宗教自由基金会”（MRFF）接到了上百名军人投诉。一些投诉者表示，他们的指挥官正将战争宗教化，声称此次战争是“上帝神圣计划”的一部分。
+
+
+当地时间3月20日，美国知名播客节目主持人乔·罗根（Joe Rogan）在节目中提及其中一条投诉，并将之与搞自杀式炸弹袭击的宗教极端主义者相提并论。
+
+
+罗根在《乔·罗根的体验》中对嘉宾说：...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">伊朗威胁打海水淡化设施，中东1亿人都赖此为生</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 齐倩】
+
+
+3月21日，美国总统特朗普扬言，若不开放霍尔木兹海峡就袭击伊朗发电站，并限时48小时。伊朗随后强硬回应称，届时，美国及其在该地区盟友的所有能源、信息技术和海水淡化设施都将成为攻击目标。
+
+
+“海水淡化设施”一词一出，立即引起各方警惕。
+
+
+迪拜风险投资公司创始人、在社交媒体X平台拥有320万粉丝的马里奥·纳瓦尔22日指出，在伊朗的回应中，这是“最关键的词汇”，因为海水淡...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">深刻战略错误！“这下西方显得更加短视，看看中国”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 王恺雯】中东冲突导致全球油价飙升，也让西方汽车制造业再次感受到危机。
+
+
+英国《卫报》3月21日刊文指出，伊朗战争应当为西方汽车制造商敲响警钟，提醒他们若不全力推进电动车，将付出高昂代价。而中国在这方面早已行动。
+
+
+文章称，福特、通用、克莱斯勒等美国知名汽车品牌，依靠销售耗油量大的汽车发家致富，但上世纪80年代，随着两次石油危机推高油价，廉价节油的日本汽车把这些底特律巨头打了个措...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“再不同意，就派ICE去机场抓人了”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 王恺雯】由于拨款法案再度受挫，美国国土安全部“停摆”僵局持续，全美机场正处于一片混乱中。
+
+
+据彭博社、美国有线电视新闻网（CNN）等美媒报道，美国总统特朗普3月21日威胁称，如果民主党坚持不同意为国土安全部提供资金的方案，他最早将于3月23日向机场部署美国移民与海关执法局（ICE）特工。
+
+
+“如果民主党人不允许在我们的机场以及全国其他地方实施公正且适当的安全措施，ICE将比以往...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">以色列两次拦截失败，伊朗宣布“战争进入新阶段”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 王恺雯】美以伊冲突进入第四周，伊朗当地时间3月21日向以色列南部发射多枚导弹，有导弹穿透以色列防空系统，命中居民区。
+
+
+据Ynet新闻网、《以色列时报》等以媒报道，21日晚，以色列南部城市迪莫纳和阿拉德遭伊朗弹道导弹袭击，造成100多人受伤。以色列防空系统两次拦截失败。
+
+
+据以色列媒体报道，21日晚间，一枚重约450公斤的弹头直接击中了阿拉德的一个居民区，造成71人受伤，其中1...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美军大调兵，伊朗警告：前方有“大惊喜”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 齐倩】
+
+
+美军调兵遣将，瞄准伊朗哈尔克岛蠢蠢欲动，似乎正酝酿地面攻势。
+
+
+近日，多家外媒援引消息人士的话称，特朗普政府正在考虑占领或封锁作为伊朗关键石油出口枢纽的哈尔克岛，以迫使伊朗重新开放霍尔木兹海峡。
+
+
+彭博社21日也报道了类似消息，称随着美国中期选举临近，高油价对特朗普构成挑战，他迫切需要解决伊朗封锁霍尔木兹海峡引发的石油危机。但报道同时提醒称，此举将使美军士兵面临更致...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">日本人竟安心了，“重要的是，特朗普没生气”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 齐倩】
+
+
+美国总统特朗普一句“没人比日本更懂偷袭，比如珍珠港”，让日本举国尴尬。
+
+
+3月21日，日本首相高市早苗的美国之行终于结束，但日本人心情依旧复杂。
+
+
+一些日媒长舒一口气，发文直呼“日本暂时过关”以及“我们成功避免激怒特朗普”。但与此同时，不少日媒和专家愤怒于高市在“珍珠港玩笑”和伊朗等问题上的“卑躬屈膝”。
+
+
+“在日本，特朗普的珍珠港笑话引发了嘲讽和不满，”美国《纽...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美代表叫板：联合国挤满中国人，咱也要塞人</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 熊超然】退群、拖欠会费、在安理会屡站正义对立面……近年来，美国人在联合国的形象每况愈下，如今竟又有人对中国动起了坏心思。
+
+
+据香港《南华早报》3月21日报道，“反华之心不死”的美国国会众议院“美中战略竞争特别委员会”（下称“中国委员会”）于当地时间3月20日发布一份报告，大言不惭地声称，中国正操纵其在联合国的地位，损害美国的利益并推进国际野心。
+
+
+这份长达34页的报告只顾着污蔑...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">这项出口逆势增长超9%，中国变身“工厂的工厂”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">观察者网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【文/观察者网 熊超然】2025年，美国总统特朗普发动关税战后，中美间贸易遭受冲击。美国《财富》杂志（Fortune）日前指出，面对如此不利局面，中国的中间产品出口在去年却增长超9%。
+
+
+当地时间3月19日，《财富》杂志援引麦肯锡全球研究院（MGI）合伙人成政珉（Jeongmin Seong）的分析指出，尽管去年中美贸易额出现下降，但中国积极采取措施，实现了贸易伙伴多元化，且主要转向了新兴经济体...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“星灿智能”完成千万级天使轮融资</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，近日，深圳星灿智能宣布完成千万级天使+轮融资。本轮融资由山东亚华电子、浙江亚特电器及其他社会资本共同完成，资金将重点用于出行陪护机器人的核心技术研发、产品量产落地与核心团队扩张。云悦资本担任长期财务顾问。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">韩国3月前20天芯片出口同比飙升163.9%，人工智能需求持续强劲</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">韩国海关周一公布的数据显示，受海外对半导体强劲需求的推动，韩国3月前20天的出口额同比增长50.4%。数据显示，3月1日至20日期间，韩国出口额达到533亿美元，创历史同期最高，而去年同期为354亿美元。数据显示，同期韩国进口额同比增长19.7%，达到412亿美元，贸易顺差为121亿美元。按品类划分，半导体出口额同比增长163.9%，创下187亿美元的历史新高，主要得益于人工智能服务器需求旺盛推动...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪指跌破3900点关口</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">沪指跌破3900点关口，日内跌超1.6%，深成指、创业板指均跌逾2%，有色金属、算力硬件、半导体芯片等方向跌幅居前，沪深京三市下跌个股近5000只。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">中天精装：科睿斯半导体科技不从事PCB板业务</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，中天精装在互动平台表示，科睿斯半导体科技（东阳）有限公司不从事PCB板业务。科睿斯主营的FCBGA高端封装基板，用于TPU/CPU/GPU/AI芯片等高算力芯片封装，是连接芯片与PCB的媒介。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">雅迪冠能 i7、星舰 Ⅱ、白鲨 Ⅱ 电动车发布，4999 元起</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">IT之家</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">感谢IT之家网友 風見暉一 的线索投递！
+            IT之家 3 月 22 日消息，2026 雅迪冠能旗舰新品发布会今晚举行，冠能 i7、星舰 Ⅱ、白鲨 Ⅱ 电动车发布，建议零售价 4999 元起。IT之家整理如下：冠能 i7 100L 建议零售价 7999 元起72V30AhTTFAR 高能锂电2000WTTFAR 电机AI 安全影像 (前摄 + 后摄)6 寸 Smart 智慧屏双...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">苹果 CEO 蒂姆 · 库克：迫不及待想看看中国 AI 下一步进展</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">IT之家</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">感谢IT之家网友 斯文当不了饭吃 的线索投递！
+            IT之家 3 月 22 日消息，据中新社消息，苹果 CEO 蒂姆 · 库克今天在接受媒体采访时表示，中国机器人行业发展令人印象深刻。谈及“十五五”时期的中国机遇，他表示对 AI 非常期待，并迫不及待想看看该领域的下一步发展。▲ 图源：苹果据报道，中国发展高层论坛 2026 年年会今天在京启幕。库克在开幕致辞表示，中国才华横溢的...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">比亚迪A股一度大涨超8%，总市值重回万亿</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，比亚迪盘中涨幅一度超8%，公司总市值重回万亿元区间，现报价111.41元/股。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪深两市成交额突破1万亿元</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，沪深两市成交额突破1万亿元，较上一个交易日此时放量超1100亿元。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">焦煤期货主力合约触及涨停</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，焦煤期货主力合约触及涨停，涨幅11%，报1289.5元/吨。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">央行今日开展80亿元7天逆回购操作</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，央行今日开展80亿元7天逆回购操作，投标量80亿元，中标量80亿元，操作利率为1.40%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">A股三大指数大幅低开，赤峰黄金跌停</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，A股三大指数大幅低开，沪指低开1.32%，深成指低开1.78%，创业板指低开1.54%；贵金属、光模块领跌，赤峰黄金跌停，紫金矿业、新易盛、兆易创新跌超4%；煤炭、油气逆势上涨，山西焦煤、陕西黑猫涨超4%，首华燃气涨超2%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">恒指开盘跌1.93%，恒生科技指数跌1.9%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，恒指开盘跌1.93%，恒生科技指数跌1.9%；科技、GEO领跌，智谱、百度集团跌超4%，哔哩哔哩跌超3%；有色金属走弱，赤峰黄金跌超18%，紫金矿业跌超5%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">人民币对美元中间价调贬143个基点</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，人民币对美元中间价报6.9041，调贬143个基点。前一交易日中间价报6.8898，在岸人民币16:30收盘价报6.8817，夜盘收报6.9050。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">千问上线打车能力，可一句话完成个性化需求</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">3月23日，千问上线打车能力，可一句话完成选车型、添加途经点、预约时间等操作，还支持“要空气清新的车，价格不超过30元”、“驾驶平稳”、“服务态度好”等个性化需求。在阿里生态能力支持下，千问能为用户提供订机票、酒店、打车等多场景串联服务。
+ 千问还让“打车”具备了记忆与预约能力。用户只需告诉千问家庭和公司地址，即可直接让千问“帮我打车回家”或“打车去公司”；说一句“下午6点半下班，帮我约车回家”，...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">华泰证券：重申对电力板块的全面看多，包括水核风光生物质在内的绿电或充分受益</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，华泰证券研报称，辽宁2026年3月发文，建立核电可持续发展价格结算机制。华泰证券认为核电试点的落地，意味着中央/地方政府从机制层面为2023年以来持续的“煤价下降，电价下降”画上了阶段性句号，也意味着以核电为代表的清洁能源过去3年盈利承压的趋势可能即将出现重大的政策拐点。同时，煤价下降本身也不可持续，霍尔木兹海峡的封锁让市场对化石能源价格易涨难跌逐步确立信心，这对于中国在过去3年受一次...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美国西得克萨斯州天然气价格转负，供应商被迫烧掉过剩产量</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">美国得克萨斯州西部的二叠纪盆地瓦哈天然气交易中心生产美国约四分之一的天然气产量，上周其现货天然气价格一度跌至每百万英热单位-9.75美元。当地钻井公司提高了石油产量，天然气产量也随之增长，但由于基础设施受限，天然气出现局部过剩，迫使生产商烧掉多余的产能。（财联社）</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沙特国防部：监测到两枚弹道导弹朝利雅得地区发射，已拦截其中一枚，另一枚落在无人区。</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">沙特国防部：监测到两枚弹道导弹朝利雅得地区发射，已拦截其中一枚，另一枚落在无人区。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国际能源署署长比罗尔：清洁能源转型“进展非常强劲”。</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">国际能源署署长比罗尔：清洁能源转型“进展非常强劲”。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国际能源署正与各国政府就进一步释放石油储备事宜进行协商</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月23日讯，国际能源署署长比罗尔周一表示，鉴于伊朗战争的影响，该机构正在与亚洲和欧洲各国政府协商，视情况需要是否应释放更多储备石油。比罗尔说：“如果有必要的话，我们当然会这么做。我们会审视各种情况，进行分析，评估市场状况，并与成员国进行讨论。”3月11日，国际能源署成员国达成一致，将从战略储备中释放创纪录的4亿桶石油，以应对全球原油价格的飙升。比罗尔补充道，届时也不会有特定的原油价格水平...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">现货黄金几乎抹去今年全部涨幅</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月23日讯，周一现货黄金一度至每盎司4320.30美元——仅比去年年底的价格高出不到一美元，几乎抹去了今年的全部涨幅。与此同时，中东地区的战争已持续了四周，而美国和伊朗之间又相互发出发动新攻击的威胁。自冲突爆发以来，不断上涨的油价增加了通胀风险，并降低了美联储会及其他央行短期内降息的可能性。这对黄金来说是一个不利因素，黄金已连续八个交易日下跌，并且刚刚创下了自1983年以来的最大单周跌幅...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪深两市成交额连续第199个交易日突破1万亿元。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">沪深两市成交额连续第199个交易日突破1万亿元。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">以色列国防军：以色列国防军已开始对德黑兰基础设施进行大规模打击。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">以色列国防军：以色列国防军已开始对德黑兰基础设施进行大规模打击。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">据伊朗努尔新闻(Nour News)：伊朗西北部城市乌尔米耶（Urmia）遭空袭，多栋住宅楼被夷为平地。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">据伊朗努尔新闻(Nour News)：伊朗西北部城市乌尔米耶（Urmia）遭空袭，多栋住宅楼被夷为平地。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">A股电网设备概念盘中拉升，三变科技触及涨停，百利电气、新特电气、保变电气、中国西电跟涨。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">A股电网设备概念盘中拉升，三变科技触及涨停，百利电气、新特电气、保变电气、中国西电跟涨。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国际能源署署长比罗尔：危机影响在欧洲仍未被充分理解。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">国际能源署署长比罗尔：危机影响在欧洲仍未被充分理解。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">南向资金净买额达50亿元。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">南向资金净买额达50亿元。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
