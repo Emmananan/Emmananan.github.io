@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年03月25日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: left; padding: 40px 0 20px 0; margin-bottom: 20px; }
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .header .subtitle { font-size: 1.1em; color: #64748b; margin-bottom: 12px; }
+        .header .subtitle .divider { color: #cbd5e1; margin: 0 8px; }
+        .header .subtitle .time { color: #94a3b8; }
+        .highlight-section { margin-bottom: 50px; }
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .highlight-desc { color: #475569; font-size: 1em; line-height: 1.8; }
+        .section { margin-bottom: 50px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+        .section-title { font-size: 1.4em; font-weight: 600; color: #1e293b; }
+        .section-subtitle { font-size: 0.85em; color: #94a3b8; margin-top: 2px; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .news-title { font-size: 1.15em; font-weight: 600; color: #1e293b; line-height: 1.5; flex: 1; }
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+        .news-source { color: #6366f1; font-weight: 500; }
+        .news-time { color: #94a3b8; }
+        .news-summary { color: #475569; font-size: 0.95em; line-height: 1.75; margin-bottom: 16px; }
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+        .news-highlight-label { font-size: 0.75em; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .news-highlight-text { color: #334155; font-size: 0.9em; line-height: 1.6; }
+        .footer { text-align: center; padding: 30px 20px; margin-top: 40px; }
+        .footer p { color: #64748b; font-size: 0.9em; margin-bottom: 8px; }
+        .footer .disclaimer { color: #94a3b8; font-size: 0.85em; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .news-header { flex-direction: column; gap: 10px; }
+            .hot-tag { align-self: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年03月25日 星期三 10:11</span></p>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">🔥 今日亮点</div>
+                <h2 class="highlight-title">OpenAI关停Sora！25个月从封神到退场</h2>
+                <p class="highlight-desc">OpenAI关停Sora！25个月从封神到退场
+       
+             西风
+                          2026-03-25
+             08:13:11
+          
+          来源：量子位            
+                          
+            AI视频正在进入“中国时间”...</p>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+            <div class="news-list"><div class="news-item"><p class="news-summary">暂无数据</p></div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">OpenAI关停Sora！25个月从封神到退场</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">OpenAI关停Sora！25个月从封神到退场
+       
+             西风
+                          2026-03-25
+             08:13:11
+          
+          来源：量子位            
+                          
+            AI视频正在进入“中国时间”...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">AI全链路加持！一加15T打造全能小屏，售价4299元起</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">AI全链路加持！一加15T打造全能小屏，售价4299元起
+       
+             量子位的朋友们
+                          2026-03-24
+             22:35:34
+          
+          来源：量子位            
+                          
+            2025...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">龙虾爆火之后，AI初创的全球化机会来了吗？｜线下沙龙报名</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">龙虾爆火之后，AI初创的全球化机会来了吗？｜线下沙龙报名
+       
+             林樾
+                          2026-03-24
+             21:09:56
+          
+          来源：量子位            
+                          
+            周四14:00，欢...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">黄仁勋暴论核弹：AGI已经实现，Ilya错了，程序员有10亿</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">黄仁勋暴论核弹：AGI已经实现，Ilya错了，程序员有10亿
+       
+             Jay
+                          2026-03-24
+             16:54:00
+          
+          来源：量子位            
+                          
+            老黄再次展示...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">你的模型真的会”举一反三”吗？RoboChallenge Table30 V2 正式发布，泛化时代开幕</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">你的模型真的会”举一反三”吗？RoboChallenge Table30 V2 正式发布，泛化时代开幕
+       
+             量子位的朋友们
+                          2026-03-24
+             16:33:52
+          
+          来源：量子位            
+                    ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">LeCun的世界模型单GPU就能跑了</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">LeCun的世界模型单GPU就能跑了
+       
+             听雨
+                          2026-03-24
+             15:00:47
+          
+          来源：量子位            
+                          
+            速度快到离谱，完整规划仅需1秒
+   ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">又一华为天才少年入局具身创业！用视频生成数据训家用机器人，首个模型登顶具身基模榜单</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">又一华为天才少年入局具身创业！用视频生成数据训家用机器人，首个模型登顶具身基模榜单
+       
+             衡宇
+                          2026-03-24
+             14:05:17
+          
+          来源：量子位            
+                          
+        ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">阿里在海外上了个“企业级龙虾”，我用它30分钟手搓了一家网店</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">阿里在海外上了个“企业级龙虾”，我用它30分钟手搓了一家网店
+       
+             鹭羽
+                          2026-03-24
+             13:21:36
+          
+          来源：量子位            
+                          
+            一站式配齐选品...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">OpenClaw逼出Claude最强反击！GUI操控电脑和真人无差别，网友：这得花多少token？</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">OpenClaw逼出Claude最强反击！GUI操控电脑和真人无差别，网友：这得花多少token？
+       
+             梦晨
+                          2026-03-24
+             10:20:26
+          
+          来源：量子位            
+                          
+...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">龙虾史上最大升级！但接了微信的千万别更</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">龙虾史上最大升级！但接了微信的千万别更
+       
+             henry
+                          2026-03-24
+             09:24:05
+          
+          来源：量子位            
+                          
+            微信和WhatsApp双双断连...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">深成指涨超2%</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，深成指涨超2%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">现货黄金重新站上4600美元/盎司</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，现货黄金重新站上4600美元/盎司，日内涨2.87%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">共百余场活动，2026中关村论坛年会今天开幕</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">今天（25日）上午，2026中关村论坛年会在北京开幕。本次年会为期5天，以“科技创新与产业创新深度融合”为主题，设置论坛会议、成果发布等五大板块，共百余场活动，将有来自100多个国家和地区的上千名嘉宾参与。在技术交易方面，将开展20多场对接活动，500余个境内外科技项目参与路演推介。（央视新闻）</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">Meta授予首席运营官哈维尔·奥利文股票期权与限制性股票单位</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">Meta授予首席运营官哈维尔·奥利文股票期权与限制性股票单位。（新浪财经）</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪指重返3900点上方</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，沪指重返3900点上方，日内涨超0.5%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">A股三大指数集体高开，铭普光磁涨停</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，A股三大指数集体高开，沪指高开0.28%，深成指高开0.98%，创业板指高开1.1%；贵金属、CPO、工程机械板块领涨，铭普光磁涨停，湖南白银涨超7%，招金黄金涨超5%，三一重工涨超1%；能源、多元金融、电信板块跌幅居前，陕西黑猫跌超6%，中国石油、中油资本跌超3%，中国电信跌近1%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">央行今日开展785亿元7天期逆回购操作</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，2026年3月25日中国人民银行以固定利率、数量招标方式开展了785亿元7天期逆回购操作。操作利率1.40%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">恒指开盘涨0.87%，恒生科技指数涨0.99%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，恒指开盘涨0.87%，恒生科技指数涨0.99%；有色金属、消费板块领涨，灵宝黄金涨超6%，泡泡玛特涨超2%；国防军工、石油石化板块跌幅居前，西锐跌超7%，山东墨龙跌超6%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">3月25日人民币对美元中间价调升32个基点</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，3月25日，人民币对美元中间价调升32个基点，报6.8911，上一交易日中间价6.8943。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“中微精仪”完成数千元天使轮融资</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，高端工业激光装备制造商“中微精仪”近日完成数千元天使轮融资。本轮融资由东方富海独家投资，华君资本担任长期独家战略财务顾问。融资资金将主要用于研发投入和团队建设。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">A股物流板块短线拉升，中国铁物封涨停，恒基达鑫、三羊马、密尔克卫、永泰运、厦门象屿跟涨。</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">A股物流板块短线拉升，中国铁物封涨停，恒基达鑫、三羊马、密尔克卫、永泰运、厦门象屿跟涨。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">南向资金净买额达10亿元。</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">南向资金净买额达10亿元。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">SK海力士CEO：目标于2026年下半年实现美国存托凭证上市。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">SK海力士CEO：目标于2026年下半年实现美国存托凭证上市。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">霍尔木兹海峡关闭，能避开海峡的阿联酋石油已飙至160美元。交易商警告：除非和谈迅速取得成果，否则中东特定品级原油的创纪录...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">霍尔木兹海峡关闭，能避开海峡的阿联酋石油已飙至160美元。交易商警告：除非和谈迅速取得成果，否则中东特定品级原油的创纪录价格，将很快蔓延至美国乃至全球。点击查看</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">越南廉价航空公司越捷航空（VietJet）：因潜在燃油短缺调整航班计划。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">越南廉价航空公司越捷航空（VietJet）：因潜在燃油短缺调整航班计划。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">贵金属牛市暂歇但逻辑完好，2026白银对黄金折价可能扩大</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">贵金属牛市暂歇但逻辑完好，2026白银对黄金折价可能扩大</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">原油分析师：伊朗争结束之前，预计油价仍将维持在高位</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月25日讯，油价大幅下跌，因美国方面推动结束与伊朗的战争。大宗商品研究机构ICIS原油市场主管Ajay Parmar表示，“油价将继续波动，因为市场会受到基本面因素和言论的两方面影响。基本面并未发生改变——目前中东地区仍有近1000万桶/日的原油供应处于中断状态，而且在这场战争结束之前，我们预计油价仍将维持在高位。”</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国家卫生健康委：4月1日起基孔肯雅热和发热伴血小板减少综合征纳入乙类传染病管理</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月25日讯，国家卫生健康委今天发布公告，根据《中华人民共和国传染病防治法》相关规定，自2026年4月1日起将基孔肯雅热和发热伴血小板减少综合征纳入乙类传染病进行管理，并采取乙类传染病的预防、控制措施。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">Momenta港股秘密递表 预计年内上市</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月25日讯，据悉，智能驾驶解决方案供应商Momenta已向港交所秘密递交招股书。多位知情人士透露，Momenta IPO估值预期超千亿元，正积极推动上市相关进程，计划2026年内在港交所挂牌。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">我国自研新一代超大型油船今天交付</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月25日讯，今天（25日），中船大连造船建造的30.7万吨超大型油船“君望”轮即将交付。该船是我国自主研发设计的新一代超大型油船，船长约333米、船宽60米，从船底到驾驶室接近20层楼高，性能指标也达到了世界一流水平，进一步提升了我国在超大型油船建造领域的全球竞争力。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
