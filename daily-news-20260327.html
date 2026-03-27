@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年03月27日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: left; padding: 40px 0 20px 0; margin-bottom: 20px; }
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .header .subtitle { font-size: 1.1em; color: #64748b; margin-bottom: 12px; }
+        .header .subtitle .divider { color: #cbd5e1; margin: 0 8px; }
+        .header .subtitle .time { color: #94a3b8; }
+        .highlight-section { margin-bottom: 50px; }
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .highlight-desc { color: #475569; font-size: 1em; line-height: 1.8; }
+        .section { margin-bottom: 50px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+        .section-title { font-size: 1.4em; font-weight: 600; color: #1e293b; }
+        .section-subtitle { font-size: 0.85em; color: #94a3b8; margin-top: 2px; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .news-title { font-size: 1.15em; font-weight: 600; color: #1e293b; line-height: 1.5; flex: 1; }
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+        .news-source { color: #6366f1; font-weight: 500; }
+        .news-time { color: #94a3b8; }
+        .news-summary { color: #475569; font-size: 0.95em; line-height: 1.75; margin-bottom: 16px; }
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+        .news-highlight-label { font-size: 0.75em; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .news-highlight-text { color: #334155; font-size: 0.9em; line-height: 1.6; }
+        .footer { text-align: center; padding: 30px 20px; margin-top: 40px; }
+        .footer p { color: #64748b; font-size: 0.9em; margin-bottom: 8px; }
+        .footer .disclaimer { color: #94a3b8; font-size: 0.85em; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .news-header { flex-direction: column; gap: 10px; }
+            .hot-tag { align-self: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年03月27日 星期五 14:41</span></p>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">🔥 今日亮点</div>
+                <h2 class="highlight-title">林俊旸离职后首次发声！复盘千问的弯路，指出AI的新路</h2>
+                <p class="highlight-desc">林俊旸离职后首次发声！复盘千问的弯路，指出AI的新路
+       
+             梦晨
+                          2026-03-27
+             14:19:01
+          
+          来源：量子位            
+                          
+            长文探讨从“推理模型时...</p>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">罗技连夜道歉难平众怒，大批网友讨要说法</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网北京3月27日电(记者 刘星晨 吴家驹)据媒体报道，3月26日，计算机外部设备品牌罗技在其官方旗舰店账号发布产品推广视频，配文道，“当我一降价，你还不是像狗一样跑过来”。罗技中国当晚发布声明致歉。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">2026年1月至2月云南省进出口产终国别及地区总值表</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">2026年1月至2月云南省进出口产终国别及地区总值表</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">中国成功发射试验三十三号卫星</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新社北京3月27日电 (记者 马帅莎)据中国航天科技集团消息，北京时间3月27日12时11分，中国在酒泉卫星发射中心使用长征二号丙运载火箭/远征一号S上面级，将试验三十三号卫星发射升空，卫星顺利进入预定轨道，发射任务取得圆满成功。该卫星主要用于空间环境探测科学试验。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">2026年1月至2月云南省进出口贸易方式总值表</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">2026年1月至2月云南省进出口贸易方式总值表</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">2026年1月至2月云南省进出口月度总值表</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">2026年1月至2月云南省进出口月度总值表</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">日本防卫大臣：自卫队官员强闯中国使馆“令人深感遗憾”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新社东京3月27日电 (记者 朱晨曦)针对24日有日本自卫队官员强闯中国驻日本大使馆一事，日本防卫大臣小泉进次郎27日在记者会上说：“本应遵守法律和纪律的自卫队官员被逮捕，令人深感遗憾。一旦查明事实情况，将予以严肃处理。”</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">2026年1至2月云南省出口主要商品量值表</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">2026年1至2月云南省出口主要商品量值表</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">2026年1至2月云南省进口主要商品量值表</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">2026年1至2月云南省进口主要商品量值表</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">快手发布2025社区治理报告：守护清朗有序的温暖家园</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">在数字时代，互联网平台已深度融入经济社会发展与公众日常生活，以短视频、直播等形态蓬勃发展的内容社区，成为串联各行各业的重要纽带。近日，快手发布2025社区治理报告。报告显示，快手社区治理体系向纵深迈进，持续深化违规内容治理与长效防控，运用多维策略守护用户权益，强化重点用户关怀与网络安全保护实践，构建全维度电商生态治理体系，守护清朗有序的温暖家园。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">博鳌对话｜PayPal邱寒：AI技术明显降低中小企业出海门槛</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新经纬3月27日电 (薛宇飞 魏薇)“2025年，中国企业出海呈现出从‘规模扩张’向‘质量跃升’的根本性转变。”博鳌亚洲论坛2026年年会期间，PayPal全球高级副总裁兼中国区首席执行官邱寒接受中新经纬专访时表示。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">林俊旸离职后首次发声！复盘千问的弯路，指出AI的新路</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">林俊旸离职后首次发声！复盘千问的弯路，指出AI的新路
+       
+             梦晨
+                          2026-03-27
+             14:19:01
+          
+          来源：量子位            
+                          
+            长文探讨从“推理模型时...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">阿里QoderWork打通钉钉、微信、飞书 手机端可直接召唤桌面AI助手</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">阿里QoderWork打通钉钉、微信、飞书 手机端可直接召唤桌面AI助手
+       
+             量子位的朋友们
+                          2026-03-27
+             12:19:13
+          
+          来源：量子位            
+                          
+        ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">从Token到词元：全模态时代的基模与交互入口</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">从Token到词元：全模态时代的基模与交互入口
+       
+             一水
+                          2026-03-27
+             12:11:18
+          
+          来源：量子位            
+                          
+            邱锡鹏创业公司官宣完成数亿元...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">卡帕西都整破防了：AI Coding没门槛，可部署环节真嗯啊的难</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">卡帕西都整破防了：AI Coding没门槛，可部署环节真嗯啊的难
+       
+             梦瑶
+                          2026-03-27
+             12:07:19
+          
+          来源：量子位            
+                          
+            AI编程下...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">这群在知乎上“造人”的年轻人，决定让AI替你交朋友</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">这群在知乎上“造人”的年轻人，决定让AI替你交朋友
+       
+             量子位的朋友们
+                          2026-03-27
+             11:46:08
+          
+          来源：量子位            
+                          
+            当AI学会替人...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">阿里云百炼上线三方视频生成模型，PixVerse首发登陆</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">阿里云百炼上线三方视频生成模型，PixVerse首发登陆
+       
+             量子位的朋友们
+                          2026-03-27
+             11:30:49
+          
+          来源：量子位            
+                          
+            在百炼平...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">金融Agent再获近2亿加码！启明红杉高瓴集体押注，5个月内连获两轮融资</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金融Agent再获近2亿加码！启明红杉高瓴集体押注，5个月内连获两轮融资
+       
+             思邈
+                          2026-03-26
+             18:04:06
+          
+          来源：量子位            
+                          
+            金...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">在线等：如何优雅地分走鹅厂这600+万？</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">在线等：如何优雅地分走鹅厂这600+万？
+       
+             闻乐
+                          2026-03-26
+             16:27:27
+          
+          来源：量子位            
+                          
+            KDD Cup首个中国算法赛道开启...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">1段话喊来13个“程序员”，阿里Qoder新模式让我躺着当CTO</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">1段话喊来13个“程序员”，阿里Qoder新模式让我躺着当CTO
+       
+             一凡
+                          2026-03-26
+             15:48:45
+          
+          来源：量子位            
+                          
+            多智能体协...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">马斯克xAI联创11跑10！仅剩特斯拉嫡系独苗留守</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">马斯克xAI联创11跑10！仅剩特斯拉嫡系独苗留守
+       
+             听雨
+                          2026-03-26
+             13:44:52
+          
+          来源：量子位            
+                          
+            普通员工也大批流失
+  ...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">海尔新能源增资至约4亿元</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，爱企查App显示，近日，海尔新能源科技股份有限公司发生工商变更，注册资本由约3.4亿元人民币增至约4亿元人民币，增幅约18%。该公司成立于2022年5月，法定代表人为董增，经营范围包括新兴能源技术研发、发电业务、光伏发电设备租赁等，由青岛纳晖控股有限公司、中国石油集团昆仑资本有限公司、中央企业乡村产业投资基金股份有限公司等共同持股。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">马斯克暗示特斯拉可能推出三排座车型</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">当地时间周四，特斯拉CEO埃隆·马斯克在社交媒体平台X上发布了一系列帖子，暗示特斯拉计划发布或开发一款新产品。Reddit联合创始人Alexis Ohanian回复了一篇关于特斯拉可能推出三排座SUV的帖子。马斯克转发了Ohanian的帖子。马斯克还回复了用户 Keller Cliffton 的一条帖子，该帖子分享了一张研究截图，指出汽车后排无法安装三个儿童安全座椅会导致生育第三个孩子的概率下降。...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪深两市成交额突破1.5万亿</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，沪深两市成交额突破1.5万亿。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">2025年韩国海外直接投资达718.8亿美元，时隔三年反弹</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">韩国财政部周五表示，受全球金融市场变化和企业支出增加的推动，2025年韩国海外直接投资实现了三年来的首次反弹。根据韩国财政部的数据，去年韩国企业海外直接投资同比增长8.7%，达到718.8亿美元。在2022年创下834.8亿美元的历史新高后，韩国海外投资在接下来的两年里有所下降，但在2025年出现反弹。（新浪财经）</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">菜鸟集团与泰国正大集团旗下CP AXTRA签署战略合作协议</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，今日菜鸟集团与泰国正大集团旗下CP AXTRA签署战略合作协议。菜鸟将应用其数字供应链科技、仓储自动化技术，以及海外仓储网络运营经验，全力支持CP AXTRA 在泰国及东盟国家打造线上线下一体的即时零售物流网络。CP AXTRA在泰国及亚洲地区管理超过2700家线下门店。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">阿里巴巴旗下公司入股诺瓦聚变能源科技公司</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，爱企查App显示，近日，诺瓦聚变能源科技（上海）有限公司发生工商变更，新增阿里巴巴旗下杭州灏月企业管理有限公司、上汽旗下河南尚颀汇融尚成一号产业基金合伙企业（有限合伙）等为股东，同时注册资本由约170.3万元人民币增至约219万元人民币。该公司成立于2025年4月，经营范围包括新材料技术研发、核电设备成套及工程技术研发、发电技术服务等。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">九号公司：与泡泡玛特达成合作，联名电动车将于4月推出</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">3月27日，九号公司宣布与泡泡玛特（POP MART）旗下人气IP小甜豆达成品牌合作，双方将围绕年轻消费群体与情绪价值表达展开深度共创，并计划于4月推出首款IP联名电动车产品。（证券时报）</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">茶百道：2025年营收利润均录得双位数增长</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">3月27日，茶百道发布2025年业绩公告，全年营收53.95亿元，同比增长10%；净利润8.2亿元，同比增长71%；经调净利润8.3亿元，同比增长29%。公司持续优化门店网络，国内门店规模稳步增至8621家，三线及以下城市门店占比升至46.1%。2025年，共上市117款新品，同比增长近一倍，注册会员数增至1.8亿人。此外，茶百道正加速落地咖啡业务，咖啡产品已在广州、深圳、上海、成都、北京等多地门...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">2025年中国科幻产业总营收达1261亿元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">在3月27日开幕的2026中国科幻大会上，中国科普研究所发布了《2026中国科幻产业报告》。2025年，中国科幻产业总营收达1261亿元，连续三年突破千亿大关。中国科幻产业稳步迈入高质量发展新阶段。（新华社）</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美国参议院通过法案 为国土安全部拨款铺平道路</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月27日讯，周五凌晨，美国参议院通过了一项法案，将为国土安全部（DHS）的大部分职能部门提供资金支持。此举为结束一场旷日持久的政府部分停摆危机铺平了道路，这场危机已导致机场安检工作陷入混乱，并可能进一步冲击本就因伊朗局势而动荡不安的美国经济。该法案尚需获得众议院的通过并由特朗普总统签署方能生效。它的通过标志着共和党立场的一次急剧转变。在此前的数周里，共和党人一直阻挠民主党人提出的类似提案...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">TradingHero周年庆最后5天！ 旗舰版年会员立减999元，畅享国际现货黄金订单流！还可抽最高1年会员时长，再赠《...</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">TradingHero周年庆最后5天！ 旗舰版年会员立减999元，畅享国际现货黄金订单流！还可抽最高1年会员时长，再赠《指标使用手册》等限量定制礼品！立即点此特惠抢购</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">伊朗总统：伊朗将继续进行正当且有力的防御</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月27日讯，据伊朗伊斯兰共和国通讯社26日报道，伊朗总统佩泽希齐扬在与伊拉克总统拉希德的通话中强调，伊朗决心继续进行正当且有力的防御，以应对一切侵略行为。佩泽希齐扬表示，伊朗有权对作为侵略源头的美国在该地区的军事基地实施正当防御，并呼吁对“美以试图通过武装力量和利用恐怖组织、借助邻国领土入侵伊朗，从而在伊斯兰国家间制造分裂和动荡”的阴谋保持警惕。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">法国预算部长：2025年预算赤字数据促使我们在2026年赤字目标上更加雄心勃勃。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">法国预算部长：2025年预算赤字数据促使我们在2026年赤字目标上更加雄心勃勃。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">日本央行：将仔细研究有关企业和家庭支出行为以及影响此类行为的金融状况的广泛信息。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">日本央行：将仔细研究有关企业和家庭支出行为以及影响此类行为的金融状况的广泛信息。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">日本央行：随着政策利率逐步接近中性区间，正确判断货币宽松程度的变化将比以往任何时候都更加重要。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">日本央行：随着政策利率逐步接近中性区间，正确判断货币宽松程度的变化将比以往任何时候都更加重要。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">日本央行发布自然利率及货币宽松程度的评估。日本央行认为，在考察经济活动和物价对短期利率变动的反应时，继续调整货币宽松力度...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">日本央行发布自然利率及货币宽松程度的评估。日本央行认为，在考察经济活动和物价对短期利率变动的反应时，继续调整货币宽松力度是恰当的。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">COMEX黄金库存每日变动监测：Brinks实物提取近4万盎司，总库存小幅下降至3190.65万盎司</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">COMEX黄金库存每日变动监测：Brinks实物提取近4万盎司，总库存小幅下降至3190.65万盎司</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">日本央行：鉴于对自然利率估计存在不确定性，有必要全面评估货币宽松程度，同时审慎考察经济活动、物价和金融发展态势。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">日本央行：鉴于对自然利率估计存在不确定性，有必要全面评估货币宽松程度，同时审慎考察经济活动、物价和金融发展态势。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">市场消息：三菱电机将讨论与罗姆（Rohm）、东芝合并功率器件及半导体业务的可能性。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">市场消息：三菱电机将讨论与罗姆（Rohm）、东芝合并功率器件及半导体业务的可能性。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
