@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年03月30日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: left; padding: 40px 0 20px 0; margin-bottom: 20px; }
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .header .subtitle { font-size: 1.1em; color: #64748b; margin-bottom: 12px; }
+        .header .subtitle .divider { color: #cbd5e1; margin: 0 8px; }
+        .header .subtitle .time { color: #94a3b8; }
+        .highlight-section { margin-bottom: 50px; }
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .highlight-desc { color: #475569; font-size: 1em; line-height: 1.8; }
+        .section { margin-bottom: 50px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+        .section-title { font-size: 1.4em; font-weight: 600; color: #1e293b; }
+        .section-subtitle { font-size: 0.85em; color: #94a3b8; margin-top: 2px; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .news-title { font-size: 1.15em; font-weight: 600; color: #1e293b; line-height: 1.5; flex: 1; }
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+        .news-source { color: #6366f1; font-weight: 500; }
+        .news-time { color: #94a3b8; }
+        .news-summary { color: #475569; font-size: 0.95em; line-height: 1.75; margin-bottom: 16px; }
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+        .news-highlight-label { font-size: 0.75em; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .news-highlight-text { color: #334155; font-size: 0.9em; line-height: 1.6; }
+        .footer { text-align: center; padding: 30px 20px; margin-top: 40px; }
+        .footer p { color: #64748b; font-size: 0.9em; margin-bottom: 8px; }
+        .footer .disclaimer { color: #94a3b8; font-size: 0.85em; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .news-header { flex-direction: column; gap: 10px; }
+            .hot-tag { align-self: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年03月30日 星期一 10:24</span></p>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">🔥 今日亮点</div>
+                <h2 class="highlight-title">单张显卡跑出15倍推理速度，aiX-apply-4B小模型加速企业AI研发落地</h2>
+                <p class="highlight-desc">单张显卡跑出15倍推理速度，aiX-apply-4B小模型加速企业AI研发落地
+       
+             思邈
+                          2026-03-30
+             08:41:45
+          
+          来源：量子位            
+                          
+          ...</p>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">京港澳科技创新论坛在京举办 共商合作新机遇</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网北京3月30日电 (记者 陈杭)2026中关村论坛年会期间，京港澳科技创新论坛暨第九届“京港青创杯”创业大赛北京选拔赛在北京举办。论坛聚焦京港澳三地人工智能领域的成果转化、产业协同与国际合作等议题，旨在建设开放、协同、富有活力的人工智能创新生态，共商合作新机遇。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">北京发布18条举措促进高校科技成果转化</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网北京3月30日电 (记者 陈杭)2026中关村论坛年会期间，首都高校科技成果转化2026首场巡回交流会暨全国高校区域技术转移转化中心(北京)成果交易会在北京中关村国际技术交易中心举办，设置项目路演环节，15个优质高校项目集中展示，现场同步滚动推介100项在京高校科技成果，覆盖人工智能、绿色能源、智能制造、生命健康等多个战略领域。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美媒：特朗普称伊朗已同意“15项要求中的大部分”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网3月30日电 据彭博社报道，当地时间2月29日，美国总统特朗普表示，伊朗接受了美国为结束战争向德黑兰提出的15项要求中的大部分，但他没有具体说明伊朗做出了哪些让步。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">水口海关2026年物业管理服务采购项目(GXJD-2613333050301)竞争性磋商公告</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">项目概况：水口海关2026年物业管理服务采购项目的潜在供应商应在精彩纵横云采购平台网站(网址： https://www.jczh.com/)获取采购文件，并于2026年 04月01日09点30分(北京时间)前提交响应文件。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国家税务总局青岛市税务局原一级巡视员赵福增接受审查调查</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网3月30日电 据中央纪委国家监委驻国家税务总局纪检监察组、山东省纪委监委消息，国家税务总局青岛市税务局原一级巡视员赵福增涉嫌严重违纪违法，目前正接受中央纪委国家监委驻国家税务总局纪检监察组纪律审查和山东省潍坊市监察委员会监察调查。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">东西问丨澳大利亚学者谈中东战火：没有任何一场冲突，真正与我们无关</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网石家庄3月29日电 题：没有任何一场冲突，真正与我们无关</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">最高法：反家暴法实施后签发3.3万份人身保护令</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网3月30日电(记者 高萌)今年是反家庭暴力法颁布实施10周年。3月30日，最高人民法院召开新闻发布会发布一批反家庭暴力典型案例。最高法介绍，反家庭暴力法实施以来，人民法院共签发人身安全保护令3.3万份。(完)</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">中国国民党主席郑丽文感谢并接受中共中央和习近平总书记邀请将率团访问大陆</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">新华社台北3月30日电(记者黄扬、姜江)中国国民党主席办公室30日表示，中共中央和习近平总书记邀请郑丽文主席率团前往大陆访问，郑主席表示感谢并欣然接受邀请。期望两党共同努力，推动两岸关系和平发展，促进两岸交流合作，为台海谋太平，为民生增福祉。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">中国官方发布《中小学校地震应急避险疏散演练手册》及示范视频</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网北京3月30日电 (记者 孙自法)2026年3月30日是中国第31个全国中小学生安全教育日，中国地震局、教育部当天联合发布《中小学校地震应急避险疏散演练手册》及示范视频。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">河南省驻马店市政协副主席李卫明接受审查调查</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网3月30日电 据河南省纪委监委消息，驻马店市政协副主席李卫明涉嫌严重违纪违法，目前正接受河南省纪委监委纪律审查和监察调查。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">单张显卡跑出15倍推理速度，aiX-apply-4B小模型加速企业AI研发落地</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">单张显卡跑出15倍推理速度，aiX-apply-4B小模型加速企业AI研发落地
+       
+             思邈
+                          2026-03-30
+             08:41:45
+          
+          来源：量子位            
+                          
+          ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">Claude 90分钟挖穿20年漏洞！5w星“安全”系统跌下神坛</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">Claude 90分钟挖穿20年漏洞！5w星“安全”系统跌下神坛
+       
+             鹭羽
+                          2026-03-30
+             00:17:28
+          
+          来源：量子位            
+                          
+            相关能力已...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">打破代码大模型训练瓶颈：MicroCoder将算法数据框架训练经验升级</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">打破代码大模型训练瓶颈：MicroCoder将算法数据框架训练经验升级
+       
+             量子位的朋友们
+                          2026-03-30
+             00:11:35
+          
+          来源：量子位            
+                          
+         ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">Claude手搓3D建筑编辑器火爆GitHub！数万年费的专业软件瑟瑟发抖</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">Claude手搓3D建筑编辑器火爆GitHub！数万年费的专业软件瑟瑟发抖
+       
+             梦瑶
+                          2026-03-30
+             00:08:53
+          
+          来源：量子位            
+                          
+            ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">何同学会玩：让龙虾自己3D打印自己</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">何同学会玩：让龙虾自己3D打印自己
+       
+             十三
+                          2026-03-29
+             23:21:42
+          
+          来源：量子位            
+                          
+            属于全民Agent的时代，才算真正拉开了...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">小沓AI・智能营销产品 2026GDPS重磅发布</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">小沓AI・智能营销产品 2026GDPS重磅发布
+       
+             量子位的朋友们
+                          2026-03-29
+             10:49:35
+          
+          来源：量子位            
+                          
+            数据・解析・营销...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">论芯率先跑进AI for EDA产线：读芯片协议文档速度25倍，揪出respin级bug</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">论芯率先跑进AI for EDA产线：读芯片协议文档速度25倍，揪出respin级bug
+       
+             西风
+                          2026-03-29
+             09:27:39
+          
+          来源：量子位            
+                          
+     ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">海淀AI，集体开弓：少年极客、中年创客与ICU归来者</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">海淀AI，集体开弓：少年极客、中年创客与ICU归来者
+       
+             西风
+                          2026-03-29
+             09:09:41
+          
+          来源：量子位            
+                          
+            最强大脑，海淀集结
+ ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">风云G会圆满落幕 共绘GEO行业可信协同发展新蓝图</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">风云G会圆满落幕 共绘GEO行业可信协同发展新蓝图
+       
+             量子位的朋友们
+                          2026-03-29
+             09:07:49
+          
+          来源：量子位            
+                          
+            为数字经济繁荣...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">趋境ATaaS平台发布，打造日均万亿产能的“Token工厂”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">趋境ATaaS平台发布，打造日均万亿产能的“Token工厂”
+       
+             十三
+                          2026-03-28
+             21:58:24
+          
+          来源：量子位            
+                          
+            郑纬民院士领衔...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">创业板指跌超2%</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，创业板指跌超2%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">南向资金净买入额达40亿港元</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，南向资金净买入额达40亿港元。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">招商银行董事长缪建民：将稳息差放在更加突出的位置</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">招商银行董事长缪建民在该行2025年度业绩发布会上表示，2026年该行将聚焦重点、穿越周期，持续保持竞争优势：一是将稳息差放在更加突出的位置，保持息差的行业领先；二是锻长板补短板，增强资产配置能力、财富管理的优势；三是重点关注信贷资产的定价和风险管理，保持资产质量的始终优良；四是推动风险加权资产合理增长，优化资产配置，保持较高的资本充足水平。（证券时报）</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">厦门国际银行公司增资至约175.7亿元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，爱企查App显示，近日，厦门国际银行股份有限公司发生工商变更，注册资本由约170.5亿元人民币增至约175.7亿元人民币。 该公司成立于1985年8月，法定代表人为王非，经营范围包括吸收公众存款，发放短期、中期和长期贷款，办理国内外结算等，由闽信集团有限公司、中国工商银行股份有限公司、福建投资企业集团公司、厦门建发集团有限公司等共同持股。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">三安光电总经理林科闯：公司各项业务均稳步推进,订单未受影响</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">三安光电总经理林科闯在新闻发布会上表示，上市公司拥有完善的组织架构、规范的治理体系和成熟的经营管理团队，各项业务均按照既定的计划稳步推进。从事件发生至今的一周左右时间里，公司已与供应商、客户、合作金融机构进行深入交流，均得到相关方面的支持，在太阳能电池、金刚石、碳化硅、车载相关业务等方面的订单目前未受到影响，银行明确表态会支持公司的长期发展，各区域的政府机构均表态会保障公司当地经营的正常开展。（财...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“微光启航”完成亿元天使+轮融资</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，近日，“微光启航”正式宣布完成亿元人民币天使+轮融资。本轮融资由啟赋资本、亿宸资本联合领投，力合创投跟投，资金将主要用于加速其全碳纤维火箭“微光一号”、全流量液氧甲烷发动机 “华光一号”的工程研制。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">杭州：住房公积金贷款最高额度由130万元提高到180万元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，杭州住房公积金管理委员会发布关于优化住房公积金使用政策的通知。住房公积金贷款最高额度由130万元提高到180万元，职工个人可贷额度不超过90万元。住房公积金职工个人可贷额度计算倍数由15倍调整为20倍。多子女家庭贷款额度可按家庭申请贷款时计算的可贷额度合计数上浮50%确定。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">（更新：已恢复）“DeepSeek 崩了”上热搜，无法加载内容</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">IT之家</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">感谢IT之家网友 花雨龘魔王 的线索投递！
+            23:01 更新：已恢复访问IT之家 3 月 29 日消息，今晚，有网友反馈 DeepSeek 疑似出现服务器故障，相关话题“DeepSeek 崩了”登上微博热搜。截至IT之家发文，DeepSeek 仍然无法加载内容。广告声明：文内含有的对外跳转链接（包括不限于超链接、二维码、口令等形式），用于传递更多信息，节省甄选时间，结果仅供...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">内存条价格被曝出现断崖式下跌，一天跌去百元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">IT之家</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">感谢IT之家网友 根哥之见、会弹琴的九号、不一样的体验 的线索投递！
+            IT之家 3 月 29 日消息，据橙柿互动今日报道，上周开始，市场的内存条价格出现断崖式下跌，市场普遍认为前期囤积内存的大户正在抛售。在百脑汇经营存储设备多年的批发商王老板对记者说：“上周六开始，价格直接崩了。昨天到今天，一款主流的 16G 内存条又掉了四五十块。上周六那天更夸张，一天就掉了一百多块。”报...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">华为给出畅享 90 Pro Max 手机设计说明：摄像模组左下角为红外传感器，兼顾对称美学设计</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">IT之家</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">IT之家 3 月 29 日消息，在 3 月 23 日的华为春季全场景新品发布会上，华为畅享 90 系列手机正式发布。而随着畅享系列的回归，华为终端 BG 首席执行官何刚宣布，华为手机实现全面回归。华为畅享 90 Pro Max 手机正面采用窄边框中置挖孔直屏方案 + 大 R 角设计；侧面采用利落的直边中框设计；后摄则延续华为标志性的中轴对称布局与闪耀星环设计语言。▲ IT之家开箱：华为畅享 90 ...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">牛市转弱但回调受限，黄金二季度买或不买该怎么看？</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">牛市转弱但回调受限，黄金二季度买或不买该怎么看？</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">金十图示：2026年03月30日（周一）亚太市场股市指数（盘初）</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十图示：2026年03月30日（周一）亚太市场股市指数（盘初）</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">A股光伏设备板块持续走弱，迈为股份跌超16%，固德威、横店东磁、易成新能、拉普拉斯、东方日升跟跌。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">A股光伏设备板块持续走弱，迈为股份跌超16%，固德威、横店东磁、易成新能、拉普拉斯、东方日升跟跌。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">黄金周线强势翻红重回4500美元，CFTC仓位大逆转，净多头暴增8458手；非农周开启，就业数据能否助黄金刺破美联储的“...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">黄金周线强势翻红重回4500美元，CFTC仓位大逆转，净多头暴增8458手；非农周开启，就业数据能否助黄金刺破美联储的“鹰派防御”？</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">恒生指数跌超2%，恒生科技指数跌2.8%。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">恒生指数跌超2%，恒生科技指数跌2.8%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">财年调仓引发长债抛售 道富预计日债曲线将回归平稳</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月30日讯，道富投资管理公司的Masahiko Loo在邮件中表示，继上周五主要受技术性抛售影响后，日本国债收益率曲线在周一继续趋于陡峭。这位高级固定收益策略师表示，近期日本国债长端收益率大幅上升的原因包括日本财年结算前的仓位调整、流动性稀缺以及缺乏实需买家。Loo称：“随着新财年国内需求的回归，收益率曲线应该会趋于稳定。”他补充道：“由于市场已消化了4月日本央行加息约70%的概率以及接...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">A股三大指数扩大跌幅，创业板指跌超2%，深成指跌1.45%，沪指跌0.75%。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">A股三大指数扩大跌幅，创业板指跌超2%，深成指跌1.45%，沪指跌0.75%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">据日经新闻：日本将把比亚迪电动车补贴削减至低于1000美元。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">据日经新闻：日本将把比亚迪电动车补贴削减至低于1000美元。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">伊朗战争正危及特朗普政治遗产，也将副总统万斯、国务卿鲁比奥推向接班人对决前线，两人鹰鸽立场鲜明，战争走向将深刻影响202...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">伊朗战争正危及特朗普政治遗产，也将副总统万斯、国务卿鲁比奥推向接班人对决前线，两人鹰鸽立场鲜明，战争走向将深刻影响2028年总统竞选版图。点击查看...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">港股手游股多数下跌，金山软件(03888.HK)、哔哩哔哩(09626.HK)跌超4%，腾讯控股(00700.HK)跌超...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">港股手游股多数下跌，金山软件(03888.HK)、哔哩哔哩(09626.HK)跌超4%，腾讯控股(00700.HK)跌超3%，中手游(00302.HK)跌超2%。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
