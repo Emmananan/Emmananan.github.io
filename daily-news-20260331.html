@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年03月31日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: left; padding: 40px 0 20px 0; margin-bottom: 20px; }
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .header .subtitle { font-size: 1.1em; color: #64748b; margin-bottom: 12px; }
+        .header .subtitle .divider { color: #cbd5e1; margin: 0 8px; }
+        .header .subtitle .time { color: #94a3b8; }
+        .highlight-section { margin-bottom: 50px; }
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .highlight-desc { color: #475569; font-size: 1em; line-height: 1.8; }
+        .section { margin-bottom: 50px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+        .section-title { font-size: 1.4em; font-weight: 600; color: #1e293b; }
+        .section-subtitle { font-size: 0.85em; color: #94a3b8; margin-top: 2px; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .news-title { font-size: 1.15em; font-weight: 600; color: #1e293b; line-height: 1.5; flex: 1; }
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+        .news-source { color: #6366f1; font-weight: 500; }
+        .news-time { color: #94a3b8; }
+        .news-summary { color: #475569; font-size: 0.95em; line-height: 1.75; margin-bottom: 16px; }
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+        .news-highlight-label { font-size: 0.75em; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .news-highlight-text { color: #334155; font-size: 0.9em; line-height: 1.6; }
+        .footer { text-align: center; padding: 30px 20px; margin-top: 40px; }
+        .footer p { color: #64748b; font-size: 0.9em; margin-bottom: 8px; }
+        .footer .disclaimer { color: #94a3b8; font-size: 0.85em; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .news-header { flex-direction: column; gap: 10px; }
+            .hot-tag { align-self: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年03月31日 星期二 11:00</span></p>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">🔥 今日亮点</div>
+                <h2 class="highlight-title">别再让AI只干零活了！AI工具正在接管投放全链路</h2>
+                <p class="highlight-desc">别再让AI只干零活了！AI工具正在接管投放全链路
+       
+             克雷西
+                          2026-03-31
+             09:03:38
+          
+          来源：量子位            
+                          
+            从行业中来，到行业中去
+...</p>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">刘海星会见塞内加尔爱国党高级干部考察团</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">新华社北京3月31日电 3月30日，中共中央对外联络部部长刘海星在北京会见由塞内加尔爱国党总书记达菲率领的高级干部考察团。双方就共同落实好两国领导人共识，密切党际交流合作，推动中塞、中非关系发展等交换意见。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">海口海关2026年防风门采购项目比选成交公告</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">根据《海口海关2026年防风门采购项目比选文件》确定的评审原则和要求，海口海关后勤管理中心组织采购小组完成了比选评审工作。经采购小组推荐，现将成交结果公告如下：</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美媒：美军用钻地弹袭击伊朗大型弹药库</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网3月31日电 据美国《华尔街日报》30日报道，一位美国官员表示，美军使用2000磅重的钻地弹袭击了伊朗伊斯法罕市的一个大型弹药库。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">中华人民共和国昆明海关2026年3月至7月政府采购意向</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">为便于供应商及时了解政府采购信息，根据《财政部关于开展政府采购意向公开工作的通知》(财库〔2020〕10号)等有关规定，现将昆明海关2026年3至7月采购意向公开如下：</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">成渝中线高铁井口嘉陵江特大桥今日合龙</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">记者从中国铁路成都局集团获悉，3月31日10时许，随着最后一节钢箱合龙段焊缝焊接完成，新建成渝中线高铁成都至重庆高速铁路(以下简称：成渝中线高铁)全线控制性工程—井口嘉陵江特大桥顺利合龙，标志着成渝中线高铁全线桥梁全部合龙，为全线按期通车奠定了坚实基础。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">昆明海关所属曲靖海关关于物业服务项目采购的意向性公告</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">为便于供应商及时了解政府采购信息，根据《财政部关于开展政府采购意向公开工作的通知》(财库〔2020〕10号)等有关规定，现将中华人民共和国曲靖海关2026年3月至4月采购项目的意向公开如下：</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">广西国际旅行卫生保健中心2026年医用试剂耗材定点供应商（项目编号：CJAH2026082G）公开招标公告</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">项目概况</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">最高奖1000万元！广州海珠“重金”砸向三大颠覆性赛道</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网广州3月31日电(记者 许青青)记者31日从广州市海珠区了解到，《广州市海珠区推动前沿产业创新发展若干措施》近日正式印发。该措施精准锚定低空经济、具身智能、脑机接口三大颠覆性前沿产业赛道，打出技术攻关、企业培育、场景落地、生态集聚的全链条政策“组合拳”，单个企业年度最高可获1000万元支持，直击前沿产业研发投入大、转化周期长、场景落地难等核心痛点。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">广东摘得三朵“山花”  获奖数量全国第一</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网广州3月31日电 (记者 程景伟)据广东省民间文艺家协会消息，3月30日晚，第十七届中国民间文艺山花奖颁奖典礼在江苏苏州举行，共有20部作品获奖，其中广东省民协报送的作品一举斩获三朵“山花”，获奖数量位列全国第一。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">广东16年来已为超过17万名女职工提供“两癌”免费筛查服务</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网惠州3月31日电 (张璐  韩晓宁)据广东省总工会31日消息，据统计，16年来，广东省总工会累计下拨资金近3000万元，为超过17万名困难女职工、女农民工和新就业形态女性劳动者提供了免费筛查服务。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">别再让AI只干零活了！AI工具正在接管投放全链路</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">别再让AI只干零活了！AI工具正在接管投放全链路
+       
+             克雷西
+                          2026-03-31
+             09:03:38
+          
+          来源：量子位            
+                          
+            从行业中来，到行业中去
+...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">阿里发布Qwen3.5-Omni，多模态能力超越Gemini-3.1 Pro</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">阿里发布Qwen3.5-Omni，多模态能力超越Gemini-3.1 Pro
+       
+             量子位的朋友们
+                          2026-03-30
+             22:21:45
+          
+          来源：量子位            
+                          
+      ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">全球OCR新王来自中国开源！GitHub狂揽73300+Star</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">全球OCR新王来自中国开源！GitHub狂揽73300+Star
+       
+             西风
+                          2026-03-30
+             22:15:44
+          
+          来源：量子位            
+                          
+            谷歌持续霸...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“杭州六小龙”第一股来了！浙大校友创业，年入8亿冲刺IPO</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">“杭州六小龙”第一股来了！浙大校友创业，年入8亿冲刺IPO
+       
+             听雨
+                          2026-03-30
+             16:56:40
+          
+          来源：量子位            
+                          
+            群核科技已通过港...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美国开源AI最后的旗帜，也倒了</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">美国开源AI最后的旗帜，也倒了
+       
+             听雨
+                          2026-03-30
+             16:47:29
+          
+          来源：量子位            
+                          
+            Ai2削减开源模型资金，研发人员集体出走
+ ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">整个公司一起吃虾！这个开源项目，让OpenClaw实现企业级部署</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">整个公司一起吃虾！这个开源项目，让OpenClaw实现企业级部署
+       
+             克雷西
+                          2026-03-30
+             16:45:57
+          
+          来源：量子位            
+                          
+            一个系统...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">预测这件事，人类越犹豫，这个大模型越有优势</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">预测这件事，人类越犹豫，这个大模型越有优势
+       
+             西风
+                          2026-03-30
+             16:34:49
+          
+          来源：量子位            
+                          
+            Elo 1034.2分霸榜，领先...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">上海AI实验室发布“AGI4S珠穆朗玛计划”，构建中国科学智能创新中枢</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">上海AI实验室发布“AGI4S珠穆朗玛计划”，构建中国科学智能创新中枢
+       
+             十三
+                          2026-03-30
+             15:24:15
+          
+          来源：量子位            
+                          
+            邀全...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">Nature Index特刊聚焦天立国际：系统呈现中国教育AGI实践探索</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">Nature Index特刊聚焦天立国际：系统呈现中国教育AGI实践探索
+       
+             量子位的朋友们
+                          2026-03-30
+             12:08:39
+          
+          来源：量子位            
+                          
+        ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国产世界模型登顶全球第一！断层领先谷歌英伟达，3D准确度近满分</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">国产世界模型登顶全球第一！断层领先谷歌英伟达，3D准确度近满分
+       
+             量子位的朋友们
+                          2026-03-30
+             11:55:06
+          
+          来源：量子位            
+                          
+            最...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">美国太空探索技术公司一颗“星链”卫星失联</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">美国太空探索技术公司3月30日证实，其卫星互联网系统“星链”的一颗卫星29日在轨出现异常，失去通信联络。该公司及“星链”任务团队正在调查事件原因，并将持续监测该卫星及可追踪碎片。（新华社）</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪深两市成交额突破1万亿元</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，沪深两市成交额突破1万亿元。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">工信部：将组织编制“十五五”新型电池发展规划</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">工业和信息化部电子信息司二级巡视员吴国纲表示，工信部将重点开展四方面工作。一是高起点谋划顶层设计，组织编制“十五五”新型电池发展规划；二是强化产业运行精准监管，动态跟踪储能电池产能、产量、价格等关键运营指标，加强前瞻研判与风险防控，遏制低水平产能重复建设，引导行业科学布局规范发展；三是完善标准体系，加强储能电池强制性国家标准实施力度，加快制定产品安全等级、性能分级、快速测试等关键标准；四是健全行业...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">中国中免等在呼和浩特设立机场商业管理公司</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，爱企查App显示，近日，中免（呼和浩特）机场商业管理有限公司成立，法定代表人为祁石，注册资本2000万元人民币，经营范围包括商业综合体管理服务、航空运输货物打包服务、销售代理等，由中免（北京）商贸有限公司、内蒙古空港商业管理有限责任公司共同持股。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">飞天茅台价格全线大涨，26年飞天原箱批价报1720元/瓶</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，“今日酒价”披露的最新批发参考价显示，3月31日，26年飞天茅台原箱较前一日上涨65元，报1720元/瓶；26年飞天茅台散瓶较前一日上涨85元，报1630元/瓶。25年飞天茅台原箱较前一日上涨80元，报1740元/瓶；25年飞天茅台散瓶较前一日上涨80元，报1650元/瓶。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪深两市成交额突破5000亿元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，沪深两市成交额突破5000亿元。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">现货白银日内涨幅扩大至4%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，现货白银日内涨幅扩大至4%，报72.91美元/盎司。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">现货白银日内涨超3%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，现货白银日内涨幅扩大至3.00%，现报72.15美元/盎司；现货黄金突破4590美元/盎司，日内涨1.76%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">创业板指跌逾1%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，创业板指跌逾1%，上证指数涨0.25%，深证成指跌0.49%。沪深京三市下跌个股近2100只。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">3月中国制造业采购经理指数为50.4%，经济回升向好</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">国家统计局、中国物流与采购联合会今天（31日）发布3月份中国制造业采购经理指数。数据显示，3月份制造业景气程度上升，市场需求较好释放，企业生产活动整体回升。3月份中国制造业采购经理指数为50.4%，较上月上升1.4个百分点，在连续2个月运行在50%以下后回到扩张区间，显示制造业景气程度提升。（央视新闻）</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">据半岛电视台：以色列拦截伊朗导弹，暂无伤亡报告。</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">据半岛电视台：以色列拦截伊朗导弹，暂无伤亡报告。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">马来西亚央行行长：中东冲突将导致林吉特出现一定波动，但属周期性波动。</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">马来西亚央行行长：中东冲突将导致林吉特出现一定波动，但属周期性波动。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">期货热点追踪</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">生猪期价连续五周下滑，机构预测二季度猪价整体或呈“前低后稳”走势，反弹还有多远？</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">日本官员的干预警告愈发密集。对冲基金正大举买入美元/日元看跌期权，押注随时干预。短期期权需求激增，显示市场关注的焦点并非...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">日本官员的干预警告愈发密集。对冲基金正大举买入美元/日元看跌期权，押注随时干预。短期期权需求激增，显示市场关注的焦点并非长期趋势，而是短期内的干预风险。点击查看</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">马来西亚央行行长：改革措施和投资者信心将为林吉特汇率提供支撑。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">马来西亚央行行长：改革措施和投资者信心将为林吉特汇率提供支撑。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">马来西亚央行行长：鉴于美元走势和国内基本面，林吉特前景依然乐观。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">马来西亚央行行长：鉴于美元走势和国内基本面，林吉特前景依然乐观。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">A股三大指数回落，沪指翻绿，深成指跌近1%，创业板指跌1.5%，全市场超3000家个股下跌。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">A股三大指数回落，沪指翻绿，深成指跌近1%，创业板指跌1.5%，全市场超3000家个股下跌。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">特朗普难得的“服软”信号推动油价下跌，但其“满嘴跑火车”的历史行为让市场保持警惕。分析师指出，前期空头狙击的“百元关口”...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">特朗普难得的“服软”信号推动油价下跌，但其“满嘴跑火车”的历史行为让市场保持警惕。分析师指出，前期空头狙击的“百元关口”现已转化成坚实支撑...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">金十图示：2026年03月31日（周二）全球富豪榜</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十图示：2026年03月31日（周二）全球富豪榜</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">中兴通讯发布Co-Claw智慧园区方案</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据3月31日讯，近日，中兴通讯正式发布基于Co-Claw企业级AI智能体平台的智慧园区应用解决方案，并率先在南京滨江智能制造基地落地。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
