@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年04月01日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: left; padding: 40px 0 20px 0; margin-bottom: 20px; }
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .header .subtitle { font-size: 1.1em; color: #64748b; margin-bottom: 12px; }
+        .header .subtitle .divider { color: #cbd5e1; margin: 0 8px; }
+        .header .subtitle .time { color: #94a3b8; }
+        .highlight-section { margin-bottom: 50px; }
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .highlight-desc { color: #475569; font-size: 1em; line-height: 1.8; }
+        .section { margin-bottom: 50px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+        .section-title { font-size: 1.4em; font-weight: 600; color: #1e293b; }
+        .section-subtitle { font-size: 0.85em; color: #94a3b8; margin-top: 2px; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .news-title { font-size: 1.15em; font-weight: 600; color: #1e293b; line-height: 1.5; flex: 1; }
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+        .news-source { color: #6366f1; font-weight: 500; }
+        .news-time { color: #94a3b8; }
+        .news-summary { color: #475569; font-size: 0.95em; line-height: 1.75; margin-bottom: 16px; }
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+        .news-highlight-label { font-size: 0.75em; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .news-highlight-text { color: #334155; font-size: 0.9em; line-height: 1.6; }
+        .footer { text-align: center; padding: 30px 20px; margin-top: 40px; }
+        .footer p { color: #64748b; font-size: 0.9em; margin-bottom: 8px; }
+        .footer .disclaimer { color: #94a3b8; font-size: 0.85em; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .news-header { flex-direction: column; gap: 10px; }
+            .hot-tag { align-self: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年04月01日 星期三 10:21</span></p>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">🔥 今日亮点</div>
+                <h2 class="highlight-title">1220亿美元！OpenAI创下史上最大单笔融资纪录</h2>
+                <p class="highlight-desc">1220亿美元！OpenAI创下史上最大单笔融资纪录
+       
+             梦瑶
+                          2026-04-01
+             08:56:13
+          
+          来源：量子位            
+                          
+            OpenAI创下史上最...</p>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">驳赖清德“非红供应链”谬论 国台办：为“倚外谋独”把台湾产业拱手送人</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">4月1日，国务院台办举行例行新闻发布会。有记者问，赖清德近日称，台湾已融入美国主导的“非红供应链”中，未来可以确保台湾的竞争优势。岛内舆论却认为，台湾在芯片等领域应深度融入大陆机器人产业链，抢抓时代机遇。越来越多台湾民众认识到，拥抱大陆是必选项，“反中抗中”只能被越甩越远。对此有何评论？</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">收藏！《AI赋能正能量生产传播场景创新实践参考》全文发布</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">新华社媒体融合生产技术与系统国家重点实验室牵头，联合相关科研机构、主流媒体、高校院所组成课题组，研究梳理了AI赋能正能量生产传播的技术前沿与实践成果，编制了《AI赋能正能量生产传播场景创新实践参考》。该成果于2026年3月28日在中央网信办网络传播局、网络管理技术局主办的中国网络媒体论坛特色活动“2026数智赋能正能量生产传播大会”上正式发布。全文如下。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国台办：和平统一后，台湾同胞再也无需为各种能源物资短缺而焦虑</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">4月1日，国务院台办举行例行新闻发布会。有记者问，台媒报道，受中东战事影响，台湾石油供应紧张，连带冲击塑料原料市场，岛内掀起“抢塑潮”，未来可能还有“缺药潮”。岛内舆论指出，面对这些困境，民进党当局只会说“油气供应无虞”，而应对危机永远慢半拍。对此有何评论？</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">今年前两个月轻工业经济运行起步稳健</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">央视网消息(新闻联播)：中国轻工业联合会最新数据显示，今年前2个月规模以上轻工业增加值同比增长7.0%，较上年末加快1.7个百分点。91种主要轻工产品中69种产量实现增长，增长面达75.8%，塑料家具、电池制造业增加值增速超20%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">从赏花“流量”到消费“增量”（新视窗·聚焦体验经济）</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">人民日报</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“济州—中国旅游交流之夜”活动在韩举行</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网韩国济州4月1日电 (记者 刘旭)“济州—中国旅游交流之夜”活动3月30日晚间在韩国济州特别自治道举行。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">无国界医生组织：性暴力成苏丹冲突显著特征</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新社北京4月1日电 喀土穆消息：当地时间3月31日，无国界医生组织发布报告称，在不到两年的时间里，该组织在苏丹北达尔富尔州和南达尔富尔州共计救治了3300余名性暴力受害者。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">几位在台隐蔽战线牺牲者清明节前魂归故里 国台办：人民不会忘记 历史不会忘记</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">4月1日，国务院台办举行例行新闻发布会。有记者问，据报道，经过两岸双方多年共同努力，今年清明节前，又有几位在台湾隐蔽战线上的牺牲者骨灰回到大陆，魂归故里。对此有何评论？</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">日韩股市上涨</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网4月1日电 (记者 谢艺观)4月1日，日韩股市一扫昨日跌势，强势上涨。截至9时46分，日经225指数涨近4%，韩国综合指数涨超6%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">刘海星会见斯里兰卡人民解放阵线高级干部考察团</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">新华社北京4月1日电 3月31日，中共中央对外联络部部长刘海星在北京会见由斯里兰卡人民解放阵线中央委员，政府贸易、商务、粮食安全和合作发展部部长萨马拉辛哈率领的高级干部考察团，就落实两国元首共识、密切党际交往、推动中斯关系发展等交换意见。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">1220亿美元！OpenAI创下史上最大单笔融资纪录</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">1220亿美元！OpenAI创下史上最大单笔融资纪录
+       
+             梦瑶
+                          2026-04-01
+             08:56:13
+          
+          来源：量子位            
+                          
+            OpenAI创下史上最...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">公司注册10天，估值逾10亿美元！理想智驾大牛刷出具身创投新热度</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">公司注册10天，估值逾10亿美元！理想智驾大牛刷出具身创投新热度
+       
+             衡宇
+                          2026-03-31
+             23:25:14
+          
+          来源：量子位            
+                          
+            理想前智驾...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">智谱上市后首份财报：超7.24亿元！国内收入最高大模型公司，MaaS发力了</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">智谱上市后首份财报：超7.24亿元！国内收入最高大模型公司，MaaS发力了
+       
+             十三
+                          2026-03-31
+             20:08:40
+          
+          来源：量子位            
+                          
+            ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">刚刚，TRAE SOLO上线独立端：已经不满足写代码，还要跨界干活！</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">刚刚，TRAE SOLO上线独立端：已经不满足写代码，还要跨界干活！
+       
+             十三
+                          2026-03-31
+             18:18:25
+          
+          来源：量子位            
+                          
+            PC和...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">ClawTip来了！ 京东科技首发推出AI智能体的“专属自主零钱包”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">ClawTip来了！ 京东科技首发推出AI智能体的“专属自主零钱包”
+       
+             量子位的朋友们
+                          2026-03-31
+             17:12:58
+          
+          来源：量子位            
+                          
+          ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">实测拿215项SOTA的Qwen3.5-Omni：摄像头一开，AI给我现场讲论文、撸代码</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">实测拿215项SOTA的Qwen3.5-Omni：摄像头一开，AI给我现场讲论文、撸代码
+       
+             听雨
+                          2026-03-31
+             16:22:36
+          
+          来源：量子位            
+                          
+     ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">机器人线下真机对线打PK！这届黑客松可太会玩了</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">机器人线下真机对线打PK！这届黑客松可太会玩了
+       
+             梦瑶
+                          2026-03-31
+             14:41:49
+          
+          来源：量子位            
+                          
+            以赛促研、以研促产
+    ...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">瑞声科技公开人形机器人感知解决方案，释放机器人业务加速落地信号</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">瑞声科技公开人形机器人感知解决方案，释放机器人业务加速落地信号
+       
+             量子位的朋友们
+                          2026-03-31
+             14:06:40
+          
+          来源：量子位            
+                          
+            机...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">2700GB高质量数据，训出空间智能SOTA，背后秘诀全栈开源</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">2700GB高质量数据，训出空间智能SOTA，背后秘诀全栈开源
+       
+             一凡
+                          2026-03-31
+             13:53:04
+          
+          来源：量子位            
+                          
+            300万对R...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">玻色量子完成10亿元B轮融资，“十五五”规划专用量子计算机赛道唯一代表！</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">量子位(备)</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">玻色量子完成10亿元B轮融资，“十五五”规划专用量子计算机赛道唯一代表！
+       
+             量子位的朋友们
+                          2026-03-31
+             13:05:33
+          
+          来源：量子位            
+                          
+        ...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">周磊接任东方证券董事长</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，爱企查App显示，近日，东方证券股份有限公司发生工商变更，龚德雄卸任法定代表人、董事长，由周磊接任。 东方证券股份有限公司成立于1997年12月，注册资本约84.97亿元人民币，经营范围包括证券业务、证券投资咨询、证券公司为期货公司提供中间介绍业务等，由申能（集团）有限公司、香港中央结算（代理人）有限公司、上海海烟投资管理有限公司等共同持股。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">小米汽车：3月小米汽车交付量超过20000台</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，据小米汽车官微，2026年3月，小米汽车交付量超过20000台，新一代SU7，自3月23日开启交付起，累计交付已超7000台。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">延迟刊发2025年业绩，Mirxes-B回应：与公司研发等没有直接关系，日常运营正常</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">4月1日，港股Mirxes-B公告，公司将延迟刊发2025年年度业绩报告。受此影响，该公司股份已于今日（4月1日）上午9时起在联交所暂停买卖。Mirxes-B相关负责人回应称，公告详细披露了目前核数师需对部分预付款项进行评估的情况，公司将全力配合核数师完成审计程序，提供所需要相关资料，争取早日完成2025年年度业绩的刊发并达成股票复牌。本次需额外审核的交易事项，与公司研发、商业运营及相关技术平台没...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">中国3月RatingDog制造业PMI 50.8</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，中国3月RatingDog制造业PMI 50.8，前值 52.1。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">A股三大指数均大幅高开，半导体板块领涨</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，A股三大指数均大幅高开，沪指高开1.23%，深成指高开1.88%，创业板指高开2.21%；半导体、贵金属、通信设备板块领涨，德明利涨停，晓程科技涨超5%，新易盛涨超4%；能源、煤炭板块走弱，中国海油、辽宁能源跌超2%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">央行今日开展5亿元7天逆回购操作</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，央行今日开展5亿元7天逆回购操作，操作利率为1.40%，与此前持平。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">恒指开盘涨2.3%，恒生科技指数涨2.75%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，恒指开盘涨2.3%，恒生科技指数涨2.75%；半导体、软件服务、传媒板块领涨，华虹半导体涨超5%，腾讯控股、中芯国际涨超4%，B站、快手涨超3%；能源、猪肉概念走弱，百勤油服跌超6%，万州国际跌0.1%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">人民币兑美元中间价报6.9025</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，人民币兑美元中间价报6.9025，上调169点；上一交易日中间价6.9194，上一交易日官方收盘价6.9081，上日夜盘报收6.8881。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">两市融资余额减少81.57亿元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，截至3月31日，上交所融资余额报13166.14亿元，较前一交易日减少28.54亿元；深交所融资余额报12657.23亿元，较前一交易日减少53.03亿元；两市合计25823.37亿元，较前一交易日减少81.57亿元。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">韩国3月出口额首次突破800亿美元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">韩国政府周三公布的数据显示，3月份出口额首次突破800亿美元大关，较上年同期飙升近50%，其中半导体出口达328亿美元创历史新高。据韩国产业通商资源部统计，上月韩国出口总额达861.3亿美元，同比增长48.3%。进口额同比增长13.2%至604亿美元，贸易顺差达257.4亿美元。（新浪财经）</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">多省份将加快氢能规模化发展 福建拟推动氢能在多领域应用试点</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据4月1日讯，多个省份今年将推进氢能规模化发展，并研究相关支持政策举措：①2026年，福建省人民政府工作报告中提出实施未来产业培育发展行动，大力发展包括绿色氢能在内的重点领域，探索多元技术路线、典型应用场景、可行商业模式。②今年内蒙古将快速推进“制储输用”全产业链先行先试，开展创新能力提升、风光制氢提质增效、扩大绿氢需求、基础设施建设、产业链强链等五项工作。③“十五五”时期，广东将聚焦突破燃...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国台办：支持福建在探索海峡两岸融合发展新路上迈出更大步伐</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据4月1日讯，国务院台办4月1日举行例行新闻发布会。有记者问：近期福建发布建设两岸融合发展示范区首批阶段性标志性成果政策项目平台三大类别，请介绍有关情况，对下一步推进示范区建设有何规划？发言人张晗表示，近期福建发布建设两岸融合发展示范区首批阶段性标志性成果。其中政策类成果7项，项目类成果5项，平台类成果5项。中央台办、国家发展改革委将继续会同有关部门，以更实举措、更大力度、更高标准高质量推动...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">伊朗最高领袖致信黎真主党领导人</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据4月1日讯，据伊朗方面消息，黎巴嫩真主党当地时间4月1日凌晨公布伊朗最高领袖穆杰塔巴·哈梅内伊3月30日给真主党领导人纳伊姆·卡西姆的信。穆杰塔巴·哈梅内伊在信中重申伊朗对真主党抵抗美以敌人的坚定支持。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">据伊朗伊斯兰共和国通讯社（IRNA）：巴林和科威特的美国基地发生爆炸。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">据伊朗伊斯兰共和国通讯社（IRNA）：巴林和科威特的美国基地发生爆炸。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国台办：越来越多台湾同胞看到两岸融合发展机遇</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据4月1日讯，4月1日，国务院台办举行例行新闻发布会。发言人张晗表示，民进党当局声称打造所谓“非红供应链”，不过是为实现其“倚外谋独”图谋而把台湾产业拱手送人。两岸经贸合作互惠互利，给台湾同胞带来了实实在在的利益。越来越多的台湾同胞看到了两岸融合发展带来的便利与机遇。今年是“十五五”开局之年，“十五五”期间，我们将推动科技创新和产业创新深度融合，在优化提升传统产业、培育壮大新兴产业、超前布局...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">据美联社：美国总统特朗普将出席当地时间周三最高法院关于出生公民权的听证会，这使他成为首位出席该国最高法院口头辩论的在任总...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">据美联社：美国总统特朗普将出席当地时间周三最高法院关于出生公民权的听证会，这使他成为首位出席该国最高法院口头辩论的在任总统。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">国台办：和平统一后，台湾同胞再也无需为各种能源物资短缺而焦虑</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">金十数据4月1日讯，4月1日，国务院台办举行例行新闻发布会。有记者问，台媒报道，受中东战事影响，台湾石油供应紧张，连带冲击塑料原料市场，岛内掀起“抢塑潮”，未来可能还有“缺药潮”。岛内舆论指出，面对这些困境，民进党当局只会说“油气供应无虞”，而应对危机永远慢半拍。对此有何评论?发言人张晗在答问时表示，民进党当局所谓的“油气供应无虞”，不过是对油气供应无力的自我安慰，更是对大众的愚弄、欺骗。和平统一...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">科创50指数涨超3%，芯原股份涨超11%领涨成份股。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">科创50指数涨超3%，芯原股份涨超11%领涨成份股。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">据伊朗媒体报道，德黑兰东北部发生三起爆炸。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">据伊朗媒体报道，德黑兰东北部发生三起爆炸。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">油市研究员Rory Johnston：如果海湾国家真的加入战斗，可能会加速霍尔木兹海峡的开放，但这可能会对他们的上游生产...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">金十数据</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">油市研究员Rory Johnston：如果海湾国家真的加入战斗，可能会加速霍尔木兹海峡的开放，但这可能会对他们的上游生产、加工和装载基础设施造成严重且长期的破坏。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
