@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球科技日报 - 2026年04月02日</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { text-align: left; padding: 40px 0 20px 0; margin-bottom: 20px; }
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        .header .subtitle { font-size: 1.1em; color: #64748b; margin-bottom: 12px; }
+        .header .subtitle .divider { color: #cbd5e1; margin: 0 8px; }
+        .header .subtitle .time { color: #94a3b8; }
+        .highlight-section { margin-bottom: 50px; }
+        .highlight-card {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            border-left: 5px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+        }
+        .highlight-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f97316;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .highlight-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        .highlight-desc { color: #475569; font-size: 1em; line-height: 1.8; }
+        .section { margin-bottom: 50px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-icon {
+            font-size: 1.5em;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        .section-global .section-icon { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+        .section-ai .section-icon { background: linear-gradient(135deg, #f5f3ff, #ede9fe); }
+        .section-tech .section-icon { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .section-stock .section-icon { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+        .section-title { font-size: 1.4em; font-weight: 600; color: #1e293b; }
+        .section-subtitle { font-size: 0.85em; color: #94a3b8; margin-top: 2px; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .news-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+        .section-global .news-item::before { background: linear-gradient(180deg, #ef4444, #dc2626); }
+        .section-ai .news-item::before { background: linear-gradient(180deg, #8b5cf6, #7c3aed); }
+        .section-tech .news-item::before { background: linear-gradient(180deg, #3b82f6, #2563eb); }
+        .section-stock .news-item::before { background: linear-gradient(180deg, #10b981, #059669); }
+        .news-item:hover {
+            background: #fafbfc;
+            border-color: #cbd5e1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .news-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        .news-title { font-size: 1.15em; font-weight: 600; color: #1e293b; line-height: 1.5; flex: 1; }
+        .hot-tag {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.85em;
+        }
+        .news-source { color: #6366f1; font-weight: 500; }
+        .news-time { color: #94a3b8; }
+        .news-summary { color: #475569; font-size: 0.95em; line-height: 1.75; margin-bottom: 16px; }
+        .news-highlight {
+            background: #f8fafc;
+            border-left: 3px solid #6366f1;
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+        }
+        .news-highlight-label { font-size: 0.75em; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .news-highlight-text { color: #334155; font-size: 0.9em; line-height: 1.6; }
+        .footer { text-align: center; padding: 30px 20px; margin-top: 40px; }
+        .footer p { color: #64748b; font-size: 0.9em; margin-bottom: 8px; }
+        .footer .disclaimer { color: #94a3b8; font-size: 0.85em; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .news-header { flex-direction: column; gap: 10px; }
+            .hot-tag { align-self: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>全球新鲜事</h1>
+            <p class="subtitle">全网热点 + AI 科技 + 财经要闻 <span class="divider">|</span> <span class="time">2026年04月02日 星期四 14:24</span></p>
+        </div>
+
+        <div class="highlight-section">
+            <div class="highlight-card">
+                <div class="highlight-label">🔥 今日亮点</div>
+                <h2 class="highlight-title">获韶音投资，一家AI公司做了“硬件版OpenClaw” | 36氪独家</h2>
+                <p class="highlight-desc">文｜邓咏仪
+  编辑｜苏建勋
+  当OpenClaw风暴席卷全球之时，无界方舟创始人曾晓东的反应不是兴奋，而是一种“终于被看见”的感觉。
+  “OpenClaw本质上是一个Agent框架，底层是一个会写代码的Agent，放在云端服务器或者电脑上。”他对《智能涌现》说，“我们的AIOS本质上也是一个Agent框架，但它是放在硬件端侧的OpenClaw——机器人、耳机、眼镜，都可以在这套OS上运行。”...</p>
+            </div>
+        </div>
+
+        <!-- 全球重大事件 -->
+        <div class="section section-global">
+            <div class="section-header">
+                <div class="section-icon">🌍</div>
+                <div>
+                    <div class="section-title">全球重大事件</div>
+                    <div class="section-subtitle">Global Breaking News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">黄金白银加速下跌 现货黄金跌破4600美元</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网4月2日电 4月2日，黄金、白银盘中再次跳水。截至发稿，伦敦现货黄金失守4600美元/盎司，最大跌幅4.31%；COMEX黄金跌近4600美元关口，最大跌幅4.17%。伦敦现货白银跌破70美元，最大跌幅7.27%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">上海：张雪机车产品受追捧 夺冠同款车型820RR最快7月交付</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">4月2日，#8204;位于上海市宝山区丰翔路1302号张雪机车 (上海宝山店)#8204;内，店员正在网络直播夺冠同款车型820RR。中新社记者 殷立勤 摄  
+
+4月2日，#8204;位于上海市宝山区丰翔路1302号张雪机车 (上海宝山店)#8204;内，工作人员将已售车辆转运至指定上牌处。中新社记者 殷立勤 摄  
+
+4月2日，#8204;位于上海市宝山区丰翔路1302号张雪机车 (上海宝山店...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">一旅客违规携带饰品、化妆品等119件入境 被海关查获</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网4月2日电 据“海关发布”微信公众号消息，3月27日，南京禄口机场海关在旅检渠道查获1名旅客违规携带饰品、衣物、挎包、化妆品等共计119件入境。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">中国选手王曼昱晋级国际乒联单打世界杯八强</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">新华社澳门4月2日电 在2日的国际乒联单打世界杯女子八分之一决赛中，中国名将王曼昱以4：0战胜日本名将伊藤美诚，晋级八强。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">“鲁法经纬”山东省—法国可持续发展专题企业对接会在济南举行</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">中新网济南4月2日电(吕妍)“鲁法经纬”山东省—法国可持续发展专题企业对接会4月2日在山东济南举办。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">青岛市召开全市性宗教团体联席会议第四次会议</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">3月31日，青岛市召开全市性宗教团体联席会议第四次会议。青岛市委统战部副巡视员徐守举出席会议并讲话，各全市性宗教团体会长(主任)、秘书长(总干事)参加会议，市委统战部有关处室人员列席会议。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">清明期间不闭馆！全国多家博物馆发布公告</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">清明假期(4月4日-6日)临近，多家博物馆陆续发布公告，4月6日(周一)正常开放(法定节假日逢周一不闭馆)，部分场馆还延长了开放时间。假期如有参观博物馆的计划，可以提前参考规划。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">清明前后易出现！这种食物变质后有毒，不要吃！</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">清明节要到了，“清明蔗，毒过蛇”这一民间俗语流传已久，近年来引发不少网友广泛议论。实际上，这一说法并非指正常甘蔗，而是针对清明前后易霉变的“隔年蔗”。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">政企同心赋能轨道交通产业发展——农工党株洲市委会开展“企业服务”专题调研</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">4月1日，农工党株洲市委会组织开展 “企业服务优化年” 专题调研，通过实地走访国家先进轨道交通装备创新中心、轨道交通党群服务中心(“思享汇” 轨道交通产业职工之家)与专题座谈，倾听企业心声、共商发展良策。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">守护儿童骨骼健康，这两件事一定要做好</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">中新网</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">青少年时期是脊柱健康的“黄金干预期”，也是孩子身心成长的关键期。预防儿童青少年脊柱侧弯，做好骨骼健康促进工作，核心是在预防上做足文章。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI趋势及应用 -->
+        <div class="section section-ai">
+            <div class="section-header">
+                <div class="section-icon">🤖</div>
+                <div>
+                    <div class="section-title">全球最新AI趋势及应用</div>
+                    <div class="section-subtitle">AI Trends & Applications</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">获韶音投资，一家AI公司做了“硬件版OpenClaw” | 36氪独家</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">文｜邓咏仪
+  编辑｜苏建勋
+  当OpenClaw风暴席卷全球之时，无界方舟创始人曾晓东的反应不是兴奋，而是一种“终于被看见”的感觉。
+  “OpenClaw本质上是一个Agent框架，底层是一个会写代码的Agent，放在云端服务器或者电脑上。”他对《智能涌现》说，“我们的AIOS本质上也是一个Agent框架，但它是放在硬件端侧的OpenClaw——机器人、耳机、眼镜，都可以在这套OS上运行。”...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">36氪首发 | 00后交大博士做仿生飞行机器人，获启高、奇绩创坛、交大母基金等投资</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">作者丨欧雪
+  编辑丨袁斯来
+  硬氪获悉，仿生扑翼飞行机器人公司——深圳鹰瞰智翼科技有限公司（下称“鹰瞰智翼”）近期已完成千万元级别天使轮融资，由启高资��领投，奇绩创坛及上海交大母基金跟投。资金将主要用于产品量产、下一代具身智能飞行机器人研发，以及全球首个机器人流体仿真引擎搭建。
+  鹰瞰智翼2025年3月成立于深圳，是全球第一家专注于具身智能扑翼机器人的公司。创始人陈昊是上海交通大学直博生，...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">抖音生活服务组织架构大调整，中小商家更重要了｜独家</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">文｜李小霞
+  编辑｜乔芊 杨轩
+  36氪独家获悉，近期抖音生活服务完成了浦燕子接任后的第二次大的组织架构调整。
+  此次调整根据商户规模重新分为线上部门和线下部门。
+  月GMV5万以上的客户被放到线上部门，分为KA（月GMV10万以上）、自助（月GMV在5-10万）、酒旅三个版块。其中前二者又分别按行业细分为餐饮、到店综合。
+  月GMV5万以下的客户被放到线下部门。线下则按照区域划分为北区...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">8点1氪丨甲骨文凌晨突发邮件裁员3万人；市监局回应张雪机车禁止新手购买；SpaceX据悉秘密提交IPO文件，估值或超过1...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">今日热点导览
+  宇树科技被抽中首发企业现场检查 
+  国家税务总局：2025年个税汇算已超7000万人申请退税 
+  原特斯拉中国区高管孔艳双入职小米 
+  特斯拉正式停产Model S和Model X两款车型 
+  美国纽约市宣布撤销政府设备使用TikTok禁令
+  TOP 3大新闻
+  甲骨文凌晨6点突发邮件裁员3万人，约占全球员工总数的18%
+  全球软件巨头甲骨文（Oracle）于当地时...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">小牛电动胡依林：一家成立12年的两轮电动车厂商决定转型AI，“all in or nothing”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">文｜邱晓芬
+  编辑｜苏建勋
+  一家成立12年的两轮电动车厂商，在成功经历过中国的锂电化、智能化浪潮，并在纳斯达克上市后，决定加入AI时代全新的竞争。造AI时代的智能两轮电动车——被小牛电动称为：“下一个十年的护城河”。
+  在小牛电动不久前的发布会上，他们展示了初步的成果——在新发布的电动车NXT2和NX2上，搭载了自研的小牛灵犀AIOS、以及首个面向骑行的AI智能体。
+  当你开车上路时，小...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">2026有智青年挑战赛，报名通道全面开启！</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">这不是一场传统比赛，是一次对话。
+  我们始终相信，AI 的使命不应是取代人类，而是帮助人类变得更强大。因此在这次选拔中，我们不会关注你的教育背景、融资规模或是使用了多么前沿的算法，唯一在意的是你的产品是否真正让个体变得更强。
+  行至决赛，你会站上WAVES的舞台，这是中国创投圈最重要的舞台之一，台下坐着投资人、产业伙伴、未来的用户，过去很多你叫得出名字的创业者，都是从这里被看见、被理解、被加速...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">氪星晚报｜特斯拉正式停产Model S和Model X两款车型；马斯克：FSD 14.3版本预计将于本周末发布；阿里发布...</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">大公司：
+  李亚鹏名下公司成立麋鹿咖啡公司
+  36氪获悉，爱企查App显示，近日，云南麋鹿咖啡有限公司成立，法定代表人为杨凝，注册资本100万元人民币，经营范围包括咖啡豆种植、食用农产品批发、食用农产品零售、食品互联网销售等。股权穿透图显示，该公司由李亚鹏名下北京艺莲文化科技有限公司、罗毓藻分别持股90%、10%。
+  特斯拉正式停产Model S和Model X两款车型
+  据媒体报道，马斯...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">2026中国股权投资行业名册，调研启动！</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪创投研究院的朋友们：
+  新春好！
+  2026的整个春天，创投圈显得格外忙碌：大家或许在养虾、参加龙虾活动；或许在钻研技术、敲代码；或许在寻觅并肩作战的队友；亦或不断在各个AI APP中反复横跳....现在正是AI春暖花开之时，暗涌Waves的2026年度调研规划也随之官宣！
+  2025过去一年，我们见证了AI从实验室的静默代码，破土成为改变产业底座的显学。暗涌发布了96篇文章，不断追踪...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">四个大脑、三条路线、一种「天真」｜36氪离线聚会第零期</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">现场拍摄
+  文 | 阿至
+  我们似乎比以往任何时候都更相信技术本身的力量。
+  过去3年，在这场由AI所掀起的创业浪潮中，技术正以前所未有的速度，被赋予创造一切、解决一切的宏大叙事。参数在迭代，估值在飙升，钱的流动此起彼伏。
+  然而在这种高速的，甚至有些喧嚣的确定性之外，那些勇敢做出选择、推动改变发生的、具体的人，才是创造变革的原点。
+  基于这一原点，我们组织了一场「离线聚会」。作为36氪...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">36氪首发 | 半导体设备老兵创业晶圆键合公司，元禾璞华领投新一轮融资</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">作者 | 乔钰杰
+  编辑 | 袁斯来
+  硬氪获悉，今日，矽赫微科技（上海）有限公司（以下简称“SHW”）宣布完成新一轮融资，由元禾璞华领投，合肥产投、哇牛资本、君子兰资本、萨珊资本、曦晨资本、苏高新、东方嘉富以及江苏大摩半导体等众多知名投资机构和产业方投资。
+  SHW成立于2023年，总部位于上海，是一家聚焦晶圆永久键合技术及设备的半导体装备企业。公司致力于为先进封装、化合物半导体及新型衬底...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 软硬科技突破 -->
+        <div class="section section-tech">
+            <div class="section-header">
+                <div class="section-icon">🚀</div>
+                <div>
+                    <div class="section-title">软硬科技突破</div>
+                    <div class="section-subtitle">Technology Breakthroughs</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">广州：目标到2030年，基本建成现代化基础设施体系</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，广州市发展改革委发布关于公开征求《广州市现代化基础设施发展“十五五”规划（征求意见稿）》意见的公告。目标到2030年，基本建成现代化基础设施体系。基础设施网络布局更加完善，系统结构更加优化，服务功能更加完备，集成协同更加高效，安全保障更加可靠，为广州建设具有经典魅力和时代活力的中心型世界城市提供坚实支撑。展望至2035年，广州现代化基础设施体系完成跨越式发展，实现全面进阶与升华，数字化...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">沪深两市成交额突破1.5万亿元</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，沪深两市成交额突破1.5万亿元。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">晶合集成旗下合肥晶奕集成电路公司增资至20亿元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，爱企查App显示，近日，合肥晶奕集成电路有限公司发生工商变更，原股东合肥芯航企业管理合伙企业（有限合伙）、合肥晶策企业管理有限公司退出，新增合肥晶合集成电路股份有限公司为全资股东，同时，注册资本由2000万元人民币增至20亿元人民币，增幅9900%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">南向资金净买入额达70亿港元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，南向资金净买入额达70亿港元。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">现货白银日内跌幅扩大至6%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，现货白银日内跌幅扩大至6%，报70.55美元/盎司。现货黄金失守4600美元/盎司，跌幅超3%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">韩国交易所启动SIDECAR机制，暂停KOSDAQ程序化卖出</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，韩国交易所启动SIDECAR机制，暂停KOSDAQ程序化卖出。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">现货黄金向下跌破4650美元</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，现货黄金向下跌破4650美元，日内下跌2.46%。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">现货铂金跌幅超3%</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">36氪获悉，现货铂金跌幅超3%，跌至1902.25美元/盎司。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">伯克希尔·哈撒韦公司据悉聘请银行发行日元债券</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">36氪快讯</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">伯克希尔·哈撒韦公司据悉聘请银行发行日元债券。（财联社）</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 全球股票市场 -->
+        <div class="section section-stock">
+            <div class="section-header">
+                <div class="section-icon">📈</div>
+                <div>
+                    <div class="section-title">全球股票最新信息</div>
+                    <div class="section-subtitle">Stock Market News</div>
+                </div>
+            </div>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">【盘中宝】产能升级+技术迭代，该行业迎来黄金机遇期，这家公司相关领域多个环节均有布局</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">财联社</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">这类产品高度适配下游多个新兴领域应用场景，产能升级+技术迭代，行业迎来黄金机遇期。这家公司相关领域多个环节均有布局。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">广州：打造算电一体化融合示范项目 降低算力综合成本</h3>
+                        <span class="hot-tag">🔥 热门</span>
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">财联社</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【广州：打造算电一体化融合示范项目 降低算力综合成本】财联社4月2日电，广州市发展改革委4月2日发布《广州市现代化基础设施发展“十五五”规划（征求意见稿）》。其中提出，推动电算协同发展。实现算力规划建设与电力系统规划联动，建立算力用电需求提前获取机制，保障算力设施用电需求。利用本地电网优势，打造算电一体化融合示范项目，降低算力综合成本，实现算电高效配置。推动算力资源纳入电力辅助服务市场，促进算力绿...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">中国互金协会筹备设立互联网贷款自律工作委员会</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">财联社</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【中国互金协会筹备设立互联网贷款自律工作委员会】财联社4月2日电，中国互联网金融协会发文表示，经第二届理事会第五次会议审议通过，将设立“互联网贷款自律工作委员会”（简称工作委员会），承担自律管理工作职责。根据工作委员会组建工作需要，现阶段由协会秘书处牵头成立工作委员会筹备组，邀请部分从事互联网助贷业务的从业机构参加，聚焦互联网助贷业务开展筹备工作。筹备组主要职责包括：研究拟定从事互联网助贷业务的从...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">主力资金监控：电子板块净流出超161亿</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">财联社</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【主力资金监控：电子板块净流出超161亿】财联社4月2日电，财联社星矿数据显示，今日主力资金净流入石油石化、能源金属、化学制药等板块，净流出电子、计算机、电新行业等板块，其中电子板块净流出超161亿元。个股方面，中超控股资金净买入11.77亿元位居首位，中利集团、新能泰山、杰瑞股份主力资金净流入居前；阳光电源遭净卖出超19亿元位居首位，中际旭创、紫金矿业、华工科技主力资金净流出额居前。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">广州：发展海洋新兴产业、航空航天与卫星产业、新一代信息技术产业</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">财联社</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【广州：发展海洋新兴产业、航空航天与卫星产业、新一代信息技术产业】财联社4月2日电，广州市发展改革委4月2日发布《广州市现代化基础设施发展“十五五”规划（征求意见稿）》。其中提出，强化现代临港制造业集群。着力推动南沙港区与万顷沙综合保税区引育临港智造产业。推动汽车、高端装备、新能源与新材料三大优势产业高端化、智能化、绿色化转型。聚焦人工智能和机器人、半导体与集成电路、激光与新材料制造、节能和环保、...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">卡塔尔航空将恢复更多中国航线 中国航司仍停飞</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">财联社</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【卡塔尔航空将恢复更多中国航线 中国航司仍停飞】财联社4月2日电，卡塔尔航空今日宣布自5月16日起恢复多哈到杭州、重庆和成都航线，目前公司已恢复到北京、上海、广州和香港的定期客运航班。国内航司仍未恢复到卡塔尔的客运航班。在3月中旬再次停飞迪拜后，目前迪拜航班也暂无恢复计划，阿联酋航空仍在执飞中国。 (第一财经)</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">财联社4月2日电，据报道，俄罗斯对生产商实施汽油出口禁令，期限至7月底。</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">财联社</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">财联社4月2日电，据报道，俄罗斯对生产商实施汽油出口禁令，期限至7月底。</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">伊朗外交部发言人：伊朗将继续抵抗“非法战争”</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">财联社</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【伊朗外交部发言人：伊朗将继续抵抗“非法战争”】财联社4月2日电，伊朗外交部发言人巴加埃2日说，当前伊朗全国上下团结一致，共同对抗“不公正、侵略性战争”。只要这场“非法战争”继续下去，只要敌人继续攻击伊朗的人民和城市，伊朗将继续抵抗。 (新华社)</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">瑞银：中国电力和资源板块有望步入多年增长周期</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">财联社</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【瑞银：中国电力和资源板块有望步入多年增长周期】财联社4月2日电，瑞银财富管理投资总监办公室(CIO)发表机构观点，认为在政策支持、结构性需求增长和海外扩张的推动下，中国电力和资源板块有望步入多年增长周期。瑞银表示，“十五五”期间电网和可再生能源投资将大幅提升，加上人工智能（AI）数据中心负载增加、电气化加速，都在重塑电力需求结构。2026年至2030年，中国电力需求增速或显著高于以往，瑞银预计需...</p>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <h3 class="news-title">广州：加强国家新型互联网交换中心建设 支持建设大湾区量子通信骨干网</h3>
+                        
+                    </div>
+                    <div class="news-meta">
+                        <span class="news-source">财联社</span>
+                        <span class="news-time">• 今日</span>
+                    </div>
+                    <p class="news-summary">【广州：加强国家新型互联网交换中心建设 支持建设大湾区量子通信骨干网】财联社4月2日电，广州市发展改革委4月2日发布《广州市现代化基础设施发展“十五五”规划（征求意见稿）》。其中提出，建设立体协同的城市一张通信网。建设泛在高效的无线通信网络，实现城郊、工业园区等薄弱场景的 5G 网络深度覆盖，有序推进5G网络向5G-A全面升级演进，加快5G-A 规模部署与融合覆盖，前瞻探索6G网络。聚焦重点行业需...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>数据来源于权威媒体与行业资讯平台</p>
+            <p class="disclaimer">免责声明：本报告仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+
+</html>
