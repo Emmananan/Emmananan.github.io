@@ -20,11 +20,36 @@
         .date-month { font-size: 13px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
         
         /* Lang Switch */
-        .lang-switch { display: flex; gap: 4px; align-items: center; margin-top: 12px; justify-content: flex-end; }
-        .lang-btn { padding: 4px 10px; font-size: 11px; font-weight: 600; border: 1px solid var(--border); background: var(--white); cursor: pointer; transition: all 0.2s; color: var(--gray); }
+        .lang-switch { display: flex; align-items: center; margin-top: 12px; justify-content: flex-end; }
+        .lang-btn { 
+            padding: 6px 12px; 
+            font-size: 12px; 
+            font-weight: 600; 
+            border: 1px solid var(--border); 
+            background: var(--white); 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            color: var(--gray);
+            min-width: 40px;
+        }
         .lang-btn:hover { border-color: var(--black); color: var(--black); }
         .lang-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
-        .lang-icon { font-size: 14px; margin-right: 6px; }
+        .lang-icon { 
+            font-size: 20px; 
+            margin-right: 8px; 
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+        }
+        .lang-icon:hover { 
+            background: var(--bg);
+            transform: scale(1.1);
+        }
         
         /* Focus */
         .focus-section { margin-bottom: 50px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
@@ -102,9 +127,7 @@
                 <div class="date-day">02</div>
                 <div class="date-month">Apr 2026</div>
                 <div class="lang-switch">
-                    <span class="lang-icon">🌐</span>
-                    <button class="lang-btn active" onclick="switchLang('zh')" data-lang-btn="zh">中</button>
-                    <button class="lang-btn" onclick="switchLang('en')" data-lang-btn="en">EN</button>
+                    <span class="lang-icon" onclick="toggleLang()" title="切换语言">🌐</span>
                 </div>
             </div>
         </header>
@@ -115,10 +138,10 @@
         <section class="focus-section">
             <div class="focus-label">焦点报道</div>
             <h2 class="focus-title">
-                <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a>
+                <a href="https://www.smashingmagazine.com/2026/04/practical-guide-design-principles/" target="_blank">A Practical Guide To Design Principles</a>
             </h2>
-            <p class="focus-summary">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time. These are the historical pranks I...</p>
-            <div class="focus-meta">CSS-Tricks · 今日</div>
+            <p class="focus-summary">A Practical Guide To Design Principles. A Practical Guide To Design PrinciplesDesign principles...</p>
+            <div class="focus-meta">Smashing Magazine · 今日</div>
         </section>
             
         <section class="section">
@@ -129,7 +152,7 @@
                 <div class="news-row-title">
                     <a href="https://github.com/Jang-woo-AnnaSoft/execution-boundaries" target="_blank" onclick="event.stopPropagation()">Should AI have the right to say 'No' to its owner?</a>
                 </div>
-                <div class="news-row-meta">HN UX+AI · <span class="hot-tag">热门</span></div>
+                <div class="news-row-meta">HN AI Design Tools · <span class="hot-tag">热门</span></div>
                 <div class="news-row-summary">Should AI have the right to say 'No' to its owner?. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -139,7 +162,7 @@
                 <div class="news-row-title">
                     <a href="https://github.com/samleeney/tmux-agent-status" target="_blank" onclick="event.stopPropagation()">Show HN: Tmux-agent-status – a tmux sidebar for monitoring AI coding agents</a>
                 </div>
-                <div class="news-row-meta">HN UX+AI · <span class="hot-tag">热门</span></div>
+                <div class="news-row-meta">HN AI Design Tools · <span class="hot-tag">热门</span></div>
                 <div class="news-row-summary">Show HN: Tmux-agent-status – a tmux sidebar for monitoring AI coding agents. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -149,7 +172,7 @@
                 <div class="news-row-title">
                     <a href="https://www.theguardian.com/technology/2026/apr/02/pupils-england-losing-thinking-skills-because-of-ai-survey" target="_blank" onclick="event.stopPropagation()">Pupils in England are losing their thinking skills because of AI, survey suggest</a>
                 </div>
-                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-meta">HN AI Design Tools · </div>
                 <div class="news-row-summary">Pupils in England are losing their thinking skills because of AI, survey suggest. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -159,7 +182,7 @@
                 <div class="news-row-title">
                     <a href="https://deknijf.com/posts/stages-of-ai-grief/" target="_blank" onclick="event.stopPropagation()">The Stages of AI Grief</a>
                 </div>
-                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-meta">HN AI Design Tools · </div>
                 <div class="news-row-summary">The Stages of AI Grief. Article URL: https://deknijf.com/posts/stages-of-ai-grief/
 Comments URL:...</div>
             </div>
@@ -170,7 +193,7 @@ Comments URL:...</div>
                 <div class="news-row-title">
                     <a href="https://www.wired.com/story/ai-models-lie-cheat-steal-protect-other-models-research/" target="_blank" onclick="event.stopPropagation()">AI Models Lie, Cheat, and Steal to Protect Other Models from Being Deleted</a>
                 </div>
-                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-meta">HN AI Design Tools · </div>
                 <div class="news-row-summary">AI Models Lie, Cheat, and Steal to Protect Other Models from Being Deleted. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -182,53 +205,53 @@ Comments URL:...</div>
         <section class="section">
             <h2 class="section-title">设计工程</h2>
             <div class="section-content">
-        <div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/04/practical-guide-design-principles/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a>
+                    <a href="https://www.smashingmagazine.com/2026/04/practical-guide-design-principles/" target="_blank" onclick="event.stopPropagation()">A Practical Guide To Design Principles</a>
                 </div>
-                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">热门</span></div>
-                <div class="news-row-summary">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time. These are the historical pranks I...</div>
+                <div class="news-row-meta">Smashing Magazine · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">A Practical Guide To Design Principles. A Practical Guide To Design PrinciplesDesign principles...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/css-olfactive-api/', '_blank')">
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/desktop-wallpaper-calendars-april-2026/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">Sniffing Out the CSS Olfactive API</a>
+                    <a href="https://www.smashingmagazine.com/2026/03/desktop-wallpaper-calendars-april-2026/" target="_blank" onclick="event.stopPropagation()">The Joy Of A Fresh Beginning (April 2026 Wallpapers Edition)</a>
                 </div>
-                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">热门</span></div>
-                <div class="news-row-summary">Sniffing Out the CSS Olfactive API. A deep sniff of the new CSS Olfactive API, a set of proposed...</div>
+                <div class="news-row-meta">Smashing Magazine · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">The Joy Of A Fresh Beginning (April 2026 Wallpapers Edition). The Joy Of A Fresh Beginning (April...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/whats-important-8/', '_blank')">
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/site-search-paradox-why-big-box-always-wins/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://css-tricks.com/whats-important-8/" target="_blank" onclick="event.stopPropagation()">What’s !important #8: Light/Dark Favicons, @mixin, object-view-box, and More</a>
+                    <a href="https://www.smashingmagazine.com/2026/03/site-search-paradox-why-big-box-always-wins/" target="_blank" onclick="event.stopPropagation()">The Site-Search Paradox: Why The Big Box Always Wins</a>
                 </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">What’s !important #8: Light/Dark Favicons, @mixin, object-view-box, and More. Short n’ sweet but...</div>
+                <div class="news-row-meta">Smashing Magazine · </div>
+                <div class="news-row-summary">The Site-Search Paradox: Why The Big Box Always Wins. The Site-Search Paradox: Why The Big Box...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/form-automation-tips-for-happier-user-and-clients/', '_blank')">
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/testing-font-scaling-accessibility-figma-variables/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://css-tricks.com/form-automation-tips-for-happier-user-and-clients/" target="_blank" onclick="event.stopPropagation()">Form Automation Tips for Happier User and Clients</a>
+                    <a href="https://www.smashingmagazine.com/2026/03/testing-font-scaling-accessibility-figma-variables/" target="_blank" onclick="event.stopPropagation()">Testing Font Scaling For Accessibility With Figma Variables</a>
                 </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">Form Automation Tips for Happier User and Clients. That gap between "the form works" and "the...</div>
+                <div class="news-row-meta">Smashing Magazine · </div>
+                <div class="news-row-summary">Testing Font Scaling For Accessibility With Figma Variables. Testing Font Scaling For Accessibility...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/generative-ui-notes/', '_blank')">
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/dropdowns-scrollable-containers-why-break-how-fix/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://css-tricks.com/generative-ui-notes/" target="_blank" onclick="event.stopPropagation()">Generative UI Notes</a>
+                    <a href="https://www.smashingmagazine.com/2026/03/dropdowns-scrollable-containers-why-break-how-fix/" target="_blank" onclick="event.stopPropagation()">Dropdowns Inside Scrollable Containers: Why They Break And How To Fix Them Properly</a>
                 </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">Generative UI Notes. Looking at research and experiments that are designed to automatically...</div>
+                <div class="news-row-meta">Smashing Magazine · </div>
+                <div class="news-row-summary">Dropdowns Inside Scrollable Containers: Why They Break And How To Fix Them Properly. Dropdowns...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div></div>
@@ -294,53 +317,55 @@ Comments URL:...</div>
         <section class="section">
             <h2 class="section-title">AI工具</h2>
             <div class="section-content">
-        <div class="news-row" onclick="window.open('https://github.com/Jang-woo-AnnaSoft/execution-boundaries', '_blank')">
+        <div class="news-row" onclick="window.open('https://github.com/kotarimorm/-Report-AI-coding-agent-programmatically-bypassing-OS-security-policies-Trace-ID-f4b806d4...-/blob/main/README.md', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://github.com/Jang-woo-AnnaSoft/execution-boundaries" target="_blank" onclick="event.stopPropagation()">Should AI have the right to say 'No' to its owner?</a>
+                    <a href="https://github.com/kotarimorm/-Report-AI-coding-agent-programmatically-bypassing-OS-security-policies-Trace-ID-f4b806d4...-/blob/main/README.md" target="_blank" onclick="event.stopPropagation()">Forensic analysis of 37GB data loss caused by Cursor AI Agent</a>
                 </div>
-                <div class="news-row-meta">HN AI Coding · <span class="hot-tag">热门</span></div>
-                <div class="news-row-summary">Should AI have the right to say 'No' to its owner?. Article URL:...</div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Forensic analysis of 37GB data loss caused by Cursor AI Agent. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://github.com/samleeney/tmux-agent-status', '_blank')">
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47605552', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://github.com/samleeney/tmux-agent-status" target="_blank" onclick="event.stopPropagation()">Show HN: Tmux-agent-status – a tmux sidebar for monitoring AI coding agents</a>
+                    <a href="https://news.ycombinator.com/item?id=47605552" target="_blank" onclick="event.stopPropagation()">Why did Harvey choose a top-down enterprise GTM while Cursor went bottom-up?</a>
                 </div>
-                <div class="news-row-meta">HN AI Coding · <span class="hot-tag">热门</span></div>
-                <div class="news-row-summary">Show HN: Tmux-agent-status – a tmux sidebar for monitoring AI coding agents. Article URL:...</div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Why did Harvey choose a top-down enterprise GTM while Cursor went bottom-up?. I heard people...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://blogit.michelin.io/clojure-programming/', '_blank')">
+        <div class="news-row" onclick="window.open('https://pdfation.yet-to-be.com/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://blogit.michelin.io/clojure-programming/" target="_blank" onclick="event.stopPropagation()">Bringing Clojure programming to Enterprise (2021)</a>
+                    <a href="https://pdfation.yet-to-be.com/" target="_blank" onclick="event.stopPropagation()">Show HN: PDFation – Cursor for PDFs</a>
                 </div>
-                <div class="news-row-meta">HN AI Coding · </div>
-                <div class="news-row-summary">Bringing Clojure programming to Enterprise (2021). Article URL:...</div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Show HN: PDFation – Cursor for PDFs. Article URL: https://pdfation.yet-to-be.com/
+Comments URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://www.theguardian.com/technology/2026/apr/02/pupils-england-losing-thinking-skills-because-of-ai-survey', '_blank')">
+        <div class="news-row" onclick="window.open('https://idiallo.com/blog/what-is-copilot-exactly', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://www.theguardian.com/technology/2026/apr/02/pupils-england-losing-thinking-skills-because-of-ai-survey" target="_blank" onclick="event.stopPropagation()">Pupils in England are losing their thinking skills because of AI, survey suggest</a>
+                    <a href="https://idiallo.com/blog/what-is-copilot-exactly" target="_blank" onclick="event.stopPropagation()">What Is Copilot Exactly?</a>
                 </div>
-                <div class="news-row-meta">HN AI Coding · </div>
-                <div class="news-row-summary">Pupils in England are losing their thinking skills because of AI, survey suggest. Article URL:...</div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">What Is Copilot Exactly?. Article URL: https://idiallo.com/blog/what-is-copilot-exactly
+Comments...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://blog.codinghorror.com/the-best-code-is-no-code-at-all/', '_blank')">
+        <div class="news-row" onclick="window.open('https://octigen.com/blog/posts/2026-04-01-copilot-for-powerpoint-reasons-it-fails/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://blog.codinghorror.com/the-best-code-is-no-code-at-all/" target="_blank" onclick="event.stopPropagation()">"The Best Code Is No Code At All" (2007) – vibe coding is its villain</a>
+                    <a href="https://octigen.com/blog/posts/2026-04-01-copilot-for-powerpoint-reasons-it-fails/" target="_blank" onclick="event.stopPropagation()">Copilot for PowerPoint: Reasons It Fails</a>
                 </div>
-                <div class="news-row-meta">HN AI Coding · </div>
-                <div class="news-row-summary">"The Best Code Is No Code At All" (2007) – vibe coding is its villain. Article URL:...</div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Copilot for PowerPoint: Reasons It Fails. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div></div>
@@ -465,10 +490,10 @@ Comments URL:...</div>
         <section class="focus-section">
             <div class="focus-label">FOCUS STORY</div>
             <h2 class="focus-title">
-                <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a>
+                <a href="https://www.smashingmagazine.com/2026/04/practical-guide-design-principles/" target="_blank">A Practical Guide To Design Principles</a>
             </h2>
-            <p class="focus-summary">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time. These are the historical pranks I...</p>
-            <div class="focus-meta">CSS-Tricks · Today</div>
+            <p class="focus-summary">A Practical Guide To Design Principles. A Practical Guide To Design PrinciplesDesign principles...</p>
+            <div class="focus-meta">Smashing Magazine · Today</div>
         </section>
             
         <section class="section">
@@ -479,7 +504,7 @@ Comments URL:...</div>
                 <div class="news-row-title">
                     <a href="https://github.com/Jang-woo-AnnaSoft/execution-boundaries" target="_blank" onclick="event.stopPropagation()">Should AI have the right to say 'No' to its owner?</a>
                 </div>
-                <div class="news-row-meta">HN UX+AI · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-meta">HN AI Design Tools · <span class="hot-tag">HOT</span></div>
                 <div class="news-row-summary">Should AI have the right to say 'No' to its owner?. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -489,7 +514,7 @@ Comments URL:...</div>
                 <div class="news-row-title">
                     <a href="https://github.com/samleeney/tmux-agent-status" target="_blank" onclick="event.stopPropagation()">Show HN: Tmux-agent-status – a tmux sidebar for monitoring AI coding agents</a>
                 </div>
-                <div class="news-row-meta">HN UX+AI · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-meta">HN AI Design Tools · <span class="hot-tag">HOT</span></div>
                 <div class="news-row-summary">Show HN: Tmux-agent-status – a tmux sidebar for monitoring AI coding agents. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -499,7 +524,7 @@ Comments URL:...</div>
                 <div class="news-row-title">
                     <a href="https://www.theguardian.com/technology/2026/apr/02/pupils-england-losing-thinking-skills-because-of-ai-survey" target="_blank" onclick="event.stopPropagation()">Pupils in England are losing their thinking skills because of AI, survey suggest</a>
                 </div>
-                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-meta">HN AI Design Tools · </div>
                 <div class="news-row-summary">Pupils in England are losing their thinking skills because of AI, survey suggest. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -509,7 +534,7 @@ Comments URL:...</div>
                 <div class="news-row-title">
                     <a href="https://deknijf.com/posts/stages-of-ai-grief/" target="_blank" onclick="event.stopPropagation()">The Stages of AI Grief</a>
                 </div>
-                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-meta">HN AI Design Tools · </div>
                 <div class="news-row-summary">The Stages of AI Grief. Article URL: https://deknijf.com/posts/stages-of-ai-grief/
 Comments URL:...</div>
             </div>
@@ -520,7 +545,7 @@ Comments URL:...</div>
                 <div class="news-row-title">
                     <a href="https://www.wired.com/story/ai-models-lie-cheat-steal-protect-other-models-research/" target="_blank" onclick="event.stopPropagation()">AI Models Lie, Cheat, and Steal to Protect Other Models from Being Deleted</a>
                 </div>
-                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-meta">HN AI Design Tools · </div>
                 <div class="news-row-summary">AI Models Lie, Cheat, and Steal to Protect Other Models from Being Deleted. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -532,53 +557,53 @@ Comments URL:...</div>
         <section class="section">
             <h2 class="section-title">Design Engineering</h2>
             <div class="section-content">
-        <div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/04/practical-guide-design-principles/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a>
+                    <a href="https://www.smashingmagazine.com/2026/04/practical-guide-design-principles/" target="_blank" onclick="event.stopPropagation()">A Practical Guide To Design Principles</a>
                 </div>
-                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">HOT</span></div>
-                <div class="news-row-summary">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time. These are the historical pranks I...</div>
+                <div class="news-row-meta">Smashing Magazine · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">A Practical Guide To Design Principles. A Practical Guide To Design PrinciplesDesign principles...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/css-olfactive-api/', '_blank')">
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/desktop-wallpaper-calendars-april-2026/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">Sniffing Out the CSS Olfactive API</a>
+                    <a href="https://www.smashingmagazine.com/2026/03/desktop-wallpaper-calendars-april-2026/" target="_blank" onclick="event.stopPropagation()">The Joy Of A Fresh Beginning (April 2026 Wallpapers Edition)</a>
                 </div>
-                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">HOT</span></div>
-                <div class="news-row-summary">Sniffing Out the CSS Olfactive API. A deep sniff of the new CSS Olfactive API, a set of proposed...</div>
+                <div class="news-row-meta">Smashing Magazine · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">The Joy Of A Fresh Beginning (April 2026 Wallpapers Edition). The Joy Of A Fresh Beginning (April...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/whats-important-8/', '_blank')">
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/site-search-paradox-why-big-box-always-wins/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://css-tricks.com/whats-important-8/" target="_blank" onclick="event.stopPropagation()">What’s !important #8: Light/Dark Favicons, @mixin, object-view-box, and More</a>
+                    <a href="https://www.smashingmagazine.com/2026/03/site-search-paradox-why-big-box-always-wins/" target="_blank" onclick="event.stopPropagation()">The Site-Search Paradox: Why The Big Box Always Wins</a>
                 </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">What’s !important #8: Light/Dark Favicons, @mixin, object-view-box, and More. Short n’ sweet but...</div>
+                <div class="news-row-meta">Smashing Magazine · </div>
+                <div class="news-row-summary">The Site-Search Paradox: Why The Big Box Always Wins. The Site-Search Paradox: Why The Big Box...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/form-automation-tips-for-happier-user-and-clients/', '_blank')">
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/testing-font-scaling-accessibility-figma-variables/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://css-tricks.com/form-automation-tips-for-happier-user-and-clients/" target="_blank" onclick="event.stopPropagation()">Form Automation Tips for Happier User and Clients</a>
+                    <a href="https://www.smashingmagazine.com/2026/03/testing-font-scaling-accessibility-figma-variables/" target="_blank" onclick="event.stopPropagation()">Testing Font Scaling For Accessibility With Figma Variables</a>
                 </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">Form Automation Tips for Happier User and Clients. That gap between "the form works" and "the...</div>
+                <div class="news-row-meta">Smashing Magazine · </div>
+                <div class="news-row-summary">Testing Font Scaling For Accessibility With Figma Variables. Testing Font Scaling For Accessibility...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/generative-ui-notes/', '_blank')">
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/dropdowns-scrollable-containers-why-break-how-fix/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://css-tricks.com/generative-ui-notes/" target="_blank" onclick="event.stopPropagation()">Generative UI Notes</a>
+                    <a href="https://www.smashingmagazine.com/2026/03/dropdowns-scrollable-containers-why-break-how-fix/" target="_blank" onclick="event.stopPropagation()">Dropdowns Inside Scrollable Containers: Why They Break And How To Fix Them Properly</a>
                 </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">Generative UI Notes. Looking at research and experiments that are designed to automatically...</div>
+                <div class="news-row-meta">Smashing Magazine · </div>
+                <div class="news-row-summary">Dropdowns Inside Scrollable Containers: Why They Break And How To Fix Them Properly. Dropdowns...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div></div>
@@ -644,53 +669,55 @@ Comments URL:...</div>
         <section class="section">
             <h2 class="section-title">AI Tools</h2>
             <div class="section-content">
-        <div class="news-row" onclick="window.open('https://github.com/Jang-woo-AnnaSoft/execution-boundaries', '_blank')">
+        <div class="news-row" onclick="window.open('https://github.com/kotarimorm/-Report-AI-coding-agent-programmatically-bypassing-OS-security-policies-Trace-ID-f4b806d4...-/blob/main/README.md', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://github.com/Jang-woo-AnnaSoft/execution-boundaries" target="_blank" onclick="event.stopPropagation()">Should AI have the right to say 'No' to its owner?</a>
+                    <a href="https://github.com/kotarimorm/-Report-AI-coding-agent-programmatically-bypassing-OS-security-policies-Trace-ID-f4b806d4...-/blob/main/README.md" target="_blank" onclick="event.stopPropagation()">Forensic analysis of 37GB data loss caused by Cursor AI Agent</a>
                 </div>
-                <div class="news-row-meta">HN AI Coding · <span class="hot-tag">HOT</span></div>
-                <div class="news-row-summary">Should AI have the right to say 'No' to its owner?. Article URL:...</div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Forensic analysis of 37GB data loss caused by Cursor AI Agent. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://github.com/samleeney/tmux-agent-status', '_blank')">
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47605552', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://github.com/samleeney/tmux-agent-status" target="_blank" onclick="event.stopPropagation()">Show HN: Tmux-agent-status – a tmux sidebar for monitoring AI coding agents</a>
+                    <a href="https://news.ycombinator.com/item?id=47605552" target="_blank" onclick="event.stopPropagation()">Why did Harvey choose a top-down enterprise GTM while Cursor went bottom-up?</a>
                 </div>
-                <div class="news-row-meta">HN AI Coding · <span class="hot-tag">HOT</span></div>
-                <div class="news-row-summary">Show HN: Tmux-agent-status – a tmux sidebar for monitoring AI coding agents. Article URL:...</div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Why did Harvey choose a top-down enterprise GTM while Cursor went bottom-up?. I heard people...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://blogit.michelin.io/clojure-programming/', '_blank')">
+        <div class="news-row" onclick="window.open('https://pdfation.yet-to-be.com/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://blogit.michelin.io/clojure-programming/" target="_blank" onclick="event.stopPropagation()">Bringing Clojure programming to Enterprise (2021)</a>
+                    <a href="https://pdfation.yet-to-be.com/" target="_blank" onclick="event.stopPropagation()">Show HN: PDFation – Cursor for PDFs</a>
                 </div>
-                <div class="news-row-meta">HN AI Coding · </div>
-                <div class="news-row-summary">Bringing Clojure programming to Enterprise (2021). Article URL:...</div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Show HN: PDFation – Cursor for PDFs. Article URL: https://pdfation.yet-to-be.com/
+Comments URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://www.theguardian.com/technology/2026/apr/02/pupils-england-losing-thinking-skills-because-of-ai-survey', '_blank')">
+        <div class="news-row" onclick="window.open('https://idiallo.com/blog/what-is-copilot-exactly', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://www.theguardian.com/technology/2026/apr/02/pupils-england-losing-thinking-skills-because-of-ai-survey" target="_blank" onclick="event.stopPropagation()">Pupils in England are losing their thinking skills because of AI, survey suggest</a>
+                    <a href="https://idiallo.com/blog/what-is-copilot-exactly" target="_blank" onclick="event.stopPropagation()">What Is Copilot Exactly?</a>
                 </div>
-                <div class="news-row-meta">HN AI Coding · </div>
-                <div class="news-row-summary">Pupils in England are losing their thinking skills because of AI, survey suggest. Article URL:...</div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">What Is Copilot Exactly?. Article URL: https://idiallo.com/blog/what-is-copilot-exactly
+Comments...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div>
-        <div class="news-row" onclick="window.open('https://blog.codinghorror.com/the-best-code-is-no-code-at-all/', '_blank')">
+        <div class="news-row" onclick="window.open('https://octigen.com/blog/posts/2026-04-01-copilot-for-powerpoint-reasons-it-fails/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
-                    <a href="https://blog.codinghorror.com/the-best-code-is-no-code-at-all/" target="_blank" onclick="event.stopPropagation()">"The Best Code Is No Code At All" (2007) – vibe coding is its villain</a>
+                    <a href="https://octigen.com/blog/posts/2026-04-01-copilot-for-powerpoint-reasons-it-fails/" target="_blank" onclick="event.stopPropagation()">Copilot for PowerPoint: Reasons It Fails</a>
                 </div>
-                <div class="news-row-meta">HN AI Coding · </div>
-                <div class="news-row-summary">"The Best Code Is No Code At All" (2007) – vibe coding is its villain. Article URL:...</div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Copilot for PowerPoint: Reasons It Fails. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div></div>
@@ -811,7 +838,6 @@ Comments URL:...</div>
         
         <footer class="footer">
             <span id="footer-source">数据来源: Figma, CSS-Tricks, HackerNews, GitHub</span>
-            <a href="https://emmananan.github.io/daily-news-20260402.html" id="footer-link">查看在线版 →</a>
         </footer>
     </div>
     
@@ -819,14 +845,18 @@ Comments URL:...</div>
         const i18n = {
             title: { zh: 'ELARA DISPATCH', en: 'ELARA DISPATCH' },
             date: { zh: '2026年04月02日 · 星期四', en: 'Apr 02, 2026 · Thu' },
-            data_source: { zh: '数据来源', en: 'Data Sources' },
-            view_online: { zh: '查看在线版', en: 'View Online' }
+            data_source: { zh: '数据来源', en: 'Data Sources' }
         };
         
+        let currentLang = 'zh';
+        
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            switchLang(currentLang);
+        }
+        
         function switchLang(lang) {
-            // 切换按钮状态
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector('[data-lang-btn="' + lang + '"]').classList.add('active');
+            currentLang = lang;
             
             // 切换内容显示
             document.querySelectorAll('.lang-content').forEach(el => {
@@ -838,7 +868,6 @@ Comments URL:...</div>
             document.getElementById('page-title').textContent = i18n.title[lang];
             document.getElementById('page-date').textContent = i18n.date[lang];
             document.getElementById('footer-source').textContent = i18n.data_source[lang] + ': Figma, CSS-Tricks, HackerNews, GitHub';
-            document.getElementById('footer-link').textContent = i18n.view_online[lang] + ' →';
         }
     </script>
 </body>
