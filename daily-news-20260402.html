@@ -5,585 +5,467 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>设计工程日报 | 2026年04月02日</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        :root { --black: #000; --white: #fff; --gray: #666; --gray-light: #999; --accent: #ff3333; --border: #e5e5e5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
         
-        :root {
-            --black: #000000;
-            --white: #ffffff;
-            --gray-light: #f5f5f5;
-            --gray-medium: #999999;
-            --gray-dark: #333333;
-            --accent: #ff3333;
-        }
+        /* Header */
+        .header { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 30px; border-bottom: 1px solid var(--black); margin-bottom: 40px; }
+        .header-left { flex: 1; }
+        .header-title { font-size: 42px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; }
+        .header-subtitle { font-size: 14px; color: var(--gray); }
+        .header-right { text-align: right; }
+        .date-day { font-size: 56px; font-weight: 900; line-height: 0.9; }
+        .date-month { font-size: 13px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
         
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Arial', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background: var(--white);
-            color: var(--black);
-            line-height: 1.6;
-            font-size: 15px;
-        }
+        /* Lang Switch */
+        .lang-switch { position: fixed; top: 20px; right: 20px; display: flex; gap: 8px; z-index: 100; }
+        .lang-btn { padding: 6px 12px; font-size: 12px; font-weight: 600; border: 1px solid var(--black); background: var(--white); cursor: pointer; transition: all 0.2s; }
+        .lang-btn:hover, .lang-btn.active { background: var(--black); color: var(--white); }
         
-        /* 主容器 */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 40px;
-        }
+        /* Focus */
+        .focus-section { margin-bottom: 50px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+        .focus-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+        .focus-title { font-size: 26px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; }
+        .focus-title a { color: var(--black); text-decoration: none; }
+        .focus-title a:hover { color: var(--accent); }
+        .focus-summary { font-size: 15px; color: var(--gray); line-height: 1.7; margin-bottom: 12px; }
+        .focus-meta { font-size: 12px; color: var(--gray-light); }
         
-        /* Header - 极简风格 */
-        .header {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--black);
-            margin-bottom: 50px;
-        }
+        /* Section */
+        .section { margin-bottom: 40px; }
+        .section-title { font-size: 18px; font-weight: 800; padding-bottom: 10px; border-bottom: 1px solid var(--black); margin-bottom: 20px; }
         
-        .header-main {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+        /* News Row */
+        .news-row { display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+        .news-row:hover { background: #fafafa; margin: 0 -12px; padding-left: 12px; padding-right: 12px; }
+        .news-row-content { flex: 1; padding-right: 16px; }
+        .news-row-title { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 6px; }
+        .news-row-title a { color: var(--black); text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-row-title a:hover { color: var(--accent); }
+        .news-row-meta { font-size: 12px; color: var(--gray-light); margin-bottom: 6px; }
+        .hot-tag { color: var(--accent); font-weight: 700; }
+        .news-row-summary { font-size: 13px; color: var(--gray); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-row-arrow { color: var(--gray-light); font-size: 20px; font-weight: 300; flex-shrink: 0; margin-top: 4px; }
+        .news-row:hover .news-row-arrow { color: var(--black); }
         
-        .header-title {
-            font-size: 56px;
-            font-weight: 900;
-            letter-spacing: -2px;
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-        
-        .header-subtitle {
-            font-size: 16px;
-            color: var(--gray-medium);
-            font-weight: 400;
-        }
-        
-        .header-tags {
-            display: flex;
-            gap: 20px;
-            margin-top: 16px;
-            font-size: 13px;
-            color: var(--gray-medium);
-        }
-        
-        .header-tag::before {
-            content: "•";
-            margin-right: 6px;
-            color: var(--black);
-        }
-        
-        .header-date {
-            text-align: right;
-        }
-        
-        .date-day {
-            font-size: 72px;
-            font-weight: 900;
-            line-height: 0.9;
-            letter-spacing: -3px;
-        }
-        
-        .date-month {
-            font-size: 14px;
-            color: var(--gray-medium);
-            margin-top: 4px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        
-        .date-year {
-            font-size: 12px;
-            color: var(--gray-medium);
-            margin-top: 2px;
-        }
-        
-        /* 焦点报道 - 大卡片 */
-        .focus-section {
-            margin-bottom: 60px;
-            padding: 40px 0;
-            border-bottom: 1px solid var(--black);
-        }
-        
-        .focus-label {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
-        
-        .focus-title {
-            font-size: 32px;
-            font-weight: 800;
-            line-height: 1.3;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-        }
-        
-        .focus-title a {
-            color: var(--black);
-            text-decoration: none;
-        }
-        
-        .focus-title a:hover {
-            color: var(--accent);
-        }
-        
-        .focus-summary {
-            font-size: 16px;
-            line-height: 1.8;
-            color: var(--gray-dark);
-            margin-bottom: 20px;
-            max-width: 700px;
-        }
-        
-        .focus-meta {
-            font-size: 13px;
-            color: var(--gray-medium);
-        }
-        
-        /* 内容网格 - 两栏布局 */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-        }
-        
-        /* 板块样式 */
-        .section {
-            margin-bottom: 50px;
-        }
-        
-        .section-header {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--black);
-            margin-bottom: 24px;
-        }
-        
-        /* 精品文章 */
-        .news-featured {
-            margin-bottom: 30px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
-        }
-        
-        .news-featured:last-of-type {
-            border-bottom: none;
-        }
-        
-        .news-meta {
-            font-size: 12px;
-            color: var(--gray-medium);
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        }
-        
-        .news-title-large {
-            font-size: 20px;
-            font-weight: 700;
-            line-height: 1.4;
-            margin-bottom: 12px;
-            letter-spacing: -0.3px;
-        }
-        
-        .news-title-large a {
-            color: var(--black);
-            text-decoration: none;
-        }
-        
-        .news-title-large a:hover {
-            color: var(--accent);
-        }
-        
-        .news-excerpt {
-            font-size: 14px;
-            line-height: 1.7;
-            color: var(--gray-dark);
-        }
-        
-        /* 普通新闻列表 */
-        .news-list-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 16px 0;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .news-list-item:hover {
-            padding-left: 8px;
-        }
-        
-        .news-list-content {
-            flex: 1;
-            padding-right: 16px;
-        }
-        
-        .news-list-title {
-            font-size: 15px;
-            font-weight: 600;
-            line-height: 1.5;
-            margin-bottom: 4px;
-        }
-        
-        .news-list-title a {
-            color: var(--black);
-            text-decoration: none;
-        }
-        
-        .news-list-title a:hover {
-            color: var(--accent);
-        }
-        
-        .news-list-meta {
-            font-size: 12px;
-            color: var(--gray-medium);
-        }
-        
-        .news-arrow {
-            color: var(--gray-medium);
-            font-size: 18px;
-            font-weight: 300;
-        }
-        
-        .news-list-item:hover .news-arrow {
-            color: var(--black);
-        }
+        /* Grid */
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         
         /* Footer */
-        .footer {
-            margin-top: 80px;
-            padding-top: 30px;
-            border-top: 1px solid var(--black);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-            color: var(--gray-medium);
-        }
+        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--black); display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-light); }
+        .footer a { color: var(--gray-light); text-decoration: none; }
+        .footer a:hover { color: var(--black); }
         
-        .footer-links {
-            display: flex;
-            gap: 24px;
-        }
-        
-        .footer-links a {
-            color: var(--gray-medium);
-            text-decoration: none;
-        }
-        
-        .footer-links a:hover {
-            color: var(--black);
-        }
-        
-        /* 响应式 */
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 30px 20px;
-            }
-            
-            .header {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .header-title {
-                font-size: 36px;
-            }
-            
-            .header-date {
-                text-align: left;
-                display: flex;
-                align-items: baseline;
-                gap: 12px;
-            }
-            
-            .date-day {
-                font-size: 48px;
-            }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .focus-title {
-                font-size: 24px;
-            }
-            
-            .section-header {
-                font-size: 20px;
-            }
+            .container { padding: 80px 16px 24px; }
+            .header { flex-direction: row; align-items: center; gap: 12px; }
+            .header-title { font-size: 28px; }
+            .header-subtitle { font-size: 12px; }
+            .date-day { font-size: 36px; }
+            .content-grid { grid-template-columns: 1fr; gap: 30px; }
+            .lang-switch { position: fixed; top: 16px; right: 16px; z-index: 100; }
+            .lang-btn { padding: 8px 14px; font-size: 13px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); }
+            .focus-title { font-size: 22px; }
+            .focus-section { margin-bottom: 36px; padding-bottom: 30px; }
+            .section { margin-bottom: 30px; }
+            .news-row { padding: 14px 0; }
+            .news-row:hover { margin: 0; padding-left: 0; padding-right: 0; }
+            .news-row-title { font-size: 15px; }
+            .news-row-summary { font-size: 12px; }
         }
         
         @media (max-width: 480px) {
-            .header-title {
-                font-size: 28px;
-            }
-            
-            .date-day {
-                font-size: 36px;
-            }
-            
-            .focus-title {
-                font-size: 20px;
-            }
-            
-            .footer {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
+            .header-title { font-size: 24px; }
+            .date-day { font-size: 32px; }
+            .focus-title { font-size: 20px; }
+            .section-title { font-size: 16px; }
         }
     </style>
 </head>
 <body>
+    <div class="lang-switch">
+        <button class="lang-btn active" onclick="switchLang('zh')">中</button>
+        <button class="lang-btn" onclick="switchLang('en')">EN</button>
+    </div>
+    
     <div class="container">
-        <!-- Header -->
         <header class="header">
-            <div class="header-main">
-                <h1 class="header-title">设计工程日报</h1>
-                <p class="header-subtitle">Design Engineering Daily</p>
-                <div class="header-tags">
-                    <span class="header-tag">设计系统</span>
-                    <span class="header-tag">前端工程</span>
-                    <span class="header-tag">AI工具</span>
-                    <span class="header-tag">开源动态</span>
-                </div>
+            <div class="header-left">
+                <h1 class="header-title" data-zh="设计工程日报" data-en="Design Engineering Daily">设计工程日报</h1>
+                <p class="header-subtitle">2026年04月02日 · 星期四</p>
             </div>
-            <div class="header-date">
+            <div class="header-right">
                 <div class="date-day">02</div>
-                <div class="date-month">04月 星期四</div>
-                <div class="date-year">2026</div>
+                <div class="date-month">Apr 2026</div>
             </div>
         </header>
         
-        <!-- Focus Story -->
         <section class="focus-section">
-            <div class="focus-label">焦点报道</div>
+            <div class="focus-label" data-zh="焦点报道" data-en="FOCUS STORY">焦点报道</div>
             <h2 class="focus-title">
-                <a href="https://css-tricks.com/experimenting-with-scroll-driven-corner-shape-animations/" target="_blank">Experimenting With Scroll-Driven corner-shape Animations</a>
+                <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a>
             </h2>
-            <p class="focus-summary">The new CSS corner-shape() property is mathematical, so it’s easily animated. Author Daniel Schwarz pokes at animating the property for interesting UI effects.
-
-Experimenting With Scroll-Driven corner-shape Animations originally published on CSS-Tric...</p>
-            <div class="focus-meta">CSS-Tricks · 今日</div>
+            <p class="focus-summary">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time. These are the historical pranks I...</p>
+            <div class="focus-meta">CSS-Tricks · <span data-zh="今日" data-en="Today">今日</span></div>
         </section>
         
-        <!-- Content Grid -->
         <div class="content-grid">
-            <div class="column-left">
-                <!-- 设计工程 -->
-                <section class="section">
-                    <h2 class="section-header">设计工程</h2>
-                    
-            <article class="news-featured" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
-                <div class="news-meta">CSS-Tricks · 今日 · <span style="color: #ff3333; font-weight: 700;">HOT</span></div>
-                <h3 class="news-title-large">
+            <div class="column">
+                
+        <section class="section">
+            <h2 class="section-title" data-zh="设计工程" data-en="Design Engineering">设计工程</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
                     <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a>
-                </h3>
-                <p class="news-excerpt">These are the historical pranks I consider the top 10 most noteworthy, rather than the “best.” You’ll see that some of them crossed the line and/or backfired.
-
-Front-End Fools: Top 10 April Fools’ UI Pranks of All Time originally published on CSS-Tri...</p>
-            </article>
-            <div class="news-list-item" onclick="window.open('https://css-tricks.com/css-olfactive-api/', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">Sniffing Out the CSS Olfactive API</a>
-                    </h4>
-                    <div class="news-list-meta">CSS-Tricks · <span style="color: #ff3333; font-weight: 700;">HOT</span></div>
                 </div>
-                <span class="news-arrow">→</span>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-summary">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time. These are the historical pranks I...</div>
             </div>
-            <div class="news-list-item" onclick="window.open('https://css-tricks.com/whats-important-8/', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://css-tricks.com/whats-important-8/" target="_blank" onclick="event.stopPropagation()">What’s !important #8: Light/Dark Favicons, @mixin, object-view-box, an...</a>
-                    </h4>
-                    <div class="news-list-meta">CSS-Tricks</div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/css-olfactive-api/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">Sniffing Out the CSS Olfactive API</a>
                 </div>
-                <span class="news-arrow">→</span>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-summary">Sniffing Out the CSS Olfactive API. A deep sniff of the new CSS Olfactive API, a set of proposed...</div>
             </div>
-            <div class="news-list-item" onclick="window.open('https://css-tricks.com/form-automation-tips-for-happier-user-and-clients/', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://css-tricks.com/form-automation-tips-for-happier-user-and-clients/" target="_blank" onclick="event.stopPropagation()">Form Automation Tips for Happier User and Clients</a>
-                    </h4>
-                    <div class="news-list-meta">CSS-Tricks</div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/whats-important-8/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/whats-important-8/" target="_blank" onclick="event.stopPropagation()">What’s !important #8: Light/Dark Favicons, @mixin, object-view-box, and More</a>
                 </div>
-                <span class="news-arrow">→</span>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">What’s !important #8: Light/Dark Favicons, @mixin, object-view-box, and More. Short n’ sweet but...</div>
             </div>
-            <div class="news-list-item" onclick="window.open('https://css-tricks.com/generative-ui-notes/', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://css-tricks.com/generative-ui-notes/" target="_blank" onclick="event.stopPropagation()">Generative UI Notes</a>
-                    </h4>
-                    <div class="news-list-meta">CSS-Tricks</div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/form-automation-tips-for-happier-user-and-clients/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/form-automation-tips-for-happier-user-and-clients/" target="_blank" onclick="event.stopPropagation()">Form Automation Tips for Happier User and Clients</a>
                 </div>
-                <span class="news-arrow">→</span>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Form Automation Tips for Happier User and Clients. That gap between "the form works" and "the...</div>
             </div>
-                </section>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/generative-ui-notes/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/generative-ui-notes/" target="_blank" onclick="event.stopPropagation()">Generative UI Notes</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Generative UI Notes. Looking at research and experiments that are designed to automatically...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
                 
-                <!-- 前端工程 -->
-                <section class="section">
-                    <h2 class="section-header">前端工程</h2>
-                    <p style="color: var(--gray-medium);">暂无数据</p>
-                </section>
+        <section class="section">
+            <h2 class="section-title" data-zh="前端工程" data-en="Frontend Engineering">前端工程</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/cesaranogilbert/aaia-eu-ai-act-classifier', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/cesaranogilbert/aaia-eu-ai-act-classifier" target="_blank" onclick="event.stopPropagation()">Open-source EU AI Act risk classifier – no API, runs offline, TypeScript</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-summary">Open-source EU AI Act risk classifier – no API, runs offline, TypeScript. Article URL:...</div>
             </div>
-            
-            <div class="column-right">
-                <!-- AI工具 -->
-                <section class="section">
-                    <h2 class="section-header">AI工具</h2>
-                    
-            <article class="news-featured" onclick="window.open('https://old.reddit.com/r/programming/comments/1s9jkzi/announcement_temporary_llm_content_ban/', '_blank')">
-                <div class="news-meta">HackerNews AI · 今日 · <span style="color: #ff3333; font-weight: 700;">HOT</span></div>
-                <h3 class="news-title-large">
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://youcefhq.github.io/pixelpeople/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://youcefhq.github.io/pixelpeople/" target="_blank" onclick="event.stopPropagation()">Show HN: PixelPeople – Generate people in pixel art for React</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-summary">Show HN: PixelPeople – Generate people in pixel art for React. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/JackChen-me/open-multi-agent', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/JackChen-me/open-multi-agent" target="_blank" onclick="event.stopPropagation()">Open Multi-Agent: Multi-agent orchestration framework for TypeScript</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Open Multi-Agent: Multi-agent orchestration framework for TypeScript. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.open-harness.dev', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.open-harness.dev" target="_blank" onclick="event.stopPropagation()">OpenHarness – Composable TypeScript SDK for building powerful agent harnesses</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">OpenHarness – Composable TypeScript SDK for building powerful agent harnesses. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://logicstamp.dev', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://logicstamp.dev" target="_blank" onclick="event.stopPropagation()">Show HN: LogicStamp – A Context Compiler for TypeScript</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Show HN: LogicStamp – A Context Compiler for TypeScript. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+            </div>
+            <div class="column">
+                
+        <section class="section">
+            <h2 class="section-title" data-zh="AI工具" data-en="AI Tools">AI工具</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/kotarimorm/-Report-AI-coding-agent-programmatically-bypassing-OS-security-policies-Trace-ID-f4b806d4...-/blob/main/README.md', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/kotarimorm/-Report-AI-coding-agent-programmatically-bypassing-OS-security-policies-Trace-ID-f4b806d4...-/blob/main/README.md" target="_blank" onclick="event.stopPropagation()">Forensic analysis of 37GB data loss caused by Cursor AI Agent</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-summary">Forensic analysis of 37GB data loss caused by Cursor AI Agent. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47605552', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47605552" target="_blank" onclick="event.stopPropagation()">Why did Harvey choose a top-down enterprise GTM while Cursor went bottom-up?</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-summary">Why did Harvey choose a top-down enterprise GTM while Cursor went bottom-up?. I heard people...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://pdfation.yet-to-be.com/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://pdfation.yet-to-be.com/" target="_blank" onclick="event.stopPropagation()">Show HN: PDFation – Cursor for PDFs</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Show HN: PDFation – Cursor for PDFs. Article URL: https://pdfation.yet-to-be.com/
+Comments URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://idiallo.com/blog/what-is-copilot-exactly', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://idiallo.com/blog/what-is-copilot-exactly" target="_blank" onclick="event.stopPropagation()">What Is Copilot Exactly?</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">What Is Copilot Exactly?. Article URL: https://idiallo.com/blog/what-is-copilot-exactly
+Comments...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://octigen.com/blog/posts/2026-04-01-copilot-for-powerpoint-reasons-it-fails/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://octigen.com/blog/posts/2026-04-01-copilot-for-powerpoint-reasons-it-fails/" target="_blank" onclick="event.stopPropagation()">Copilot for PowerPoint: Reasons It Fails</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Copilot for PowerPoint: Reasons It Fails. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                
+        <section class="section">
+            <h2 class="section-title" data-zh="AI模型" data-en="AI Models">AI模型</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/tornikeo/claude-code/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/tornikeo/claude-code/" target="_blank" onclick="event.stopPropagation()">Where to host leaked Claude Code source?</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-summary">Where to host leaked Claude Code source?. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.bbc.com/news/articles/ce8l2q5yq51o', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.bbc.com/news/articles/ce8l2q5yq51o" target="_blank" onclick="event.stopPropagation()">Claude Code users hitting usage limits 'way faster than expected'</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-summary">Claude Code users hitting usage limits 'way faster than expected'. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://vitalik.eth.limo/general/2026/04/02/secure_llms.html', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://vitalik.eth.limo/general/2026/04/02/secure_llms.html" target="_blank" onclick="event.stopPropagation()">Vitalik Buterin – "My self-sovereign / local / private / secure LLM setup"</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Vitalik Buterin – "My self-sovereign / local / private / secure LLM setup". Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://old.reddit.com/r/programming/comments/1s9jkzi/announcement_temporary_llm_content_ban/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
                     <a href="https://old.reddit.com/r/programming/comments/1s9jkzi/announcement_temporary_llm_content_ban/" target="_blank" onclick="event.stopPropagation()">r/programming bans all discussion of LLM programming</a>
-                </h3>
-                <p class="news-excerpt">Article URL: https://old.reddit.com/r/programming/comments/1s9jkzi/announcement_temporary_llm_content_ban/
-Comments URL: https://news.ycombinator.com/item?id=47610336
-Points: 99
-# Comments: 79</p>
-            </article>
-            <div class="news-list-item" onclick="window.open('https://www.ycombinator.com/companies/inspectmind-ai/jobs/jQNra64-software-engineer-build-the-world-s-best-ai-plan-checker', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://www.ycombinator.com/companies/inspectmind-ai/jobs/jQNra64-software-engineer-build-the-world-s-best-ai-plan-checker" target="_blank" onclick="event.stopPropagation()">InspectMind AI (YC W24) Is Hiring</a>
-                    </h4>
-                    <div class="news-list-meta">HackerNews AI · <span style="color: #ff3333; font-weight: 700;">HOT</span></div>
                 </div>
-                <span class="news-arrow">→</span>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">r/programming bans all discussion of LLM programming. Article URL:...</div>
             </div>
-            <div class="news-list-item" onclick="window.open('https://engineering.fb.com/2026/03/30/data-center-engineering/ai-for-american-produced-cement-and-concrete/', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://engineering.fb.com/2026/03/30/data-center-engineering/ai-for-american-produced-cement-and-concrete/" target="_blank" onclick="event.stopPropagation()">AI for American-produced cement and concrete</a>
-                    </h4>
-                    <div class="news-list-meta">HackerNews AI</div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://chipsandcheese.com/p/embracing-ai-with-claudes-c-compiler', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://chipsandcheese.com/p/embracing-ai-with-claudes-c-compiler" target="_blank" onclick="event.stopPropagation()">Embracing AI with Claude's C Compiler</a>
                 </div>
-                <span class="news-arrow">→</span>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Embracing AI with Claude's C Compiler. Article URL:...</div>
             </div>
-            <div class="news-list-item" onclick="window.open('https://www.bloomberg.com/news/articles/2026-03-27/ai-changed-chess-grandmasters-now-win-with-unpredictable-moves', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://www.bloomberg.com/news/articles/2026-03-27/ai-changed-chess-grandmasters-now-win-with-unpredictable-moves" target="_blank" onclick="event.stopPropagation()">AI Perfected Chess. Humans Made It Unpredictable Again</a>
-                    </h4>
-                    <div class="news-list-meta">HackerNews AI</div>
-                </div>
-                <span class="news-arrow">→</span>
-            </div>
-            <div class="news-list-item" onclick="window.open('https://www.ycombinator.com/companies/toma/jobs/2lrQI7S-sr-staff-software-engineer', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://www.ycombinator.com/companies/toma/jobs/2lrQI7S-sr-staff-software-engineer" target="_blank" onclick="event.stopPropagation()">Toma (YC W24) is hiring a Senior/Staff Eng to build AI automotive cowo...</a>
-                    </h4>
-                    <div class="news-list-meta">HackerNews AI</div>
-                </div>
-                <span class="news-arrow">→</span>
-            </div>
-                </section>
-                
-                <!-- 开源工具 -->
-                <section class="section">
-                    <h2 class="section-header">开源工具</h2>
-                    
-            <div class="news-list-item" onclick="window.open('https://old.reddit.com/r/programming/comments/1s9jkzi/announcement_temporary_llm_content_ban/', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://old.reddit.com/r/programming/comments/1s9jkzi/announcement_temporary_llm_content_ban/" target="_blank" onclick="event.stopPropagation()">r/programming bans all discussion of LLM programming</a>
-                    </h4>
-                    <div class="news-list-meta">HackerNews · <span style="color: #ff3333; font-weight: 700;">HOT</span></div>
-                </div>
-                <span class="news-arrow">→</span>
-            </div>
-            <div class="news-list-item" onclick="window.open('https://bytemash.net/posts/subscription-bombing-your-signup-form-is-a-weapon/', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://bytemash.net/posts/subscription-bombing-your-signup-form-is-a-weapon/" target="_blank" onclick="event.stopPropagation()">Subscription bombing and how to mitigate it</a>
-                    </h4>
-                    <div class="news-list-meta">HackerNews · <span style="color: #ff3333; font-weight: 700;">HOT</span></div>
-                </div>
-                <span class="news-arrow">→</span>
-            </div>
-            <div class="news-list-item" onclick="window.open('https://fff.dmtrkovalenko.dev/', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://fff.dmtrkovalenko.dev/" target="_blank" onclick="event.stopPropagation()">The future of code search is not regex – 100x faster than ripgrep</a>
-                    </h4>
-                    <div class="news-list-meta">HackerNews</div>
-                </div>
-                <span class="news-arrow">→</span>
-            </div>
-            <div class="news-list-item" onclick="window.open('https://www.sunnywingsvirtual.com/artemis2/timeline.html', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://www.sunnywingsvirtual.com/artemis2/timeline.html" target="_blank" onclick="event.stopPropagation()">Show HN: NASA Artemis II Mission Timeline Tracker</a>
-                    </h4>
-                    <div class="news-list-meta">HackerNews</div>
-                </div>
-                <span class="news-arrow">→</span>
-            </div>
-                </section>
-                
-                <!-- 科技动态 -->
-                <section class="section">
-                    <h2 class="section-header">科技动态</h2>
-                    
-            <div class="news-list-item" onclick="window.open('https://www.36kr.com/newsflashes/3749337166168837', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://www.36kr.com/newsflashes/3749337166168837" target="_blank" onclick="event.stopPropagation()">南向资金净买入额达100亿港元</a>
-                    </h4>
-                    <div class="news-list-meta">36氪快讯 · <span style="color: #ff3333; font-weight: 700;">HOT</span></div>
-                </div>
-                <span class="news-arrow">→</span>
-            </div>
-            <div class="news-list-item" onclick="window.open('https://www.36kr.com/newsflashes/3749335243964935', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://www.36kr.com/newsflashes/3749335243964935" target="_blank" onclick="event.stopPropagation()">A股三大指数集体收跌，贵金属板块走弱</a>
-                    </h4>
-                    <div class="news-list-meta">36氪快讯 · <span style="color: #ff3333; font-weight: 700;">HOT</span></div>
-                </div>
-                <span class="news-arrow">→</span>
-            </div>
-            <div class="news-list-item" onclick="window.open('https://www.36kr.com/newsflashes/3749318831571461', '_blank')">
-                <div class="news-list-content">
-                    <h4 class="news-list-title">
-                        <a href="https://www.36kr.com/newsflashes/3749318831571461" target="_blank" onclick="event.stopPropagation()">肖广瑞卸任万达商业管理集团公司执行董事</a>
-                    </h4>
-                    <div class="news-list-meta">36氪快讯</div>
-                </div>
-                <span class="news-arrow">→</span>
-            </div>
-                </section>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
             </div>
         </div>
         
-        <!-- Footer -->
-        <footer class="footer">
-            <span>数据来源于 Figma、CSS-Tricks、HackerNews、GitHub 等专业平台</span>
-            <div class="footer-links">
-                <a href="https://emmananan.github.io/daily-news-20260402.html">今日日报</a>
-                <a href="https://github.com">GitHub</a>
-                <a href="https://figma.com">Figma</a>
+        
+        <section class="section">
+            <h2 class="section-title" data-zh="开源工具" data-en="Open Source">开源工具</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/esl-epfl/OpenEdgeCGRA', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/esl-epfl/OpenEdgeCGRA" target="_blank" onclick="event.stopPropagation()">OpenEdgeCGRA – An Open-Hardware Coarse Grained Reconfigurable Array (CGRA)</a>
+                </div>
+                <div class="news-row-meta">HN Tools · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-summary">OpenEdgeCGRA – An Open-Hardware Coarse Grained Reconfigurable Array (CGRA). Article URL:...</div>
             </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/tornikeo/claude-code/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/tornikeo/claude-code/" target="_blank" onclick="event.stopPropagation()">Where to host leaked Claude Code source?</a>
+                </div>
+                <div class="news-row-meta">HN Tools · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-summary">Where to host leaked Claude Code source?. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://zml.ai/posts/zml-smi/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://zml.ai/posts/zml-smi/" target="_blank" onclick="event.stopPropagation()">Universal diagnostic and monitoring tool for GPUs, TPUs and NPUs</a>
+                </div>
+                <div class="news-row-meta">HN Tools · </div>
+                <div class="news-row-summary">Universal diagnostic and monitoring tool for GPUs, TPUs and NPUs. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://repofortify.com/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://repofortify.com/" target="_blank" onclick="event.stopPropagation()">RepoFortify – Production readiness scanner for GitHub repos (free, no signup)</a>
+                </div>
+                <div class="news-row-meta">HN Tools · </div>
+                <div class="news-row-summary">RepoFortify – Production readiness scanner for GitHub repos (free, no signup). Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/cesaranogilbert/aaia-eu-ai-act-classifier', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/cesaranogilbert/aaia-eu-ai-act-classifier" target="_blank" onclick="event.stopPropagation()">Open-source EU AI Act risk classifier – no API, runs offline, TypeScript</a>
+                </div>
+                <div class="news-row-meta">HN Tools · </div>
+                <div class="news-row-summary">Open-source EU AI Act risk classifier – no API, runs offline, TypeScript. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title" data-zh="设计洞见" data-en="Designer Insights">设计洞见</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://knowingken.com/making-and-meeting-moloch', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://knowingken.com/making-and-meeting-moloch" target="_blank" onclick="event.stopPropagation()">Making and Meeting Moloch: Game design and the pressure to make numbers go up</a>
+                </div>
+                <div class="news-row-meta">HN Design · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-summary">Making and Meeting Moloch: Game design and the pressure to make numbers go up. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://refactoringenglish.com/blog/ai-vs-human-design-doc/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://refactoringenglish.com/blog/ai-vs-human-design-doc/" target="_blank" onclick="event.stopPropagation()">Which Design Doc Did AI Write?</a>
+                </div>
+                <div class="news-row-meta">HN Design · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-summary">Which Design Doc Did AI Write?. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://lukechu.dev/post/arcade-design-and-materials', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://lukechu.dev/post/arcade-design-and-materials" target="_blank" onclick="event.stopPropagation()">Building an Arcade Cabinet (Part 1, Design & Materials)</a>
+                </div>
+                <div class="news-row-meta">HN Design · </div>
+                <div class="news-row-summary">Building an Arcade Cabinet (Part 1, Design & Materials). Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://sycamore.dev', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://sycamore.dev" target="_blank" onclick="event.stopPropagation()">Show HN: Sycamore – next gen Rust web UI library using fine-grained reactivity</a>
+                </div>
+                <div class="news-row-meta">HN Design · </div>
+                <div class="news-row-summary">Show HN: Sycamore – next gen Rust web UI library using fine-grained reactivity. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://goldenxp.com/posts/2025/07/05/ABA-Game-Design/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://goldenxp.com/posts/2025/07/05/ABA-Game-Design/" target="_blank" onclick="event.stopPropagation()">Applied Behavior Analysis for Game and UX Designers</a>
+                </div>
+                <div class="news-row-meta">HN Design · </div>
+                <div class="news-row-summary">Applied Behavior Analysis for Game and UX Designers. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+        
+        <footer class="footer">
+            <span><span data-zh="数据来源" data-en="Data Sources">数据来源</span>: Figma, CSS-Tricks, HackerNews, GitHub</span>
+            <a href="https://emmananan.github.io/daily-news-20260402.html"><span data-zh="查看在线版" data-en="View Online">查看在线版</span> →</a>
         </footer>
     </div>
+    
+    <script>
+        function switchLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('[data-zh][data-en]').forEach(el => {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+        }
+    </script>
 </body>
 </html>
