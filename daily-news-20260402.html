@@ -20,9 +20,11 @@
         .date-month { font-size: 13px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
         
         /* Lang Switch */
-        .lang-switch { position: fixed; top: 20px; right: 20px; display: flex; gap: 8px; z-index: 100; }
-        .lang-btn { padding: 6px 12px; font-size: 12px; font-weight: 600; border: 1px solid var(--black); background: var(--white); cursor: pointer; transition: all 0.2s; }
-        .lang-btn:hover, .lang-btn.active { background: var(--black); color: var(--white); }
+        .lang-switch { display: flex; gap: 4px; align-items: center; margin-top: 12px; justify-content: flex-end; }
+        .lang-btn { padding: 4px 10px; font-size: 11px; font-weight: 600; border: 1px solid var(--border); background: var(--white); cursor: pointer; transition: all 0.2s; color: var(--gray); }
+        .lang-btn:hover { border-color: var(--black); color: var(--black); }
+        .lang-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
+        .lang-icon { font-size: 14px; margin-right: 6px; }
         
         /* Focus */
         .focus-section { margin-bottom: 50px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
@@ -58,16 +60,20 @@
         .footer a { color: var(--gray-light); text-decoration: none; }
         .footer a:hover { color: var(--black); }
         
+        /* Language Content */
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
+        
         /* Responsive */
         @media (max-width: 768px) {
-            .container { padding: 80px 16px 24px; }
+            .container { padding: 24px 16px; }
             .header { flex-direction: row; align-items: center; gap: 12px; }
             .header-title { font-size: 28px; }
             .header-subtitle { font-size: 12px; }
             .date-day { font-size: 36px; }
             .content-grid { grid-template-columns: 1fr; gap: 30px; }
-            .lang-switch { position: fixed; top: 16px; right: 16px; z-index: 100; }
-            .lang-btn { padding: 8px 14px; font-size: 13px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); }
+            .lang-switch { margin-top: 8px; }
+            .lang-btn { padding: 6px 12px; font-size: 12px; }
             .focus-title { font-size: 22px; }
             .focus-section { margin-bottom: 36px; padding-bottom: 30px; }
             .section { margin-bottom: 30px; }
@@ -86,44 +92,46 @@
     </style>
 </head>
 <body>
-    <div class="lang-switch">
-        <button class="lang-btn active" onclick="switchLang('zh')">中</button>
-        <button class="lang-btn" onclick="switchLang('en')">EN</button>
-    </div>
-    
     <div class="container">
         <header class="header">
             <div class="header-left">
-                <h1 class="header-title" data-zh="设计工程日报" data-en="Design Engineering Daily">设计工程日报</h1>
-                <p class="header-subtitle">2026年04月02日 · 星期四</p>
+                <h1 class="header-title" id="page-title">设计工程日报</h1>
+                <p class="header-subtitle" id="page-date">2026年04月02日 · 星期四</p>
             </div>
             <div class="header-right">
                 <div class="date-day">02</div>
                 <div class="date-month">Apr 2026</div>
+                <div class="lang-switch">
+                    <span class="lang-icon">🌐</span>
+                    <button class="lang-btn active" onclick="switchLang('zh')" data-lang-btn="zh">中</button>
+                    <button class="lang-btn" onclick="switchLang('en')" data-lang-btn="en">EN</button>
+                </div>
             </div>
         </header>
         
+        <!-- 中文内容 -->
+        <div class="lang-content active" data-lang="zh">
+            
         <section class="focus-section">
-            <div class="focus-label" data-zh="焦点报道" data-en="FOCUS STORY">焦点报道</div>
+            <div class="focus-label">焦点报道</div>
             <h2 class="focus-title">
                 <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a>
             </h2>
             <p class="focus-summary">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time. These are the historical pranks I...</p>
-            <div class="focus-meta">CSS-Tricks · <span data-zh="今日" data-en="Today">今日</span></div>
+            <div class="focus-meta">CSS-Tricks · 今日</div>
         </section>
-        
-        <div class="content-grid">
-            <div class="column">
-                
+            <div class="content-grid">
+                <div class="column">
+                    
         <section class="section">
-            <h2 class="section-title" data-zh="设计工程" data-en="Design Engineering">设计工程</h2>
+            <h2 class="section-title">设计工程</h2>
             <div class="section-content">
         <div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
                     <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a>
                 </div>
-                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">热门</span></div>
                 <div class="news-row-summary">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time. These are the historical pranks I...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -133,7 +141,7 @@
                 <div class="news-row-title">
                     <a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">Sniffing Out the CSS Olfactive API</a>
                 </div>
-                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">热门</span></div>
                 <div class="news-row-summary">Sniffing Out the CSS Olfactive API. A deep sniff of the new CSS Olfactive API, a set of proposed...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -169,16 +177,16 @@
             <div class="news-row-arrow">→</div>
         </div></div>
         </section>
-                
+                    
         <section class="section">
-            <h2 class="section-title" data-zh="前端工程" data-en="Frontend Engineering">前端工程</h2>
+            <h2 class="section-title">前端工程</h2>
             <div class="section-content">
         <div class="news-row" onclick="window.open('https://github.com/cesaranogilbert/aaia-eu-ai-act-classifier', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
                     <a href="https://github.com/cesaranogilbert/aaia-eu-ai-act-classifier" target="_blank" onclick="event.stopPropagation()">Open-source EU AI Act risk classifier – no API, runs offline, TypeScript</a>
                 </div>
-                <div class="news-row-meta">HackerNews · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
                 <div class="news-row-summary">Open-source EU AI Act risk classifier – no API, runs offline, TypeScript. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -188,7 +196,7 @@
                 <div class="news-row-title">
                     <a href="https://youcefhq.github.io/pixelpeople/" target="_blank" onclick="event.stopPropagation()">Show HN: PixelPeople – Generate people in pixel art for React</a>
                 </div>
-                <div class="news-row-meta">HackerNews · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
                 <div class="news-row-summary">Show HN: PixelPeople – Generate people in pixel art for React. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -224,18 +232,18 @@
             <div class="news-row-arrow">→</div>
         </div></div>
         </section>
-            </div>
-            <div class="column">
-                
+                </div>
+                <div class="column">
+                    
         <section class="section">
-            <h2 class="section-title" data-zh="AI工具" data-en="AI Tools">AI工具</h2>
+            <h2 class="section-title">AI工具</h2>
             <div class="section-content">
         <div class="news-row" onclick="window.open('https://github.com/kotarimorm/-Report-AI-coding-agent-programmatically-bypassing-OS-security-policies-Trace-ID-f4b806d4...-/blob/main/README.md', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
                     <a href="https://github.com/kotarimorm/-Report-AI-coding-agent-programmatically-bypassing-OS-security-policies-Trace-ID-f4b806d4...-/blob/main/README.md" target="_blank" onclick="event.stopPropagation()">Forensic analysis of 37GB data loss caused by Cursor AI Agent</a>
                 </div>
-                <div class="news-row-meta">HackerNews · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
                 <div class="news-row-summary">Forensic analysis of 37GB data loss caused by Cursor AI Agent. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -245,7 +253,7 @@
                 <div class="news-row-title">
                     <a href="https://news.ycombinator.com/item?id=47605552" target="_blank" onclick="event.stopPropagation()">Why did Harvey choose a top-down enterprise GTM while Cursor went bottom-up?</a>
                 </div>
-                <div class="news-row-meta">HackerNews · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
                 <div class="news-row-summary">Why did Harvey choose a top-down enterprise GTM while Cursor went bottom-up?. I heard people...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -283,16 +291,46 @@ Comments...</div>
             <div class="news-row-arrow">→</div>
         </div></div>
         </section>
-                
+                    
         <section class="section">
-            <h2 class="section-title" data-zh="AI模型" data-en="AI Models">AI模型</h2>
+            <h2 class="section-title">AI模型</h2>
             <div class="section-content">
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47611461', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47611461" target="_blank" onclick="event.stopPropagation()">Claude Code /buddy – what is it?</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Claude Code /buddy – what is it?. It's a virtual pet system inside the terminal: when you type...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/agentic-utils/skills/tree/main/plugins/claude-code', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/agentic-utils/skills/tree/main/plugins/claude-code" target="_blank" onclick="event.stopPropagation()">Claude Code internals from the source leak, packaged as reusable skills</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Claude Code internals from the source leak, packaged as reusable skills. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47611419', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47611419" target="_blank" onclick="event.stopPropagation()">Show HN: Running LLM on smartwatch – found llama.cpp loading model twice in RAM</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Show HN: Running LLM on smartwatch – found llama.cpp loading model twice in RAM. Running SmolLM2...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
         <div class="news-row" onclick="window.open('https://github.com/tornikeo/claude-code/', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
                     <a href="https://github.com/tornikeo/claude-code/" target="_blank" onclick="event.stopPropagation()">Where to host leaked Claude Code source?</a>
                 </div>
-                <div class="news-row-meta">HackerNews · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-meta">HackerNews · </div>
                 <div class="news-row-summary">Where to host leaked Claude Code source?. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -302,55 +340,34 @@ Comments...</div>
                 <div class="news-row-title">
                     <a href="https://www.bbc.com/news/articles/ce8l2q5yq51o" target="_blank" onclick="event.stopPropagation()">Claude Code users hitting usage limits 'way faster than expected'</a>
                 </div>
-                <div class="news-row-meta">HackerNews · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-meta">HackerNews · </div>
                 <div class="news-row-summary">Claude Code users hitting usage limits 'way faster than expected'. Article URL:...</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://vitalik.eth.limo/general/2026/04/02/secure_llms.html', '_blank')">
-            <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://vitalik.eth.limo/general/2026/04/02/secure_llms.html" target="_blank" onclick="event.stopPropagation()">Vitalik Buterin – "My self-sovereign / local / private / secure LLM setup"</a>
-                </div>
-                <div class="news-row-meta">HackerNews · </div>
-                <div class="news-row-summary">Vitalik Buterin – "My self-sovereign / local / private / secure LLM setup". Article URL:...</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://old.reddit.com/r/programming/comments/1s9jkzi/announcement_temporary_llm_content_ban/', '_blank')">
-            <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://old.reddit.com/r/programming/comments/1s9jkzi/announcement_temporary_llm_content_ban/" target="_blank" onclick="event.stopPropagation()">r/programming bans all discussion of LLM programming</a>
-                </div>
-                <div class="news-row-meta">HackerNews · </div>
-                <div class="news-row-summary">r/programming bans all discussion of LLM programming. Article URL:...</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://chipsandcheese.com/p/embracing-ai-with-claudes-c-compiler', '_blank')">
-            <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://chipsandcheese.com/p/embracing-ai-with-claudes-c-compiler" target="_blank" onclick="event.stopPropagation()">Embracing AI with Claude's C Compiler</a>
-                </div>
-                <div class="news-row-meta">HackerNews · </div>
-                <div class="news-row-summary">Embracing AI with Claude's C Compiler. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
         </div></div>
         </section>
+                </div>
             </div>
-        </div>
-        
-        
+            
         <section class="section">
-            <h2 class="section-title" data-zh="开源工具" data-en="Open Source">开源工具</h2>
+            <h2 class="section-title">开源工具</h2>
             <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/agentic-utils/skills/tree/main/plugins/claude-code', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/agentic-utils/skills/tree/main/plugins/claude-code" target="_blank" onclick="event.stopPropagation()">Claude Code internals from the source leak, packaged as reusable skills</a>
+                </div>
+                <div class="news-row-meta">HN Tools · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Claude Code internals from the source leak, packaged as reusable skills. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
         <div class="news-row" onclick="window.open('https://github.com/esl-epfl/OpenEdgeCGRA', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
                     <a href="https://github.com/esl-epfl/OpenEdgeCGRA" target="_blank" onclick="event.stopPropagation()">OpenEdgeCGRA – An Open-Hardware Coarse Grained Reconfigurable Array (CGRA)</a>
                 </div>
-                <div class="news-row-meta">HN Tools · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-meta">HN Tools · <span class="hot-tag">热门</span></div>
                 <div class="news-row-summary">OpenEdgeCGRA – An Open-Hardware Coarse Grained Reconfigurable Array (CGRA). Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -360,7 +377,7 @@ Comments...</div>
                 <div class="news-row-title">
                     <a href="https://github.com/tornikeo/claude-code/" target="_blank" onclick="event.stopPropagation()">Where to host leaked Claude Code source?</a>
                 </div>
-                <div class="news-row-meta">HN Tools · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-meta">HN Tools · </div>
                 <div class="news-row-summary">Where to host leaked Claude Code source?. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -384,28 +401,18 @@ Comments...</div>
                 <div class="news-row-summary">RepoFortify – Production readiness scanner for GitHub repos (free, no signup). Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://github.com/cesaranogilbert/aaia-eu-ai-act-classifier', '_blank')">
-            <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://github.com/cesaranogilbert/aaia-eu-ai-act-classifier" target="_blank" onclick="event.stopPropagation()">Open-source EU AI Act risk classifier – no API, runs offline, TypeScript</a>
-                </div>
-                <div class="news-row-meta">HN Tools · </div>
-                <div class="news-row-summary">Open-source EU AI Act risk classifier – no API, runs offline, TypeScript. Article URL:...</div>
-            </div>
-            <div class="news-row-arrow">→</div>
         </div></div>
         </section>
-        
+            
         <section class="section">
-            <h2 class="section-title" data-zh="设计洞见" data-en="Designer Insights">设计洞见</h2>
+            <h2 class="section-title">设计洞见</h2>
             <div class="section-content">
         <div class="news-row" onclick="window.open('https://knowingken.com/making-and-meeting-moloch', '_blank')">
             <div class="news-row-content">
                 <div class="news-row-title">
                     <a href="https://knowingken.com/making-and-meeting-moloch" target="_blank" onclick="event.stopPropagation()">Making and Meeting Moloch: Game design and the pressure to make numbers go up</a>
                 </div>
-                <div class="news-row-meta">HN Design · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-meta">HN Design · <span class="hot-tag">热门</span></div>
                 <div class="news-row-summary">Making and Meeting Moloch: Game design and the pressure to make numbers go up. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -415,7 +422,7 @@ Comments...</div>
                 <div class="news-row-title">
                     <a href="https://refactoringenglish.com/blog/ai-vs-human-design-doc/" target="_blank" onclick="event.stopPropagation()">Which Design Doc Did AI Write?</a>
                 </div>
-                <div class="news-row-meta">HN Design · <span class="hot-tag" data-zh="热门" data-en="HOT">热门</span></div>
+                <div class="news-row-meta">HN Design · <span class="hot-tag">热门</span></div>
                 <div class="news-row-summary">Which Design Doc Did AI Write?. Article URL:...</div>
             </div>
             <div class="news-row-arrow">→</div>
@@ -451,20 +458,389 @@ Comments...</div>
             <div class="news-row-arrow">→</div>
         </div></div>
         </section>
+        </div>
+        
+        <!-- 英文内容 -->
+        <div class="lang-content" data-lang="en">
+            
+        <section class="focus-section">
+            <div class="focus-label">FOCUS STORY</div>
+            <h2 class="focus-title">
+                <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a>
+            </h2>
+            <p class="focus-summary">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time. These are the historical pranks I...</p>
+            <div class="focus-meta">CSS-Tricks · Today</div>
+        </section>
+            <div class="content-grid">
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">Design Engineering</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time. These are the historical pranks I...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/css-olfactive-api/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">Sniffing Out the CSS Olfactive API</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Sniffing Out the CSS Olfactive API. A deep sniff of the new CSS Olfactive API, a set of proposed...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/whats-important-8/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/whats-important-8/" target="_blank" onclick="event.stopPropagation()">What’s !important #8: Light/Dark Favicons, @mixin, object-view-box, and More</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">What’s !important #8: Light/Dark Favicons, @mixin, object-view-box, and More. Short n’ sweet but...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/form-automation-tips-for-happier-user-and-clients/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/form-automation-tips-for-happier-user-and-clients/" target="_blank" onclick="event.stopPropagation()">Form Automation Tips for Happier User and Clients</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Form Automation Tips for Happier User and Clients. That gap between "the form works" and "the...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/generative-ui-notes/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/generative-ui-notes/" target="_blank" onclick="event.stopPropagation()">Generative UI Notes</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Generative UI Notes. Looking at research and experiments that are designed to automatically...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">Frontend Engineering</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/cesaranogilbert/aaia-eu-ai-act-classifier', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/cesaranogilbert/aaia-eu-ai-act-classifier" target="_blank" onclick="event.stopPropagation()">Open-source EU AI Act risk classifier – no API, runs offline, TypeScript</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Open-source EU AI Act risk classifier – no API, runs offline, TypeScript. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://youcefhq.github.io/pixelpeople/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://youcefhq.github.io/pixelpeople/" target="_blank" onclick="event.stopPropagation()">Show HN: PixelPeople – Generate people in pixel art for React</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Show HN: PixelPeople – Generate people in pixel art for React. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/JackChen-me/open-multi-agent', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/JackChen-me/open-multi-agent" target="_blank" onclick="event.stopPropagation()">Open Multi-Agent: Multi-agent orchestration framework for TypeScript</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Open Multi-Agent: Multi-agent orchestration framework for TypeScript. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.open-harness.dev', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.open-harness.dev" target="_blank" onclick="event.stopPropagation()">OpenHarness – Composable TypeScript SDK for building powerful agent harnesses</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">OpenHarness – Composable TypeScript SDK for building powerful agent harnesses. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://logicstamp.dev', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://logicstamp.dev" target="_blank" onclick="event.stopPropagation()">Show HN: LogicStamp – A Context Compiler for TypeScript</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Show HN: LogicStamp – A Context Compiler for TypeScript. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">AI Tools</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/kotarimorm/-Report-AI-coding-agent-programmatically-bypassing-OS-security-policies-Trace-ID-f4b806d4...-/blob/main/README.md', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/kotarimorm/-Report-AI-coding-agent-programmatically-bypassing-OS-security-policies-Trace-ID-f4b806d4...-/blob/main/README.md" target="_blank" onclick="event.stopPropagation()">Forensic analysis of 37GB data loss caused by Cursor AI Agent</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Forensic analysis of 37GB data loss caused by Cursor AI Agent. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47605552', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47605552" target="_blank" onclick="event.stopPropagation()">Why did Harvey choose a top-down enterprise GTM while Cursor went bottom-up?</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Why did Harvey choose a top-down enterprise GTM while Cursor went bottom-up?. I heard people...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://pdfation.yet-to-be.com/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://pdfation.yet-to-be.com/" target="_blank" onclick="event.stopPropagation()">Show HN: PDFation – Cursor for PDFs</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Show HN: PDFation – Cursor for PDFs. Article URL: https://pdfation.yet-to-be.com/
+Comments URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://idiallo.com/blog/what-is-copilot-exactly', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://idiallo.com/blog/what-is-copilot-exactly" target="_blank" onclick="event.stopPropagation()">What Is Copilot Exactly?</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">What Is Copilot Exactly?. Article URL: https://idiallo.com/blog/what-is-copilot-exactly
+Comments...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://octigen.com/blog/posts/2026-04-01-copilot-for-powerpoint-reasons-it-fails/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://octigen.com/blog/posts/2026-04-01-copilot-for-powerpoint-reasons-it-fails/" target="_blank" onclick="event.stopPropagation()">Copilot for PowerPoint: Reasons It Fails</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Copilot for PowerPoint: Reasons It Fails. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">AI Models</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47611461', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47611461" target="_blank" onclick="event.stopPropagation()">Claude Code /buddy – what is it?</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Claude Code /buddy – what is it?. It's a virtual pet system inside the terminal: when you type...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/agentic-utils/skills/tree/main/plugins/claude-code', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/agentic-utils/skills/tree/main/plugins/claude-code" target="_blank" onclick="event.stopPropagation()">Claude Code internals from the source leak, packaged as reusable skills</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Claude Code internals from the source leak, packaged as reusable skills. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47611419', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47611419" target="_blank" onclick="event.stopPropagation()">Show HN: Running LLM on smartwatch – found llama.cpp loading model twice in RAM</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Show HN: Running LLM on smartwatch – found llama.cpp loading model twice in RAM. Running SmolLM2...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/tornikeo/claude-code/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/tornikeo/claude-code/" target="_blank" onclick="event.stopPropagation()">Where to host leaked Claude Code source?</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Where to host leaked Claude Code source?. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.bbc.com/news/articles/ce8l2q5yq51o', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.bbc.com/news/articles/ce8l2q5yq51o" target="_blank" onclick="event.stopPropagation()">Claude Code users hitting usage limits 'way faster than expected'</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Claude Code users hitting usage limits 'way faster than expected'. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+            </div>
+            
+        <section class="section">
+            <h2 class="section-title">Open Source</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/agentic-utils/skills/tree/main/plugins/claude-code', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/agentic-utils/skills/tree/main/plugins/claude-code" target="_blank" onclick="event.stopPropagation()">Claude Code internals from the source leak, packaged as reusable skills</a>
+                </div>
+                <div class="news-row-meta">HN Tools · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Claude Code internals from the source leak, packaged as reusable skills. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/esl-epfl/OpenEdgeCGRA', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/esl-epfl/OpenEdgeCGRA" target="_blank" onclick="event.stopPropagation()">OpenEdgeCGRA – An Open-Hardware Coarse Grained Reconfigurable Array (CGRA)</a>
+                </div>
+                <div class="news-row-meta">HN Tools · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">OpenEdgeCGRA – An Open-Hardware Coarse Grained Reconfigurable Array (CGRA). Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/tornikeo/claude-code/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/tornikeo/claude-code/" target="_blank" onclick="event.stopPropagation()">Where to host leaked Claude Code source?</a>
+                </div>
+                <div class="news-row-meta">HN Tools · </div>
+                <div class="news-row-summary">Where to host leaked Claude Code source?. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://zml.ai/posts/zml-smi/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://zml.ai/posts/zml-smi/" target="_blank" onclick="event.stopPropagation()">Universal diagnostic and monitoring tool for GPUs, TPUs and NPUs</a>
+                </div>
+                <div class="news-row-meta">HN Tools · </div>
+                <div class="news-row-summary">Universal diagnostic and monitoring tool for GPUs, TPUs and NPUs. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://repofortify.com/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://repofortify.com/" target="_blank" onclick="event.stopPropagation()">RepoFortify – Production readiness scanner for GitHub repos (free, no signup)</a>
+                </div>
+                <div class="news-row-meta">HN Tools · </div>
+                <div class="news-row-summary">RepoFortify – Production readiness scanner for GitHub repos (free, no signup). Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+            
+        <section class="section">
+            <h2 class="section-title">Designer Insights</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://knowingken.com/making-and-meeting-moloch', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://knowingken.com/making-and-meeting-moloch" target="_blank" onclick="event.stopPropagation()">Making and Meeting Moloch: Game design and the pressure to make numbers go up</a>
+                </div>
+                <div class="news-row-meta">HN Design · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Making and Meeting Moloch: Game design and the pressure to make numbers go up. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://refactoringenglish.com/blog/ai-vs-human-design-doc/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://refactoringenglish.com/blog/ai-vs-human-design-doc/" target="_blank" onclick="event.stopPropagation()">Which Design Doc Did AI Write?</a>
+                </div>
+                <div class="news-row-meta">HN Design · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Which Design Doc Did AI Write?. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://lukechu.dev/post/arcade-design-and-materials', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://lukechu.dev/post/arcade-design-and-materials" target="_blank" onclick="event.stopPropagation()">Building an Arcade Cabinet (Part 1, Design & Materials)</a>
+                </div>
+                <div class="news-row-meta">HN Design · </div>
+                <div class="news-row-summary">Building an Arcade Cabinet (Part 1, Design & Materials). Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://sycamore.dev', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://sycamore.dev" target="_blank" onclick="event.stopPropagation()">Show HN: Sycamore – next gen Rust web UI library using fine-grained reactivity</a>
+                </div>
+                <div class="news-row-meta">HN Design · </div>
+                <div class="news-row-summary">Show HN: Sycamore – next gen Rust web UI library using fine-grained reactivity. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://goldenxp.com/posts/2025/07/05/ABA-Game-Design/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://goldenxp.com/posts/2025/07/05/ABA-Game-Design/" target="_blank" onclick="event.stopPropagation()">Applied Behavior Analysis for Game and UX Designers</a>
+                </div>
+                <div class="news-row-meta">HN Design · </div>
+                <div class="news-row-summary">Applied Behavior Analysis for Game and UX Designers. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+        </div>
         
         <footer class="footer">
-            <span><span data-zh="数据来源" data-en="Data Sources">数据来源</span>: Figma, CSS-Tricks, HackerNews, GitHub</span>
-            <a href="https://emmananan.github.io/daily-news-20260402.html"><span data-zh="查看在线版" data-en="View Online">查看在线版</span> →</a>
+            <span id="footer-source">数据来源: Figma, CSS-Tricks, HackerNews, GitHub</span>
+            <a href="https://emmananan.github.io/daily-news-20260402.html" id="footer-link">查看在线版 →</a>
         </footer>
     </div>
     
     <script>
+        const i18n = {
+            title: { zh: '设计工程日报', en: 'Design Engineering Daily' },
+            date: { zh: '2026年04月02日 · 星期四', en: 'Apr 02, 2026 · Thu' },
+            data_source: { zh: '数据来源', en: 'Data Sources' },
+            view_online: { zh: '查看在线版', en: 'View Online' }
+        };
+        
         function switchLang(lang) {
+            // 切换按钮状态
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            document.querySelectorAll('[data-zh][data-en]').forEach(el => {
-                el.textContent = el.getAttribute('data-' + lang);
+            document.querySelector('[data-lang-btn="' + lang + '"]').classList.add('active');
+            
+            // 切换内容显示
+            document.querySelectorAll('.lang-content').forEach(el => {
+                el.classList.remove('active');
             });
+            document.querySelector('.lang-content[data-lang="' + lang + '"]').classList.add('active');
+            
+            // 更新标题和日期
+            document.getElementById('page-title').textContent = i18n.title[lang];
+            document.getElementById('page-date').textContent = i18n.date[lang];
+            document.getElementById('footer-source').textContent = i18n.data_source[lang] + ': Figma, CSS-Tricks, HackerNews, GitHub';
+            document.getElementById('footer-link').textContent = i18n.view_online[lang] + ' →';
         }
     </script>
 </body>
