@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELARA DISPATCH | 2026年04月05日</title>
+    <style>
+        :root { --black: #000; --white: #fff; --gray: #666; --gray-light: #999; --accent: #ff3333; --border: #e5e5e5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        /* Header */
+        .header { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 30px; border-bottom: 1px solid var(--black); margin-bottom: 40px; }
+        .header-left { flex: 1; }
+        .header-title { font-size: 42px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; }
+        .header-subtitle { font-size: 14px; color: var(--gray); }
+        .header-right { text-align: right; }
+        .date-day { font-size: 56px; font-weight: 900; line-height: 0.9; }
+        .date-month { font-size: 13px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Lang Switch - Segment Style */
+        .lang-switch { 
+            display: inline-flex; 
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .lang-segment { 
+            display: flex;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--white);
+        }
+        .lang-btn { 
+            padding: 6px 16px; 
+            font-size: 13px; 
+            font-weight: 500; 
+            border: none;
+            background: var(--white); 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            color: var(--gray);
+        }
+        .lang-btn:first-child {
+            border-right: 1px solid var(--border);
+        }
+        .lang-btn:hover { 
+            color: var(--black);
+            background: var(--bg);
+        }
+        .lang-btn.active { 
+            background: var(--black); 
+            color: var(--white);
+        }
+        .lang-btn.active:hover { 
+            background: var(--black); 
+        }
+        
+        /* Focus */
+        .focus-section { margin-bottom: 50px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+        .focus-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+        .focus-title { font-size: 26px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; }
+        .focus-title a { color: var(--black); text-decoration: none; }
+        .focus-title a:hover { color: var(--accent); }
+        .focus-summary { font-size: 15px; color: var(--gray); line-height: 1.7; margin-bottom: 12px; }
+        .focus-meta { font-size: 12px; color: var(--gray-light); }
+        
+        /* Section */
+        .section { margin-bottom: 40px; }
+        .section-title { font-size: 18px; font-weight: 800; padding-bottom: 10px; border-bottom: 1px solid var(--black); margin-bottom: 20px; }
+        
+        /* News Row */
+        .news-row { display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+        .news-row:hover { background: #fafafa; margin: 0 -12px; padding-left: 12px; padding-right: 12px; }
+        .news-row-content { flex: 1; padding-right: 16px; }
+        .news-row-title { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 6px; }
+        .news-row-title a { color: var(--black); text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-row-title a:hover { color: var(--accent); }
+        .news-row-meta { font-size: 12px; color: var(--gray-light); margin-bottom: 6px; }
+        .hot-tag { color: var(--accent); font-weight: 700; }
+        .news-row-summary { font-size: 13px; color: var(--gray); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-row-arrow { color: var(--gray-light); font-size: 20px; font-weight: 300; flex-shrink: 0; margin-top: 4px; }
+        .news-row:hover .news-row-arrow { color: var(--black); }
+        
+        /* Grid */
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        /* Footer */
+        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--black); display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-light); }
+        .footer a { color: var(--gray-light); text-decoration: none; }
+        .footer a:hover { color: var(--black); }
+        
+        /* Language Content */
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 24px 16px; }
+            .header { flex-direction: row; align-items: center; gap: 12px; }
+            .header-title { font-size: 28px; }
+            .header-subtitle { font-size: 12px; }
+            .date-day { font-size: 36px; }
+            .content-grid { grid-template-columns: 1fr; gap: 30px; }
+            .lang-switch { margin-bottom: 12px; }
+            .lang-btn { padding: 5px 12px; font-size: 12px; }
+            .focus-title { font-size: 22px; }
+            .focus-section { margin-bottom: 36px; padding-bottom: 30px; }
+            .section { margin-bottom: 30px; }
+            .news-row { padding: 14px 0; }
+            .news-row:hover { margin: 0; padding-left: 0; padding-right: 0; }
+            .news-row-title { font-size: 15px; }
+            .news-row-summary { font-size: 12px; }
+        }
+        
+        @media (max-width: 480px) {
+            .header-title { font-size: 24px; }
+            .date-day { font-size: 32px; }
+            .focus-title { font-size: 20px; }
+            .section-title { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 语言切换 - Segment风格，左对齐 -->
+        <div class="lang-switch">
+            <div class="lang-segment">
+                <button class="lang-btn active" onclick="switchLang('zh')" data-lang-btn="zh">中文</button>
+                <button class="lang-btn" onclick="switchLang('en')" data-lang-btn="en">EN</button>
+            </div>
+        </div>
+        
+        <header class="header">
+            <div class="header-left">
+                <h1 class="header-title" id="page-title">ELARA DISPATCH</h1>
+                <p class="header-subtitle" id="page-date">2026年04月05日 · 星期日</p>
+            </div>
+            <div class="header-right">
+                <div class="date-day">05</div>
+                <div class="date-month">Apr 2026</div>
+            </div>
+        </header>
+        
+        <!-- 中文内容 -->
+        <div class="lang-content active" data-lang="zh">
+            
+        <section class="focus-section">
+            <div class="focus-label">焦点报道</div>
+            <h2 class="focus-title">
+                <a href="https://www.smashingmagazine.com/2026/04/practical-guide-design-principles/" target="_blank">A Practical 指南到设计 Principles</a>
+            </h2>
+            <p class="focus-summary">A Practical 指南到设计 Principles.Practical 指南到设计 PrinciplesDesign principles...</p>
+            <div class="focus-meta">Smashing Magazine · 今日</div>
+        </section>
+            
+        <section class="section">
+            <h2 class="section-title">设计洞见</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://blog.djhaskin.com/blog/writing-lisp-is-ai-resistant-and-im-sad/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://blog.djhaskin.com/blog/writing-lisp-is-ai-resistant-and-im-sad/" target="_blank" onclick="event.stopPropagation()">Writing Lisp是AI Resistant和I'm Sad</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Writing Lisp是AI Resistant和I'm Sad. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47645141', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47645141" target="_blank" onclick="event.stopPropagation()">HN问答: Will AI agents replace data scientists or make them better?</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">HN问答: Will AI agents replace data scientists or make them better?. There's beenlot的chatter...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://economics.mit.edu/sites/default/files/2026-04/IA%20AI%20note_1.pdf', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://economics.mit.edu/sites/default/files/2026-04/IA%20AI%20note_1.pdf" target="_blank" onclick="event.stopPropagation()">Some Thoughts在AI和Research [pdf]</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-summary">Some Thoughts在AI和Research [pdf]. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.pcgamer.com/gaming-industry/take-two-has-seemingly-laid-off-an-unspecified-portion-of-its-ai-team-including-its-head-of-artificial-intelligence/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.pcgamer.com/gaming-industry/take-two-has-seemingly-laid-off-an-unspecified-portion-of-its-ai-team-including-its-head-of-artificial-intelligence/" target="_blank" onclick="event.stopPropagation()">Take-Two seemingly laid offportion的its AI team, including head的AI</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-summary">Take-Two seemingly laid offportion的its AI team, including head的AI. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://vibooks.ai/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://vibooks.ai/" target="_blank" onclick="event.stopPropagation()">HN展示: Vibooks – Local-first bookkeeping software built用于AI agents</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-summary">HN展示: Vibooks – Local-first bookkeeping software built用于AI agents. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+            <div class="content-grid">
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">设计工程</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/04/practical-guide-design-principles/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.smashingmagazine.com/2026/04/practical-guide-design-principles/" target="_blank" onclick="event.stopPropagation()">A Practical 指南到设计 Principles</a>
+                </div>
+                <div class="news-row-meta">Smashing Magazine · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">A Practical 指南到设计 Principles.Practical 指南到设计 PrinciplesDesign principles...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/desktop-wallpaper-calendars-april-2026/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.smashingmagazine.com/2026/03/desktop-wallpaper-calendars-april-2026/" target="_blank" onclick="event.stopPropagation()">Joy的A Fresh Beginning (April 2026 Wallpapers Edition)</a>
+                </div>
+                <div class="news-row-meta">Smashing Magazine · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Joy的A Fresh Beginning (April 2026 Wallpapers Edition). Joy的A Fresh Beginning (April...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/site-search-paradox-why-big-box-always-wins/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.smashingmagazine.com/2026/03/site-search-paradox-why-big-box-always-wins/" target="_blank" onclick="event.stopPropagation()">Site-Search Paradox: 为什么 Big Box Always Wins</a>
+                </div>
+                <div class="news-row-meta">Smashing Magazine · </div>
+                <div class="news-row-summary">Site-Search Paradox: 为什么 Big Box Always Wins. Site-Search Paradox: 为什么 Big Box...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/testing-font-scaling-accessibility-figma-variables/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.smashingmagazine.com/2026/03/testing-font-scaling-accessibility-figma-variables/" target="_blank" onclick="event.stopPropagation()">测试 Font Scaling用于无障碍使用Figma Variables</a>
+                </div>
+                <div class="news-row-meta">Smashing Magazine · </div>
+                <div class="news-row-summary">测试 Font Scaling用于无障碍使用Figma Variables. 测试 Font Scaling用于无障碍...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/dropdowns-scrollable-containers-why-break-how-fix/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.smashingmagazine.com/2026/03/dropdowns-scrollable-containers-why-break-how-fix/" target="_blank" onclick="event.stopPropagation()">Dropdowns Inside Scrollable Containers: 为什么 They Break和如何 修复 Them Properly</a>
+                </div>
+                <div class="news-row-meta">Smashing Magazine · </div>
+                <div class="news-row-summary">Dropdowns Inside Scrollable Containers: 为什么 They Break和如何 修复 Them Properly. Dropdowns...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">前端工程</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/shujaSN/ShieldStack-TS', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/shujaSN/ShieldStack-TS" target="_blank" onclick="event.stopPropagation()">ShieldStack TS – LLM 安全 middleware用于TypeScript</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">ShieldStack TS – LLM 安全 middleware用于TypeScript. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47639940', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47639940" target="_blank" onclick="event.stopPropagation()">HN展示: React hooks that predict text height before render,使用font metrics</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">HN展示: React hooks that predict text height before render,使用font metrics. I built...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/p32929/electron-shadcn-typescript', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/p32929/electron-shadcn-typescript" target="_blank" onclick="event.stopPropagation()">Electron和React和TypeScript和Tailwind和Shadcn Starter Kit</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Electron和React和TypeScript和Tailwind和Shadcn Starter Kit. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://discourse.llvm.org/t/the-need-for-better-frontend-benchmarks/90257', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://discourse.llvm.org/t/the-need-for-better-frontend-benchmarks/90257" target="_blank" onclick="event.stopPropagation()">need用于better compiler 前端 benchmarks: Carbon's benchmarking approach</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">need用于better compiler 前端 benchmarks: Carbon's benchmarking approach. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/tintolee/finprim', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/tintolee/finprim" target="_blank" onclick="event.stopPropagation()">Finprim – financial primitives用于TypeScript (zero deps)</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Finprim – financial primitives用于TypeScript (zero deps). Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">AI工具</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/liorcodev/trpc-docs-generator', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/liorcodev/trpc-docs-generator" target="_blank" onclick="event.stopPropagation()">HN展示: tRPC Docs Generator v0.8.0 – Improved UI</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">HN展示: tRPC Docs Generator v0.8.0 – Improved UI. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://teybannerman.com/strategy/2026/03/31/how-many-microsoft-copilot-are-there.html', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://teybannerman.com/strategy/2026/03/31/how-many-microsoft-copilot-are-there.html" target="_blank" onclick="event.stopPropagation()">如何 many products does Microsoft have named 'Copilot'?</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">如何 many products does Microsoft have named 'Copilot'?. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://go-llm-proxy.com', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://go-llm-proxy.com" target="_blank" onclick="event.stopPropagation()">Go-LLM-proxy v0.3 released – translating proxy用于Claude Code和Codex</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Go-LLM-proxy v0.3 released – translating proxy用于Claude Code和Codex. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/Panzer-Jack/easy-live2d', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/Panzer-Jack/easy-live2d" target="_blank" onclick="event.stopPropagation()">Easy-Live2d v0.4.0:Milestone 发布用于Live2D在Web</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Easy-Live2d v0.4.0:Milestone 发布用于Live2D在Web. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/64bit/commandOK', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/64bit/commandOK" target="_blank" onclick="event.stopPropagation()">HN展示: Cursor Cmd+K like command generator用于all terminals</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">HN展示: Cursor Cmd+K like command generator用于all terminals. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">AI模型</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://arxiv.org/abs/2604.00356', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://arxiv.org/abs/2604.00356" target="_blank" onclick="event.stopPropagation()">HN展示: Signals – finding most informative agent traces without LLM judges</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">HN展示: Signals – finding most informative agent traces without LLM judges. Hey HNSalman,...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://christophermeiklejohn.com/ai/zabriskie/reliability/2026/04/03/the-feature-that-has-never-worked.html', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://christophermeiklejohn.com/ai/zabriskie/reliability/2026/04/03/the-feature-that-has-never-worked.html" target="_blank" onclick="event.stopPropagation()">A broken auto-live poller,和什么是 perceived urgency does到Claude Code</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">A broken auto-live poller,和什么是 perceived urgency does到Claude Code. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://shoofly.dev/blog/openclaw-claude-billing-change/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://shoofly.dev/blog/openclaw-claude-billing-change/" target="_blank" onclick="event.stopPropagation()">OpenClaw和Claude是Now Pay-per-Token: 什么是 It Costs和什么是到Do Next</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">OpenClaw和Claude是Now Pay-per-Token: 什么是 It Costs和什么是到Do Next. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://opncd.ai/share/W7nlxn8C', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://opncd.ai/share/W7nlxn8C" target="_blank" onclick="event.stopPropagation()">Kimi's response到"hello. 什么是是you"是"I'm Claude "</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Kimi's response到"hello. 什么是是you"是"I'm Claude ". Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/anthropics/claude-code/issues/43675', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/anthropics/claude-code/issues/43675" target="_blank" onclick="event.stopPropagation()">Claude Code caches unredacted session history和secrets在plaintext</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Claude Code caches unredacted session history和secrets在plaintext. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- 英文内容 -->
+        <div class="lang-content" data-lang="en">
+            
+        <section class="focus-section">
+            <div class="focus-label">FOCUS STORY</div>
+            <h2 class="focus-title">
+                <a href="https://www.smashingmagazine.com/2026/04/practical-guide-design-principles/" target="_blank">A Practical Guide To Design Principles</a>
+            </h2>
+            <p class="focus-summary">A Practical Guide To Design Principles. A Practical Guide To Design PrinciplesDesign principles...</p>
+            <div class="focus-meta">Smashing Magazine · Today</div>
+        </section>
+            
+        <section class="section">
+            <h2 class="section-title">Designer Insights</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://blog.djhaskin.com/blog/writing-lisp-is-ai-resistant-and-im-sad/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://blog.djhaskin.com/blog/writing-lisp-is-ai-resistant-and-im-sad/" target="_blank" onclick="event.stopPropagation()">Writing Lisp Is AI Resistant and I'm Sad</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Writing Lisp Is AI Resistant and I'm Sad. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47645141', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47645141" target="_blank" onclick="event.stopPropagation()">Ask HN: Will AI agents replace data scientists or make them better?</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Ask HN: Will AI agents replace data scientists or make them better?. There's been a lot of chatter...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://economics.mit.edu/sites/default/files/2026-04/IA%20AI%20note_1.pdf', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://economics.mit.edu/sites/default/files/2026-04/IA%20AI%20note_1.pdf" target="_blank" onclick="event.stopPropagation()">Some Thoughts on AI and Research [pdf]</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-summary">Some Thoughts on AI and Research [pdf]. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.pcgamer.com/gaming-industry/take-two-has-seemingly-laid-off-an-unspecified-portion-of-its-ai-team-including-its-head-of-artificial-intelligence/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.pcgamer.com/gaming-industry/take-two-has-seemingly-laid-off-an-unspecified-portion-of-its-ai-team-including-its-head-of-artificial-intelligence/" target="_blank" onclick="event.stopPropagation()">Take-Two seemingly laid off a portion of its AI team, including head of AI</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-summary">Take-Two seemingly laid off a portion of its AI team, including head of AI. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://vibooks.ai/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://vibooks.ai/" target="_blank" onclick="event.stopPropagation()">Show HN: Vibooks – Local-first bookkeeping software built for AI agents</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-summary">Show HN: Vibooks – Local-first bookkeeping software built for AI agents. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+            <div class="content-grid">
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">Design Engineering</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/04/practical-guide-design-principles/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.smashingmagazine.com/2026/04/practical-guide-design-principles/" target="_blank" onclick="event.stopPropagation()">A Practical Guide To Design Principles</a>
+                </div>
+                <div class="news-row-meta">Smashing Magazine · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">A Practical Guide To Design Principles. A Practical Guide To Design PrinciplesDesign principles...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/desktop-wallpaper-calendars-april-2026/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.smashingmagazine.com/2026/03/desktop-wallpaper-calendars-april-2026/" target="_blank" onclick="event.stopPropagation()">The Joy Of A Fresh Beginning (April 2026 Wallpapers Edition)</a>
+                </div>
+                <div class="news-row-meta">Smashing Magazine · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">The Joy Of A Fresh Beginning (April 2026 Wallpapers Edition). The Joy Of A Fresh Beginning (April...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/site-search-paradox-why-big-box-always-wins/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.smashingmagazine.com/2026/03/site-search-paradox-why-big-box-always-wins/" target="_blank" onclick="event.stopPropagation()">The Site-Search Paradox: Why The Big Box Always Wins</a>
+                </div>
+                <div class="news-row-meta">Smashing Magazine · </div>
+                <div class="news-row-summary">The Site-Search Paradox: Why The Big Box Always Wins. The Site-Search Paradox: Why The Big Box...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/testing-font-scaling-accessibility-figma-variables/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.smashingmagazine.com/2026/03/testing-font-scaling-accessibility-figma-variables/" target="_blank" onclick="event.stopPropagation()">Testing Font Scaling For Accessibility With Figma Variables</a>
+                </div>
+                <div class="news-row-meta">Smashing Magazine · </div>
+                <div class="news-row-summary">Testing Font Scaling For Accessibility With Figma Variables. Testing Font Scaling For Accessibility...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/dropdowns-scrollable-containers-why-break-how-fix/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.smashingmagazine.com/2026/03/dropdowns-scrollable-containers-why-break-how-fix/" target="_blank" onclick="event.stopPropagation()">Dropdowns Inside Scrollable Containers: Why They Break And How To Fix Them Properly</a>
+                </div>
+                <div class="news-row-meta">Smashing Magazine · </div>
+                <div class="news-row-summary">Dropdowns Inside Scrollable Containers: Why They Break And How To Fix Them Properly. Dropdowns...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">Frontend Engineering</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/shujaSN/ShieldStack-TS', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/shujaSN/ShieldStack-TS" target="_blank" onclick="event.stopPropagation()">ShieldStack TS – LLM security middleware for TypeScript</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">ShieldStack TS – LLM security middleware for TypeScript. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47639940', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47639940" target="_blank" onclick="event.stopPropagation()">Show HN: React hooks that predict text height before render, using font metrics</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Show HN: React hooks that predict text height before render, using font metrics. I built...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/p32929/electron-shadcn-typescript', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/p32929/electron-shadcn-typescript" target="_blank" onclick="event.stopPropagation()">Electron and React and TypeScript and Tailwind and Shadcn Starter Kit</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Electron and React and TypeScript and Tailwind and Shadcn Starter Kit. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://discourse.llvm.org/t/the-need-for-better-frontend-benchmarks/90257', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://discourse.llvm.org/t/the-need-for-better-frontend-benchmarks/90257" target="_blank" onclick="event.stopPropagation()">The need for better compiler frontend benchmarks: Carbon's benchmarking approach</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">The need for better compiler frontend benchmarks: Carbon's benchmarking approach. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/tintolee/finprim', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/tintolee/finprim" target="_blank" onclick="event.stopPropagation()">Finprim – financial primitives for TypeScript (zero deps)</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Finprim – financial primitives for TypeScript (zero deps). Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">AI Tools</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/liorcodev/trpc-docs-generator', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/liorcodev/trpc-docs-generator" target="_blank" onclick="event.stopPropagation()">Show HN: tRPC Docs Generator v0.8.0 – Improved UI</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Show HN: tRPC Docs Generator v0.8.0 – Improved UI. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://teybannerman.com/strategy/2026/03/31/how-many-microsoft-copilot-are-there.html', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://teybannerman.com/strategy/2026/03/31/how-many-microsoft-copilot-are-there.html" target="_blank" onclick="event.stopPropagation()">How many products does Microsoft have named 'Copilot'?</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">How many products does Microsoft have named 'Copilot'?. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://go-llm-proxy.com', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://go-llm-proxy.com" target="_blank" onclick="event.stopPropagation()">Go-LLM-proxy v0.3 released – translating proxy for Claude Code and Codex</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Go-LLM-proxy v0.3 released – translating proxy for Claude Code and Codex. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/Panzer-Jack/easy-live2d', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/Panzer-Jack/easy-live2d" target="_blank" onclick="event.stopPropagation()">Easy-Live2d v0.4.0: A Milestone Release for Live2D on the Web</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Easy-Live2d v0.4.0: A Milestone Release for Live2D on the Web. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/64bit/commandOK', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/64bit/commandOK" target="_blank" onclick="event.stopPropagation()">Show HN: Cursor Cmd+K like command generator for all terminals</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Show HN: Cursor Cmd+K like command generator for all terminals. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">AI Models</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://arxiv.org/abs/2604.00356', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://arxiv.org/abs/2604.00356" target="_blank" onclick="event.stopPropagation()">Show HN: Signals – finding the most informative agent traces without LLM judges</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Show HN: Signals – finding the most informative agent traces without LLM judges. Hey HNSalman,...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://christophermeiklejohn.com/ai/zabriskie/reliability/2026/04/03/the-feature-that-has-never-worked.html', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://christophermeiklejohn.com/ai/zabriskie/reliability/2026/04/03/the-feature-that-has-never-worked.html" target="_blank" onclick="event.stopPropagation()">A broken auto-live poller, and what perceived urgency does to Claude Code</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">A broken auto-live poller, and what perceived urgency does to Claude Code. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://shoofly.dev/blog/openclaw-claude-billing-change/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://shoofly.dev/blog/openclaw-claude-billing-change/" target="_blank" onclick="event.stopPropagation()">OpenClaw and Claude Is Now Pay-per-Token: What It Costs and What to Do Next</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">OpenClaw and Claude Is Now Pay-per-Token: What It Costs and What to Do Next. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://opncd.ai/share/W7nlxn8C', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://opncd.ai/share/W7nlxn8C" target="_blank" onclick="event.stopPropagation()">Kimi's response to "hello. what are you" is "I'm Claude "</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Kimi's response to "hello. what are you" is "I'm Claude ". Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/anthropics/claude-code/issues/43675', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/anthropics/claude-code/issues/43675" target="_blank" onclick="event.stopPropagation()">Claude Code caches unredacted session history and secrets in plaintext</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Claude Code caches unredacted session history and secrets in plaintext. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+            </div>
+            
+        </div>
+        
+        <footer class="footer">
+            <span id="footer-source">数据来源: Figma, CSS-Tricks, HackerNews, GitHub</span>
+        </footer>
+    </div>
+    
+    <script>
+        const i18n = {
+            title: { zh: 'ELARA DISPATCH', en: 'ELARA DISPATCH' },
+            date: { zh: '2026年04月05日 · 星期日', en: 'Apr 05, 2026 · Sun' },
+            data_source: { zh: '数据来源', en: 'Data Sources' }
+        };
+        
+        let currentLang = 'zh';
+        
+        function switchLang(lang) {
+            currentLang = lang;
+            
+            // 切换按钮状态
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-lang-btn="' + lang + '"]').classList.add('active');
+            
+            // 切换内容显示
+            document.querySelectorAll('.lang-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelector('.lang-content[data-lang="' + lang + '"]').classList.add('active');
+            
+            // 更新标题和日期
+            document.getElementById('page-title').textContent = i18n.title[lang];
+            document.getElementById('page-date').textContent = i18n.date[lang];
+            document.getElementById('footer-source').textContent = i18n.data_source[lang] + ': Figma, CSS-Tricks, HackerNews, GitHub';
+        }
+    </script>
+</body>
+</html>

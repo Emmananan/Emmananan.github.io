@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELARA DISPATCH | 2026年04月07日</title>
+    <style>
+        :root { --black: #000; --white: #fff; --gray: #666; --gray-light: #999; --accent: #ff3333; --border: #e5e5e5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        /* Header */
+        .header { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 30px; border-bottom: 1px solid var(--black); margin-bottom: 40px; }
+        .header-left { flex: 1; }
+        .header-title { font-size: 42px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; }
+        .header-subtitle { font-size: 14px; color: var(--gray); }
+        .header-right { text-align: right; }
+        .date-day { font-size: 56px; font-weight: 900; line-height: 0.9; }
+        .date-month { font-size: 13px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Lang Switch - Segment Style */
+        .lang-switch { 
+            display: inline-flex; 
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .lang-segment { 
+            display: flex;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--white);
+        }
+        .lang-btn { 
+            padding: 6px 16px; 
+            font-size: 13px; 
+            font-weight: 500; 
+            border: none;
+            background: var(--white); 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            color: var(--gray);
+        }
+        .lang-btn:first-child {
+            border-right: 1px solid var(--border);
+        }
+        .lang-btn:hover { 
+            color: var(--black);
+            background: var(--bg);
+        }
+        .lang-btn.active { 
+            background: var(--black); 
+            color: var(--white);
+        }
+        .lang-btn.active:hover { 
+            background: var(--black); 
+        }
+        
+        /* Focus */
+        .focus-section { margin-bottom: 50px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+        .focus-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+        .focus-title { font-size: 26px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; }
+        .focus-title a { color: var(--black); text-decoration: none; }
+        .focus-title a:hover { color: var(--accent); }
+        .focus-summary { font-size: 15px; color: var(--gray); line-height: 1.7; margin-bottom: 12px; }
+        .focus-meta { font-size: 12px; color: var(--gray-light); }
+        
+        /* Section */
+        .section { margin-bottom: 40px; }
+        .section-title { font-size: 18px; font-weight: 800; padding-bottom: 10px; border-bottom: 1px solid var(--black); margin-bottom: 20px; }
+        
+        /* News Row */
+        .news-row { display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+        .news-row:hover { background: #fafafa; margin: 0 -12px; padding-left: 12px; padding-right: 12px; }
+        .news-row-content { flex: 1; padding-right: 16px; }
+        .news-row-title { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 6px; }
+        .news-row-title a { color: var(--black); text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-row-title a:hover { color: var(--accent); }
+        .news-row-meta { font-size: 12px; color: var(--gray-light); margin-bottom: 6px; }
+        .hot-tag { color: var(--accent); font-weight: 700; }
+        .news-row-summary { font-size: 13px; color: var(--gray); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-row-arrow { color: var(--gray-light); font-size: 20px; font-weight: 300; flex-shrink: 0; margin-top: 4px; }
+        .news-row:hover .news-row-arrow { color: var(--black); }
+        
+        /* Grid */
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        /* Footer */
+        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--black); display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-light); }
+        .footer a { color: var(--gray-light); text-decoration: none; }
+        .footer a:hover { color: var(--black); }
+        
+        /* Language Content */
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 24px 16px; }
+            .header { flex-direction: row; align-items: center; gap: 12px; }
+            .header-title { font-size: 28px; }
+            .header-subtitle { font-size: 12px; }
+            .date-day { font-size: 36px; }
+            .content-grid { grid-template-columns: 1fr; gap: 30px; }
+            .lang-switch { margin-bottom: 12px; }
+            .lang-btn { padding: 5px 12px; font-size: 12px; }
+            .focus-title { font-size: 22px; }
+            .focus-section { margin-bottom: 36px; padding-bottom: 30px; }
+            .section { margin-bottom: 30px; }
+            .news-row { padding: 14px 0; }
+            .news-row:hover { margin: 0; padding-left: 0; padding-right: 0; }
+            .news-row-title { font-size: 15px; }
+            .news-row-summary { font-size: 12px; }
+        }
+        
+        @media (max-width: 480px) {
+            .header-title { font-size: 24px; }
+            .date-day { font-size: 32px; }
+            .focus-title { font-size: 20px; }
+            .section-title { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 语言切换 - Segment风格，左对齐 -->
+        <div class="lang-switch">
+            <div class="lang-segment">
+                <button class="lang-btn active" onclick="switchLang('zh')" data-lang-btn="zh">中文</button>
+                <button class="lang-btn" onclick="switchLang('en')" data-lang-btn="en">EN</button>
+            </div>
+        </div>
+        
+        <header class="header">
+            <div class="header-left">
+                <h1 class="header-title" id="page-title">ELARA DISPATCH</h1>
+                <p class="header-subtitle" id="page-date">2026年04月07日 · 星期二</p>
+            </div>
+            <div class="header-right">
+                <div class="date-day">07</div>
+                <div class="date-month">Apr 2026</div>
+            </div>
+        </header>
+        
+        <!-- 中文内容 -->
+        <div class="lang-content active" data-lang="zh">
+            
+        <section class="focus-section">
+            <div class="focus-label">焦点报道</div>
+            <h2 class="focus-title">
+                <a href="https://news.ycombinator.com/item?id=47669957" target="_blank">Claude Agent SDK vs. Messages API用于a Production AI Assistant?</a>
+            </h2>
+            <p class="focus-summary">Claude Agent SDK vs. Messages API用于a Production AI Assistant?. We're buildingchat assistant...</p>
+            <div class="focus-meta">HackerNews · 今日</div>
+        </section>
+            
+        <section class="section">
+            <h2 class="section-title">设计洞见</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47669957', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47669957" target="_blank" onclick="event.stopPropagation()">Claude Agent SDK vs. Messages API用于a Production AI Assistant?</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Claude Agent SDK vs. Messages API用于a Production AI Assistant?. We're buildingchat assistant...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.japantimes.co.jp/commentary/2026/04/06/world/quantum-computing-ais-sustainability-problem/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.japantimes.co.jp/commentary/2026/04/06/world/quantum-computing-ais-sustainability-problem/" target="_blank" onclick="event.stopPropagation()">Quantum computing could 修复 AI's sustainability problem</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Quantum computing could 修复 AI's sustainability problem. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://brickstack.substack.com/p/i-tried-every-gamma-alternative-just', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://brickstack.substack.com/p/i-tried-every-gamma-alternative-just" target="_blank" onclick="event.stopPropagation()">Stop使用AI wrappers和just use Claude</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-summary">Stop使用AI wrappers和just use Claude. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/milla-jovovich/mempalace', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/milla-jovovich/mempalace" target="_blank" onclick="event.stopPropagation()">highest-scoring AI memory system ever benchmarked</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-summary">highest-scoring AI memory system ever benchmarked. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/ertis-research/kafka-ml', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/ertis-research/kafka-ml" target="_blank" onclick="event.stopPropagation()">Kafka-ML: Connecting data stream使用ML/AI frameworks</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-summary">Kafka-ML: Connecting data stream使用ML/AI frameworks. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+            <div class="content-grid">
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">设计工程</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/css-multi-column-layout-wrapping-features/" target="_blank" onclick="event.stopPropagation()">Looking at 新 CSS Multi-Column 布局 Wrapping Features</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Looking at 新 CSS Multi-Column 布局 Wrapping Features. Chrome 145 introduces column-height...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/complex-css-shapes-with-shape-function/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/complex-css-shapes-with-shape-function/" target="_blank" onclick="event.stopPropagation()">Making Complex CSS Shapes使用shape()</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Making Complex CSS Shapes使用shape(). Creating rectangles, circles,和rounded rectangles is...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">前端 Fools: 热门 10 April Fools’ UI Pranks的All Time</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">前端 Fools: 热门 10 April Fools’ UI Pranks的All Time. These是historical pranks I...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/css-olfactive-api/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">Sniffing Out CSS Olfactive API</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Sniffing Out CSS Olfactive API.deep sniff的新 CSS Olfactive API,set的proposed...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/whats-important-8/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/whats-important-8/" target="_blank" onclick="event.stopPropagation()">什么是’s!important #8: Light/Dark Favicons, @mixin, object-view-box,和More</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">什么是’s!important #8: Light/Dark Favicons, @mixin, object-view-box,和More. Short n’ sweet but...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">前端工程</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/foxted/rsc-boundary', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/foxted/rsc-boundary" target="_blank" onclick="event.stopPropagation()">HN展示: Visualizing React 服务器 组件 Boundaries在Next.js</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">HN展示: Visualizing React 服务器 组件 Boundaries在Next.js. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.youtube.com/watch?v=0fTdCSH_QEU', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.youtube.com/watch?v=0fTdCSH_QEU" target="_blank" onclick="event.stopPropagation()">TypeScript Enums是Terrible</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">TypeScript Enums是Terrible. Article URL: https://www.youtube.com/watch?v=0fTdCSH_QEU Comments...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://aofp.github.io/yume/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://aofp.github.io/yume/" target="_blank" onclick="event.stopPropagation()">HN展示: Yume,桌面 GUI用于Claude Code (Tauri/React)</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">HN展示: Yume,桌面 GUI用于Claude Code (Tauri/React). Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.kurt.xyz/dot-globe', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.kurt.xyz/dot-globe" target="_blank" onclick="event.stopPropagation()">HN展示: Dot-Globe – React 组件 that renders NASA night-light data</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">HN展示: Dot-Globe – React 组件 that renders NASA night-light data. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/shujaSN/ShieldStack-TS', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/shujaSN/ShieldStack-TS" target="_blank" onclick="event.stopPropagation()">ShieldStack TS – LLM 安全 middleware用于TypeScript</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">ShieldStack TS – LLM 安全 middleware用于TypeScript. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">AI工具</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-combines-model-families-for-a-second-opinion/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-combines-model-families-for-a-second-opinion/" target="_blank" onclick="event.stopPropagation()">GitHub Copilot CLI combines model families用于a second opinion</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">GitHub Copilot CLI combines model families用于a second opinion. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://techcommunity.microsoft.com/blog/microsoft365copilotblog/introducing-multi-model-intelligence-in-researcher/4506011', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://techcommunity.microsoft.com/blog/microsoft365copilotblog/introducing-multi-model-intelligence-in-researcher/4506011" target="_blank" onclick="event.stopPropagation()">Multi-model intelligence在MS Copilot Researcher</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Multi-model intelligence在MS Copilot Researcher. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/RootCX/RootCX', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/RootCX/RootCX" target="_blank" onclick="event.stopPropagation()">HN展示: RootCX – I built开源 alternative到"Cursor和Supabase"</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">HN展示: RootCX – I built开源 alternative到"Cursor和Supabase". Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.aissence.ai/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.aissence.ai/" target="_blank" onclick="event.stopPropagation()">AissenceAI – Real-time AI interview Copilot</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">AissenceAI – Real-time AI interview Copilot. Article URL: https://www.aissence.ai/ Comments URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.windowslatest.com/2026/04/05/new-copilot-for-windows-11-includes-a-full-microsoft-edge-package-uses-more-ram/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.windowslatest.com/2026/04/05/new-copilot-for-windows-11-includes-a-full-microsoft-edge-package-uses-more-ram/" target="_blank" onclick="event.stopPropagation()">新 Copilot用于Windows 11 includesfull Microsoft Edge 包, uses more RAM</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">新 Copilot用于Windows 11 includesfull Microsoft Edge 包, uses more RAM. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">AI模型</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47669957', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47669957" target="_blank" onclick="event.stopPropagation()">Claude Agent SDK vs. Messages API用于a Production AI Assistant?</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Claude Agent SDK vs. Messages API用于a Production AI Assistant?. We're buildingchat assistant...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/jeffskafi/OpenBolt', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/jeffskafi/OpenBolt" target="_blank" onclick="event.stopPropagation()">HN展示: MCP 插件 that lets Claude autonomously pay用于APIs via Lightning</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">HN展示: MCP 插件 that lets Claude autonomously pay用于APIs via Lightning. Hey HN,As we move...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/lucianareynaud/turnpike', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/lucianareynaud/turnpike" target="_blank" onclick="event.stopPropagation()">Turnpike – typed cost attribution用于LLM calls</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Turnpike – typed cost attribution用于LLM calls. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://brickstack.substack.com/p/i-tried-every-gamma-alternative-just', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://brickstack.substack.com/p/i-tried-every-gamma-alternative-just" target="_blank" onclick="event.stopPropagation()">Stop使用AI wrappers和just use Claude</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Stop使用AI wrappers和just use Claude. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/AlexChen31337/openclaw-plugin-claude-code', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/AlexChen31337/openclaw-plugin-claude-code" target="_blank" onclick="event.stopPropagation()">OpenClaw 插件用于Claude Code CLI – Persistent Worker Pool使用Smart OAuth</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">OpenClaw 插件用于Claude Code CLI – Persistent Worker Pool使用Smart OAuth. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+            </div>
+            
+        <section class="section">
+            <h2 class="section-title">开源工具</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://fatih-erikli-potato.github.io/path-draw/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://fatih-erikli-potato.github.io/path-draw/" target="_blank" onclick="event.stopPropagation()">Bezier drawing tool w infinite zoom</a>
+                </div>
+                <div class="news-row-meta">HN Tools · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Bezier drawing tool w infinite zoom. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.feynman.is/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.feynman.is/" target="_blank" onclick="event.stopPropagation()">Feynman: 开放-source AI research agent</a>
+                </div>
+                <div class="news-row-meta">HN Tools · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Feynman: 开放-source AI research agent. Article URL: https://www.feynman.is/ Comments URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://tracefix.vercel.app/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://tracefix.vercel.app/" target="_blank" onclick="event.stopPropagation()">TraceFix –simple tool到trace issues from logs faster</a>
+                </div>
+                <div class="news-row-meta">HN Tools · </div>
+                <div class="news-row-summary">TraceFix –simple tool到trace issues from logs faster. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://where-is-artemis.com', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://where-is-artemis.com" target="_blank" onclick="event.stopPropagation()">HN展示: 在哪里是Artemis? Realtime 开源 3D tracker用于Artemis 2 mission</a>
+                </div>
+                <div class="news-row-meta">HN Tools · </div>
+                <div class="news-row-summary">HN展示: 在哪里是Artemis? Realtime 开源 3D tracker用于Artemis 2 mission. I builtquick...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/CelestoAI/smolVM', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/CelestoAI/smolVM" target="_blank" onclick="event.stopPropagation()">开放-source sandboxes到run AI code, browser agents和computer-use</a>
+                </div>
+                <div class="news-row-meta">HN Tools · </div>
+                <div class="news-row-summary">开放-source sandboxes到run AI code, browser agents和computer-use. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+        </div>
+        
+        <!-- 英文内容 -->
+        <div class="lang-content" data-lang="en">
+            
+        <section class="focus-section">
+            <div class="focus-label">FOCUS STORY</div>
+            <h2 class="focus-title">
+                <a href="https://news.ycombinator.com/item?id=47669957" target="_blank">Claude Agent SDK vs. Messages API for a Production AI Assistant?</a>
+            </h2>
+            <p class="focus-summary">Claude Agent SDK vs. Messages API for a Production AI Assistant?. We're building a chat assistant...</p>
+            <div class="focus-meta">HackerNews · Today</div>
+        </section>
+            
+        <section class="section">
+            <h2 class="section-title">Designer Insights</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47669957', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47669957" target="_blank" onclick="event.stopPropagation()">Claude Agent SDK vs. Messages API for a Production AI Assistant?</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Claude Agent SDK vs. Messages API for a Production AI Assistant?. We're building a chat assistant...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.japantimes.co.jp/commentary/2026/04/06/world/quantum-computing-ais-sustainability-problem/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.japantimes.co.jp/commentary/2026/04/06/world/quantum-computing-ais-sustainability-problem/" target="_blank" onclick="event.stopPropagation()">Quantum computing could fix AI's sustainability problem</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Quantum computing could fix AI's sustainability problem. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://brickstack.substack.com/p/i-tried-every-gamma-alternative-just', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://brickstack.substack.com/p/i-tried-every-gamma-alternative-just" target="_blank" onclick="event.stopPropagation()">Stop using AI wrappers and just use Claude</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-summary">Stop using AI wrappers and just use Claude. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/milla-jovovich/mempalace', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/milla-jovovich/mempalace" target="_blank" onclick="event.stopPropagation()">The highest-scoring AI memory system ever benchmarked</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-summary">The highest-scoring AI memory system ever benchmarked. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/ertis-research/kafka-ml', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/ertis-research/kafka-ml" target="_blank" onclick="event.stopPropagation()">Kafka-ML: Connecting the data stream with ML/AI frameworks</a>
+                </div>
+                <div class="news-row-meta">HN UX+AI · </div>
+                <div class="news-row-summary">Kafka-ML: Connecting the data stream with ML/AI frameworks. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+            <div class="content-grid">
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">Design Engineering</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/css-multi-column-layout-wrapping-features/" target="_blank" onclick="event.stopPropagation()">Looking at New CSS Multi-Column Layout Wrapping Features</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Looking at New CSS Multi-Column Layout Wrapping Features. Chrome 145 introduces the column-height...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/complex-css-shapes-with-shape-function/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/complex-css-shapes-with-shape-function/" target="_blank" onclick="event.stopPropagation()">Making Complex CSS Shapes Using shape()</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Making Complex CSS Shapes Using shape(). Creating rectangles, circles, and rounded rectangles is...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time. These are the historical pranks I...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/css-olfactive-api/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">Sniffing Out the CSS Olfactive API</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Sniffing Out the CSS Olfactive API. A deep sniff of the new CSS Olfactive API, a set of proposed...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/whats-important-8/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/whats-important-8/" target="_blank" onclick="event.stopPropagation()">What’s !important #8: Light/Dark Favicons, @mixin, object-view-box, and More</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">What’s !important #8: Light/Dark Favicons, @mixin, object-view-box, and More. Short n’ sweet but...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">Frontend Engineering</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/foxted/rsc-boundary', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/foxted/rsc-boundary" target="_blank" onclick="event.stopPropagation()">Show HN: Visualizing React Server Component Boundaries in Next.js</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Show HN: Visualizing React Server Component Boundaries in Next.js. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.youtube.com/watch?v=0fTdCSH_QEU', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.youtube.com/watch?v=0fTdCSH_QEU" target="_blank" onclick="event.stopPropagation()">TypeScript Enums Are Terrible</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">TypeScript Enums Are Terrible. Article URL: https://www.youtube.com/watch?v=0fTdCSH_QEU
+Comments...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://aofp.github.io/yume/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://aofp.github.io/yume/" target="_blank" onclick="event.stopPropagation()">Show HN: Yume, a Desktop GUI for Claude Code (Tauri/React)</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Show HN: Yume, a Desktop GUI for Claude Code (Tauri/React). Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.kurt.xyz/dot-globe', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.kurt.xyz/dot-globe" target="_blank" onclick="event.stopPropagation()">Show HN: Dot-Globe – React component that renders NASA night-light data</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Show HN: Dot-Globe – React component that renders NASA night-light data. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/shujaSN/ShieldStack-TS', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/shujaSN/ShieldStack-TS" target="_blank" onclick="event.stopPropagation()">ShieldStack TS – LLM security middleware for TypeScript</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">ShieldStack TS – LLM security middleware for TypeScript. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">AI Tools</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-combines-model-families-for-a-second-opinion/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-combines-model-families-for-a-second-opinion/" target="_blank" onclick="event.stopPropagation()">GitHub Copilot CLI combines model families for a second opinion</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">GitHub Copilot CLI combines model families for a second opinion. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://techcommunity.microsoft.com/blog/microsoft365copilotblog/introducing-multi-model-intelligence-in-researcher/4506011', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://techcommunity.microsoft.com/blog/microsoft365copilotblog/introducing-multi-model-intelligence-in-researcher/4506011" target="_blank" onclick="event.stopPropagation()">Multi-model intelligence in MS Copilot Researcher</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Multi-model intelligence in MS Copilot Researcher. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/RootCX/RootCX', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/RootCX/RootCX" target="_blank" onclick="event.stopPropagation()">Show HN: RootCX – I built an open source alternative to "Cursor and Supabase"</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Show HN: RootCX – I built an open source alternative to "Cursor and Supabase". Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.aissence.ai/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.aissence.ai/" target="_blank" onclick="event.stopPropagation()">AissenceAI – Real-time AI interview copilot</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">AissenceAI – Real-time AI interview copilot. Article URL: https://www.aissence.ai/
+Comments URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.windowslatest.com/2026/04/05/new-copilot-for-windows-11-includes-a-full-microsoft-edge-package-uses-more-ram/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.windowslatest.com/2026/04/05/new-copilot-for-windows-11-includes-a-full-microsoft-edge-package-uses-more-ram/" target="_blank" onclick="event.stopPropagation()">New Copilot for Windows 11 includes a full Microsoft Edge package, uses more RAM</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">New Copilot for Windows 11 includes a full Microsoft Edge package, uses more RAM. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">AI Models</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47669957', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://news.ycombinator.com/item?id=47669957" target="_blank" onclick="event.stopPropagation()">Claude Agent SDK vs. Messages API for a Production AI Assistant?</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Claude Agent SDK vs. Messages API for a Production AI Assistant?. We're building a chat assistant...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/jeffskafi/OpenBolt', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/jeffskafi/OpenBolt" target="_blank" onclick="event.stopPropagation()">Show HN: MCP plugin that lets Claude autonomously pay for APIs via Lightning</a>
+                </div>
+                <div class="news-row-meta">HackerNews · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Show HN: MCP plugin that lets Claude autonomously pay for APIs via Lightning. Hey HN,As we move...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/lucianareynaud/turnpike', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/lucianareynaud/turnpike" target="_blank" onclick="event.stopPropagation()">Turnpike – typed cost attribution for LLM calls</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Turnpike – typed cost attribution for LLM calls. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://brickstack.substack.com/p/i-tried-every-gamma-alternative-just', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://brickstack.substack.com/p/i-tried-every-gamma-alternative-just" target="_blank" onclick="event.stopPropagation()">Stop using AI wrappers and just use Claude</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">Stop using AI wrappers and just use Claude. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/AlexChen31337/openclaw-plugin-claude-code', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/AlexChen31337/openclaw-plugin-claude-code" target="_blank" onclick="event.stopPropagation()">OpenClaw Plugin for Claude Code CLI – Persistent Worker Pool with Smart OAuth</a>
+                </div>
+                <div class="news-row-meta">HackerNews · </div>
+                <div class="news-row-summary">OpenClaw Plugin for Claude Code CLI – Persistent Worker Pool with Smart OAuth. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+            </div>
+            
+        <section class="section">
+            <h2 class="section-title">Open Source</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://fatih-erikli-potato.github.io/path-draw/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://fatih-erikli-potato.github.io/path-draw/" target="_blank" onclick="event.stopPropagation()">Bezier drawing tool w infinite zoom</a>
+                </div>
+                <div class="news-row-meta">HN Tools · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Bezier drawing tool w infinite zoom. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.feynman.is/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.feynman.is/" target="_blank" onclick="event.stopPropagation()">Feynman: Open-source AI research agent</a>
+                </div>
+                <div class="news-row-meta">HN Tools · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Feynman: Open-source AI research agent. Article URL: https://www.feynman.is/
+Comments URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://tracefix.vercel.app/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://tracefix.vercel.app/" target="_blank" onclick="event.stopPropagation()">TraceFix – A simple tool to trace issues from logs faster</a>
+                </div>
+                <div class="news-row-meta">HN Tools · </div>
+                <div class="news-row-summary">TraceFix – A simple tool to trace issues from logs faster. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://where-is-artemis.com', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://where-is-artemis.com" target="_blank" onclick="event.stopPropagation()">Show HN: Where Is Artemis? Realtime open source 3D tracker for Artemis 2 mission</a>
+                </div>
+                <div class="news-row-meta">HN Tools · </div>
+                <div class="news-row-summary">Show HN: Where Is Artemis? Realtime open source 3D tracker for Artemis 2 mission. I built a quick...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/CelestoAI/smolVM', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/CelestoAI/smolVM" target="_blank" onclick="event.stopPropagation()">Open-source sandboxes to run AI code, browser agents and computer-use</a>
+                </div>
+                <div class="news-row-meta">HN Tools · </div>
+                <div class="news-row-summary">Open-source sandboxes to run AI code, browser agents and computer-use. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+        </div>
+        
+        <footer class="footer">
+            <span id="footer-source">数据来源: Figma, CSS-Tricks, HackerNews, GitHub</span>
+        </footer>
+    </div>
+    
+    <script>
+        const i18n = {
+            title: { zh: 'ELARA DISPATCH', en: 'ELARA DISPATCH' },
+            date: { zh: '2026年04月07日 · 星期二', en: 'Apr 07, 2026 · Tue' },
+            data_source: { zh: '数据来源', en: 'Data Sources' }
+        };
+        
+        let currentLang = 'zh';
+        
+        function switchLang(lang) {
+            currentLang = lang;
+            
+            // 切换按钮状态
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-lang-btn="' + lang + '"]').classList.add('active');
+            
+            // 切换内容显示
+            document.querySelectorAll('.lang-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelector('.lang-content[data-lang="' + lang + '"]').classList.add('active');
+            
+            // 更新标题和日期
+            document.getElementById('page-title').textContent = i18n.title[lang];
+            document.getElementById('page-date').textContent = i18n.date[lang];
+            document.getElementById('footer-source').textContent = i18n.data_source[lang] + ': Figma, CSS-Tricks, HackerNews, GitHub';
+        }
+    </script>
+</body>
+</html>
