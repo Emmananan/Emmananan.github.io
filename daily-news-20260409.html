@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELARA DISPATCH | 2026年04月09日</title>
+    <style>
+        :root { --black: #000; --white: #fff; --gray: #666; --gray-light: #999; --accent: #ff3333; --border: #e5e5e5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        /* Header */
+        .header { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 30px; border-bottom: 1px solid var(--black); margin-bottom: 40px; }
+        .header-left { flex: 1; }
+        .header-title { font-size: 42px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; }
+        .header-subtitle { font-size: 14px; color: var(--gray); }
+        .header-right { text-align: right; }
+        .date-day { font-size: 56px; font-weight: 900; line-height: 0.9; }
+        .date-month { font-size: 13px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Lang Switch - Segment Style */
+        .lang-switch { 
+            display: inline-flex; 
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .lang-segment { 
+            display: flex;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--white);
+        }
+        .lang-btn { 
+            padding: 6px 16px; 
+            font-size: 13px; 
+            font-weight: 500; 
+            border: none;
+            background: var(--white); 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            color: var(--gray);
+        }
+        .lang-btn:first-child {
+            border-right: 1px solid var(--border);
+        }
+        .lang-btn:hover { 
+            color: var(--black);
+            background: var(--bg);
+        }
+        .lang-btn.active { 
+            background: var(--black); 
+            color: var(--white);
+        }
+        .lang-btn.active:hover { 
+            background: var(--black); 
+        }
+        
+        /* Focus */
+        .focus-section { margin-bottom: 50px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+        .focus-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+        .focus-title { font-size: 26px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; }
+        .focus-title a { color: var(--black); text-decoration: none; }
+        .focus-title a:hover { color: var(--accent); }
+        .focus-summary { font-size: 15px; color: var(--gray); line-height: 1.7; margin-bottom: 12px; }
+        .focus-meta { font-size: 12px; color: var(--gray-light); }
+        
+        /* Section */
+        .section { margin-bottom: 40px; }
+        .section-title { font-size: 18px; font-weight: 800; padding-bottom: 10px; border-bottom: 1px solid var(--black); margin-bottom: 20px; }
+        
+        /* News Row */
+        .news-row { display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+        .news-row:hover { background: #fafafa; margin: 0 -12px; padding-left: 12px; padding-right: 12px; }
+        .news-row-content { flex: 1; padding-right: 16px; }
+        .news-row-title { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 6px; }
+        .news-row-title a { color: var(--black); text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-row-title a:hover { color: var(--accent); }
+        .news-row-meta { font-size: 12px; color: var(--gray-light); margin-bottom: 6px; }
+        .hot-tag { color: var(--accent); font-weight: 700; }
+        .news-row-summary { font-size: 13px; color: var(--gray); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-row-arrow { color: var(--gray-light); font-size: 20px; font-weight: 300; flex-shrink: 0; margin-top: 4px; }
+        .news-row:hover .news-row-arrow { color: var(--black); }
+        
+        /* Grid */
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        /* Footer */
+        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--black); display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-light); }
+        .footer a { color: var(--gray-light); text-decoration: none; }
+        .footer a:hover { color: var(--black); }
+        
+        /* Language Content */
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 24px 16px; }
+            .header { flex-direction: row; align-items: center; gap: 12px; }
+            .header-title { font-size: 28px; }
+            .header-subtitle { font-size: 12px; }
+            .date-day { font-size: 36px; }
+            .content-grid { grid-template-columns: 1fr; gap: 30px; }
+            .lang-switch { margin-bottom: 12px; }
+            .lang-btn { padding: 5px 12px; font-size: 12px; }
+            .focus-title { font-size: 22px; }
+            .focus-section { margin-bottom: 36px; padding-bottom: 30px; }
+            .section { margin-bottom: 30px; }
+            .news-row { padding: 14px 0; }
+            .news-row:hover { margin: 0; padding-left: 0; padding-right: 0; }
+            .news-row-title { font-size: 15px; }
+            .news-row-summary { font-size: 12px; }
+        }
+        
+        @media (max-width: 480px) {
+            .header-title { font-size: 24px; }
+            .date-day { font-size: 32px; }
+            .focus-title { font-size: 20px; }
+            .section-title { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 语言切换 - Segment风格，左对齐 -->
+        <div class="lang-switch">
+            <div class="lang-segment">
+                <button class="lang-btn active" onclick="switchLang('zh')" data-lang-btn="zh">中文</button>
+                <button class="lang-btn" onclick="switchLang('en')" data-lang-btn="en">EN</button>
+            </div>
+        </div>
+        
+        <header class="header">
+            <div class="header-left">
+                <h1 class="header-title" id="page-title">ELARA DISPATCH</h1>
+                <p class="header-subtitle" id="page-date">2026年04月09日 · 星期四</p>
+            </div>
+            <div class="header-right">
+                <div class="date-day">09</div>
+                <div class="date-month">Apr 2026</div>
+            </div>
+        </header>
+        
+        <!-- 中文内容 -->
+        <div class="lang-content active" data-lang="zh">
+            
+        <section class="focus-section">
+            <div class="focus-label">焦点报道</div>
+            <h2 class="focus-title">
+                <a href="https://www.youtube.com/watch?v=h3AtWdeu_G0" target="_blank">Bernie vs. Claude</a>
+            </h2>
+            <p class="focus-summary">Bernie vs. Claude. Speaking到Anthropic’s AI agent Claude about AI collecting massive amounts of...</p>
+            <div class="focus-meta">Sidebar.io · 今日</div>
+        </section>
+            
+        <section class="section">
+            <h2 class="section-title">AI × 设计</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://preview.thedrive.ai', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://preview.thedrive.ai" target="_blank" onclick="event.stopPropagation()">HN展示: Preview.thedrive.ai – instant thumbnails用于any document URL</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">HN展示: Preview.thedrive.ai – instant thumbnails用于any document URL. Generating thumbnails from...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.wheresyoured.at/ai-is-really-weird/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.wheresyoured.at/ai-is-really-weird/" target="_blank" onclick="event.stopPropagation()">AI是Weird</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">AI是Weird. Article URL: https://www.wheresyoured.at/ai-is-really-weird/ Comments URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.siliconimist.com/p/tiny-tapeout-matt-venn', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.siliconimist.com/p/tiny-tapeout-matt-venn" target="_blank" onclick="event.stopPropagation()">Demystifying 开放 Silicon – Matt Venn是Democratizing Chip 设计</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · </div>
+                <div class="news-row-summary">Demystifying 开放 Silicon – Matt Venn是Democratizing Chip 设计. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://apps.apple.com/us/app/azalea-audio/id6761150322', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://apps.apple.com/us/app/azalea-audio/id6761150322" target="_blank" onclick="event.stopPropagation()">HN展示: Public Domain Audiobooks使用AI (Azalea Audio)</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · </div>
+                <div class="news-row-summary">HN展示: Public Domain Audiobooks使用AI (Azalea Audio). Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.globalsolo.global/tools/compare', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.globalsolo.global/tools/compare" target="_blank" onclick="event.stopPropagation()">HN展示: Side-by-side comparison 工具用于US LLC formation,banking和payments</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · </div>
+                <div class="news-row-summary">HN展示: Side-by-side comparison 工具用于US LLC formation,banking和payments. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+            <div class="content-grid">
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">交互/体验</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/social-media-on-trial-32be44a6434e?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/social-media-on-trial-32be44a6434e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Social media在trial</a>
+                </div>
+                <div class="news-row-meta">UX Collective · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Social media在trial. 如何 设计 was used到target vulnerable childrenContinue reading在UX...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/the-old-design-workshop-is-dead-long-live-design-workshops-98f4ee58d9a7?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/the-old-design-workshop-is-dead-long-live-design-workshops-98f4ee58d9a7?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">old 设计 workshop是dead. Long live 设计 workshops.</a>
+                </div>
+                <div class="news-row-meta">UX Collective · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">old 设计 workshop是dead. Long live 设计 workshops.. 如何 新 leaner 设计 workshops are...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/careful-liable-ux-is-a-thing-now-ff088a766de8?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/careful-liable-ux-is-a-thing-now-ff088a766de8?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Careful, liable UX isthing now</a>
+                </div>
+                <div class="news-row-meta">UX Collective · </div>
+                <div class="news-row-summary">Careful, liable UX isthing now. recent ruling against Meta signalsshift that&#x2019;s...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/beyond-the-user-why-design-needs-to-widen-its-circle-5d6d6bca783e?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/beyond-the-user-why-design-needs-to-widen-its-circle-5d6d6bca783e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Beyond user: 为什么 设计 needs到widen its circle</a>
+                </div>
+                <div class="news-row-meta">UX Collective · </div>
+                <div class="news-row-summary">Beyond user: 为什么 设计 needs到widen its circle. Human-centred 设计 changed everything. But...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/designing-for-the-invisible-customer-1e1bbeba56ae?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/designing-for-the-invisible-customer-1e1bbeba56ae?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Designing用于invisible customer</a>
+                </div>
+                <div class="news-row-meta">UX Collective · </div>
+                <div class="news-row-summary">Designing用于invisible customer.是consumers&#x2019; Openclaw agents becoming real...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">行业声音</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://siddhantkhare.com/writing/ai-fatigue-is-real', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://siddhantkhare.com/writing/ai-fatigue-is-real" target="_blank" onclick="event.stopPropagation()">AI fatigue是real和nobody talks about it</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">AI fatigue是real和nobody talks about it. You’re使用AI到be more productive. So 为什么是you...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.youtube.com/watch?v=h3AtWdeu_G0', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.youtube.com/watch?v=h3AtWdeu_G0" target="_blank" onclick="event.stopPropagation()">Bernie vs. Claude</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Bernie vs. Claude. Speaking到Anthropic’s AI agent Claude about AI collecting massive amounts of...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://shotoniphone.lorenzobocchi.com/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://shotoniphone.lorenzobocchi.com/" target="_blank" onclick="event.stopPropagation()">Shot在iPhone在black & white</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · </div>
+                <div class="news-row-summary">Shot在iPhone在black & white. No warmth borrowed fromgolden hour, no colour到flatter or...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://blog.pope.tech/2026/04/01/making-emojis-and-icons-screen-reader-accessible/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://blog.pope.tech/2026/04/01/making-emojis-and-icons-screen-reader-accessible/" target="_blank" onclick="event.stopPropagation()">Making emojis和icons screen reader accessible</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · </div>
+                <div class="news-row-summary">Making emojis和icons screen reader accessible. 如何 emojis和icons是often not traditional...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.chrbutler.com/craft-is-untouchable', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.chrbutler.com/craft-is-untouchable" target="_blank" onclick="event.stopPropagation()">Craft是untouchable</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · </div>
+                <div class="news-row-summary">Craft是untouchable. AI doesn’t threaten craft—temptation到skip iteration does.</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">趋势灵感</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/04/07/work-in-progress-part-16', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/04/07/work-in-progress-part-16" target="_blank" onclick="event.stopPropagation()">Work在Progress, Part 16 🚧</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Work在Progress, Part 16 🚧.</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/03/16/the-golden-age-of-women-s-sports-branding-is-here-and-designers-are-leading-it', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/03/16/the-golden-age-of-women-s-sports-branding-is-here-and-designers-are-leading-it" target="_blank" onclick="event.stopPropagation()">golden age的women’s sports branding是here,和designers是leading it.</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">golden age的women’s sports branding是here,和designers是leading it..</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/03/06/designing-their-own-paths-women-in-the-dribbble-community-share-their-stories', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/03/06/designing-their-own-paths-women-in-the-dribbble-community-share-their-stories" target="_blank" onclick="event.stopPropagation()">Designing their own paths: Women在Dribbble community share their stories</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · </div>
+                <div class="news-row-summary">Designing their own paths: Women在Dribbble community share their stories.</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control" target="_blank" onclick="event.stopPropagation()">如何 Exposure Works在Dribbble (and 什么是 You Can Actually Control)</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · </div>
+                <div class="news-row-summary">如何 Exposure Works在Dribbble (and 什么是 You Can Actually Control).</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients" target="_blank" onclick="event.stopPropagation()">如何 Share Your Work在Dribbble (While Attracting Right Clients)</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · </div>
+                <div class="news-row-summary">如何 Share Your Work在Dribbble (While Attracting Right Clients).</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">UI/视觉</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://css-tricks.com/alternatives-to-the-important-keyword/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/alternatives-to-the-important-keyword/" target="_blank" onclick="event.stopPropagation()">Alternatives到!important Keyword</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Alternatives到!important Keyword. Cascade layers, specificity 窍门, smarter ordering, and...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/css-multi-column-layout-wrapping-features/" target="_blank" onclick="event.stopPropagation()">Looking at 新 CSS Multi-Column 布局 Wrapping Features</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Looking at 新 CSS Multi-Column 布局 Wrapping Features. Chrome 145 introduces column-height...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/complex-css-shapes-with-shape-function/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/complex-css-shapes-with-shape-function/" target="_blank" onclick="event.stopPropagation()">Making Complex CSS Shapes使用shape()</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Making Complex CSS Shapes使用shape(). Creating rectangles, circles,和rounded rectangles is...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">前端 Fools: 热门 10 April Fools’ UI Pranks的All Time</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">前端 Fools: 热门 10 April Fools’ UI Pranks的All Time. These是historical pranks I...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/css-olfactive-api/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">Sniffing Out CSS Olfactive API</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Sniffing Out CSS Olfactive API.deep sniff的新 CSS Olfactive API,set的proposed...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+            </div>
+            
+        <section class="section">
+            <h2 class="section-title">工具动态</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/grainulation/grainulator', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/grainulation/grainulator" target="_blank" onclick="event.stopPropagation()">Claude Code 插件用于LLM research使用typed claims和conflict detection</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Claude Code 插件用于LLM research使用typed claims和conflict detection. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://featureflare.com/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://featureflare.com/" target="_blank" onclick="event.stopPropagation()">HN展示: 功能 发布 system使用MCP agent controls</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">HN展示: 功能 发布 system使用MCP agent controls. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.siliconimist.com/p/tiny-tapeout-matt-venn', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.siliconimist.com/p/tiny-tapeout-matt-venn" target="_blank" onclick="event.stopPropagation()">Demystifying 开放 Silicon – Matt Venn是Democratizing Chip 设计</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · </div>
+                <div class="news-row-summary">Demystifying 开放 Silicon – Matt Venn是Democratizing Chip 设计. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.youtube.com/watch?v=Kohl9wy3S7g', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.youtube.com/watch?v=Kohl9wy3S7g" target="_blank" onclick="event.stopPropagation()">I wroteWebAssembly 插件 system用于my Wayland compositor</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · </div>
+                <div class="news-row-summary">I wroteWebAssembly 插件 system用于my Wayland compositor. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.youtube.com/watch?v=JO8EnzNfEk4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.youtube.com/watch?v=JO8EnzNfEk4" target="_blank" onclick="event.stopPropagation()">54kb Minecraft clone made withoutgraphics 库 [video]</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · </div>
+                <div class="news-row-summary">54kb Minecraft clone made withoutgraphics 库 [video]. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+        </div>
+        
+        <!-- 英文内容 -->
+        <div class="lang-content" data-lang="en">
+            
+        <section class="focus-section">
+            <div class="focus-label">FOCUS STORY</div>
+            <h2 class="focus-title">
+                <a href="https://www.youtube.com/watch?v=h3AtWdeu_G0" target="_blank">Bernie vs. Claude</a>
+            </h2>
+            <p class="focus-summary">Bernie vs. Claude. Speaking to Anthropic’s AI agent Claude about AI collecting massive amounts of...</p>
+            <div class="focus-meta">Sidebar.io · Today</div>
+        </section>
+            
+        <section class="section">
+            <h2 class="section-title">AI × Design</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://preview.thedrive.ai', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://preview.thedrive.ai" target="_blank" onclick="event.stopPropagation()">Show HN: Preview.thedrive.ai – instant thumbnails for any document URL</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Show HN: Preview.thedrive.ai – instant thumbnails for any document URL. Generating thumbnails from...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.wheresyoured.at/ai-is-really-weird/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.wheresyoured.at/ai-is-really-weird/" target="_blank" onclick="event.stopPropagation()">AI Is Weird</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">AI Is Weird. Article URL: https://www.wheresyoured.at/ai-is-really-weird/
+Comments URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.siliconimist.com/p/tiny-tapeout-matt-venn', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.siliconimist.com/p/tiny-tapeout-matt-venn" target="_blank" onclick="event.stopPropagation()">Demystifying Open Silicon – Matt Venn Is Democratizing Chip Design</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · </div>
+                <div class="news-row-summary">Demystifying Open Silicon – Matt Venn Is Democratizing Chip Design. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://apps.apple.com/us/app/azalea-audio/id6761150322', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://apps.apple.com/us/app/azalea-audio/id6761150322" target="_blank" onclick="event.stopPropagation()">Show HN: Public Domain Audiobooks with AI (Azalea Audio)</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · </div>
+                <div class="news-row-summary">Show HN: Public Domain Audiobooks with AI (Azalea Audio). Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.globalsolo.global/tools/compare', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.globalsolo.global/tools/compare" target="_blank" onclick="event.stopPropagation()">Show HN: Side-by-side comparison tools for US LLC formation,banking and payments</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · </div>
+                <div class="news-row-summary">Show HN: Side-by-side comparison tools for US LLC formation,banking and payments. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+            <div class="content-grid">
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">UX / Interaction</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/social-media-on-trial-32be44a6434e?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/social-media-on-trial-32be44a6434e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Social media on trial</a>
+                </div>
+                <div class="news-row-meta">UX Collective · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Social media on trial. How design was used to target vulnerable childrenContinue reading on UX...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/the-old-design-workshop-is-dead-long-live-design-workshops-98f4ee58d9a7?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/the-old-design-workshop-is-dead-long-live-design-workshops-98f4ee58d9a7?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">The old design workshop is dead. Long live design workshops.</a>
+                </div>
+                <div class="news-row-meta">UX Collective · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">The old design workshop is dead. Long live design workshops.. How new leaner design workshops are...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/careful-liable-ux-is-a-thing-now-ff088a766de8?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/careful-liable-ux-is-a-thing-now-ff088a766de8?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Careful, liable UX is a thing now</a>
+                </div>
+                <div class="news-row-meta">UX Collective · </div>
+                <div class="news-row-summary">Careful, liable UX is a thing now. The recent ruling against Meta signals a shift that&#x2019;s...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/beyond-the-user-why-design-needs-to-widen-its-circle-5d6d6bca783e?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/beyond-the-user-why-design-needs-to-widen-its-circle-5d6d6bca783e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Beyond the user: why design needs to widen its circle</a>
+                </div>
+                <div class="news-row-meta">UX Collective · </div>
+                <div class="news-row-summary">Beyond the user: why design needs to widen its circle. Human-centred design changed everything. But...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/designing-for-the-invisible-customer-1e1bbeba56ae?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/designing-for-the-invisible-customer-1e1bbeba56ae?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Designing for the invisible customer</a>
+                </div>
+                <div class="news-row-meta">UX Collective · </div>
+                <div class="news-row-summary">Designing for the invisible customer. Are consumers&#x2019; Openclaw agents becoming the real...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">Industry Voice</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://siddhantkhare.com/writing/ai-fatigue-is-real', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://siddhantkhare.com/writing/ai-fatigue-is-real" target="_blank" onclick="event.stopPropagation()">AI fatigue is real and nobody talks about it</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">AI fatigue is real and nobody talks about it. You’re using AI to be more productive. So why are you...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.youtube.com/watch?v=h3AtWdeu_G0', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.youtube.com/watch?v=h3AtWdeu_G0" target="_blank" onclick="event.stopPropagation()">Bernie vs. Claude</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Bernie vs. Claude. Speaking to Anthropic’s AI agent Claude about AI collecting massive amounts of...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://shotoniphone.lorenzobocchi.com/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://shotoniphone.lorenzobocchi.com/" target="_blank" onclick="event.stopPropagation()">Shot on iPhone in black & white</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · </div>
+                <div class="news-row-summary">Shot on iPhone in black & white. No warmth borrowed from a golden hour, no colour to flatter or...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://blog.pope.tech/2026/04/01/making-emojis-and-icons-screen-reader-accessible/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://blog.pope.tech/2026/04/01/making-emojis-and-icons-screen-reader-accessible/" target="_blank" onclick="event.stopPropagation()">Making emojis and icons screen reader accessible</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · </div>
+                <div class="news-row-summary">Making emojis and icons screen reader accessible. How emojis and icons are often not traditional...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.chrbutler.com/craft-is-untouchable', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.chrbutler.com/craft-is-untouchable" target="_blank" onclick="event.stopPropagation()">Craft is untouchable</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · </div>
+                <div class="news-row-summary">Craft is untouchable. AI doesn’t threaten craft—the temptation to skip iteration does.</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">Trends & Inspiration</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/04/07/work-in-progress-part-16', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/04/07/work-in-progress-part-16" target="_blank" onclick="event.stopPropagation()">Work In Progress, Part 16 🚧</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Work In Progress, Part 16 🚧. </div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/03/16/the-golden-age-of-women-s-sports-branding-is-here-and-designers-are-leading-it', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/03/16/the-golden-age-of-women-s-sports-branding-is-here-and-designers-are-leading-it" target="_blank" onclick="event.stopPropagation()">The golden age of women’s sports branding is here, and designers are leading it.</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">The golden age of women’s sports branding is here, and designers are leading it.. </div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/03/06/designing-their-own-paths-women-in-the-dribbble-community-share-their-stories', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/03/06/designing-their-own-paths-women-in-the-dribbble-community-share-their-stories" target="_blank" onclick="event.stopPropagation()">Designing their own paths: Women in the Dribbble community share their stories</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · </div>
+                <div class="news-row-summary">Designing their own paths: Women in the Dribbble community share their stories. </div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control" target="_blank" onclick="event.stopPropagation()">How Exposure Works on Dribbble (and What You Can Actually Control)</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · </div>
+                <div class="news-row-summary">How Exposure Works on Dribbble (and What You Can Actually Control). </div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients" target="_blank" onclick="event.stopPropagation()">How to Share Your Work on Dribbble (While Attracting the Right Clients)</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · </div>
+                <div class="news-row-summary">How to Share Your Work on Dribbble (While Attracting the Right Clients). </div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">UI / Visual</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://css-tricks.com/alternatives-to-the-important-keyword/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/alternatives-to-the-important-keyword/" target="_blank" onclick="event.stopPropagation()">Alternatives to the !important Keyword</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Alternatives to the !important Keyword. Cascade layers, specificity tricks, smarter ordering, and...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/css-multi-column-layout-wrapping-features/" target="_blank" onclick="event.stopPropagation()">Looking at New CSS Multi-Column Layout Wrapping Features</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Looking at New CSS Multi-Column Layout Wrapping Features. Chrome 145 introduces the column-height...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/complex-css-shapes-with-shape-function/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/complex-css-shapes-with-shape-function/" target="_blank" onclick="event.stopPropagation()">Making Complex CSS Shapes Using shape()</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Making Complex CSS Shapes Using shape(). Creating rectangles, circles, and rounded rectangles is...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time. These are the historical pranks I...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/css-olfactive-api/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">Sniffing Out the CSS Olfactive API</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Sniffing Out the CSS Olfactive API. A deep sniff of the new CSS Olfactive API, a set of proposed...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+            </div>
+            
+        <section class="section">
+            <h2 class="section-title">Tools Updates</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/grainulation/grainulator', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/grainulation/grainulator" target="_blank" onclick="event.stopPropagation()">Claude Code plugin for LLM research with typed claims and conflict detection</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Claude Code plugin for LLM research with typed claims and conflict detection. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://featureflare.com/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://featureflare.com/" target="_blank" onclick="event.stopPropagation()">Show HN: Feature release system with MCP agent controls</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Show HN: Feature release system with MCP agent controls. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.siliconimist.com/p/tiny-tapeout-matt-venn', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.siliconimist.com/p/tiny-tapeout-matt-venn" target="_blank" onclick="event.stopPropagation()">Demystifying Open Silicon – Matt Venn Is Democratizing Chip Design</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · </div>
+                <div class="news-row-summary">Demystifying Open Silicon – Matt Venn Is Democratizing Chip Design. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.youtube.com/watch?v=Kohl9wy3S7g', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.youtube.com/watch?v=Kohl9wy3S7g" target="_blank" onclick="event.stopPropagation()">I wrote a WebAssembly plugin system for my Wayland compositor</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · </div>
+                <div class="news-row-summary">I wrote a WebAssembly plugin system for my Wayland compositor. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.youtube.com/watch?v=JO8EnzNfEk4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.youtube.com/watch?v=JO8EnzNfEk4" target="_blank" onclick="event.stopPropagation()">54kb Minecraft clone made without a graphics library [video]</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · </div>
+                <div class="news-row-summary">54kb Minecraft clone made without a graphics library [video]. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+        </div>
+        
+        <footer class="footer">
+            <span id="footer-source">数据来源: Figma, UX Collective, Dribbble, Designer News</span>
+        </footer>
+    </div>
+    
+    <script>
+        const i18n = {
+            title: { zh: 'ELARA DISPATCH', en: 'ELARA DISPATCH' },
+            date: { zh: '2026年04月09日 · 星期四', en: 'Apr 09, 2026 · Thu' },
+            data_source: { zh: '数据来源', en: 'Data Sources' }
+        };
+        
+        let currentLang = 'zh';
+        
+        function switchLang(lang) {
+            currentLang = lang;
+            
+            // 切换按钮状态
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-lang-btn="' + lang + '"]').classList.add('active');
+            
+            // 切换内容显示
+            document.querySelectorAll('.lang-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelector('.lang-content[data-lang="' + lang + '"]').classList.add('active');
+            
+            // 更新标题和日期
+            document.getElementById('page-title').textContent = i18n.title[lang];
+            document.getElementById('page-date').textContent = i18n.date[lang];
+            document.getElementById('footer-source').textContent = i18n.data_source[lang] + ': Figma, CSS-Tricks, HackerNews, GitHub';
+        }
+    </script>
+</body>
+</html>
