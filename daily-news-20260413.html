@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELARA DISPATCH | 2026年04月13日</title>
+    <style>
+        :root { --black: #000; --white: #fff; --gray: #666; --gray-light: #999; --accent: #ff3333; --border: #e5e5e5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        /* Header */
+        .header { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 30px; border-bottom: 1px solid var(--black); margin-bottom: 40px; }
+        .header-left { flex: 1; }
+        .header-title { font-size: 42px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; }
+        .header-subtitle { font-size: 14px; color: var(--gray); }
+        .header-right { text-align: right; }
+        .date-day { font-size: 56px; font-weight: 900; line-height: 0.9; }
+        .date-month { font-size: 13px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Lang Switch - Segment Style */
+        .lang-switch { 
+            display: inline-flex; 
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .lang-segment { 
+            display: flex;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--white);
+        }
+        .lang-btn { 
+            padding: 6px 16px; 
+            font-size: 13px; 
+            font-weight: 500; 
+            border: none;
+            background: var(--white); 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            color: var(--gray);
+        }
+        .lang-btn:first-child {
+            border-right: 1px solid var(--border);
+        }
+        .lang-btn:hover { 
+            color: var(--black);
+            background: var(--bg);
+        }
+        .lang-btn.active { 
+            background: var(--black); 
+            color: var(--white);
+        }
+        .lang-btn.active:hover { 
+            background: var(--black); 
+        }
+        
+        /* Focus */
+        .focus-section { margin-bottom: 50px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+        .focus-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+        .focus-title { font-size: 26px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; }
+        .focus-title a { color: var(--black); text-decoration: none; }
+        .focus-title a:hover { color: var(--accent); }
+        .focus-summary { font-size: 15px; color: var(--gray); line-height: 1.7; margin-bottom: 12px; }
+        .focus-meta { font-size: 12px; color: var(--gray-light); }
+        
+        /* Section */
+        .section { margin-bottom: 40px; }
+        .section-title { font-size: 18px; font-weight: 800; padding-bottom: 10px; border-bottom: 1px solid var(--black); margin-bottom: 20px; }
+        
+        /* News Row */
+        .news-row { display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
+        .news-row:hover { background: #fafafa; margin: 0 -12px; padding-left: 12px; padding-right: 12px; }
+        .news-row-content { flex: 1; padding-right: 16px; }
+        .news-row-title { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 6px; }
+        .news-row-title a { color: var(--black); text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-row-title a:hover { color: var(--accent); }
+        .news-row-meta { font-size: 12px; color: var(--gray-light); margin-bottom: 6px; }
+        .hot-tag { color: var(--accent); font-weight: 700; }
+        .news-row-summary { font-size: 13px; color: var(--gray); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-row-arrow { color: var(--gray-light); font-size: 20px; font-weight: 300; flex-shrink: 0; margin-top: 4px; }
+        .news-row:hover .news-row-arrow { color: var(--black); }
+        
+        /* Grid */
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        /* Footer */
+        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--black); display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-light); }
+        .footer a { color: var(--gray-light); text-decoration: none; }
+        .footer a:hover { color: var(--black); }
+        
+        /* Language Content */
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 24px 16px; }
+            .header { flex-direction: row; align-items: center; gap: 12px; }
+            .header-title { font-size: 28px; }
+            .header-subtitle { font-size: 12px; }
+            .date-day { font-size: 36px; }
+            .content-grid { grid-template-columns: 1fr; gap: 30px; }
+            .lang-switch { margin-bottom: 12px; }
+            .lang-btn { padding: 5px 12px; font-size: 12px; }
+            .focus-title { font-size: 22px; }
+            .focus-section { margin-bottom: 36px; padding-bottom: 30px; }
+            .section { margin-bottom: 30px; }
+            .news-row { padding: 14px 0; }
+            .news-row:hover { margin: 0; padding-left: 0; padding-right: 0; }
+            .news-row-title { font-size: 15px; }
+            .news-row-summary { font-size: 12px; }
+        }
+        
+        @media (max-width: 480px) {
+            .header-title { font-size: 24px; }
+            .date-day { font-size: 32px; }
+            .focus-title { font-size: 20px; }
+            .section-title { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 语言切换 - Segment风格，左对齐 -->
+        <div class="lang-switch">
+            <div class="lang-segment">
+                <button class="lang-btn active" onclick="switchLang('zh')" data-lang-btn="zh">中文</button>
+                <button class="lang-btn" onclick="switchLang('en')" data-lang-btn="en">EN</button>
+            </div>
+        </div>
+        
+        <header class="header">
+            <div class="header-left">
+                <h1 class="header-title" id="page-title">ELARA DISPATCH</h1>
+                <p class="header-subtitle" id="page-date">2026年04月13日 · 星期一</p>
+            </div>
+            <div class="header-right">
+                <div class="date-day">13</div>
+                <div class="date-month">Apr 2026</div>
+            </div>
+        </header>
+        
+        <!-- 中文内容 -->
+        <div class="lang-content active" data-lang="zh">
+            
+        <section class="focus-section">
+            <div class="focus-label">焦点报道</div>
+            <h2 class="focus-title">
+                <a href="https://uxdesign.cc/designing-adaptive-teams-cee73e55013d?source=rss----138adf9c44c---4" target="_blank">Designing adaptive teams</a>
+            </h2>
+            <p class="focus-summary">Designing adaptive teams.systemic 分析的Peter Senge’s learning organisation within the...</p>
+            <div class="focus-meta">UX Collective · 今日</div>
+        </section>
+            
+        <section class="section">
+            <h2 class="section-title">AI × 设计</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/redshadow912/ReceiptBot', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/redshadow912/ReceiptBot" target="_blank" onclick="event.stopPropagation()">ReceiptBot – Stop Node.js AI agents from reading.env和burning your budget</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">ReceiptBot – Stop Node.js AI agents from reading.env和burning your budget. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://imageditor.net/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://imageditor.net/" target="_blank" onclick="event.stopPropagation()">HN展示: Yet another AI image ediotr和generator</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">HN展示: Yet another AI image ediotr和generator. Article URL: https://imageditor.net/ Comments...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://majorcontext.com/moat/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://majorcontext.com/moat/" target="_blank" onclick="event.stopPropagation()">Moat: Run AI agents在isolated containers</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · </div>
+                <div class="news-row-summary">Moat: Run AI agents在isolated containers. Article URL: https://majorcontext.com/moat/ Comments...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/nehloo/graphAI', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/nehloo/graphAI" target="_blank" onclick="event.stopPropagation()">GraphAI – dual-graph $0 knowledge system使用AI-native binary format</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · </div>
+                <div class="news-row-summary">GraphAI – dual-graph $0 knowledge system使用AI-native binary format. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/ashxco/piedpiper', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/ashxco/piedpiper" target="_blank" onclick="event.stopPropagation()">HN展示:virtual office 在哪里 you watch your AI agents code</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · </div>
+                <div class="news-row-summary">HN展示:virtual office 在哪里 you watch your AI agents code. I runlot的Claude agents at once...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+            <div class="content-grid">
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">交互/体验</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/most-products-dont-need-tone-of-voice-they-need-a-point-cf37f7c752ac?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/most-products-dont-need-tone-of-voice-they-need-a-point-cf37f7c752ac?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Most products don’t need tone的voice — they needpoint</a>
+                </div>
+                <div class="news-row-meta">UX Collective · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Most products don’t need tone的voice — they needpoint. Instead的BS rules that no one will...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/designing-adaptive-teams-cee73e55013d?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/designing-adaptive-teams-cee73e55013d?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Designing adaptive teams</a>
+                </div>
+                <div class="news-row-meta">UX Collective · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Designing adaptive teams.systemic 分析的Peter Senge’s learning organisation within the...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">trust-latency gap: 为什么 future的UX是intentionally slower</a>
+                </div>
+                <div class="news-row-meta">UX Collective · </div>
+                <div class="news-row-summary">trust-latency gap: 为什么 future的UX是intentionally slower. As AI compresses decisions...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/rethinking-design-critique-3d358a859304?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/rethinking-design-critique-3d358a859304?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Rethinking 设计 critique</a>
+                </div>
+                <div class="news-row-meta">UX Collective · </div>
+                <div class="news-row-summary">Rethinking 设计 critique. Building 设计 knowledge throughcollaborative processContinue...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/notes-from-the-people-building-your-future-2a1c7a9dfbcd?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/notes-from-the-people-building-your-future-2a1c7a9dfbcd?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Notes from people building your future</a>
+                </div>
+                <div class="news-row-meta">UX Collective · </div>
+                <div class="news-row-summary">Notes from people building your future. companies disrupting your career是now...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">行业声音</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://www.anildash.com/2026/04/06/people-love-to-work-hard/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.anildash.com/2026/04/06/people-love-to-work-hard/" target="_blank" onclick="event.stopPropagation()">Actually, people love到work hard</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Actually, people love到work hard. 何时 effort stems from purpose, agency,和trust, rather than...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.printmag.com/designer-interviews/james-junk-is-the-voice-design-needs-now/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.printmag.com/designer-interviews/james-junk-is-the-voice-design-needs-now/" target="_blank" onclick="event.stopPropagation()">James Junk是voice 设计 needs now</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">James Junk是voice 设计 needs now. Redefining 什么是 it means到becreative在age of...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://titlescream.cameronaskin.com/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://titlescream.cameronaskin.com/" target="_blank" onclick="event.stopPropagation()">Title Scream</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · </div>
+                <div class="news-row-summary">Title Scream. Type + Graphic inspiration from 8/16bit games.</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://martinfowler.com/articles/mechanical-sympathy-principles.html', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://martinfowler.com/articles/mechanical-sympathy-principles.html" target="_blank" onclick="event.stopPropagation()">Principles的mechanical sympathy</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · </div>
+                <div class="news-row-summary">Principles的mechanical sympathy. Memory access patterns, false sharing, single-writer...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://mitchellh.com/writing/building-block-economy', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://mitchellh.com/writing/building-block-economy" target="_blank" onclick="event.stopPropagation()">building block economy</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · </div>
+                <div class="news-row-summary">building block economy. 如何 "building blocks" thrive by letting AI和niche users handle the...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">趋势灵感</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/04/07/work-in-progress-part-16', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/04/07/work-in-progress-part-16" target="_blank" onclick="event.stopPropagation()">Work在Progress, Part 16 🚧</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Work在Progress, Part 16 🚧.</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/03/16/the-golden-age-of-women-s-sports-branding-is-here-and-designers-are-leading-it', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/03/16/the-golden-age-of-women-s-sports-branding-is-here-and-designers-are-leading-it" target="_blank" onclick="event.stopPropagation()">golden age的women’s sports branding是here,和designers是leading it.</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">golden age的women’s sports branding是here,和designers是leading it..</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/03/06/designing-their-own-paths-women-in-the-dribbble-community-share-their-stories', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/03/06/designing-their-own-paths-women-in-the-dribbble-community-share-their-stories" target="_blank" onclick="event.stopPropagation()">Designing their own paths: Women在Dribbble community share their stories</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · </div>
+                <div class="news-row-summary">Designing their own paths: Women在Dribbble community share their stories.</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control" target="_blank" onclick="event.stopPropagation()">如何 Exposure Works在Dribbble (and 什么是 You Can Actually Control)</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · </div>
+                <div class="news-row-summary">如何 Exposure Works在Dribbble (and 什么是 You Can Actually Control).</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients" target="_blank" onclick="event.stopPropagation()">如何 Share Your Work在Dribbble (While Attracting Right Clients)</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · </div>
+                <div class="news-row-summary">如何 Share Your Work在Dribbble (While Attracting Right Clients).</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">UI/视觉</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://css-tricks.com/selecting-a-date-range-in-css/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/selecting-a-date-range-in-css/" target="_blank" onclick="event.stopPropagation()">SelectingDate Range在CSS</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">SelectingDate Range在CSS.clever approach用于selecting multiple dates在a calendar 在哪里...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/alternatives-to-the-important-keyword/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/alternatives-to-the-important-keyword/" target="_blank" onclick="event.stopPropagation()">Alternatives到!important Keyword</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Alternatives到!important Keyword. Cascade layers, specificity 窍门, smarter ordering, and...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/css-multi-column-layout-wrapping-features/" target="_blank" onclick="event.stopPropagation()">Looking at 新 CSS Multi-Column 布局 Wrapping Features</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Looking at 新 CSS Multi-Column 布局 Wrapping Features. Chrome 145 introduces column-height...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/complex-css-shapes-with-shape-function/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/complex-css-shapes-with-shape-function/" target="_blank" onclick="event.stopPropagation()">Making Complex CSS Shapes使用shape()</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Making Complex CSS Shapes使用shape(). Creating rectangles, circles,和rounded rectangles is...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">前端 Fools: 热门 10 April Fools’ UI Pranks的All Time</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">前端 Fools: 热门 10 April Fools’ UI Pranks的All Time. These是historical pranks I...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+            </div>
+            
+        <section class="section">
+            <h2 class="section-title">工具动态</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/nehloo/graphAI', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/nehloo/graphAI" target="_blank" onclick="event.stopPropagation()">GraphAI – dual-graph $0 knowledge system使用AI-native binary format</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">GraphAI – dual-graph $0 knowledge system使用AI-native binary format. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.washingtonpost.com/nation/2026/04/12/mississippi-liquor-sales-breakdown/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.washingtonpost.com/nation/2026/04/12/mississippi-liquor-sales-breakdown/" target="_blank" onclick="event.stopPropagation()">Ongoing system issues w/ state distributor has Mississippi running out的liquor</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · <span class="hot-tag">热门</span></div>
+                <div class="news-row-summary">Ongoing system issues w/ state distributor has Mississippi running out的liquor. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.youtube.com/watch?v=sdWEGzWFcCc', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.youtube.com/watch?v=sdWEGzWFcCc" target="_blank" onclick="event.stopPropagation()">Oilfield Units:Measurement System so Cursed it made me Change Career [video]</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · </div>
+                <div class="news-row-summary">Oilfield Units:Measurement System so Cursed it made me Change Career [video]. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://kubekattle.github.io/ktl/blog/vibin-is-easy-its-all-about-data-and-design-now.html', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://kubekattle.github.io/ktl/blog/vibin-is-easy-its-all-about-data-and-design-now.html" target="_blank" onclick="event.stopPropagation()">Vibin'是Easy: It's All About Data和设计 Now</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · </div>
+                <div class="news-row-summary">Vibin'是Easy: It's All About Data和设计 Now. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://drive.google.com/file/d/1tsVV7tPQks3x70wMoJJYhuywSboaxKs0/view?usp=drivesdk', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://drive.google.com/file/d/1tsVV7tPQks3x70wMoJJYhuywSboaxKs0/view?usp=drivesdk" target="_blank" onclick="event.stopPropagation()">Specs用于Quantum Processor 设计</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · </div>
+                <div class="news-row-summary">Specs用于Quantum Processor 设计. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+        </div>
+        
+        <!-- 英文内容 -->
+        <div class="lang-content" data-lang="en">
+            
+        <section class="focus-section">
+            <div class="focus-label">FOCUS STORY</div>
+            <h2 class="focus-title">
+                <a href="https://uxdesign.cc/designing-adaptive-teams-cee73e55013d?source=rss----138adf9c44c---4" target="_blank">Designing adaptive teams</a>
+            </h2>
+            <p class="focus-summary">Designing adaptive teams. A systemic analysis of Peter Senge’s learning organisation within the...</p>
+            <div class="focus-meta">UX Collective · Today</div>
+        </section>
+            
+        <section class="section">
+            <h2 class="section-title">AI × Design</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/redshadow912/ReceiptBot', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/redshadow912/ReceiptBot" target="_blank" onclick="event.stopPropagation()">ReceiptBot – Stop Node.js AI agents from reading .env and burning your budget</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">ReceiptBot – Stop Node.js AI agents from reading .env and burning your budget. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://imageditor.net/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://imageditor.net/" target="_blank" onclick="event.stopPropagation()">Show HN: Yet another AI image ediotr and generator</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Show HN: Yet another AI image ediotr and generator. Article URL: https://imageditor.net/
+Comments...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://majorcontext.com/moat/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://majorcontext.com/moat/" target="_blank" onclick="event.stopPropagation()">Moat: Run AI agents in isolated containers</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · </div>
+                <div class="news-row-summary">Moat: Run AI agents in isolated containers. Article URL: https://majorcontext.com/moat/
+Comments...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/nehloo/graphAI', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/nehloo/graphAI" target="_blank" onclick="event.stopPropagation()">GraphAI – dual-graph $0 knowledge system with AI-native binary format</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · </div>
+                <div class="news-row-summary">GraphAI – dual-graph $0 knowledge system with AI-native binary format. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://github.com/ashxco/piedpiper', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/ashxco/piedpiper" target="_blank" onclick="event.stopPropagation()">Show HN: A virtual office where you watch your AI agents code</a>
+                </div>
+                <div class="news-row-meta">HN AI Design · </div>
+                <div class="news-row-summary">Show HN: A virtual office where you watch your AI agents code. I run a lot of Claude agents at once...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+            <div class="content-grid">
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">UX / Interaction</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/most-products-dont-need-tone-of-voice-they-need-a-point-cf37f7c752ac?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/most-products-dont-need-tone-of-voice-they-need-a-point-cf37f7c752ac?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Most products don’t need tone of voice — they need a point</a>
+                </div>
+                <div class="news-row-meta">UX Collective · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Most products don’t need tone of voice — they need a point. Instead of BS rules that no one will...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/designing-adaptive-teams-cee73e55013d?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/designing-adaptive-teams-cee73e55013d?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Designing adaptive teams</a>
+                </div>
+                <div class="news-row-meta">UX Collective · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Designing adaptive teams. A systemic analysis of Peter Senge’s learning organisation within the...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">The trust-latency gap: why the future of UX is intentionally slower</a>
+                </div>
+                <div class="news-row-meta">UX Collective · </div>
+                <div class="news-row-summary">The trust-latency gap: why the future of UX is intentionally slower. As AI compresses decisions...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/rethinking-design-critique-3d358a859304?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/rethinking-design-critique-3d358a859304?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Rethinking design critique</a>
+                </div>
+                <div class="news-row-meta">UX Collective · </div>
+                <div class="news-row-summary">Rethinking design critique. Building design knowledge through a collaborative processContinue...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://uxdesign.cc/notes-from-the-people-building-your-future-2a1c7a9dfbcd?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://uxdesign.cc/notes-from-the-people-building-your-future-2a1c7a9dfbcd?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Notes from the people building your future</a>
+                </div>
+                <div class="news-row-meta">UX Collective · </div>
+                <div class="news-row-summary">Notes from the people building your future. The companies disrupting your career are now...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">Industry Voice</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://www.anildash.com/2026/04/06/people-love-to-work-hard/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.anildash.com/2026/04/06/people-love-to-work-hard/" target="_blank" onclick="event.stopPropagation()">Actually, people love to work hard</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Actually, people love to work hard. When effort stems from purpose, agency, and trust, rather than...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.printmag.com/designer-interviews/james-junk-is-the-voice-design-needs-now/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.printmag.com/designer-interviews/james-junk-is-the-voice-design-needs-now/" target="_blank" onclick="event.stopPropagation()">James Junk is the voice design needs now</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">James Junk is the voice design needs now. Redefining what it means to be a creative in the age of...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://titlescream.cameronaskin.com/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://titlescream.cameronaskin.com/" target="_blank" onclick="event.stopPropagation()">Title Scream</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · </div>
+                <div class="news-row-summary">Title Scream. Type + Graphic inspiration from 8/16bit games.</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://martinfowler.com/articles/mechanical-sympathy-principles.html', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://martinfowler.com/articles/mechanical-sympathy-principles.html" target="_blank" onclick="event.stopPropagation()">Principles of mechanical sympathy</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · </div>
+                <div class="news-row-summary">Principles of mechanical sympathy. Memory access patterns, false sharing, the single-writer...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://mitchellh.com/writing/building-block-economy', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://mitchellh.com/writing/building-block-economy" target="_blank" onclick="event.stopPropagation()">The building block economy</a>
+                </div>
+                <div class="news-row-meta">Sidebar.io · </div>
+                <div class="news-row-summary">The building block economy. How "building blocks" thrive by letting AI and niche users handle the...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+                <div class="column">
+                    
+        <section class="section">
+            <h2 class="section-title">Trends & Inspiration</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/04/07/work-in-progress-part-16', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/04/07/work-in-progress-part-16" target="_blank" onclick="event.stopPropagation()">Work In Progress, Part 16 🚧</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Work In Progress, Part 16 🚧. </div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/03/16/the-golden-age-of-women-s-sports-branding-is-here-and-designers-are-leading-it', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/03/16/the-golden-age-of-women-s-sports-branding-is-here-and-designers-are-leading-it" target="_blank" onclick="event.stopPropagation()">The golden age of women’s sports branding is here, and designers are leading it.</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">The golden age of women’s sports branding is here, and designers are leading it.. </div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/03/06/designing-their-own-paths-women-in-the-dribbble-community-share-their-stories', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/03/06/designing-their-own-paths-women-in-the-dribbble-community-share-their-stories" target="_blank" onclick="event.stopPropagation()">Designing their own paths: Women in the Dribbble community share their stories</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · </div>
+                <div class="news-row-summary">Designing their own paths: Women in the Dribbble community share their stories. </div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control" target="_blank" onclick="event.stopPropagation()">How Exposure Works on Dribbble (and What You Can Actually Control)</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · </div>
+                <div class="news-row-summary">How Exposure Works on Dribbble (and What You Can Actually Control). </div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients" target="_blank" onclick="event.stopPropagation()">How to Share Your Work on Dribbble (While Attracting the Right Clients)</a>
+                </div>
+                <div class="news-row-meta">Dribbble Stories · </div>
+                <div class="news-row-summary">How to Share Your Work on Dribbble (While Attracting the Right Clients). </div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                    
+        <section class="section">
+            <h2 class="section-title">UI / Visual</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://css-tricks.com/selecting-a-date-range-in-css/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/selecting-a-date-range-in-css/" target="_blank" onclick="event.stopPropagation()">Selecting a Date Range in CSS</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Selecting a Date Range in CSS. A clever approach for selecting multiple dates on a calendar where...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/alternatives-to-the-important-keyword/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/alternatives-to-the-important-keyword/" target="_blank" onclick="event.stopPropagation()">Alternatives to the !important Keyword</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Alternatives to the !important Keyword. Cascade layers, specificity tricks, smarter ordering, and...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/css-multi-column-layout-wrapping-features/" target="_blank" onclick="event.stopPropagation()">Looking at New CSS Multi-Column Layout Wrapping Features</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Looking at New CSS Multi-Column Layout Wrapping Features. Chrome 145 introduces the column-height...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/complex-css-shapes-with-shape-function/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/complex-css-shapes-with-shape-function/" target="_blank" onclick="event.stopPropagation()">Making Complex CSS Shapes Using shape()</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Making Complex CSS Shapes Using shape(). Creating rectangles, circles, and rounded rectangles is...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a>
+                </div>
+                <div class="news-row-meta">CSS-Tricks · </div>
+                <div class="news-row-summary">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time. These are the historical pranks I...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+                </div>
+            </div>
+            
+        <section class="section">
+            <h2 class="section-title">Tools Updates</h2>
+            <div class="section-content">
+        <div class="news-row" onclick="window.open('https://github.com/nehloo/graphAI', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://github.com/nehloo/graphAI" target="_blank" onclick="event.stopPropagation()">GraphAI – dual-graph $0 knowledge system with AI-native binary format</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">GraphAI – dual-graph $0 knowledge system with AI-native binary format. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.washingtonpost.com/nation/2026/04/12/mississippi-liquor-sales-breakdown/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.washingtonpost.com/nation/2026/04/12/mississippi-liquor-sales-breakdown/" target="_blank" onclick="event.stopPropagation()">Ongoing system issues w/ state distributor has Mississippi running out of liquor</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · <span class="hot-tag">HOT</span></div>
+                <div class="news-row-summary">Ongoing system issues w/ state distributor has Mississippi running out of liquor. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://www.youtube.com/watch?v=sdWEGzWFcCc', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://www.youtube.com/watch?v=sdWEGzWFcCc" target="_blank" onclick="event.stopPropagation()">Oilfield Units: a Measurement System so Cursed it made me Change Career [video]</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · </div>
+                <div class="news-row-summary">Oilfield Units: a Measurement System so Cursed it made me Change Career [video]. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://kubekattle.github.io/ktl/blog/vibin-is-easy-its-all-about-data-and-design-now.html', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://kubekattle.github.io/ktl/blog/vibin-is-easy-its-all-about-data-and-design-now.html" target="_blank" onclick="event.stopPropagation()">Vibin' Is Easy: It's All About Data and Design Now</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · </div>
+                <div class="news-row-summary">Vibin' Is Easy: It's All About Data and Design Now. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div>
+        <div class="news-row" onclick="window.open('https://drive.google.com/file/d/1tsVV7tPQks3x70wMoJJYhuywSboaxKs0/view?usp=drivesdk', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title">
+                    <a href="https://drive.google.com/file/d/1tsVV7tPQks3x70wMoJJYhuywSboaxKs0/view?usp=drivesdk" target="_blank" onclick="event.stopPropagation()">Specs for Quantum Processor Design</a>
+                </div>
+                <div class="news-row-meta">HN Design Tools · </div>
+                <div class="news-row-summary">Specs for Quantum Processor Design. Article URL:...</div>
+            </div>
+            <div class="news-row-arrow">→</div>
+        </div></div>
+        </section>
+        </div>
+        
+        <footer class="footer">
+            <span id="footer-source">数据来源: Figma, UX Collective, Dribbble, Designer News</span>
+        </footer>
+    </div>
+    
+    <script>
+        const i18n = {
+            title: { zh: 'ELARA DISPATCH', en: 'ELARA DISPATCH' },
+            date: { zh: '2026年04月13日 · 星期一', en: 'Apr 13, 2026 · Mon' },
+            data_source: { zh: '数据来源', en: 'Data Sources' }
+        };
+        
+        let currentLang = 'zh';
+        
+        function switchLang(lang) {
+            currentLang = lang;
+            
+            // 切换按钮状态
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-lang-btn="' + lang + '"]').classList.add('active');
+            
+            // 切换内容显示
+            document.querySelectorAll('.lang-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelector('.lang-content[data-lang="' + lang + '"]').classList.add('active');
+            
+            // 更新标题和日期
+            document.getElementById('page-title').textContent = i18n.title[lang];
+            document.getElementById('page-date').textContent = i18n.date[lang];
+            document.getElementById('footer-source').textContent = i18n.data_source[lang] + ': Figma, CSS-Tricks, HackerNews, GitHub';
+        }
+    </script>
+</body>
+</html>
