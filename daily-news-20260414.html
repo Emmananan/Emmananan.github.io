@@ -1,812 +1,484 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELARA DISPATCH | 2026年04月14日</title>
-    <style>
-        :root { --black: #000; --white: #fff; --gray: #666; --gray-light: #999; --accent: #ff3333; --border: #e5e5e5; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
-        
-        /* Header */
-        .header { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 30px; border-bottom: 1px solid var(--black); margin-bottom: 40px; }
-        .header-left { flex: 1; }
-        .header-title { font-size: 42px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; }
-        .header-subtitle { font-size: 14px; color: var(--gray); }
-        .header-right { text-align: right; }
-        .date-day { font-size: 56px; font-weight: 900; line-height: 0.9; }
-        .date-month { font-size: 13px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* Lang Switch - Segment Style */
-        .lang-switch { 
-            display: inline-flex; 
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        .lang-segment { 
-            display: flex;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            overflow: hidden;
-            background: var(--white);
-        }
-        .lang-btn { 
-            padding: 6px 16px; 
-            font-size: 13px; 
-            font-weight: 500; 
-            border: none;
-            background: var(--white); 
-            cursor: pointer; 
-            transition: all 0.2s; 
-            color: var(--gray);
-        }
-        .lang-btn:first-child {
-            border-right: 1px solid var(--border);
-        }
-        .lang-btn:hover { 
-            color: var(--black);
-            background: var(--bg);
-        }
-        .lang-btn.active { 
-            background: var(--black); 
-            color: var(--white);
-        }
-        .lang-btn.active:hover { 
-            background: var(--black); 
-        }
-        
-        /* Focus */
-        .focus-section { margin-bottom: 50px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
-        .focus-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-        .focus-title { font-size: 26px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; }
-        .focus-title a { color: var(--black); text-decoration: none; }
-        .focus-title a:hover { color: var(--accent); }
-        .focus-summary { font-size: 15px; color: var(--gray); line-height: 1.7; margin-bottom: 12px; }
-        .focus-editor-note { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 12px; padding: 6px 12px; background: rgba(255,51,51,0.06); border-radius: 6px; border-left: 3px solid var(--accent); }
-        .focus-meta { font-size: 12px; color: var(--gray-light); }
-        
-        /* Section */
-        .section { margin-bottom: 40px; }
-        .section-title { font-size: 18px; font-weight: 800; padding-bottom: 10px; border-bottom: 1px solid var(--black); margin-bottom: 20px; }
-        
-        /* News Row */
-        .news-row { display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: all 0.2s; }
-        .news-row:hover { background: #fafafa; margin: 0 -12px; padding-left: 12px; padding-right: 12px; }
-        .news-row-content { flex: 1; padding-right: 16px; }
-        .news-row-title { font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 6px; }
-        .news-row-title a { color: var(--black); text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .news-row-title a:hover { color: var(--accent); }
-        .news-row-meta { font-size: 12px; color: var(--gray-light); margin-bottom: 6px; }
-        .hot-tag { color: var(--accent); font-weight: 700; }
-        .news-row-summary { font-size: 13px; color: var(--gray); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .editor-note { font-size: 12px; color: #7B8FA3; font-weight: 500; margin-top: 6px; padding: 3px 8px; background: rgba(123,143,163,0.08); border-radius: 4px; display: inline-block; }
-        .editor-note-hot { color: var(--accent); background: rgba(255,51,51,0.06); }
-        .news-row-arrow { color: var(--gray-light); font-size: 20px; font-weight: 300; flex-shrink: 0; margin-top: 4px; }
-        .news-row:hover .news-row-arrow { color: var(--black); }
-        
-        /* Grid */
-        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        
-        /* Footer */
-        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--black); display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-light); }
-        .footer a { color: var(--gray-light); text-decoration: none; }
-        .footer a:hover { color: var(--black); }
-        
-        /* Language Content */
-        .lang-content { display: none; }
-        .lang-content.active { display: block; }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container { padding: 24px 16px; }
-            .header { flex-direction: row; align-items: center; gap: 12px; }
-            .header-title { font-size: 28px; }
-            .header-subtitle { font-size: 12px; }
-            .date-day { font-size: 36px; }
-            .content-grid { grid-template-columns: 1fr; gap: 30px; }
-            .lang-switch { margin-bottom: 12px; }
-            .lang-btn { padding: 5px 12px; font-size: 12px; }
-            .focus-title { font-size: 22px; }
-            .focus-section { margin-bottom: 36px; padding-bottom: 30px; }
-            .section { margin-bottom: 30px; }
-            .news-row { padding: 14px 0; }
-            .news-row:hover { margin: 0; padding-left: 0; padding-right: 0; }
-            .news-row-title { font-size: 15px; }
-            .news-row-summary { font-size: 12px; }
-            .editor-note { font-size: 11px; padding: 2px 6px; }
-        }
-        
-        @media (max-width: 480px) {
-            .header-title { font-size: 24px; }
-            .date-day { font-size: 32px; }
-            .focus-title { font-size: 20px; }
-            .section-title { font-size: 16px; }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- 语言切换 - Segment风格，左对齐 -->
-        <div class="lang-switch">
-            <div class="lang-segment">
-                <button class="lang-btn active" onclick="switchLang('zh')" data-lang-btn="zh">中文</button>
-                <button class="lang-btn" onclick="switchLang('en')" data-lang-btn="en">EN</button>
-            </div>
-        </div>
-        
-        <header class="header">
-            <div class="header-left">
-                <h1 class="header-title" id="page-title">ELARA DISPATCH</h1>
-                <p class="header-subtitle" id="page-date">2026年04月14日 · 星期二</p>
-            </div>
-            <div class="header-right">
-                <div class="date-day">14</div>
-                <div class="date-month">Apr 2026</div>
-            </div>
-        </header>
-        
-        <!-- 中文内容 -->
-        <div class="lang-content active" data-lang="zh">
-            
-        <section class="focus-section">
-            <div class="focus-label">焦点报道</div>
-            <h2 class="focus-title">
-                <a href="https://www.awwwards.com/ribbit-case-study.html" target="_blank">Ribbit — 案例研究</a>
-            </h2>
-            <p class="focus-summary">Ribbit 是一家位于哥本哈根的动效设计工作室，由五位长期合作的设计师共同创立。本案例深入拆解了 Ribbit 如何通过大胆的色彩运用、流畅的动效编排和极具表现力的视觉叙事，打造出令人过目难忘的品牌体验。</p>
-            <div class="focus-editor-note">💡 动效趋势更新，提升界面品质感</div>
-            <div class="focus-meta">Awwwards · 今日</div>
-        </section>
-            
-        <section class="section">
-            <h2 class="section-title">AI × 设计</h2>
-            <div class="section-content">
-        <div class="news-row" onclick="window.open('https://alistapart.com/article/opportunities-for-ai-in-accessibility/', '_blank')">
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ELARA DISPATCH — 2026-04-14</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#fafafa;color:#1a1a2e;line-height:1.6}
+.container{max-width:900px;margin:40px auto;padding:0 24px}.header{margin-bottom:48px;border-bottom:2px solid #1a1a2e;padding-bottom:16px}
+.header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.lang-switch{display:flex;border:1px solid #e0e0e0;border-radius:20px;overflow:hidden;font-size:13px}
+.lang-switch button{border:none;background:#fff;padding:8px 18px;cursor:pointer;font-weight:500;color:#666;transition:.2s}
+.lang-switch button.active{background:#1a1a2e;color:#fff}.page-title{font-size:36px;font-weight:800;letter-spacing:-0.02em}.page-date{color:#888;font-size:15px;margin-top:4px}
+
+.focus-section{background:#fff;border-radius:16px;padding:32px;margin-bottom:40px;box-shadow:0 2px 12px rgba(0,0,0,.04);border-left:4px solid #e74c3c}
+.focus-label{color:#e74c3c;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+.focus-title{font-size:26px;font-weight:700;line-height:1.3;margin-bottom:14px}.focus-title a{color:#1a1a2e;text-decoration:none}.focus-title a:hover{color:#e74c3c}
+.focus-summary{color:#555;font-size:15px;line-height:1.7;margin-bottom:16px}
+.focus-editor-note{background:rgba(231,76,60,.06);padding:12px 16px;border-left:3px solid #e74c3c;border-radius:0 8px 8px 0;font-size:14px;margin-bottom:12px;color:#c0392b}
+.focus-meta{color:#aaa;font-size:13px}
+
+.section{margin-bottom:36px}.section-title{font-size:19px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #eee}
+.news-row{background:#fff;border-radius:12px;padding:16px 20px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all .2s;border:1px solid transparent}
+.news-row:hover{box-shadow:0 4px 16px rgba(0,0,0,.06);border-color:#f0f0f0}
+.news-row-content{flex:1;min-width:0}.news-row-title{font-size:15px;font-weight:600;margin-bottom:4px}.news-row-title a{color:#1a1a2e;text-decoration:none}.news-row-title a:hover{color:#e74c3c}
+.news-row-meta{font-size:12px;color:#aaa;margin-bottom:4px}.hot-tag{background:#e74c3c;color:#fff;font-size:10px;padding:1px 8px;border-radius:10px;margin-left:6px;font-weight:600}
+.news-row-summary{font-size:13px;color:#777;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.news-row-arrow{color:#ccc;font-size:18px;margin-left:16px;flex-shrink:0}
+
+.editor-note{background:rgba(123,143,163,.08);color:#7B8FA3;font-size:12px;padding:6px 12px;border-radius:6px;margin-top:8px;display:inline-block}
+.editor-note-hot{background:rgba(231,76,60,.06);color:#e74c3c}.footer{text-align:center;color:#bbb;font-size:12px;padding:32px 0;border-top:1px solid #eee;margin-top:48px}
+.lang-content{display:none}.lang-content.active{display:block}@media(max-width:640px){.container{margin:20px auto;padding:0 16px}.page-title{font-size:28px}}</style></head><body>
+<div class="container"><div class="header"><div class="header-top">
+<div class="lang-switch"><button onclick="switchLang('zh')" id="btn-zh">中文</button><button onclick="switchLang('en')" id="btn-en">EN</button></div></div>
+<h1 class="page-title">ELARA DISPATCH</h1><p class="page-date">2026-04-14 · Tue</p></div>
+
+<div class="lang-content active" data-lang="zh"><section class="focus-section"><div class="focus-label">焦点报道</div>
+<h2 class="focus-title"><a href="https://heydesigner.com/newsletter/real-time-ui/" target="_blank">实时 UI</a></h2>
+<p class="focus-summary">UX Components, AI-native product 设计, UI 设计 Brain, Introducing Glaze, Beyond blur, Slots in a Figma 库, Agentic UX, and more.</p>
+<div class="focus-editor-note">💡 设计行业动态</div>
+<div class="focus-meta">HeyDesigner · 今日</div></section>
+<section class="section"><h2 class="section-title">AI × 设计</h2><div class="section-content"><div class="news-row" onclick="window.open('https://kirancodes.me/posts/log-distributed-llms.html', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://alistapart.com/article/opportunities-for-ai-in-accessibility/" target="_blank" onclick="event.stopPropagation()">AI 在无障碍设计中的机遇</a>
-                </div>
-                <div class="news-row-meta">A List Apart · </div>
-                <div class="news-row-summary">Joe Dolson 近期撰文探讨 AI 与无障碍设计的交叉领域。文章分析了 AI 工具如何帮助屏幕阅读器用户、自动生成替代文本、以及 AI 在提升数字产品可访问性方面的潜力与局限。</div>
-                <div class="editor-note ">💡 AI + 无障碍，技术向善的新方向</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://uxdesign.cc/social-media-on-trial-32be44a6434e?source=rss----138adf9c44c---4', '_blank')">
+                <div class="news-row-title"><a href="https://kirancodes.me/posts/log-distributed-llms.html" target="_blank" onclick="event.stopPropagation()">Multi-Agentic Software Development Is a Distributed Systems Problem</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://kirancodes.me/posts/log-distributed-llms.html
+Comments URL: https://news.ycombinator.com/item?id=47...</div>
+                <div class="editor-note">💡 AI × 设计交叉动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://tanstack.com/blog/react-server-components', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://uxdesign.cc/social-media-on-trial-32be44a6434e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">社交媒体受审：设计如何瞄准弱势儿童</a>
-                </div>
-                <div class="news-row-meta">UX Collective · </div>
-                <div class="news-row-summary">本文探讨了社交平台如何利用产品设计手段吸引并影响未成年用户。从无限滚动到推送算法，设计决策在用户留存与伦理边界之间引发了激烈争论。</div>
-                <div class="editor-note ">💡 产品伦理议题——设计师的责任边界在哪？</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://uxdesign.cc/taste-md-e4fb75d9096f?source=rss----138adf9c44c---4', '_blank')">
+                <div class="news-row-title"><a href="https://tanstack.com/blog/react-server-components" target="_blank" onclick="event.stopPropagation()">TanStack Start Now Support React Server Components</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://tanstack.com/blog/react-server-components
+Comments URL: https://news.ycombinator.com/item?id=477616...</div>
+                <div class="editor-note">💡 AI × 设计交叉动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://github.com/asgeirtj/system_prompts_leaks/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://uxdesign.cc/taste-md-e4fb75d9096f?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">品味.md——科技圈新热词</a>
-                </div>
-                <div class="news-row-meta">UX Collective · </div>
-                <div class="news-row-summary">"品味"正在成为科技和设计领域的最新流行词。但到底什么是好的品味？它是可以习得的吗？作者从设计评审的角度重新审视了这个被过度使用却鲜少定义的概念。</div>
-                <div class="editor-note ">💡 「品味」能定义吗？值得反思</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div></div>
-        </section>
-            <div class="content-grid">
-                <div class="column">
-                    
-        <section class="section">
-            <h2 class="section-title">交互/体验</h2>
-            <div class="section-content">
-        <div class="news-row" onclick="window.open('https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4', '_blank')">
+                <div class="news-row-title"><a href="https://github.com/asgeirtj/system_prompts_leaks/" target="_blank" onclick="event.stopPropagation()">Extracted 系统 Prompts from ChatGPT, Claude, Gemini, Grok, Perplexity and More</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://github.com/asgeirtj/system_prompts_leaks/
+Comments URL: https://news.ycombinator.com/item?id=477611...</div>
+                <div class="editor-note">💡 AI × 设计交叉动态</div>
+            </div><div class="news-row-arrow">→</div></div></div></section>
+<section class="section"><h2 class="section-title">交互/体验</h2><div class="section-content"><div class="news-row" onclick="window.open('https://alistapart.com/article/user-research-is-storytelling/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">信任-延迟差距：为什么未来的 UX 会刻意慢下来</a>
-                </div>
-                <div class="news-row-meta">UX Collective · </div>
-                <div class="news-row-summary">随着 AI 压缩了决策时间，「即时响应」是否仍是体验的金标准？本文提出「信任-延迟差距」概念——在某些场景中，适度的等待反而能建立信任。这对 UX 设计范式提出了全新挑战。</div>
-                <div class="editor-note ">💡 「慢 UX」理念值得深思——不是所有体验都要快</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://www.nngroup.com/news/item/new-ai-specialty/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication', '_blank')">
+                <div class="news-row-title"><a href="https://alistapart.com/article/user-research-is-storytelling/" target="_blank" onclick="event.stopPropagation()">User Research Is Storytelling</a></div>
+                <div class="news-row-meta">A List Apart</div>
+                <div class="news-row-summary">Ever since I was a boy, I’ve been fascinated with movies. I loved characters and excitement—but most of all stories. I w...</div>
+                <div class="editor-note">💡 用研方法论更新，值得实操参考</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://www.nngroup.com/news/item/new-ai-specialty/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication" target="_blank" onclick="event.stopPropagation()">尼尔森诺曼集团推出 UX 认证 AI 专业方向</a>
-                </div>
-                <div class="news-row-meta">Nielsen Norman · </div>
-                <div class="news-row-summary">尼尔森诺曼集团（NN/g）正式宣布在其 UX 认证体系中新增人工智能专业方向。这一举措标志着 UX 行业正式将 AI 能力纳入核心职业能力框架，对从业者技能发展具有风向标意义。</div>
-                <div class="editor-note ">💡 UX 专业认证动态，职业发展参考</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/04/legacy-systems/', '_blank')">
+                <div class="news-row-title"><a href="https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">信任-延迟差距：为什么未来的 UX 会刻意慢下来</a></div>
+                <div class="news-row-meta">UX Collective</div>
+                <div class="news-row-summary">As AI compresses decisions into milliseconds, designers who thrive will be ones who know when to slow things down — and ...</div>
+                <div class="editor-note">💡 「慢 UX」理念值得深思——不是所有体验都要快</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://www.nngroup.com/news/item/new-ai-specialty/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://www.smashingmagazine.com/2026/04/legacy-systems/" target="_blank" onclick="event.stopPropagation()">如何在遗留系统中改进用户体验</a>
-                </div>
-                <div class="news-row-meta">Smashing Magazine · </div>
-                <div class="news-row-summary">面对代码陈旧、架构僵化的遗留系统，UX 改进从何入手？本文提供了一套实用的方法论：从快速审计到渐进式重构，帮助团队在不推翻重来的前提下显著提升用户体验。</div>
-                <div class="editor-note ">💡 实操教程，收藏备用</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/testing-font-scaling-accessibility-figma-variables/', '_blank')">
+                <div class="news-row-title"><a href="https://www.nngroup.com/news/item/new-ai-specialty/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication" target="_blank" onclick="event.stopPropagation()">尼尔森诺曼集团推出 UX 认证 AI 专业方向</a></div>
+                <div class="news-row-meta">Nielsen Norman</div>
+                <div class="news-row-summary">NNGroup is excited to announce NN/G UX Certification program’s newest specialty: Artificial Intelligence (AI). As AI res...</div>
+                <div class="editor-note">💡 UX 专业认证动态，职业发展参考</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://alistapart.com/article/opportunities-for-ai-in-accessibility/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://www.smashingmagazine.com/2026/03/testing-font-scaling-accessibility-figma-variables/" target="_blank" onclick="event.stopPropagation()">用 Figma 变量测试字体缩放的无障碍性</a>
-                </div>
-                <div class="news-row-meta">Smashing Magazine · </div>
-                <div class="news-row-summary">无障碍设计中，字体缩放是基础却常被忽视的一环。本文演示了如何利用 Figma 变量功能模拟不同字体缩放场景，在设计阶段就提前验证界面的可访问性和适配效果。</div>
-                <div class="editor-note ">💡 无障碍设计不是可选项，是基本功</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/modal-separate-page-ux-decision-tree/', '_blank')">
+                <div class="news-row-title"><a href="https://alistapart.com/article/opportunities-for-ai-in-accessibility/" target="_blank" onclick="event.stopPropagation()">AI 在无障碍设计中的机遇</a></div>
+                <div class="news-row-meta">A List Apart</div>
+                <div class="news-row-summary">In reading Joe Dolson’s recent piece on intersection of AI and accessibility, I absolutely appreciated skepticism that h...</div>
+                <div class="editor-note">💡 无障碍设计不是可选项，是基本功</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://uxdesign.cc/rethinking-design-critique-3d358a859304?source=rss----138adf9c44c---4', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://www.smashingmagazine.com/2026/03/modal-separate-page-ux-decision-tree/" target="_blank" onclick="event.stopPropagation()">弹窗 vs 独立页面：UX 决策指南</a>
-                </div>
-                <div class="news-row-meta">Smashing Magazine · </div>
-                <div class="news-row-summary">该用弹窗还是跳转独立页面？这是交互设计中最常见也最容易被随意处理的决策之一。本文提供了一棵清晰的决策树，帮助设计师根据内容复杂度、任务流程和上下文关系做出合理选择。</div>
-                <div class="editor-note ">💡 交互决策树——选弹窗还是独立页面？</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div></div>
-        </section>
-                    
-        <section class="section">
-            <h2 class="section-title">行业声音</h2>
-            <div class="section-content">
-        <div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/real-time-ui/', '_blank')">
+                <div class="news-row-title"><a href="https://uxdesign.cc/rethinking-design-critique-3d358a859304?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Rethinking 设计 critique</a></div>
+                <div class="news-row-meta">UX Collective</div>
+                <div class="news-row-summary">构建 设计 knowledge through a collaborative processContinue reading on UX Collective »</div>
+                <div class="editor-note">💡 设计评审方法论的反思，团队协作可借鉴</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://uxdesign.cc/social-media-on-trial-32be44a6434e?source=rss----138adf9c44c---4', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://heydesigner.com/newsletter/real-time-ui/" target="_blank" onclick="event.stopPropagation()">实时 UI 设计前沿</a>
-                </div>
-                <div class="news-row-meta">HeyDesigner · </div>
-                <div class="news-row-summary">本期涵盖：UX 组件库新动向、AI 原生产品设计思维、UI Design Brain 工具介绍、Glaze 新品发布，以及超越原型制作的 10 条流体 UI 原则。还有关于「品味不是截图」的热议话题。</div>
-                <div class="editor-note ">💡 有新品发布和新观点，值得关注</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/beyond-prototyping/', '_blank')">
+                <div class="news-row-title"><a href="https://uxdesign.cc/social-media-on-trial-32be44a6434e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">社交媒体受审：设计如何瞄准弱势儿童</a></div>
+                <div class="news-row-meta">UX Collective</div>
+                <div class="news-row-summary">How 设计 was used to target vulnerable childrenContinue reading on UX Collective »</div>
+                <div class="editor-note">💡 UX 方法论与实践更新</div>
+            </div><div class="news-row-arrow">→</div></div></div></section>
+<section class="section"><h2 class="section-title">行业声音</h2><div class="section-content"><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/real-time-ui/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://heydesigner.com/newsletter/beyond-prototyping/" target="_blank" onclick="event.stopPropagation()">超越原型：流体 UI 的十条原则</a>
-                </div>
-                <div class="news-row-meta">HeyDesigner · </div>
-                <div class="news-row-summary">本期核心：10 条打造流体 UI 的设计原则、「品味不是一张截图」的深度讨论、AI 用户界面设计的新思路，以及关于设计系统中的 AI 应用探索。跳出原型思维，重新审视设计的本质。</div>
-                <div class="editor-note ">💡 旧话题的新思考，值得跳出惯性看看</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://bit.ly/side-div3', '_blank')">
+                <div class="news-row-title"><a href="https://heydesigner.com/newsletter/real-time-ui/" target="_blank" onclick="event.stopPropagation()">实时 UI</a></div>
+                <div class="news-row-meta">HeyDesigner</div>
+                <div class="news-row-summary">UX Components, AI-native product 设计, UI 设计 Brain, Introducing Glaze, Beyond blur, Slots in a Figma 库, Agentic UX, and mo...</div>
+                <div class="editor-note">💡 设计行业动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/beyond-prototyping/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://bit.ly/side-div3" target="_blank" onclick="event.stopPropagation()">html.to.design —— 一键将网页转为设计稿的 Chrome 扩展</a>
-                </div>
-                <div class="news-row-meta">Sidebar.io · </div>
-                <div class="news-row-summary">浏览任意网站，一键截取整个页面或指定区域，直接转换为可编辑的设计文件（支持 Figma/Sketch 格式）。这款 Chrome 扩展大幅缩短了从网页灵感到设计稿的路径。</div>
-                <div class="editor-note ">💡 实用工具推荐，提升设计效率</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/design-at-the-edges/', '_blank')">
+                <div class="news-row-title"><a href="https://heydesigner.com/newsletter/beyond-prototyping/" target="_blank" onclick="event.stopPropagation()">Beyond prototyping</a></div>
+                <div class="news-row-meta">HeyDesigner</div>
+                <div class="news-row-summary">10 principles for fluid UI, Taste isn't a screenshot, 设计 AI 用户体验, 设计 Systems Report 2026, great CSS expansion, and more.</div>
+                <div class="editor-note">💡 设计行业动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/modal-vs-separate-page/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://heydesigner.com/newsletter/design-at-the-edges/" target="_blank" onclick="event.stopPropagation()">边缘设计：在边界处创造价值</a>
-                </div>
-                <div class="news-row-meta">HeyDesigner · </div>
-                <div class="news-row-summary">本期精选：「品味不是功能」的设计悖论讨论、设计系统中的 AI 应用实践、工匠精神在数字化时代的意义、以及关于「最后的界面」的哲学思考。好设计往往藏在细节的边缘地带。</div>
-                <div class="editor-note ">💡 边界情况的设计——细节决定体验</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/make-ui-feel-better/', '_blank')">
+                <div class="news-row-title"><a href="https://heydesigner.com/newsletter/modal-vs-separate-page/" target="_blank" onclick="event.stopPropagation()">Modal vs. separate page: UX decision tree</a></div>
+                <div class="news-row-meta">HeyDesigner</div>
+                <div class="news-row-summary">设计 with Claude Code, UI polish skill, Don’t 设计 for average users, Onboarding is a transaction, product designer's parado...</div>
+                <div class="editor-note">💡 设计行业动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://bit.ly/side-div3', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://heydesigner.com/newsletter/make-ui-feel-better/" target="_blank" onclick="event.stopPropagation()">让界面更好用的那些细节</a>
-                </div>
-                <div class="news-row-meta">HeyDesigner · </div>
-                <div class="news-row-summary">哪些微小的设计细节能让界面感觉更精致？本期汇总了「最后一个界面」概念、设计流程中的隐藏规律、持久有效的设计模式，以及大量来自真实产品的细节案例。魔鬼藏在细节里，天使也是。</div>
-                <div class="editor-note ">💡 细节控必读——微交互决定质感</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div></div>
-        </section>
-                </div>
-                <div class="column">
-                    
-        <section class="section">
-            <h2 class="section-title">趋势灵感</h2>
-            <div class="section-content">
-        <div class="news-row" onclick="window.open('https://www.awwwards.com/ribbit-case-study.html', '_blank')">
+                <div class="news-row-title"><a href="https://bit.ly/side-div3" target="_blank" onclick="event.stopPropagation()">html.to.设计 — chrome extension</a></div>
+                <div class="news-row-meta">Sidebar.io</div>
+                <div class="news-row-summary">Browse any website. Capture full page or just a section, and send it straight to Figma. Re-capture anytime.</div>
+                <div class="editor-note">💡 设计行业动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/design-at-the-edges/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://www.awwwards.com/ribbit-case-study.html" target="_blank" onclick="event.stopPropagation()">Ribbit 动效工作室品牌案例研究</a>
-                </div>
-                <div class="news-row-meta">Awwwards · </div>
-                <div class="news-row-summary">Ribbit 是一家位于哥本哈根的动效设计工作室，由五位长期合作的好友创立。本案例完整展示了其品牌识别系统、动效语言体系和项目执行过程，是学习动效设计与品牌表达结合的优秀范本。</div>
-                <div class="editor-note ">💡 Awwwards 获奖案例，动效设计标杆</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control', '_blank')">
+                <div class="news-row-title"><a href="https://heydesigner.com/newsletter/design-at-the-edges/" target="_blank" onclick="event.stopPropagation()">设计 at edges</a></div>
+                <div class="news-row-meta">HeyDesigner</div>
+                <div class="news-row-summary">Taste is not a feature, 设计 paradox, AI 在 设计 systems, Craft is untouchable, 设计 engineer symptom, and more.</div>
+                <div class="editor-note">💡 设计行业动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/make-ui-feel-better/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control" target="_blank" onclick="event.stopPropagation()">Dribbble 曝光机制揭秘：你真正能掌控的是什么</a>
-                </div>
-                <div class="news-row-meta">Dribbble Stories · </div>
-                <div class="news-row-summary">很多设计师抱怨在 Dribbble 上没有曝光度，但他们真的了解 Dribbble 的推荐算法吗？本文深入解析了 Dribbble 的曝光运作机制，并明确指出了哪些因素你能控制、哪些不能。</div>
-                <div class="editor-note ">💡 Dribbble 运营攻略——理解平台算法</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients', '_blank')">
+                <div class="news-row-title"><a href="https://heydesigner.com/newsletter/make-ui-feel-better/" target="_blank" onclick="event.stopPropagation()">Details that make interfaces feel better</a></div>
+                <div class="news-row-meta">HeyDesigner</div>
+                <div class="news-row-summary">last 界面, 设计 process, Durable patterns, Icon 组件 sizes, Breakpoints, Agent Skills Directory, and more.</div>
+                <div class="editor-note">💡 设计管理视角，团队负责人必读</div>
+            </div><div class="news-row-arrow">→</div></div></div></section>
+<section class="section"><h2 class="section-title">趋势灵感</h2><div class="section-content"><div class="news-row" onclick="window.open('https://www.awwwards.com/ribbit-case-study.html', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients" target="_blank" onclick="event.stopPropagation()">如何在 Dribbble 分享作品并精准触达目标客户</a>
-                </div>
-                <div class="news-row-meta">Dribbble Stories · </div>
-                <div class="news-row-summary">在 Dribbble 上发作品不等于获得客户。本文提供了从作品包装策略、标签优化、发布时机选择到互动运营的完整方法论，帮助你不仅获得点赞，更能吸引到真正匹配的商业合作机会。</div>
-                <div class="editor-note ">💡 Dribbble 运营攻略——从展示到获客</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/12/designing-in-public-thinking-long-term-and-growing-with-dribbble', '_blank')">
+                <div class="news-row-title"><a href="https://www.awwwards.com/ribbit-case-study.html" target="_blank" onclick="event.stopPropagation()">Ribbit - 案例研究</a></div>
+                <div class="news-row-meta">Awwwards</div>
+                <div class="news-row-summary">Ribbit is a Copenhagen-based motion 设计 studio founded by five longtime friends and animators who, after years freelancin...</div>
+                <div class="editor-note">💡 动效趋势更新，提升界面品质感</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/03/06/designing-their-own-paths-women-in-the-dribbble-community-share-their-stories', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://dribbble.com/stories/2026/02/12/designing-in-public-thinking-long-term-and-growing-with-dribbble" target="_blank" onclick="event.stopPropagation()">公开设计、长期主义与在 Dribbble 成长的故事</a>
-                </div>
-                <div class="news-row-meta">Dribbble Stories · </div>
-                <div class="news-row-summary">一位设计师分享了自己坚持在 Dribbble 公开设计过程、以长期主义心态持续输出作品的心得。从最初无人问津到逐步积累受众，这个故事证明了持续性和真诚比单次爆款更重要。</div>
-                <div class="editor-note ">💡 个人品牌成长案例——公开设计的力量</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://www.awwwards.com/brunos-portfolio-case-study.html', '_blank')">
+                <div class="news-row-title"><a href="https://dribbble.com/stories/2026/03/06/designing-their-own-paths-women-in-the-dribbble-community-share-their-stories" target="_blank" onclick="event.stopPropagation()">设计 their own paths: Women in Dribbble community share their stories</a></div>
+                <div class="news-row-meta">Dribbble Stories</div>
+                <div class="news-row-summary"></div>
+                <div class="editor-note">💡 设计灵感与趋势</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://www.awwwards.com/brunos-portfolio-case-study.html" target="_blank" onclick="event.stopPropagation()">Bruno 个人作品集案例研究（Awwwards 获奖）</a>
-                </div>
-                <div class="news-row-meta">Awwwards · </div>
-                <div class="news-row-summary">2019 年 Bruno 推出了他的第一个个人作品集——一个简单却充满想象力的世界构建。2026 年，他完全重做了这个站点。这个案例详细记录了他两次版本迭代的设计思考和技术实现，是个人品牌设计的优秀范例。</div>
-                <div class="editor-note ">💡 Awwwards 获奖作品集，个人品牌建设参考</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div></div>
-        </section>
-                    
-        <section class="section">
-            <h2 class="section-title">UI/视觉</h2>
-            <div class="section-content">
-        <div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
+                <div class="news-row-title"><a href="https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control" target="_blank" onclick="event.stopPropagation()">Dribbble 曝光机制揭秘：你真正能掌控的是什么</a></div>
+                <div class="news-row-meta">Dribbble Stories</div>
+                <div class="news-row-summary"></div>
+                <div class="editor-note">💡 设计灵感与趋势</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://css-tricks.com/css-multi-column-layout-wrapping-features/" target="_blank" onclick="event.stopPropagation()">CSS 多列布局换行特性详解（Chrome 145 新增）</a>
-                </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">Chrome 145 引入了 `column-height` 属性，为 CSS 多列布局带来了全新的换行控制能力。本文详细解读了这一特性的工作原理、浏览器兼容情况以及实际应用场景，让你的多列布局不再「溢出失控」。</div>
-                <div class="editor-note ">💡 CSS 布局能力又进化了，前端必看</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/selecting-a-date-range-in-css/', '_blank')">
+                <div class="news-row-title"><a href="https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients" target="_blank" onclick="event.stopPropagation()">如何在 Dribbble 分享作品并精准触达目标客户</a></div>
+                <div class="news-row-meta">Dribbble Stories</div>
+                <div class="news-row-summary"></div>
+                <div class="editor-note">💡 设计灵感与趋势</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/12/designing-in-public-thinking-long-term-and-growing-with-dribbble', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://css-tricks.com/selecting-a-date-range-in-css/" target="_blank" onclick="event.stopPropagation()">用 CSS 实现日期范围选择器</a>
-                </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">日历组件中选择连续日期范围是一个经典交互难题。本文分享了一个巧妙的纯 CSS 方案，无需 JavaScript 即可实现日期范围的高亮选中效果，代码简洁且兼容性好。</div>
-                <div class="editor-note ">💡 纯 CSS 交互巧思，优雅且实用</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/complex-css-shapes-with-shape-function/', '_blank')">
+                <div class="news-row-title"><a href="https://dribbble.com/stories/2026/02/12/designing-in-public-thinking-long-term-and-growing-with-dribbble" target="_blank" onclick="event.stopPropagation()">公开设计、长期主义与在 Dribbble 成长的故事</a></div>
+                <div class="news-row-meta">Dribbble Stories</div>
+                <div class="news-row-summary"></div>
+                <div class="editor-note">💡 公开设计的趋势——边做边分享，建立影响力</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://www.awwwards.com/brunos-portfolio-case-study.html', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://css-tricks.com/complex-css-shapes-with-shape-function/" target="_blank" onclick="event.stopPropagation()">用 shape() 函数创建复杂 CSS 图形</a>
-                </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">矩形、圆形、圆角矩形早已不在话下，但如果你想画更复杂的图形呢？CSS 新增的 `shape()` 函数让自定义形状变得前所未有的简单。本文带你掌握这一新工具的创作潜力。</div>
-                <div class="editor-note ">💡 CSS 图形绘制新武器</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/css-olfactive-api/', '_blank')">
+                <div class="news-row-title"><a href="https://www.awwwards.com/brunos-portfolio-case-study.html" target="_blank" onclick="event.stopPropagation()">Bruno’s Portfolio 案例研究</a></div>
+                <div class="news-row-meta">Awwwards</div>
+                <div class="news-row-summary">In 2019, I launched my first portfolio. It was a simple world built with Three.js, where visitors could drive around in ...</div>
+                <div class="editor-note">💡 案例拆解，学习别人怎么做</div>
+            </div><div class="news-row-arrow">→</div></div></div></section>
+<section class="section"><h2 class="section-title">UI/视觉</h2><div class="section-content"><div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">嗅探 CSS 嗅觉 API——给网页加上「气味」</a>
-                </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">你没看错——CSS 真的在提案一个「嗅觉 API」。虽然听起来像玩笑，但这个提议背后涉及多感官 Web 的深层思考。来一起「嗅一嗅」这个最奇特 CSS 提案的来龙去脉吧。</div>
-                <div class="editor-note ">💡 最奇葩的 CSS 提案，了解一下 😂</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
+                <div class="news-row-title"><a href="https://css-tricks.com/css-multi-column-layout-wrapping-features/" target="_blank" onclick="event.stopPropagation()">Looking at 新CSS Multi-Column Layout Wrapping Features</a></div>
+                <div class="news-row-meta">CSS-Tricks</div>
+                <div class="news-row-summary">Chrome 145 introduces column-height and column-wrap properties, enabling us to wrap additional content into a 新row below...</div>
+                <div class="editor-note">💡 CSS 新能力又扩展了，布局方式在进化</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/css-olfactive-api/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">前端愚人节：史上十大 UI 恶搞大盘点</a>
-                </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">每年愚人节，各大互联网公司都会在产品 UI 上玩花样。本文回顾了历史上最经典的十个前端 UI 恶作剧——从翻转的按钮到消失的导航栏，每一个都是创意与技术的完美结合。放松一下，享受这些有趣的彩蛋吧！</div>
-                <div class="editor-note ">💡 愚人节 UI 恶搞集锦，放松一下 😄</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div></div>
-        </section>
-                </div>
-            </div>
-            
-        <section class="section">
-            <h2 class="section-title">工具动态</h2>
-            <div class="section-content">
-        <div class="news-row" onclick="window.open('https://tanstack.com/blog/react-server-components', '_blank')">
+                <div class="news-row-title"><a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">Sniffing Out CSS Olfactive API</a></div>
+                <div class="news-row-meta">CSS-Tricks</div>
+                <div class="news-row-summary">A deep sniff of 新CSS Olfactive API, a set of proposed features for immersive user experiences using smell.
+
+Sniffing Out...</div>
+                <div class="editor-note">💡 CSS 新能力又扩展了，布局方式在进化</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/selecting-a-date-range-in-css/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://tanstack.com/blog/react-server-components" target="_blank" onclick="event.stopPropagation()">TanStack Start 正式支持 React 服务端组件</a>
-                </div>
-                <div class="news-row-meta">HN Design Tools · </div>
-                <div class="news-row-summary">TanStack 团队宣布其全栈框架 TanStack Start 已正式支持 React Server Components (RSC)。这意味着开发者可以在 TanStack 生态中享受服务端渲染的性能优势，同时保持客户端交互的灵活性。对设计系统和组件库开发者而言意义重大。</div>
-                <div class="editor-note ">💡 全栈框架重大更新，RSC 生态持续扩展</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div></div>
-        </section>
-        </div>
-        
-        <!-- 英文内容 -->
-        <div class="lang-content" data-lang="en">
-            
-        <section class="focus-section">
-            <div class="focus-label">FOCUS STORY</div>
-            <h2 class="focus-title">
-                <a href="https://www.awwwards.com/ribbit-case-study.html" target="_blank">Ribbit - Case Study</a>
-            </h2>
-            <p class="focus-summary">Ribbit - Case Study. Ribbit is a Copenhagen-based motion design studio founded by five longtime...</p>
-            <div class="focus-editor-note">💡 Motion trend updates — elevate interface quality</div>
-            <div class="focus-meta">Awwwards · Today</div>
-        </section>
-            
-        <section class="section">
-            <h2 class="section-title">AI × Design</h2>
-            <div class="section-content">
-        <div class="news-row" onclick="window.open('https://alistapart.com/article/opportunities-for-ai-in-accessibility/', '_blank')">
+                <div class="news-row-title"><a href="https://css-tricks.com/selecting-a-date-range-in-css/" target="_blank" onclick="event.stopPropagation()">Selecting a Date Range in CSS</a></div>
+                <div class="news-row-meta">CSS-Tricks</div>
+                <div class="news-row-summary">A clever approach for selecting multiple dates on a calendar where the :nth-child()'s “n of selector” syntax does all he...</div>
+                <div class="editor-note">💡 UI 视觉与前端技术</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/complex-css-shapes-with-shape-function/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://alistapart.com/article/opportunities-for-ai-in-accessibility/" target="_blank" onclick="event.stopPropagation()">Opportunities for AI in Accessibility</a>
-                </div>
-                <div class="news-row-meta">A List Apart · </div>
-                <div class="news-row-summary">Opportunities for AI in Accessibility. In reading Joe Dolson's recent piece on the intersection of...</div>
-                <div class="editor-note ">💡 AI + accessibility — tech for good, new direction</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://uxdesign.cc/social-media-on-trial-32be44a6434e?source=rss----138adf9c44c---4', '_blank')">
+                <div class="news-row-title"><a href="https://css-tricks.com/complex-css-shapes-with-shape-function/" target="_blank" onclick="event.stopPropagation()">Making Complex CSS Shapes Using shape()</a></div>
+                <div class="news-row-meta">CSS-Tricks</div>
+                <div class="news-row-summary">创建 rectangles, circles, and rounded rectangles is basic of CSS. 创建 more complex CSS shapes such as triangles, hexagons, ...</div>
+                <div class="editor-note">💡 CSS Shape 函数——用代码画复杂图形</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/7-view-transitions-recipes-to-try/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://uxdesign.cc/social-media-on-trial-32be44a6434e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Social media on trial</a>
-                </div>
-                <div class="news-row-meta">UX Collective · </div>
-                <div class="news-row-summary">Social media on trial. How design was used to target vulnerable childrenContinue reading on UX...</div>
-                <div class="editor-note ">💡 产品伦理议题——设计师的责任边界在哪？</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://uxdesign.cc/taste-md-e4fb75d9096f?source=rss----138adf9c44c---4', '_blank')">
+                <div class="news-row-title"><a href="https://css-tricks.com/7-view-transitions-recipes-to-try/" target="_blank" onclick="event.stopPropagation()">7 View Transitions Recipes to Try</a></div>
+                <div class="news-row-meta">CSS-Tricks</div>
+                <div class="news-row-summary">Craving for a view transition? Sunkanmi has lots of common transitions you can drop into your website right now!
+
+7 View...</div>
+                <div class="editor-note">💡 UI 视觉与前端技术</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://uxdesign.cc/taste-md-e4fb75d9096f?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">taste.md</a>
-                </div>
-                <div class="news-row-meta">UX Collective · </div>
-                <div class="news-row-summary">taste.md. the new tech buzzwordContinue reading on UX Collective »</div>
-                <div class="editor-note ">💡 「品味」能定义吗？值得反思</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div></div>
-        </section>
-            <div class="content-grid">
-                <div class="column">
-                    
-        <section class="section">
-            <h2 class="section-title">UX / Interaction</h2>
-            <div class="section-content">
-        <div class="news-row" onclick="window.open('https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4', '_blank')">
+                <div class="news-row-title"><a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a></div>
+                <div class="news-row-meta">CSS-Tricks</div>
+                <div class="news-row-summary">These are historical pranks I consider top 10 most noteworthy, rather than the “best.” You’ll see that some of them cros...</div>
+                <div class="editor-note">💡 愚人节 UI 恶搞集锦，放松一下 😄</div>
+            </div><div class="news-row-arrow">→</div></div></div></section>
+<section class="section"><h2 class="section-title">工具动态</h2><div class="section-content"><div class="news-row" onclick="window.open('https://kirancodes.me/posts/log-distributed-llms.html', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">The trust-latency gap: why the future of UX is intentionally slower</a>
-                </div>
-                <div class="news-row-meta">UX Collective · </div>
-                <div class="news-row-summary">The trust-latency gap: why the future of UX is intentionally slower. As AI compresses decisions...</div>
-                <div class="editor-note ">💡 'Slow UX' worth pondering — not every experience should be fast</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://www.nngroup.com/news/item/new-ai-specialty/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication', '_blank')">
+                <div class="news-row-title"><a href="https://kirancodes.me/posts/log-distributed-llms.html" target="_blank" onclick="event.stopPropagation()">Multi-Agentic Software Development Is a Distributed Systems Problem</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://kirancodes.me/posts/log-distributed-llms.html
+Comments URL: https://news.ycombinator.com/item?id=47...</div>
+                <div class="editor-note">💡 AI × 设计交叉动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://tanstack.com/blog/react-server-components', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://www.nngroup.com/news/item/new-ai-specialty/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication" target="_blank" onclick="event.stopPropagation()">New Artificial Intelligence Specialty for UX Certification</a>
-                </div>
-                <div class="news-row-meta">Nielsen Norman · </div>
-                <div class="news-row-summary">New Artificial Intelligence Specialty for UX Certification. NNGroup is excited to announce the NN/G...</div>
-                <div class="editor-note ">💡 UX certification updates — career development reference</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/04/legacy-systems/', '_blank')">
+                <div class="news-row-title"><a href="https://tanstack.com/blog/react-server-components" target="_blank" onclick="event.stopPropagation()">TanStack Start Now Support React Server Components</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://tanstack.com/blog/react-server-components
+Comments URL: https://news.ycombinator.com/item?id=477616...</div>
+                <div class="editor-note">💡 AI × 设计交叉动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://github.com/asgeirtj/system_prompts_leaks/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://www.smashingmagazine.com/2026/04/legacy-systems/" target="_blank" onclick="event.stopPropagation()">How To Improve UX In Legacy Systems</a>
-                </div>
-                <div class="news-row-meta">Smashing Magazine · </div>
-                <div class="news-row-summary">How To Improve UX In Legacy Systems. How To Improve UX In Legacy SystemsPractical guidelines for...</div>
-                <div class="editor-note ">💡 Hands-on tutorial — bookmark for later</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/testing-font-scaling-accessibility-figma-variables/', '_blank')">
+                <div class="news-row-title"><a href="https://github.com/asgeirtj/system_prompts_leaks/" target="_blank" onclick="event.stopPropagation()">Extracted 系统 Prompts from ChatGPT, Claude, Gemini, Grok, Perplexity and More</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://github.com/asgeirtj/system_prompts_leaks/
+Comments URL: https://news.ycombinator.com/item?id=477611...</div>
+                <div class="editor-note">💡 AI × 设计交叉动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47760931', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://www.smashingmagazine.com/2026/03/testing-font-scaling-accessibility-figma-variables/" target="_blank" onclick="event.stopPropagation()">Testing Font Scaling For Accessibility With Figma Variables</a>
-                </div>
-                <div class="news-row-meta">Smashing Magazine · </div>
-                <div class="news-row-summary">Testing Font Scaling For Accessibility With Figma Variables. Testing Font Scaling For Accessibility...</div>
-                <div class="editor-note ">💡 Accessibility isn't optional — it's a baseline</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://www.smashingmagazine.com/2026/03/modal-separate-page-ux-decision-tree/', '_blank')">
+                <div class="news-row-title"><a href="https://news.ycombinator.com/item?id=47760931" target="_blank" onclick="event.stopPropagation()">Ask HN: Are most agent skills just fancy 系统 prompts with a name?</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Comments URL: https://news.ycombinator.com/item?id=47760931
+Points: 3
+# Comments: 1</div>
+                <div class="editor-note">💡 设计工具链更新</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://github.com/tombedor/excalicharts', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://www.smashingmagazine.com/2026/03/modal-separate-page-ux-decision-tree/" target="_blank" onclick="event.stopPropagation()">Modal vs. Separate Page: UX Decision Tree</a>
-                </div>
-                <div class="news-row-meta">Smashing Magazine · </div>
-                <div class="news-row-summary">Modal vs. Separate Page: UX Decision Tree. Modal vs. Separate Page: UX Decision TreeHow to choose...</div>
-                <div class="editor-note ">💡 交互决策树——选弹窗还是独立页面？</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div></div>
-        </section>
-                    
-        <section class="section">
-            <h2 class="section-title">Industry Voice</h2>
-            <div class="section-content">
-        <div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/real-time-ui/', '_blank')">
+                <div class="news-row-title"><a href="https://github.com/tombedor/excalicharts" target="_blank" onclick="event.stopPropagation()">Show HN: Excalicharts – Charting 库 for Excalidraw</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">I very frequently use Excalidraw for presentations and writing, but charting ability is relatively limited.
+This project...</div>
+                <div class="editor-note">💡 设计工具链更新</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://dl.acm.org/doi/abs/10.1145/3725272', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://heydesigner.com/newsletter/real-time-ui/" target="_blank" onclick="event.stopPropagation()">Real-time UI</a>
-                </div>
-                <div class="news-row-meta">HeyDesigner · </div>
-                <div class="news-row-summary">Real-time UI. UX Components, AI-native product design, UI Design Brain, Introducing Glaze, Beyond...</div>
-                <div class="editor-note ">💡 有新品发布和新观点，值得关注</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/beyond-prototyping/', '_blank')">
+                <div class="news-row-title"><a href="https://dl.acm.org/doi/abs/10.1145/3725272" target="_blank" onclick="event.stopPropagation()">BPF-DB: A kernel-embedded transactional database management 系统 for eBPF app</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://dl.acm.org/doi/abs/10.1145/3725272
+Comments URL: https://news.ycombinator.com/item?id=47759494
+Poin...</div>
+                <div class="editor-note">💡 设计工具链更新</div>
+            </div><div class="news-row-arrow">→</div></div></div></section></div>
+<div class="lang-content" data-lang="en"><section class="focus-section"><div class="focus-label">FOCUS STORY</div>
+<h2 class="focus-title"><a href="https://heydesigner.com/newsletter/real-time-ui/" target="_blank">Real-time UI</a></h2>
+<p class="focus-summary">UX Components, AI-native product design, UI Design Brain, Introducing Glaze, Beyond the blur, Slots in a Figma library, Agentic UX, and more.</p>
+<div class="focus-editor-note">💡 设计行业动态</div>
+<div class="focus-meta">HeyDesigner · Today</div></section>
+<section class="section"><h2 class="section-title">AI × Design</h2><div class="section-content"><div class="news-row" onclick="window.open('https://kirancodes.me/posts/log-distributed-llms.html', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://heydesigner.com/newsletter/beyond-prototyping/" target="_blank" onclick="event.stopPropagation()">Beyond prototyping</a>
-                </div>
-                <div class="news-row-meta">HeyDesigner · </div>
-                <div class="news-row-summary">Beyond prototyping. 10 principles for fluid UI, Taste isn't a screenshot, Designing the AI user...</div>
-                <div class="editor-note ">💡 New take on old topic — worth breaking habits for</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://bit.ly/side-div3', '_blank')">
+                <div class="news-row-title"><a href="https://kirancodes.me/posts/log-distributed-llms.html" target="_blank" onclick="event.stopPropagation()">Multi-Agentic Software Development Is a Distributed Systems Problem</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://kirancodes.me/posts/log-distributed-llms.html
+Comments URL: https://news.ycombinator.com/item?id=47...</div>
+                <div class="editor-note">💡 AI × 设计交叉动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://tanstack.com/blog/react-server-components', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://bit.ly/side-div3" target="_blank" onclick="event.stopPropagation()">html.to.design — chrome extension</a>
-                </div>
-                <div class="news-row-meta">Sidebar.io · </div>
-                <div class="news-row-summary">html.to.design — chrome extension. Browse any website. Capture the full page or just a section, and...</div>
-                <div class="editor-note ">💡 实用工具推荐，提升设计效率</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/design-at-the-edges/', '_blank')">
+                <div class="news-row-title"><a href="https://tanstack.com/blog/react-server-components" target="_blank" onclick="event.stopPropagation()">TanStack Start Now Support React Server Components</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://tanstack.com/blog/react-server-components
+Comments URL: https://news.ycombinator.com/item?id=477616...</div>
+                <div class="editor-note">💡 AI × 设计交叉动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://github.com/asgeirtj/system_prompts_leaks/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://heydesigner.com/newsletter/design-at-the-edges/" target="_blank" onclick="event.stopPropagation()">Design at the edges</a>
-                </div>
-                <div class="news-row-meta">HeyDesigner · </div>
-                <div class="news-row-summary">Design at the edges. Taste is not a feature, The design paradox, AI in design systems, Craft is...</div>
-                <div class="editor-note ">💡 Edge case design — details make the experience</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/make-ui-feel-better/', '_blank')">
+                <div class="news-row-title"><a href="https://github.com/asgeirtj/system_prompts_leaks/" target="_blank" onclick="event.stopPropagation()">Extracted System Prompts from ChatGPT, Claude, Gemini, Grok, Perplexity and More</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://github.com/asgeirtj/system_prompts_leaks/
+Comments URL: https://news.ycombinator.com/item?id=477611...</div>
+                <div class="editor-note">💡 AI × 设计交叉动态</div>
+            </div><div class="news-row-arrow">→</div></div></div></section>
+<section class="section"><h2 class="section-title">UX / Interaction</h2><div class="section-content"><div class="news-row" onclick="window.open('https://alistapart.com/article/user-research-is-storytelling/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://heydesigner.com/newsletter/make-ui-feel-better/" target="_blank" onclick="event.stopPropagation()">Details that make interfaces feel better</a>
-                </div>
-                <div class="news-row-meta">HeyDesigner · </div>
-                <div class="news-row-summary">Details that make interfaces feel better. The last interface, Design process, Durable patterns,...</div>
-                <div class="editor-note ">💡 细节控必读——微交互决定质感</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div></div>
-        </section>
-                </div>
-                <div class="column">
-                    
-        <section class="section">
-            <h2 class="section-title">Trends & Inspiration</h2>
-            <div class="section-content">
-        <div class="news-row" onclick="window.open('https://www.awwwards.com/ribbit-case-study.html', '_blank')">
+                <div class="news-row-title"><a href="https://alistapart.com/article/user-research-is-storytelling/" target="_blank" onclick="event.stopPropagation()">User Research Is Storytelling</a></div>
+                <div class="news-row-meta">A List Apart</div>
+                <div class="news-row-summary">Ever since I was a boy, I’ve been fascinated with movies. I loved the characters and the excitement—but most of all the ...</div>
+                <div class="editor-note">💡 User research methods updated</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://www.awwwards.com/ribbit-case-study.html" target="_blank" onclick="event.stopPropagation()">Ribbit - Case Study</a>
-                </div>
-                <div class="news-row-meta">Awwwards · </div>
-                <div class="news-row-summary">Ribbit - Case Study. Ribbit is a Copenhagen-based motion design studio founded by five longtime...</div>
-                <div class="editor-note ">💡 Awwwards 获奖案例，动效设计标杆</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control', '_blank')">
+                <div class="news-row-title"><a href="https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">The trust-latency gap: why the future of UX is intentionally slower</a></div>
+                <div class="news-row-meta">UX Collective</div>
+                <div class="news-row-summary">As AI compresses decisions into milliseconds, the designers who thrive will be the ones who know when to slow things dow...</div>
+                <div class="editor-note">💡 'Slow UX' worth pondering</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://www.nngroup.com/news/item/new-ai-specialty/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control" target="_blank" onclick="event.stopPropagation()">How Exposure Works on Dribbble (and What You Can Actually Control)</a>
-                </div>
-                <div class="news-row-meta">Dribbble Stories · </div>
-                <div class="news-row-summary">How Exposure Works on Dribbble (and What You Can Actually Control). </div>
-                <div class="editor-note ">💡 Dribbble 运营攻略——理解平台算法</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients', '_blank')">
+                <div class="news-row-title"><a href="https://www.nngroup.com/news/item/new-ai-specialty/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication" target="_blank" onclick="event.stopPropagation()">New Artificial Intelligence Specialty for UX Certification</a></div>
+                <div class="news-row-meta">Nielsen Norman</div>
+                <div class="news-row-summary">NNGroup is excited to announce the NN/G UX Certification program’s newest specialty: Artificial Intelligence (AI). As AI...</div>
+                <div class="editor-note">💡 UX certification updates</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://alistapart.com/article/opportunities-for-ai-in-accessibility/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients" target="_blank" onclick="event.stopPropagation()">How to Share Your Work on Dribbble (While Attracting the Right Clients)</a>
-                </div>
-                <div class="news-row-meta">Dribbble Stories · </div>
-                <div class="news-row-summary">How to Share Your Work on Dribbble (While Attracting the Right Clients). </div>
-                <div class="editor-note ">💡 Dribbble 运营攻略——从展示到获客</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/12/designing-in-public-thinking-long-term-and-growing-with-dribbble', '_blank')">
+                <div class="news-row-title"><a href="https://alistapart.com/article/opportunities-for-ai-in-accessibility/" target="_blank" onclick="event.stopPropagation()">Opportunities for AI in Accessibility</a></div>
+                <div class="news-row-meta">A List Apart</div>
+                <div class="news-row-summary">In reading Joe Dolson’s recent piece on the intersection of AI and accessibility, I absolutely appreciated the skepticis...</div>
+                <div class="editor-note">💡 Accessibility isn't optional</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://uxdesign.cc/rethinking-design-critique-3d358a859304?source=rss----138adf9c44c---4', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://dribbble.com/stories/2026/02/12/designing-in-public-thinking-long-term-and-growing-with-dribbble" target="_blank" onclick="event.stopPropagation()">Designing in Public, Thinking Long-Term, and Growing With Dribbble</a>
-                </div>
-                <div class="news-row-meta">Dribbble Stories · </div>
-                <div class="news-row-summary">Designing in Public, Thinking Long-Term, and Growing With Dribbble. </div>
-                <div class="editor-note ">💡 个人品牌成长案例——公开设计的力量</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://www.awwwards.com/brunos-portfolio-case-study.html', '_blank')">
+                <div class="news-row-title"><a href="https://uxdesign.cc/rethinking-design-critique-3d358a859304?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Rethinking design critique</a></div>
+                <div class="news-row-meta">UX Collective</div>
+                <div class="news-row-summary">Building design knowledge through a collaborative processContinue reading on UX Collective »</div>
+                <div class="editor-note">💡 Team / Collaboration</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://uxdesign.cc/social-media-on-trial-32be44a6434e?source=rss----138adf9c44c---4', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://www.awwwards.com/brunos-portfolio-case-study.html" target="_blank" onclick="event.stopPropagation()">Bruno's Portfolio Case Study</a>
-                </div>
-                <div class="news-row-meta">Awwwards · </div>
-                <div class="news-row-summary">Bruno's Portfolio Case Study. In 2019, I launched my first portfolio. It was a simple world built...</div>
-                <div class="editor-note ">💡 Awwwards 获奖作品集，个人品牌建设参考</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div></div>
-        </section>
-                    
-        <section class="section">
-            <h2 class="section-title">UI / Visual</h2>
-            <div class="section-content">
-        <div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
+                <div class="news-row-title"><a href="https://uxdesign.cc/social-media-on-trial-32be44a6434e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Social media on trial</a></div>
+                <div class="news-row-meta">UX Collective</div>
+                <div class="news-row-summary">How design was used to target vulnerable childrenContinue reading on UX Collective »</div>
+                <div class="editor-note">💡 UX 方法论与实践更新</div>
+            </div><div class="news-row-arrow">→</div></div></div></section>
+<section class="section"><h2 class="section-title">Industry Voice</h2><div class="section-content"><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/real-time-ui/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://css-tricks.com/css-multi-column-layout-wrapping-features/" target="_blank" onclick="event.stopPropagation()">Looking at New CSS Multi-Column Layout Wrapping Features</a>
-                </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">Looking at New CSS Multi-Column Layout Wrapping Features. Chrome 145 introduces the column-height...</div>
-                <div class="editor-note ">💡 CSS 布局能力又进化了，前端必看</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/selecting-a-date-range-in-css/', '_blank')">
+                <div class="news-row-title"><a href="https://heydesigner.com/newsletter/real-time-ui/" target="_blank" onclick="event.stopPropagation()">Real-time UI</a></div>
+                <div class="news-row-meta">HeyDesigner</div>
+                <div class="news-row-summary">UX Components, AI-native product design, UI Design Brain, Introducing Glaze, Beyond the blur, Slots in a Figma library, ...</div>
+                <div class="editor-note">💡 设计行业动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/beyond-prototyping/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://css-tricks.com/selecting-a-date-range-in-css/" target="_blank" onclick="event.stopPropagation()">Selecting a Date Range in CSS</a>
-                </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">Selecting a Date Range in CSS. A clever approach for selecting multiple dates on a calendar where...</div>
-                <div class="editor-note ">💡 纯 CSS 交互巧思，优雅且实用</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/complex-css-shapes-with-shape-function/', '_blank')">
+                <div class="news-row-title"><a href="https://heydesigner.com/newsletter/beyond-prototyping/" target="_blank" onclick="event.stopPropagation()">Beyond prototyping</a></div>
+                <div class="news-row-meta">HeyDesigner</div>
+                <div class="news-row-summary">10 principles for fluid UI, Taste isn't a screenshot, Designing the AI user experience, Design Systems Report 2026, The ...</div>
+                <div class="editor-note">💡 设计行业动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/modal-vs-separate-page/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://css-tricks.com/complex-css-shapes-with-shape-function/" target="_blank" onclick="event.stopPropagation()">Making Complex CSS Shapes Using shape()</a>
-                </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">Making Complex CSS Shapes Using shape(). Creating rectangles, circles, and rounded rectangles is...</div>
-                <div class="editor-note ">💡 CSS 图形绘制新武器</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/css-olfactive-api/', '_blank')">
+                <div class="news-row-title"><a href="https://heydesigner.com/newsletter/modal-vs-separate-page/" target="_blank" onclick="event.stopPropagation()">Modal vs. separate page: UX decision tree</a></div>
+                <div class="news-row-meta">HeyDesigner</div>
+                <div class="news-row-summary">Designing with Claude Code, UI polish skill, Don’t design for average users, Onboarding is a transaction, The product de...</div>
+                <div class="editor-note">💡 设计行业动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://bit.ly/side-div3', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">Sniffing Out the CSS Olfactive API</a>
-                </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">Sniffing Out the CSS Olfactive API. A deep sniff of the new CSS Olfactive API, a set of proposed...</div>
-                <div class="editor-note ">💡 最奇葩的 CSS 提案，了解一下 😂</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div>
-        <div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
+                <div class="news-row-title"><a href="https://bit.ly/side-div3" target="_blank" onclick="event.stopPropagation()">html.to.design — chrome extension</a></div>
+                <div class="news-row-meta">Sidebar.io</div>
+                <div class="news-row-summary">Browse any website. Capture the full page or just a section, and send it straight to Figma. Re-capture anytime.</div>
+                <div class="editor-note">💡 设计行业动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/design-at-the-edges/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">Front-End Fools: Top 10 April Fools' UI Pranks of All Time</a>
-                </div>
-                <div class="news-row-meta">CSS-Tricks · </div>
-                <div class="news-row-summary">Front-End Fools: Top 10 April Fools' UI Pranks of All Time. These are the historical pranks I...</div>
-                <div class="editor-note ">💡 April Fools UI prank roundup — lighten up 😄</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div></div>
-        </section>
-                </div>
-            </div>
-            
-        <section class="section">
-            <h2 class="section-title">Tools Updates</h2>
-            <div class="section-content">
-        <div class="news-row" onclick="window.open('https://tanstack.com/blog/react-server-components', '_blank')">
+                <div class="news-row-title"><a href="https://heydesigner.com/newsletter/design-at-the-edges/" target="_blank" onclick="event.stopPropagation()">Design at the edges</a></div>
+                <div class="news-row-meta">HeyDesigner</div>
+                <div class="news-row-summary">Taste is not a feature, The design paradox, AI in design systems, Craft is untouchable, The design engineer symptom, and...</div>
+                <div class="editor-note">💡 设计行业动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/make-ui-feel-better/', '_blank')">
             <div class="news-row-content">
-                <div class="news-row-title">
-                    <a href="https://tanstack.com/blog/react-server-components" target="_blank" onclick="event.stopPropagation()">TanStack Start Now Support React Server Components</a>
-                </div>
-                <div class="news-row-meta">HN Design Tools · </div>
-                <div class="news-row-summary">TanStack Start Now Support React Server Components. Article URL:...</div>
-                <div class="editor-note ">💡 全栈框架重大更新，RSC 生态持续扩展</div>
-            </div>
-            <div class="news-row-arrow">→</div>
-        </div></div>
-        </section>
-        </div>
-        
-        <footer class="footer">
-            <span id="footer-source">数据来源: Figma, UX Collective, Dribbble, Designer News</span>
-        </footer>
-    </div>
-    
-    <script>
-        const i18n = {
-            title: { zh: 'ELARA DISPATCH', en: 'ELARA DISPATCH' },
-            date: { zh: '2026年04月14日 · 星期二', en: 'Apr 14, 2026 · Tue' },
-            data_source: { zh: '数据来源', en: 'Data Sources' }
-        };
-        
-        let currentLang = 'zh';
-        
-        function switchLang(lang) {
-            currentLang = lang;
-            
-            // 切换按钮状态
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector('[data-lang-btn="' + lang + '"]').classList.add('active');
-            
-            // 切换内容显示
-            document.querySelectorAll('.lang-content').forEach(el => {
-                el.classList.remove('active');
-            });
-            document.querySelector('.lang-content[data-lang="' + lang + '"]').classList.add('active');
-            
-            // 更新标题和日期
-            document.getElementById('page-title').textContent = i18n.title[lang];
-            document.getElementById('page-date').textContent = i18n.date[lang];
-            document.getElementById('footer-source').textContent = i18n.data_source[lang] + ': Figma, CSS-Tricks, HackerNews, GitHub';
-        }
-    </script>
-</body>
-</html>
+                <div class="news-row-title"><a href="https://heydesigner.com/newsletter/make-ui-feel-better/" target="_blank" onclick="event.stopPropagation()">Details that make interfaces feel better</a></div>
+                <div class="news-row-meta">HeyDesigner</div>
+                <div class="news-row-summary">The last interface, Design process, Durable patterns, Icon component sizes, Breakpoints, The Agent Skills Directory, and...</div>
+                <div class="editor-note">💡 Team / Collaboration</div>
+            </div><div class="news-row-arrow">→</div></div></div></section>
+<section class="section"><h2 class="section-title">Trends & Inspiration</h2><div class="section-content"><div class="news-row" onclick="window.open('https://www.awwwards.com/ribbit-case-study.html', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://www.awwwards.com/ribbit-case-study.html" target="_blank" onclick="event.stopPropagation()">Ribbit - Case Study</a></div>
+                <div class="news-row-meta">Awwwards</div>
+                <div class="news-row-summary">Ribbit is a Copenhagen-based motion design studio founded by five longtime friends and animators who, after years freela...</div>
+                <div class="editor-note">💡 Motion trend updates</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/03/06/designing-their-own-paths-women-in-the-dribbble-community-share-their-stories', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://dribbble.com/stories/2026/03/06/designing-their-own-paths-women-in-the-dribbble-community-share-their-stories" target="_blank" onclick="event.stopPropagation()">Designing their own paths: Women in the Dribbble community share their stories</a></div>
+                <div class="news-row-meta">Dribbble Stories</div>
+                <div class="news-row-summary"></div>
+                <div class="editor-note">💡 设计灵感与趋势</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://dribbble.com/stories/2026/02/24/how-exposure-works-on-dribbble-and-what-you-can-actually-control" target="_blank" onclick="event.stopPropagation()">How Exposure Works on Dribbble (and What You Can Actually Control)</a></div>
+                <div class="news-row-meta">Dribbble Stories</div>
+                <div class="news-row-summary"></div>
+                <div class="editor-note">💡 设计灵感与趋势</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://dribbble.com/stories/2026/02/18/how-to-share-your-work-on-dribbble-while-attracting-the-right-clients" target="_blank" onclick="event.stopPropagation()">How to Share Your Work on Dribbble (While Attracting the Right Clients)</a></div>
+                <div class="news-row-meta">Dribbble Stories</div>
+                <div class="news-row-summary"></div>
+                <div class="editor-note">💡 设计灵感与趋势</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://dribbble.com/stories/2026/02/12/designing-in-public-thinking-long-term-and-growing-with-dribbble', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://dribbble.com/stories/2026/02/12/designing-in-public-thinking-long-term-and-growing-with-dribbble" target="_blank" onclick="event.stopPropagation()">Designing in Public, Thinking Long-Term, and Growing With Dribbble</a></div>
+                <div class="news-row-meta">Dribbble Stories</div>
+                <div class="news-row-summary"></div>
+                <div class="editor-note">💡 Design-in-public trend</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://www.awwwards.com/brunos-portfolio-case-study.html', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://www.awwwards.com/brunos-portfolio-case-study.html" target="_blank" onclick="event.stopPropagation()">Bruno’s Portfolio Case Study</a></div>
+                <div class="news-row-meta">Awwwards</div>
+                <div class="news-row-summary">In 2019, I launched my first portfolio. It was a simple world built with Three.js, where visitors could drive around in ...</div>
+                <div class="editor-note">💡 案例拆解，学习别人怎么做</div>
+            </div><div class="news-row-arrow">→</div></div></div></section>
+<section class="section"><h2 class="section-title">UI / Visual</h2><div class="section-content"><div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://css-tricks.com/css-multi-column-layout-wrapping-features/" target="_blank" onclick="event.stopPropagation()">Looking at New CSS Multi-Column Layout Wrapping Features</a></div>
+                <div class="news-row-meta">CSS-Tricks</div>
+                <div class="news-row-summary">Chrome 145 introduces the column-height and column-wrap properties, enabling us to wrap the additional content into a ne...</div>
+                <div class="editor-note">💡 Tool/扩展 update</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/css-olfactive-api/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://css-tricks.com/css-olfactive-api/" target="_blank" onclick="event.stopPropagation()">Sniffing Out the CSS Olfactive API</a></div>
+                <div class="news-row-meta">CSS-Tricks</div>
+                <div class="news-row-summary">A deep sniff of the new CSS Olfactive API, a set of proposed features for immersive user experiences using smell.
+
+Sniff...</div>
+                <div class="editor-note">💡 Tool/扩展 update</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/selecting-a-date-range-in-css/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://css-tricks.com/selecting-a-date-range-in-css/" target="_blank" onclick="event.stopPropagation()">Selecting a Date Range in CSS</a></div>
+                <div class="news-row-meta">CSS-Tricks</div>
+                <div class="news-row-summary">A clever approach for selecting multiple dates on a calendar where the :nth-child()'s “n of selector” syntax does all th...</div>
+                <div class="editor-note">💡 UI 视觉与前端技术</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/complex-css-shapes-with-shape-function/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://css-tricks.com/complex-css-shapes-with-shape-function/" target="_blank" onclick="event.stopPropagation()">Making Complex CSS Shapes Using shape()</a></div>
+                <div class="news-row-meta">CSS-Tricks</div>
+                <div class="news-row-summary">Creating rectangles, circles, and rounded rectangles is the basic of CSS. Creating more complex CSS shapes such as trian...</div>
+                <div class="editor-note">💡 CSS Shape 函数——用代码画复杂图形</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/7-view-transitions-recipes-to-try/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://css-tricks.com/7-view-transitions-recipes-to-try/" target="_blank" onclick="event.stopPropagation()">7 View Transitions Recipes to Try</a></div>
+                <div class="news-row-meta">CSS-Tricks</div>
+                <div class="news-row-summary">Craving for a view transition? Sunkanmi has lots of common transitions you can drop into your website right now!
+
+7 View...</div>
+                <div class="editor-note">💡 UI 视觉与前端技术</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/front-end-april-fools-top-10/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://css-tricks.com/front-end-april-fools-top-10/" target="_blank" onclick="event.stopPropagation()">Front-End Fools: Top 10 April Fools’ UI Pranks of All Time</a></div>
+                <div class="news-row-meta">CSS-Tricks</div>
+                <div class="news-row-summary">These are the historical pranks I consider the top 10 most noteworthy, rather than the “best.” You’ll see that some of t...</div>
+                <div class="editor-note">💡 April Fools UI pranks</div>
+            </div><div class="news-row-arrow">→</div></div></div></section>
+<section class="section"><h2 class="section-title">Tools Updates</h2><div class="section-content"><div class="news-row" onclick="window.open('https://kirancodes.me/posts/log-distributed-llms.html', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://kirancodes.me/posts/log-distributed-llms.html" target="_blank" onclick="event.stopPropagation()">Multi-Agentic Software Development Is a Distributed Systems Problem</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://kirancodes.me/posts/log-distributed-llms.html
+Comments URL: https://news.ycombinator.com/item?id=47...</div>
+                <div class="editor-note">💡 AI × 设计交叉动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://tanstack.com/blog/react-server-components', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://tanstack.com/blog/react-server-components" target="_blank" onclick="event.stopPropagation()">TanStack Start Now Support React Server Components</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://tanstack.com/blog/react-server-components
+Comments URL: https://news.ycombinator.com/item?id=477616...</div>
+                <div class="editor-note">💡 AI × 设计交叉动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://github.com/asgeirtj/system_prompts_leaks/', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://github.com/asgeirtj/system_prompts_leaks/" target="_blank" onclick="event.stopPropagation()">Extracted System Prompts from ChatGPT, Claude, Gemini, Grok, Perplexity and More</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://github.com/asgeirtj/system_prompts_leaks/
+Comments URL: https://news.ycombinator.com/item?id=477611...</div>
+                <div class="editor-note">💡 AI × 设计交叉动态</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://news.ycombinator.com/item?id=47760931', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://news.ycombinator.com/item?id=47760931" target="_blank" onclick="event.stopPropagation()">Ask HN: Are most agent skills just fancy system prompts with a name?</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Comments URL: https://news.ycombinator.com/item?id=47760931
+Points: 3
+# Comments: 1</div>
+                <div class="editor-note">💡 Tool/工具 update</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://github.com/tombedor/excalicharts', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://github.com/tombedor/excalicharts" target="_blank" onclick="event.stopPropagation()">Show HN: Excalicharts – Charting Library for Excalidraw</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">I very frequently use Excalidraw for presentations and writing, but the charting ability is relatively limited.
+This pro...</div>
+                <div class="editor-note">💡 Tool/工具 update</div>
+            </div><div class="news-row-arrow">→</div></div><div class="news-row" onclick="window.open('https://dl.acm.org/doi/abs/10.1145/3725272', '_blank')">
+            <div class="news-row-content">
+                <div class="news-row-title"><a href="https://dl.acm.org/doi/abs/10.1145/3725272" target="_blank" onclick="event.stopPropagation()">BPF-DB: A kernel-embedded transactional database management system for eBPF app</a></div>
+                <div class="news-row-meta">HN Design Tools</div>
+                <div class="news-row-summary">Article URL: https://dl.acm.org/doi/abs/10.1145/3725272
+Comments URL: https://news.ycombinator.com/item?id=47759494
+Poin...</div>
+                <div class="editor-note">💡 Tool/工具 update</div>
+            </div><div class="news-row-arrow">→</div></div></div></section></div>
+
+<div class="footer" id="footer-source">数据来源: Figma, CSS-Tricks, HackerNews, GitHub</div></div>
+<script>function switchLang(l){document.querySelectorAll('.lang-content').forEach(function(e){e.classList.remove('active')});document.querySelector('.lang-content[data-lang="'+l+'"]').classList.add('active');document.querySelectorAll('.lang-switch button').forEach(function(e){e.classList.remove('active')});document.getElementById('btn-'+l).classList.add('active');document.getElementById('page-title').textContent='ELARA DISPATCH';document.getElementById('footer-source').textContent=l==='zh'?'数据来源: Figma, CSS-Tricks, HackerNews, GitHub':'Data Sources: Figma, CSS-Tricks, HackerNews, GitHub';}</script></body></html>
