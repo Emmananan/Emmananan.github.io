@@ -35,8 +35,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;b
 .section-title-wrap{display:flex;align-items:center}
 .section-title{font-size:13.5px;font-weight:700;color:#1a1a2e;display:inline}
 .section-count{background:#f0f2f5;color:#999;font-size:11px;font-weight:600;padding:2px 9px;border-radius:10px}
-.section-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
-.section-card.open .section-body{max-height:900px}
+.section-body{display:none;transition:max-height .3s ease}
+.section-card.open .section-body{display:block;overflow:visible}
 
 /* 新闻行 — 紧凑 */
 .news-row{padding:11px 16px;border-top:1px solid #f5f6f7;cursor:pointer;transition:.12s}
@@ -74,7 +74,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;b
 <div class="focus-body"><h2 class="focus-title"><a href="https://heydesigner.com/newsletter/real-time-ui/" target="_blank">实时 UI</a></h2>
 <p class="focus-summary">UX Components, AI-native product 设计, UI 设计 Brain, Introducing Glaze, Beyond blur, Slots in a Figma 库, Agentic UX, and more.</p>
 <div class="focus-editor-note">💡 设计行业动态</div>
-<span class="focus-meta">HeyDesigner · 今日</span></div></section><div class="sections-grid"><div class="grid-col"><div class="section-card" id="sec-zh-438145">
+<span class="focus-meta">HeyDesigner · 今日</span></div></section><div class="sections-grid"><div class="grid-col"><div class="section-card" id="sec-zh-541480">
 <button class="section-header" onclick="toggleSection(this)">
 <span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">AI × 设计</h2></span>
 <span class="section-count">3</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://kirancodes.me/posts/log-distributed-llms.html', '_blank')">
@@ -92,7 +92,7 @@ Comments URL: https://news.ycombinato...</div>
             <div class="news-row-meta">HN Design Tools</div>
             <div class="news-row-summary">Article URL: https://github.com/asgeirtj/system_prompts_leaks/
 Comments URL: https://news.ycombinato...</div>
-            <div class="editor-note">💡 AI × 设计交叉动态</div></div></div></div><div class="section-card" id="sec-zh-463026">
+            <div class="editor-note">💡 AI × 设计交叉动态</div></div></div></div><div class="section-card" id="sec-zh-519001">
 <button class="section-header" onclick="toggleSection(this)">
 <span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">行业声音</h2></span>
 <span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/real-time-ui/', '_blank')">
@@ -115,7 +115,7 @@ Comments URL: https://news.ycombinato...</div>
             <div class="news-row-top"><a href="https://heydesigner.com/newsletter/design-at-the-edges/" target="_blank" onclick="event.stopPropagation()">设计 at edges</a></div>
             <div class="news-row-meta">HeyDesigner</div>
             <div class="news-row-summary">Taste is not a feature, 设计 paradox, AI 在 设计 systems, Craft is untouchable, 设计 engineer symptom, and ...</div>
-            <div class="editor-note">💡 设计行业动态</div></div></div></div><div class="section-card" id="sec-zh-361901">
+            <div class="editor-note">💡 设计行业动态</div></div></div></div><div class="section-card" id="sec-zh-232528">
 <button class="section-header" onclick="toggleSection(this)">
 <span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">UI/视觉</h2></span>
 <span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
@@ -138,7 +138,7 @@ Comments URL: https://news.ycombinato...</div>
             <div class="news-row-top"><a href="https://css-tricks.com/7-view-transitions-recipes-to-try/" target="_blank" onclick="event.stopPropagation()">7 View Transitions Recipes to Try</a></div>
             <div class="news-row-meta">CSS-Tricks</div>
             <div class="news-row-summary">Craving for a view transition? Sunkanmi has lots of common transitions you can drop into your websit...</div>
-            <div class="editor-note">💡 UI 视觉与前端技术</div></div></div></div></div><div class="grid-col"><div class="section-card" id="sec-zh-284608">
+            <div class="editor-note">💡 UI 视觉与前端技术</div></div></div></div></div><div class="grid-col"><div class="section-card" id="sec-zh-794845">
 <button class="section-header" onclick="toggleSection(this)">
 <span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">交互/体验</h2></span>
 <span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://alistapart.com/article/user-research-is-storytelling/', '_blank')">
@@ -161,7 +161,7 @@ Comments URL: https://news.ycombinato...</div>
             <div class="news-row-top"><a href="https://uxdesign.cc/rethinking-design-critique-3d358a859304?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Rethinking 设计 critique</a></div>
             <div class="news-row-meta">UX Collective</div>
             <div class="news-row-summary">构建 设计 knowledge through a collaborative processContinue reading on UX Collective »</div>
-            <div class="editor-note">💡 设计评审方法论的反思，团队协作可借鉴</div></div></div></div><div class="section-card" id="sec-zh-683764">
+            <div class="editor-note">💡 设计评审方法论的反思，团队协作可借鉴</div></div></div></div><div class="section-card" id="sec-zh-675379">
 <button class="section-header" onclick="toggleSection(this)">
 <span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">趋势灵感</h2></span>
 <span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://www.awwwards.com/ribbit-case-study.html', '_blank')">
@@ -184,7 +184,7 @@ Comments URL: https://news.ycombinato...</div>
             <div class="news-row-top"><a href="https://dribbble.com/stories/2026/02/12/designing-in-public-thinking-long-term-and-growing-with-dribbble" target="_blank" onclick="event.stopPropagation()">公开设计、长期主义与在 Dribbble 成长的故事</a></div>
             <div class="news-row-meta">Dribbble Stories</div>
             <div class="news-row-summary"></div>
-            <div class="editor-note">💡 公开设计的趋势——边做边分享，建立影响力</div></div></div></div><div class="section-card" id="sec-zh-096966">
+            <div class="editor-note">💡 公开设计的趋势——边做边分享，建立影响力</div></div></div></div><div class="section-card" id="sec-zh-326368">
 <button class="section-header" onclick="toggleSection(this)">
 <span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">工具动态</h2></span>
 <span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://kirancodes.me/posts/log-distributed-llms.html', '_blank')">
@@ -217,7 +217,7 @@ Points: 3
 <div class="focus-body"><h2 class="focus-title"><a href="https://heydesigner.com/newsletter/real-time-ui/" target="_blank">Real-time UI</a></h2>
 <p class="focus-summary">UX Components, AI-native product design, UI Design Brain, Introducing Glaze, Beyond the blur, Slots in a Figma library, Agentic UX, and more.</p>
 <div class="focus-editor-note">💡 设计行业动态</div>
-<span class="focus-meta">HeyDesigner · Today</span></div></section><div class="sections-grid"><div class="grid-col"><div class="section-card" id="sec-en-438145">
+<span class="focus-meta">HeyDesigner · Today</span></div></section><div class="sections-grid"><div class="grid-col"><div class="section-card" id="sec-en-541480">
 <button class="section-header" onclick="toggleSection(this)">
 <span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">AI × Design</h2></span>
 <span class="section-count">3</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://kirancodes.me/posts/log-distributed-llms.html', '_blank')">
@@ -235,7 +235,7 @@ Comments URL: https://news.ycombinato...</div>
             <div class="news-row-meta">HN Design Tools</div>
             <div class="news-row-summary">Article URL: https://github.com/asgeirtj/system_prompts_leaks/
 Comments URL: https://news.ycombinato...</div>
-            <div class="editor-note">💡 AI × 设计交叉动态</div></div></div></div><div class="section-card" id="sec-en-463026">
+            <div class="editor-note">💡 AI × 设计交叉动态</div></div></div></div><div class="section-card" id="sec-en-519001">
 <button class="section-header" onclick="toggleSection(this)">
 <span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">Industry Voice</h2></span>
 <span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/real-time-ui/', '_blank')">
@@ -258,7 +258,7 @@ Comments URL: https://news.ycombinato...</div>
             <div class="news-row-top"><a href="https://heydesigner.com/newsletter/design-at-the-edges/" target="_blank" onclick="event.stopPropagation()">Design at the edges</a></div>
             <div class="news-row-meta">HeyDesigner</div>
             <div class="news-row-summary">Taste is not a feature, The design paradox, AI in design systems, Craft is untouchable, The design e...</div>
-            <div class="editor-note">💡 设计行业动态</div></div></div></div><div class="section-card" id="sec-en-361901">
+            <div class="editor-note">💡 设计行业动态</div></div></div></div><div class="section-card" id="sec-en-232528">
 <button class="section-header" onclick="toggleSection(this)">
 <span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">UI / Visual</h2></span>
 <span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
@@ -281,7 +281,7 @@ Comments URL: https://news.ycombinato...</div>
             <div class="news-row-top"><a href="https://css-tricks.com/7-view-transitions-recipes-to-try/" target="_blank" onclick="event.stopPropagation()">7 View Transitions Recipes to Try</a></div>
             <div class="news-row-meta">CSS-Tricks</div>
             <div class="news-row-summary">Craving for a view transition? Sunkanmi has lots of common transitions you can drop into your websit...</div>
-            <div class="editor-note">💡 UI 视觉与前端技术</div></div></div></div></div><div class="grid-col"><div class="section-card" id="sec-en-284608">
+            <div class="editor-note">💡 UI 视觉与前端技术</div></div></div></div></div><div class="grid-col"><div class="section-card" id="sec-en-794845">
 <button class="section-header" onclick="toggleSection(this)">
 <span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">UX / Interaction</h2></span>
 <span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://alistapart.com/article/user-research-is-storytelling/', '_blank')">
@@ -304,7 +304,7 @@ Comments URL: https://news.ycombinato...</div>
             <div class="news-row-top"><a href="https://uxdesign.cc/rethinking-design-critique-3d358a859304?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">Rethinking design critique</a></div>
             <div class="news-row-meta">UX Collective</div>
             <div class="news-row-summary">Building design knowledge through a collaborative processContinue reading on UX Collective »</div>
-            <div class="editor-note">💡 Team / Collaboration</div></div></div></div><div class="section-card" id="sec-en-683764">
+            <div class="editor-note">💡 Team / Collaboration</div></div></div></div><div class="section-card" id="sec-en-675379">
 <button class="section-header" onclick="toggleSection(this)">
 <span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">Trends & Inspiration</h2></span>
 <span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://www.awwwards.com/ribbit-case-study.html', '_blank')">
@@ -327,7 +327,7 @@ Comments URL: https://news.ycombinato...</div>
             <div class="news-row-top"><a href="https://dribbble.com/stories/2026/02/12/designing-in-public-thinking-long-term-and-growing-with-dribbble" target="_blank" onclick="event.stopPropagation()">Designing in Public, Thinking Long-Term, and Growing With Dribbble</a></div>
             <div class="news-row-meta">Dribbble Stories</div>
             <div class="news-row-summary"></div>
-            <div class="editor-note">💡 Design-in-public trend</div></div></div></div><div class="section-card" id="sec-en-096966">
+            <div class="editor-note">💡 Design-in-public trend</div></div></div></div><div class="section-card" id="sec-en-326368">
 <button class="section-header" onclick="toggleSection(this)">
 <span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">Tools Updates</h2></span>
 <span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://kirancodes.me/posts/log-distributed-llms.html', '_blank')">
@@ -366,6 +366,7 @@ function switchLang(l){
   document.querySelectorAll('.lang-switch button').forEach(function(e){e.classList.remove('active')});
   document.getElementById('btn-'+l).classList.add('active');
   document.getElementById('footer-source').textContent=l==='zh'?'数据来源: Figma, CSS-Tricks, HackerNews, GitHub':'Data Sources: Figma, CSS-Tricks, HackerNews, GitHub';
+  expandAll();
 }
 function toggleSection(btn){
   var card=btn.parentElement;
@@ -375,9 +376,8 @@ function toggleSection(btn){
   else body.style.maxHeight=null;
 }
 // 默认展开所有板块
-setTimeout(function(){
-  document.querySelectorAll('.section-card').forEach(function(c){
-    c.classList.add('open');var b=c.querySelector('.section-body');if(b)b.style.maxHeight=b.scrollHeight+'px';
-  });
-},50);
+function expandAll(){
+  document.querySelectorAll('.section-card').forEach(function(c){c.classList.add('open')});
+}
+expandAll();
 </script></body></html>
