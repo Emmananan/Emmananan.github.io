@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ELARA DISPATCH — 2026-04-16</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#f4f5f7;color:#1a1a2e;line-height:1.55;-webkit-font-smoothing:antialiased}
+.container{max-width:1100px;margin:28px auto;padding:0 24px}
+.header{margin-bottom:28px;display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid #e8eaed;padding-bottom:14px}
+.header-left{display:flex;align-items:baseline;gap:16px}
+.lang-switch{display:flex;border:1px solid #ddd;border-radius:18px;overflow:hidden;font-size:12px;flex-shrink:0}
+.lang-switch button{border:none;background:#fff;padding:6px 14px;cursor:pointer;font-weight:500;color:#888;transition:.15s}
+.lang-switch button.active{background:#1a1a2e;color:#fff}
+.page-title{font-size:28px;font-weight:800;letter-spacing:-.02em;color:#1a1a2e}
+.page-date{color:#666;font-size:14px;font-weight:600;background:#f0f2f5;padding:4px 12px;border-radius:6px}
+
+/* 焦点区 — 横版紧凑 */
+.focus-section{background:linear-gradient(135deg,#1a1a2e 0%,#2d2d44 100%);border-radius:14px;padding:22px 26px;margin-bottom:24px;color:#fff;position:relative;overflow:hidden}
+.focus-section::before{content:'';position:absolute;top:-30px;right:-30px;width:110px;height:110px;background:rgba(231,76,60,.12);border-radius:50%}
+.focus-label{color:#e74c3c;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.focus-body{display:flex;gap:20px;align-items:center}
+.focus-title{font-size:19px;font-weight:700;line-height:1.35;flex:1;min-width:0}.focus-title a{color:#fff;text-decoration:none}.focus-title a:hover{text-decoration:underline}
+.focus-summary{color:rgba(255,255,255,.65);font-size:12.5px;line-height:1.6;flex:1.4;min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.focus-editor-note{background:rgba(231,76,60,.14);padding:7px 13px;border-radius:8px;font-size:11.5px;color:#ffb3aa;white-space:nowrap;align-self:flex-end;flex-shrink:0}
+.focus-meta{color:rgba(255,255,255,.4);font-size:11px;white-space:nowrap;align-self:flex-end;flex-shrink:0}
+
+/* 双栏网格 */
+.sections-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* 板块卡片 — 可折叠手风琴 */
+.section-card{background:#fff;border-radius:11px;border:1px solid #eef0f2;overflow:hidden;transition:.2s}
+.section-header{width:100%;display:flex;justify-content:space-between;align-items:center;padding:13px 16px;background:#fafbfc;border:none;cursor:pointer;transition:.15s;text-align:left}
+.section-header:hover{background:#f0f2f5}
+.section-icon{color:#bbb;font-size:10px;transition:.2s;margin-right:7px;display:inline-block;width:10px}
+.section-card.open .section-icon{transform:rotate(90deg);color:#e74c3c}
+.section-title-wrap{display:flex;align-items:center}
+.section-title{font-size:13.5px;font-weight:700;color:#1a1a2e;display:inline}
+.section-count{background:#f0f2f5;color:#999;font-size:11px;font-weight:600;padding:2px 9px;border-radius:10px}
+.section-body{display:none;transition:max-height .3s ease}
+.section-card.open .section-body{display:block;overflow:visible}
+
+/* 新闻行 — 紧凑 */
+.news-row{padding:11px 16px;border-top:1px solid #f5f6f7;cursor:pointer;transition:.12s}
+.news-row:hover{background:#fafbfc}
+.news-row-top{display:flex;align-items:center;gap:7px;margin-bottom:2px}
+.news-row-top a{font-size:13px;font-weight:600;color:#1a1a2e;text-decoration:none;flex:1;line-height:1.38}.news-row-top a:hover{color:#e74c3c}
+.hot-tag{background:#e74c3c;color:#fff;font-size:9px;padding:1px 7px;border-radius:8px;font-weight:600;flex-shrink:0}
+.news-row-meta{font-size:11px;color:#bbb;margin-bottom:4px}
+.news-row-summary{font-size:11.5px;color:#999;line-height:1.5;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.editor-note{background:rgba(123,143,163,.07);color:#7B8FA3;font-size:11px;padding:4px 10px;border-radius:5px;margin-top:5px;display:inline-block;line-height:1.55}
+.editor-note-hot{background:rgba(231,76,60,.06);color:#e74c3c}
+
+.footer{text-align:center;color:#ccc;font-size:11px;padding:24px 0;margin-top:16px}
+.lang-content{display:none}.lang-content.active{display:block}
+
+/* 移动端响应式 */
+@media(max-width:768px){
+  .container{margin:14px auto;padding:0 14px}
+  .header{flex-direction:column;align-items:flex-start;gap:8px;margin-bottom:20px}
+  .page-title{font-size:24px}
+  .sections-grid{grid-template-columns:1fr;gap:8px}
+  .focus-body{flex-direction:column;align-items:flex-start;gap:10px}
+  .focus-summary{-webkit-line-clamp:3}
+  .focus-editor-note,.focus-meta{white-space:normal}
+  .section-header{padding:11px 13px}
+  .news-row{padding:9px 13px}
+}</style></head><body>
+<div class="container">
+<div class="header">
+<div class="header-left">
+<h1 class="page-title">ELARA DISPATCH</h1><p class="page-date">2026-04-16 · Thu</p></div>
+<div class="lang-switch"><button onclick="switchLang('zh')" id="btn-zh" class="active">中文</button><button onclick="switchLang('en')" id="btn-en">EN</button></div></div>
+
+<div class="lang-content active" data-lang="zh"><div class="sections-grid"><div class="grid-col"><div class="section-card" id="sec-zh-104359">
+<button class="section-header" onclick="toggleSection(this)">
+<span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">AI × 设计</h2></span>
+<span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://publications.eai.eu/index.php/airo/article/view/8895', '_blank')">
+            <div class="news-row-top"><a href="https://publications.eai.eu/index.php/airo/article/view/8895" target="_blank" onclick="event.stopPropagation()">基于强化学习 Agent 的动态 Web UI 自主测试方法论（BDD 框架）</a><span class="hot-tag">热门</span></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">提出一种将强化学习（RL）Agent 引入 BDD（行为驱动开发）框架的新方法，让 AI 能够自主探索和测试动态 Web UI，无需预先编写大量测试用例。对设计系统的回归测试有重要参考价值。</div>
+            <div class="editor-note editor-note-hot">💡 AI 驱动的自动化 UI 测试新范式</div></div><div class="news-row" onclick="window.open('https://medium.com/@Koukyosyumei/hacking-mcp-servers-in-ai-systems-the-rug-pull-tool-changes-after-approval-b4f1841da410', '_blank')">
+            <div class="news-row-top"><a href="https://medium.com/@Koukyosyumei/hacking-mcp-servers-in-ai-systems-the-rug-pull-tool-changes-after-approval-b4f1841da410" target="_blank" onclick="event.stopPropagation()">MCP 服务器的安全漏洞：「拉地毯」攻击——工具在审批后被篡改</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">揭示 MCP（Model Context Protocol）服务器的一个安全隐患：AI 工具在通过用户审批后，其底层实现可能被偷偷替换，导致「表面安全、实际越权」的攻击向量。对所有使用 AI Agen...</div>
+            <div class="editor-note">💡 AI 安全领域的重要发现——Agent 审批机制存在盲区</div></div><div class="news-row" onclick="window.open('http://www.kleefeldoncomics.com/2026/04/amazon-ai-cancelling-webcomics.html', '_blank')">
+            <div class="news-row-top"><a href="http://www.kleefeldoncomics.com/2026/04/amazon-ai-cancelling-webcomics.html" target="_blank" onclick="event.stopPropagation()">亚马逊用 AI 取消了网络漫画业务，创作者社区震动</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">亚马逊利用 AI 决策砍掉了旗下网络漫画平台，引发创作者群体强烈反响。HN 上获得 50 赞、8 条评论，成为今日热议话题——AI 做商业决策的边界在哪里？</div>
+            <div class="editor-note">💡 AI 商业决策引发创作圈争议</div></div><div class="news-row" onclick="window.open('https://medium.com/@curiouser.ai/the-great-ai-layoff-boomerang-68e38c88fa7d', '_blank')">
+            <div class="news-row-top"><a href="https://medium.com/@curiouser.ai/the-great-ai-layoff-boomerang-68e38c88fa7d" target="_blank" onclick="event.stopPropagation()">AI 裁员大回旋镖：55% 的企业后悔以 AI 为由裁员</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">调查显示 55% 曾因 AI 替代人力而裁员的企業如今感到后悔——被裁掉的经验和隐性知识无法被算法替代。这篇深度文章剖析了「AI 裂痕」背后的组织代价。</div>
+            <div class="editor-note">💡 AI 替代人力的反面案例，数据说话</div></div><div class="news-row" onclick="window.open('https://github.com/GenAI-Gurus/awesome-eu-ai-act', '_blank')">
+            <div class="news-row-top"><a href="https://github.com/GenAI-Gurus/awesome-eu-ai-act" target="_blank" onclick="event.stopPropagation()">EU AI Act 合规资源合集：工具、官方文档、模板与开源方案</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">一份精心整理的欧盟《人工智能法案》合规工具包，涵盖分类指南、风险评估模板、开源合规框架等实用资源，帮助产品团队快速理解法规要求并落地执行。</div>
+            <div class="editor-note">💡 AI 法规落地实操工具箱</div></div></div></div><div class="section-card" id="sec-zh-237530">
+<button class="section-header" onclick="toggleSection(this)">
+<span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">行业声音</h2></span>
+<span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/beyond-prototyping/', '_blank')">
+            <div class="news-row-top"><a href="https://heydesigner.com/newsletter/beyond-prototyping/" target="_blank" onclick="event.stopPropagation()">超越原型：流式 UI 十大原则、「品味不是截图」、Design Systems Report 2026 等</a><span class="hot-tag">热门</span></div>
+            <div class="news-row-meta">HeyDesigner</div>
+            <div class="news-row-summary">本期 HeyDesigner 精选核心议题：流式 UI 十大原则重申交互本质；「品味不是一张截图」深度思考；AI UX 设计实操指南；2026 设计系统报告；CSS 大扩张时代的技术洞察。</div>
+            <div class="editor-note editor-note-hot">💡 设计行业本周核心议题汇总</div></div><div class="news-row" onclick="window.open('https://matthiasott.com/articles/design-and-engineering-as-one', '_blank')">
+            <div class="news-row-top"><a href="https://matthiasott.com/articles/design-and-engineering-as-one" target="_blank" onclick="event.stopPropagation()">设计与工程一体化：打破旧有的产品团队模型</a></div>
+            <div class="news-row-meta">Sidebar.io</div>
+            <div class="news-row-summary">大多数团队仍在沿用为旧问题设计的协作模式，但问题本身已经变了。本文探讨如何将设计与工程真正融合为一个有机整体，而非两个互相甩文档的独立部门。</div>
+            <div class="editor-note">💡 Design + Engineering 融合的组织变革思路</div></div><div class="news-row" onclick="window.open('https://robonomics.substack.com/p/org-design-in-the-age-of-ai', '_blank')">
+            <div class="news-row-top"><a href="https://robonomics.substack.com/p/org-design-in-the-age-of-ai" target="_blank" onclick="event.stopPropagation()">AI 时代的企业组织设计：人人都在加 AI，却没人重新思考流程本身</a></div>
+            <div class="news-row-meta">Sidebar.io</div>
+            <div class="news-row-summary">所有企业都在把 AI 加入工作流，但几乎没有人重新审视「为什么工作流本来就该是这样」。真正的组织创新不是给旧流程贴 AI 标签，而是从根本上重新设计协作方式。</div>
+            <div class="editor-note">💡 AI 时代的组织架构反思</div></div><div class="news-row" onclick="window.open('https://www.acolorbright.com/en/insights/aesthetics-of-ai', '_blank')">
+            <div class="news-row-top"><a href="https://www.acolorbright.com/en/insights/aesthetics-of-ai" target="_blank" onclick="event.stopPropagation()">AI 美学：顶尖 AI 品牌的视觉身份观察</a></div>
+            <div class="news-row-meta">Sidebar.io</div>
+            <div class="news-row-summary">深入观察 standout AI 品牌（OpenAI、Anthropic、Midjourney 等）的视觉语言：渐变、流体形态、抽象符号……这些设计选择背后有什么规律？AI 产品是否正在形成一种统一的...</div>
+            <div class="editor-note">💡 AI 产品视觉风格的趋势分析</div></div><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/modal-vs-separate-page/', '_blank')">
+            <div class="news-row-top"><a href="https://heydesigner.com/newsletter/modal-vs-separate-page/" target="_blank" onclick="event.stopPropagation()">弹窗 vs 独立页面：UX 决策树</a></div>
+            <div class="news-row-meta">HeyDesigner</div>
+            <div class="news-row-summary">用 Claude Code 辅助设计、UI 打磨技巧、不要为平均用户设计、Onboarding 本质上是一笔交易、产品设计师悖论等内容精选。</div>
+            <div class="editor-note">💡 UX 微决策的方法论参考</div></div></div></div><div class="section-card" id="sec-zh-721265">
+<button class="section-header" onclick="toggleSection(this)">
+<span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">UI/视觉</h2></span>
+<span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
+            <div class="news-row-top"><a href="https://css-tricks.com/css-multi-column-layout-wrapping-features/" target="_blank" onclick="event.stopPropagation()">CSS 多列布局换行新特性详解（Chrome 145）</a><span class="hot-tag">热门</span></div>
+            <div class="news-row-meta">CSS-Tricks</div>
+            <div class="news-row-summary">Chrome 145 正式引入 column-height 和 column-wrap 属性，允许多列布局中的溢出内容自动换行至下方新列，从而实现垂直滚动替代水平滚动。这对响应式新闻列表、商品网格等场...</div>
+            <div class="editor-note editor-note-hot">💡 CSS 布局能力又进化了</div></div><div class="news-row" onclick="window.open('https://www.creativebloq.com/design/design-software/adobe-is-making-bold-claims-about-its-new-firefly-ai-assistant', '_blank')">
+            <div class="news-row-top"><a href="https://www.creativebloq.com/design/design-software/adobe-is-making-bold-claims-about-its-new-firefly-ai-assistant" target="_blank" onclick="event.stopPropagation()">Adobe Firefly AI 助手发布：把「所有 Adobe 黑科技」装进一根魔法棒</a></div>
+            <div class="news-row-meta">Creative Bloq</div>
+            <div class="news-row-summary">Adobe 发布新一代 Firefly AI 助手，号称将 Photoshop、Illustrator、Premiere 等全线产品的核心能力集成到一个统一的 AI 入口中。「All of Adobe...</div>
+            <div class="editor-note">💡 Adobe 全线 AI 化的重要一步</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/the-radio-state-machine/', '_blank')">
+            <div class="news-row-top"><a href="https://css-tricks.com/the-radio-state-machine/" target="_blank" onclick="event.stopPropagation()">单选状态机：超越 Checkbox Hack 的 CSS 多状态管理方案</a></div>
+            <div class="news-row-meta">CSS-Tricks</div>
+            <div class="news-row-summary">Checkbox Hack 是最知名的 CSS 状态管理方案，但如果组件需要三态、四态甚至七态怎么办？Radio State Machine 用纯 CSS 实现了优雅的多状态切换模式，无需 JS 即可...</div>
+            <div class="editor-note">💡 CSS 状态管理的优雅新模式</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/alternatives-to-the-important-keyword/', '_blank')">
+            <div class="news-row-top"><a href="https://css-tricks.com/alternatives-to-the-important-keyword/" target="_blank" onclick="event.stopPropagation()">!important 关键字的替代方案盘点</a></div>
+            <div class="news-row-meta">CSS-Tricks</div>
+            <div class="news-row-summary">层叠层（Cascade Layers）、特异性技巧、更智能的选择器排序，甚至一些巧妙的选择器 hack——这些方法往往能比 !important 提供更干净、更可预测且不那么尴尬的样式覆盖方案。</div>
+            <div class="editor-note">💡 告别 !important 的现代 CSS 最佳实践</div></div><div class="news-row" onclick="window.open('https://www.creativebloq.com/design/branding/why-colour-is-so-vital-in-the-charity-sector', '_blank')">
+            <div class="news-row-top"><a href="https://www.creativebloq.com/design/branding/why-colour-is-so-vital-in-the-charity-sector" target="_blank" onclick="event.stopPropagation()">颜色对公益品牌形象至关重要——其他品牌能学到什么？</a></div>
+            <div class="news-row-meta">Creative Bloq</div>
+            <div class="news-row-summary">慈善机构的色彩运用往往极其精准而有力——红色代表紧迫、绿色象征希望、蓝色传递信任。分析公益品牌的调色板策略，对任何需要建立情感连接的品牌都有借鉴意义。</div>
+            <div class="editor-note">💡 品牌色彩策略的情感维度分析</div></div></div></div></div><div class="grid-col"><div class="section-card" id="sec-zh-123120">
+<button class="section-header" onclick="toggleSection(this)">
+<span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">交互/体验</h2></span>
+<span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://alistapart.com/article/user-research-is-storytelling/', '_blank')">
+            <div class="news-row-top"><a href="https://alistapart.com/article/user-research-is-storytelling/" target="_blank" onclick="event.stopPropagation()">用户研究即叙事</a><span class="hot-tag">热门</span></div>
+            <div class="news-row-meta">A List Apart</div>
+            <div class="news-row-summary">用户研究与电影叙事有着深刻的相似性：好的用户研究不只是收集数据，而是构建引人入胜的故事，让团队真正理解用户的处境与需求。叙事能力是用研人员被低估的核心技能。</div>
+            <div class="editor-note editor-note-hot">💡 用研方法论更新——将故事思维引入用户研究</div></div><div class="news-row" onclick="window.open('https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-top"><a href="https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">信任-延迟差距：为什么未来的 UX 会刻意慢下来</a></div>
+            <div class="news-row-meta">UX Collective</div>
+            <div class="news-row-summary">当 AI 将决策压缩到毫秒级，真正能脱颖而出的设计师是那些懂得何时该「慢下来」的人——信任需要时间来建立，而「刻意慢」正在成为一种新的竞争优势。</div>
+            <div class="editor-note">💡 「慢 UX」理念值得深思——不是所有体验都要快</div></div><div class="news-row" onclick="window.open('https://www.nngroup.com/articles/handmade-designs/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication', '_blank')">
+            <div class="news-row-top"><a href="https://www.nngroup.com/articles/handmade-designs/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication" target="_blank" onclick="event.stopPropagation()">手工设计：AI 时代的新型信任信号</a></div>
+            <div class="news-row-meta">Nielsen Norman</div>
+            <div class="news-row-summary">在一个万物皆可 AI 生成的时代，「手工感」反而成了稀缺资源。厌倦了 AI 输出的用户开始主动寻找那些看起来像真人做的设计——瑕疵、不完美和人性温度成了新的品牌资产。</div>
+            <div class="editor-note">💡 AI 时代的反直觉趋势——手工感 = 信任感</div></div><div class="news-row" onclick="window.open('https://uxdesign.cc/the-erosion-of-design-authority-burnout-problems-invisible-customers-98e75650e97d?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-top"><a href="https://uxdesign.cc/the-erosion-of-design-authority-burnout-problems-invisible-customers-98e75650e97d?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">设计权威的消蚀、职业倦怠与隐形客户</a></div>
+            <div class="news-row-meta">UX Collective</div>
+            <div class="news-row-summary">AI 工具带来的兴奋并非来自设计本身，而是来自「描述即生成」的距离崩塌。这种崩塌正在侵蚀设计师的专业权威，导致职业倦怠，并让真正的用户需求变得隐形——值得每个设计管理者反思。</div>
+            <div class="editor-note">💡 行业深层焦虑——设计师的价值定位危机</div></div><div class="news-row" onclick="window.open('https://www.nngroup.com/articles/genui-vs-vibe/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication', '_blank')">
+            <div class="news-row-top"><a href="https://www.nngroup.com/articles/genui-vs-vibe/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication" target="_blank" onclick="event.stopPropagation()">GenUI vs Vibe Coding：到底谁在设计？</a></div>
+            <div class="news-row-meta">Nielsen Norman</div>
+            <div class="news-row-summary">生成式 UI（GenUI）：AI 系统自主决定生成交互元素甚至完整产品；Vibe Coding：用户请求 AI 来构建。两者都在模糊「设计者」的定义——当 AI 能做设计决策时，设计师的角色变成了什么...</div>
+            <div class="editor-note">💡 两种 AI 设计模式的本质辨析</div></div></div></div><div class="section-card" id="sec-zh-030532">
+<button class="section-header" onclick="toggleSection(this)">
+<span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">趋势灵感</h2></span>
+<span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://www.awwwards.com/farm-minerals-case-study.html', '_blank')">
+            <div class="news-row-top"><a href="https://www.awwwards.com/farm-minerals-case-study.html" target="_blank" onclick="event.stopPropagation()">Farm Minerals 农业科技公司品牌案例研究</a><span class="hot-tag">热门</span></div>
+            <div class="news-row-meta">Awwwards</div>
+            <div class="news-row-summary">Farm Minerals 是一家农业科技（AgriTech）公司，专注于研发零排放肥料和饲料添加剂。本案例展示了如何将硬核科技企业的品牌形象做得既有科学严谨性又有自然亲和力，视觉系统从实验室数据到田...</div>
+            <div class="editor-note editor-note-hot">💡 科技品牌的视觉表达新方向</div></div><div class="news-row" onclick="window.open('https://www.awwwards.com/the-art-of-getting-noticed-product-design-and-development-for-an-artist-social-network-startup.html', '_blank')">
+            <div class="news-row-top"><a href="https://www.awwwards.com/the-art-of-getting-noticed-product-design-and-development-for-an-artist-social-network-startup.html" target="_blank" onclick="event.stopPropagation()">艺术家社交网络的产品设计与开发全案</a></div>
+            <div class="news-row-meta">Awwwards</div>
+            <div class="news-row-summary">如何帮助初创公司打造专业平台并吸引关注？涵盖艺术家 SaaS 平台从推广站点到完整产品的设计与开发全流程，包括用户获取策略、社区运营设计和变现路径规划。</div>
+            <div class="editor-note">💡 创业公司产品设计全案参考</div></div><div class="news-row" onclick="window.open('https://www.awwwards.com/100-lost-species.html', '_blank')">
+            <div class="news-row-top"><a href="https://www.awwwards.com/100-lost-species.html" target="_blank" onclick="event.stopPropagation()">100 种灭绝物种：数字叙事沉浸式体验</a></div>
+            <div class="news-row-meta">Awwwards</div>
+            <div class="news-row-summary">一个关于物种灭绝的数字化故事，用户可以主动探索每一种消失的生命。由 Immersive 团队开发，融合了数据可视化与情感化叙事，让冰冷的 extinction 数据变成触目惊心的生命故事。</div>
+            <div class="editor-note">💡 数据叙事 + 情感设计的优秀范例</div></div><div class="news-row" onclick="window.open('https://www.awwwards.com/stringtune-for-core-web-animations.html', '_blank')">
+            <div class="news-row-top"><a href="https://www.awwwards.com/stringtune-for-core-web-animations.html" target="_blank" onclick="event.stopPropagation()">StringTune：Web 核心动画引擎</a></div>
+            <div class="news-row-meta">Awwwards</div>
+            <div class="news-row-summary">因对品质的高标准追求，开启了一段拥抱全新开发哲学的长途旅程。StringTune 是一个面向 Web 核心动画的引擎/库项目，展示了如何用纯前端技术实现电影级的动效体验。</div>
+            <div class="editor-note">💡 Web 动画引擎的前沿实践</div></div><div class="news-row" onclick="window.open('https://www.awwwards.com/brunos-portfolio-case-study.html', '_blank')">
+            <div class="news-row-top"><a href="https://www.awwwards.com/brunos-portfolio-case-study.html" target="_blank" onclick="event.stopPropagation()">Bruno 的 Three.js 作品集案例</a></div>
+            <div class="news-row-meta">Awwwards</div>
+            <div class="news-row-summary">2019 年发布第一个作品集——Three.js 构建的 3D 世界，访客可驾驶红色小车穿梭其中。经过多年迭代进化为更成熟的个人展示平台。从初代到现在的演进过程本身就是最好的设计成长档案。</div>
+            <div class="editor-note">💡 3D 作品集的长期迭代经验</div></div></div></div><div class="section-card" id="sec-zh-108515">
+<button class="section-header" onclick="toggleSection(this)">
+<span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">工具动态</h2></span>
+<span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://publications.eai.eu/index.php/airo/article/view/8895', '_blank')">
+            <div class="news-row-top"><a href="https://publications.eai.eu/index.php/airo/article/view/8895" target="_blank" onclick="event.stopPropagation()">基于强化学习的自主 Web UI 测试 Agent（BDD 框架集成）</a><span class="hot-tag">热门</span></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">RL Agent 在 BDD 框架中实现动态 Web UI 的自主探索与测试，无需人工编写测试脚本。对于组件库回归测试和设计系统一致性校验具有革命性潜力。</div>
+            <div class="editor-note editor-note-hot">💡 AI 测试工具的前沿探索</div></div><div class="news-row" onclick="window.open('https://quietly.fastclick.ai', '_blank')">
+            <div class="news-row-top"><a href="https://quietly.fastclick.ai" target="_blank" onclick="event.stopPropagation()">Mac 本地运行的 AI 会议记录工具 Quietly</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">一款完全本地运行的 AI 会议记录应用，数据不上云，隐私有保障。支持自动识别发言人、提取行动项、生成会议摘要。HN 获得 3 赞，隐私优先的设计理念值得关注。</div>
+            <div class="editor-note">💡 本地优先的 AI 效率工具</div></div><div class="news-row" onclick="window.open('https://github.com/MeepCastana/KubeezCut', '_blank')">
+            <div class="news-row-top"><a href="https://github.com/MeepCastana/KubeezCut" target="_blank" onclick="event.stopPropagation()">免费开源的 AI 编辑器 KubeezCut</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">一款完全免费开源的 AI 编辑器，支持多种 AI 模型接入，提供现代化的编辑界面。HN 上获得 3 赞，适合不想被订阅费绑定的创作者使用。</div>
+            <div class="editor-note">💡 开源 AI 创作工具新选项</div></div><div class="news-row" onclick="window.open('https://www.atlassian.com/blog/developer/developer-workflow-rovo-dev-notifications', '_blank')">
+            <div class="news-row-top"><a href="https://www.atlassian.com/blog/developer/developer-workflow-rovo-dev-notifications" target="_blank" onclick="event.stopPropagation()">Rovo Dev 与通知系统集成：Atlassian 开发者工作流增强</a></div>
+            <div class="news-row-meta">HN AI UI Tools</div>
+            <div class="news-row-summary">Atlassian 推出 Rovo Dev 与通知系统的深度集成，让开发者能在 Jira/Confluence 工作流中直接接收和处理来自各工具的通知，减少上下文切换成本。</div>
+            <div class="editor-note">💡 开发者工作流效率提升</div></div><div class="news-row" onclick="window.open('https://medium.com/@Koukyosyumei/hacking-mcp-servers-in-ai-systems-the-rug-pull-tool-changes-after-approval-b4f1841da410', '_blank')">
+            <div class="news-row-top"><a href="https://medium.com/@Koukyosyumei/hacking-mcp-servers-in-ai-systems-the-rug-pull-tool-changes-after-approval-b4f1841da410" target="_blank" onclick="event.stopPropagation()">MCP 服务器安全漏洞：「拉地毯」攻击——工具审批后的偷换手法</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">安全研究人员披露 MCP 协议的一种新型攻击面：AI 工具在用户审批通过后，其实现可能被动态替换。这相当于「先让你同意开门，然后悄悄换了门里的东西」。</div>
+            <div class="editor-note">💡 MCP 生态的安全提醒</div></div></div></div></div></div></div>
+<div class="lang-content" data-lang="en"><div class="sections-grid"><div class="grid-col"><div class="section-card" id="sec-en-104359">
+<button class="section-header" onclick="toggleSection(this)">
+<span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">AI × Design</h2></span>
+<span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://publications.eai.eu/index.php/airo/article/view/8895', '_blank')">
+            <div class="news-row-top"><a href="https://publications.eai.eu/index.php/airo/article/view/8895" target="_blank" onclick="event.stopPropagation()">An Autonomous RL Agent Methodology for Dynamic Web UI Testing in a BDD Framework</a><span class="hot-tag">HOT</span></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">Article URL: https://publications.eai.eu/index.php/airo/article/view/8895</div>
+            <div class="editor-note editor-note-hot">💡 AI 驱动的自动化 UI 测试新范式</div></div><div class="news-row" onclick="window.open('https://medium.com/@Koukyosyumei/hacking-mcp-servers-in-ai-systems-the-rug-pull-tool-changes-after-approval-b4f1841da410', '_blank')">
+            <div class="news-row-top"><a href="https://medium.com/@Koukyosyumei/hacking-mcp-servers-in-ai-systems-the-rug-pull-tool-changes-after-approval-b4f1841da410" target="_blank" onclick="event.stopPropagation()">Hacking MCP Servers in AI Systems – The Rug Pull: Tool Changes After Approval</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">Article URL: https://medium.com/@Koukyosyumei/hacking-mcp-servers-in-ai-systems-the-rug-pull-tool-ch...</div>
+            <div class="editor-note">💡 AI 安全领域的重要发现——Agent 审批机制存在盲区</div></div><div class="news-row" onclick="window.open('http://www.kleefeldoncomics.com/2026/04/amazon-ai-cancelling-webcomics.html', '_blank')">
+            <div class="news-row-top"><a href="http://www.kleefeldoncomics.com/2026/04/amazon-ai-cancelling-webcomics.html" target="_blank" onclick="event.stopPropagation()">Amazon AI Cancelling Webcomics</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">Article URL: http://www.kleefeldoncomics.com/2026/04/amazon-ai-cancelling-webcomics.html</div>
+            <div class="editor-note">💡 AI 商业决策引发创作圈争议</div></div><div class="news-row" onclick="window.open('https://medium.com/@curiouser.ai/the-great-ai-layoff-boomerang-68e38c88fa7d', '_blank')">
+            <div class="news-row-top"><a href="https://medium.com/@curiouser.ai/the-great-ai-layoff-boomerang-68e38c88fa7d" target="_blank" onclick="event.stopPropagation()">The Great AI Layoff Boomerang. 55% of companies regret their AI-driven layoffs</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">Article URL: https://medium.com/@curiouser.ai/the-great-ai-layoff-boomerang-68e38c88fa7d</div>
+            <div class="editor-note">💡 Case study / Research</div></div><div class="news-row" onclick="window.open('https://github.com/GenAI-Gurus/awesome-eu-ai-act', '_blank')">
+            <div class="news-row-top"><a href="https://github.com/GenAI-Gurus/awesome-eu-ai-act" target="_blank" onclick="event.stopPropagation()">EU AI Act: curated tools, official sources, templates, and OSS</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">Article URL: https://github.com/GenAI-Gurus/awesome-eu-ai-act</div>
+            <div class="editor-note">💡 Tool/工具 update</div></div></div></div><div class="section-card" id="sec-en-237530">
+<button class="section-header" onclick="toggleSection(this)">
+<span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">Industry Voice</h2></span>
+<span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/beyond-prototyping/', '_blank')">
+            <div class="news-row-top"><a href="https://heydesigner.com/newsletter/beyond-prototyping/" target="_blank" onclick="event.stopPropagation()">Beyond prototyping</a><span class="hot-tag">HOT</span></div>
+            <div class="news-row-meta">HeyDesigner</div>
+            <div class="news-row-summary">10 principles for fluid UI, Taste isn't a screenshot, Designing the AI user experience, Design Syste...</div>
+            <div class="editor-note editor-note-hot">💡 设计行业本周核心议题汇总</div></div><div class="news-row" onclick="window.open('https://matthiasott.com/articles/design-and-engineering-as-one', '_blank')">
+            <div class="news-row-top"><a href="https://matthiasott.com/articles/design-and-engineering-as-one" target="_blank" onclick="event.stopPropagation()">Design and engineering, as one</a></div>
+            <div class="news-row-meta">Sidebar.io</div>
+            <div class="news-row-summary">Most of us are still running product teams on a model that was designed for a problem we don't have.</div>
+            <div class="editor-note">💡 Design + Engineering 融合的组织变革思路</div></div><div class="news-row" onclick="window.open('https://robonomics.substack.com/p/org-design-in-the-age-of-ai', '_blank')">
+            <div class="news-row-top"><a href="https://robonomics.substack.com/p/org-design-in-the-age-of-ai" target="_blank" onclick="event.stopPropagation()">Org design in the age of AI</a></div>
+            <div class="news-row-meta">Sidebar.io</div>
+            <div class="news-row-summary">Everyone is adding AI to their workflows. Almost no one is rethinking why the workflow is shaped tha...</div>
+            <div class="editor-note">💡 AI 时代的组织架构反思</div></div><div class="news-row" onclick="window.open('https://www.acolorbright.com/en/insights/aesthetics-of-ai', '_blank')">
+            <div class="news-row-top"><a href="https://www.acolorbright.com/en/insights/aesthetics-of-ai" target="_blank" onclick="event.stopPropagation()">Aesthetics of AI</a></div>
+            <div class="news-row-meta">Sidebar.io</div>
+            <div class="news-row-summary">Observations on the visual identities of standout AI brands and the trends shaping them.</div>
+            <div class="editor-note">💡 Trend: 趋势 insight</div></div><div class="news-row" onclick="window.open('https://heydesigner.com/newsletter/modal-vs-separate-page/', '_blank')">
+            <div class="news-row-top"><a href="https://heydesigner.com/newsletter/modal-vs-separate-page/" target="_blank" onclick="event.stopPropagation()">Modal vs. separate page: UX decision tree</a></div>
+            <div class="news-row-meta">HeyDesigner</div>
+            <div class="news-row-summary">Designing with Claude Code, UI polish skill, Don't design for average users, Onboarding is a transac...</div>
+            <div class="editor-note">💡 UX 微决策的方法论参考</div></div></div></div><div class="section-card" id="sec-en-721265">
+<button class="section-header" onclick="toggleSection(this)">
+<span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">UI / Visual</h2></span>
+<span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://css-tricks.com/css-multi-column-layout-wrapping-features/', '_blank')">
+            <div class="news-row-top"><a href="https://css-tricks.com/css-multi-column-layout-wrapping-features/" target="_blank" onclick="event.stopPropagation()">Looking at New CSS Multi-Column Layout Wrapping Features</a><span class="hot-tag">HOT</span></div>
+            <div class="news-row-meta">CSS-Tricks</div>
+            <div class="news-row-summary">Chrome 145 introduces the column-height and column-wrap properties, enabling us to wrap the addition...</div>
+            <div class="editor-note editor-note-hot">💡 进化 & evolution</div></div><div class="news-row" onclick="window.open('https://www.creativebloq.com/design/design-software/adobe-is-making-bold-claims-about-its-new-firefly-ai-assistant', '_blank')">
+            <div class="news-row-top"><a href="https://www.creativebloq.com/design/design-software/adobe-is-making-bold-claims-about-its-new-firefly-ai-assistant" target="_blank" onclick="event.stopPropagation()">Adobe is making bold claims about its new Firefly AI Assistant</a></div>
+            <div class="news-row-meta">Creative Bloq</div>
+            <div class="news-row-summary">"All of Adobe's magic in a single wand."</div>
+            <div class="editor-note">💡 Adobe 全线 AI 化的重要一步</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/the-radio-state-machine/', '_blank')">
+            <div class="news-row-top"><a href="https://css-tricks.com/the-radio-state-machine/" target="_blank" onclick="event.stopPropagation()">The Radio State Machine</a></div>
+            <div class="news-row-meta">CSS-Tricks</div>
+            <div class="news-row-summary">One of the best-known examples of CSS state management is the checkbox hack. What if we want a compo...</div>
+            <div class="editor-note">💡 Team / Collaboration</div></div><div class="news-row" onclick="window.open('https://css-tricks.com/alternatives-to-the-important-keyword/', '_blank')">
+            <div class="news-row-top"><a href="https://css-tricks.com/alternatives-to-the-important-keyword/" target="_blank" onclick="event.stopPropagation()">Alternatives to the !important Keyword</a></div>
+            <div class="news-row-meta">CSS-Tricks</div>
+            <div class="news-row-summary">Cascade layers, specificity tricks, smarter ordering, and even some clever selector hacks can often ...</div>
+            <div class="editor-note">💡 告别 !important 的现代 CSS 最佳实践</div></div><div class="news-row" onclick="window.open('https://www.creativebloq.com/design/branding/why-colour-is-so-vital-in-the-charity-sector', '_blank')">
+            <div class="news-row-top"><a href="https://www.creativebloq.com/design/branding/why-colour-is-so-vital-in-the-charity-sector" target="_blank" onclick="event.stopPropagation()">Why colour is so essential to charity branding</a></div>
+            <div class="news-row-meta">Creative Bloq</div>
+            <div class="news-row-summary">And what other brands can learn from charities' colour palettes</div>
+            <div class="editor-note">💡 品牌色彩策略的情感维度分析</div></div></div></div></div><div class="grid-col"><div class="section-card" id="sec-en-123120">
+<button class="section-header" onclick="toggleSection(this)">
+<span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">UX / Interaction</h2></span>
+<span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://alistapart.com/article/user-research-is-storytelling/', '_blank')">
+            <div class="news-row-top"><a href="https://alistapart.com/article/user-research-is-storytelling/" target="_blank" onclick="event.stopPropagation()">User Research Is Storytelling</a><span class="hot-tag">HOT</span></div>
+            <div class="news-row-meta">A List Apart</div>
+            <div class="news-row-summary">Ever since I was a boy, I've been fascinated with movies. I loved the characters and the excitement—...</div>
+            <div class="editor-note editor-note-hot">💡 User research methods updated</div></div><div class="news-row" onclick="window.open('https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-top"><a href="https://uxdesign.cc/the-trust-latency-gap-why-the-future-of-ux-is-intentionally-slower-3433c1787d5e?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">The trust-latency gap: why the future of UX is intentionally slower</a></div>
+            <div class="news-row-meta">UX Collective</div>
+            <div class="news-row-summary">As AI compresses decisions into milliseconds, the designers who thrive will be the ones who know whe...</div>
+            <div class="editor-note">💡 'Slow UX' worth pondering</div></div><div class="news-row" onclick="window.open('https://www.nngroup.com/articles/handmade-designs/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication', '_blank')">
+            <div class="news-row-top"><a href="https://www.nngroup.com/articles/handmade-designs/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication" target="_blank" onclick="event.stopPropagation()">Handmade Designs: The New Trust Signal</a></div>
+            <div class="news-row-meta">Nielsen Norman</div>
+            <div class="news-row-summary">In an era of AI-generated-everything, AI-fatigued users want designs that look like they were made b...</div>
+            <div class="editor-note">💡 Trend: 趋势 insight</div></div><div class="news-row" onclick="window.open('https://uxdesign.cc/the-erosion-of-design-authority-burnout-problems-invisible-customers-98e75650e97d?source=rss----138adf9c44c---4', '_blank')">
+            <div class="news-row-top"><a href="https://uxdesign.cc/the-erosion-of-design-authority-burnout-problems-invisible-customers-98e75650e97d?source=rss----138adf9c44c---4" target="_blank" onclick="event.stopPropagation()">The erosion of design authority, burnout problems, invisible customers</a></div>
+            <div class="news-row-meta">UX Collective</div>
+            <div class="news-row-summary">Weekly curated resources for designers—thinkers and makers. The excitement surrounding these tools d...</div>
+            <div class="editor-note">💡 行业深层焦虑——设计师的价值定位危机</div></div><div class="news-row" onclick="window.open('https://www.nngroup.com/articles/genui-vs-vibe/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication', '_blank')">
+            <div class="news-row-top"><a href="https://www.nngroup.com/articles/genui-vs-vibe/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication" target="_blank" onclick="event.stopPropagation()">GenUI vs. Vibe Coding: Who's Designing?</a></div>
+            <div class="news-row-meta">Nielsen Norman</div>
+            <div class="news-row-summary">With generative UI, the AI system decides to generate an interactive element or entire product in re...</div>
+            <div class="editor-note">💡 两种 AI 设计模式的本质辨析</div></div></div></div><div class="section-card" id="sec-en-030532">
+<button class="section-header" onclick="toggleSection(this)">
+<span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">Trends & Inspiration</h2></span>
+<span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://www.awwwards.com/farm-minerals-case-study.html', '_blank')">
+            <div class="news-row-top"><a href="https://www.awwwards.com/farm-minerals-case-study.html" target="_blank" onclick="event.stopPropagation()">Farm Minerals - Case Study</a><span class="hot-tag">HOT</span></div>
+            <div class="news-row-meta">Awwwards</div>
+            <div class="news-row-summary">Farm Minerals is an AgriTech company developing emissions-free fertilizers and feed additives design...</div>
+            <div class="editor-note editor-note-hot">💡 科技品牌的视觉表达新方向</div></div><div class="news-row" onclick="window.open('https://www.awwwards.com/the-art-of-getting-noticed-product-design-and-development-for-an-artist-social-network-startup.html', '_blank')">
+            <div class="news-row-top"><a href="https://www.awwwards.com/the-art-of-getting-noticed-product-design-and-development-for-an-artist-social-network-startup.html" target="_blank" onclick="event.stopPropagation()">The Art of Getting Noticed: Product Design and Development for an Artist Social Network Startup</a></div>
+            <div class="news-row-meta">Awwwards</div>
+            <div class="news-row-summary">A case study on how we helped a startup develop a professional platform and attract attention to it....</div>
+            <div class="editor-note">💡 创业公司产品设计全案参考</div></div><div class="news-row" onclick="window.open('https://www.awwwards.com/100-lost-species.html', '_blank')">
+            <div class="news-row-top"><a href="https://www.awwwards.com/100-lost-species.html" target="_blank" onclick="event.stopPropagation()">100 Lost Species</a></div>
+            <div class="news-row-meta">Awwwards</div>
+            <div class="news-row-summary">With 100 Lost Species, we set out to create a digital story about extinction that people could activ...</div>
+            <div class="editor-note">💡 数据叙事 + 情感设计的优秀范例</div></div><div class="news-row" onclick="window.open('https://www.awwwards.com/stringtune-for-core-web-animations.html', '_blank')">
+            <div class="news-row-top"><a href="https://www.awwwards.com/stringtune-for-core-web-animations.html" target="_blank" onclick="event.stopPropagation()">StringTune: For Core Web Animations</a></div>
+            <div class="news-row-meta">Awwwards</div>
+            <div class="news-row-summary">Our high standards led us to the beginning of a long and enchanting journey of embracing a new philo...</div>
+            <div class="editor-note">💡 Web 动画引擎的前沿实践</div></div><div class="news-row" onclick="window.open('https://www.awwwards.com/brunos-portfolio-case-study.html', '_blank')">
+            <div class="news-row-top"><a href="https://www.awwwards.com/brunos-portfolio-case-study.html" target="_blank" onclick="event.stopPropagation()">Bruno's Portfolio Case Study</a></div>
+            <div class="news-row-meta">Awwwards</div>
+            <div class="news-row-summary">In 2019, I launched my first portfolio. It was a simple world built with Three.js, where visitors co...</div>
+            <div class="editor-note">💡 迭代 & evolution</div></div></div></div><div class="section-card" id="sec-en-108515">
+<button class="section-header" onclick="toggleSection(this)">
+<span class="section-title-wrap"><span class="section-icon">▸</span><h2 class="section-title">Tools Updates</h2></span>
+<span class="section-count">5</span></button><div class="section-body"><div class="news-row" onclick="window.open('https://publications.eai.eu/index.php/airo/article/view/8895', '_blank')">
+            <div class="news-row-top"><a href="https://publications.eai.eu/index.php/airo/article/view/8895" target="_blank" onclick="event.stopPropagation()">An Autonomous RL Agent Methodology for Dynamic Web UI Testing in a BDD Framework</a><span class="hot-tag">HOT</span></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">Article URL: https://publications.eai.eu/index.php/airo/article/view/8895</div>
+            <div class="editor-note editor-note-hot">💡 Tool/工具 update</div></div><div class="news-row" onclick="window.open('https://quietly.fastclick.ai', '_blank')">
+            <div class="news-row-top"><a href="https://quietly.fastclick.ai" target="_blank" onclick="event.stopPropagation()">AI Meeting recorder that runs on your Mac</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">Article URL: https://quietly.fastclick.ai</div>
+            <div class="editor-note">💡 本地优先的 AI 效率工具</div></div><div class="news-row" onclick="window.open('https://github.com/MeepCastana/KubeezCut', '_blank')">
+            <div class="news-row-top"><a href="https://github.com/MeepCastana/KubeezCut" target="_blank" onclick="event.stopPropagation()">Free open source AI Editor</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">Article URL: https://github.com/MeepCastana/KubeezCut</div>
+            <div class="editor-note">💡 Tool/工具 update</div></div><div class="news-row" onclick="window.open('https://www.atlassian.com/blog/developer/developer-workflow-rovo-dev-notifications', '_blank')">
+            <div class="news-row-top"><a href="https://www.atlassian.com/blog/developer/developer-workflow-rovo-dev-notifications" target="_blank" onclick="event.stopPropagation()">Enhancing Developer Workflow with Rovo Dev and Notifications</a></div>
+            <div class="news-row-meta">HN AI UI Tools</div>
+            <div class="news-row-summary">Article URL: https://www.atlassian.com/blog/developer/developer-workflow-rovo-dev-notifications</div>
+            <div class="editor-note">💡 开发者工作流效率提升</div></div><div class="news-row" onclick="window.open('https://medium.com/@Koukyosyumei/hacking-mcp-servers-in-ai-systems-the-rug-pull-tool-changes-after-approval-b4f1841da410', '_blank')">
+            <div class="news-row-top"><a href="https://medium.com/@Koukyosyumei/hacking-mcp-servers-in-ai-systems-the-rug-pull-tool-changes-after-approval-b4f1841da410" target="_blank" onclick="event.stopPropagation()">Hacking MCP Servers in AI Systems – The Rug Pull: Tool Changes After Approval</a></div>
+            <div class="news-row-meta">HN AI Design</div>
+            <div class="news-row-summary">Article URL: https://medium.com/@Koukyosyumei/hacking-mcp-servers-in-ai-systems-the-rug-pull-tool-ch...</div>
+            <div class="editor-note">💡 MCP 生态的安全提醒</div></div></div></div></div></div></div>
+
+<div class="footer" id="footer-source">数据来源: Figma, CSS-Tricks, HackerNews, GitHub</div></div>
+
+<script>
+function switchLang(l){
+  document.querySelectorAll('.lang-content').forEach(function(e){e.classList.remove('active')});
+  document.querySelector('.lang-content[data-lang="'+l+'"]').classList.add('active');
+  document.querySelectorAll('.lang-switch button').forEach(function(e){e.classList.remove('active')});
+  document.getElementById('btn-'+l).classList.add('active');
+  document.getElementById('footer-source').textContent=l==='zh'?'数据来源: Figma, CSS-Tricks, HackerNews, GitHub':'Data Sources: Figma, CSS-Tricks, HackerNews, GitHub';
+  expandAll();
+}
+function toggleSection(btn){
+  var card=btn.parentElement;
+  card.classList.toggle('open');
+  var body=card.querySelector('.section-body');
+  if(card.classList.contains('open'))body.style.maxHeight=body.scrollHeight+'px';
+  else body.style.maxHeight=null;
+}
+// 默认展开所有板块
+function expandAll(){
+  document.querySelectorAll('.section-card').forEach(function(c){c.classList.add('open')});
+}
+expandAll();
+</script></body></html>
